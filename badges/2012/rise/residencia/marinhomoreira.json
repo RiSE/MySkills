@@ -1,0 +1,19 @@
+{
+  "recipient": "fmarinho.rodrigues@gmail.com",
+  "salt": "capuccino",
+  "evidence": "/badges/2012/rise/residencia/marinhomoreira",
+  "issued_on": "2012-03-01",
+  "badge": {
+    "version": "1.0.0",
+    "name": "RiSE Software Reuse Residency",
+    "image": "/myskills/img/obi-rise-residencia-badge.png",
+    "description": "Participates in the RiSe Porto Digital Software Reuse Residency",
+    "criteria": "/badges/2012/rise/residencia/",
+    "issuer": {
+      "origin": "http://www.rise.com.br",
+      "name": "RiSE Reuse in Software Engineering",
+      "org": "Residentes 2011",
+      "contact": "rise@rise.com.br"
+   }
+  }
+}
