@@ -23,7 +23,7 @@ $config = array(
         array(
             'field' => 'code',
             'label' => 'Code',
-            'rules' => 'required|numeric'
+            'rules' => 'numeric'
         ),
         array(
             'field' => 'email',
