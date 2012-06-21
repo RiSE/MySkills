@@ -1,0 +1,10 @@
+RewriteEngine On
+
+#combat the asset_helper and base_url
+  RewriteRule (css|js|images)/(.*)$ assets/$1/$2 [NC,L]
+
+RewriteCond %{SCRIPT_FILENAME} !-f [OR]
+RewriteCond %{SCRIPT_FILENAME} !-d [OR]
+RewriteCond %{SCRIPT_FILENAME} !-s
+
+RewriteRule ^(.*)$ index.php?/$1&%{QUERY_STRING} [L]
