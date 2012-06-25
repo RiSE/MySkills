@@ -14,6 +14,7 @@ if (!defined('BASEPATH'))
  * @version             0.1
  */
 $config = array(
+    
     'programmer' => array(
         array(
             'field' => 'code',
@@ -35,6 +36,7 @@ $config = array(
             'rules' => 'numeric|max_length[2]'
         )
     ),
+    
     'recruiter' => array(
         array(
             'field' => 'company',
