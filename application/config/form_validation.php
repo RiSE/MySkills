@@ -17,13 +17,9 @@ $config = array(
     
     'programmer' => array(
         array(
-            'field' => 'code',
             'label' => 'Code',
-<<<<<<< HEAD
-            'rules' => 'numeric'
-=======
+            'rules' => 'numeric',
             'rules' => 'numeric|max_length[30]'
->>>>>>> update
         ),
         array(
             'field' => 'email',
