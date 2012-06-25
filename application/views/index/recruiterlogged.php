@@ -2,16 +2,15 @@
 
     <div class="span12">
 
-        <h3><span class="slash">//</span> Finished the iOS trainning course?</h3>
+        <h3><span class="slash">//</span> Hunting for a head?</h3>
 
-        <p>
-            If you are a programmer, just sign-in and put you code and e-mail so that we can know you.
-        </p>
+        <p>Are you a head hunter? Login below and signup to find your dream team.</p>
 
-        <form method="POST" name="frmProgrammer">
-            <label>Certficate Code</label>
-            <input type="text" id="code" name="code" />
-            <span><?php echo form_error('code'); ?></span>
+        <form method="POST" name="frmRecruiter">
+
+            <label>Company</label>
+            <input type="text" id="company" name="company" />
+            <span><?php echo form_error('company'); ?></span>
 
             <label>E-mail</label>
             <input type="text" id="email" name="email" />

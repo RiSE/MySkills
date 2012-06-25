@@ -89,6 +89,13 @@
                                     Contact Us
                                 </a>						
                             </li>
+                            <li>
+                                <?php if (!$this->session->userdata('uid') > 0) :?>
+                                    <a href="#">Sign-in</a>
+                                <?php else: ?>
+                                    <a href="#" onclick="fbLogout();" >Sign-out</a>
+                                <?php endif; ?>
+                            </li>                            
                         </ul>
 
                     </div><!--/.nav-collapse -->	

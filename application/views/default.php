@@ -27,7 +27,7 @@
         <link href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.css" rel="stylesheet">
 
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
-        <link href="./css/font-awesome.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet">
 
         <link href="<?php echo base_url(); ?>assets/css/reboot-landing.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>assets/css/reboot-landing-responsive.css" rel="stylesheet">
@@ -51,164 +51,109 @@
         <div id="fb-root"></div>
         <script type="text/javascript">
                        
+            var appId = '<?php echo $this->facebook_model->getAppId(); ?>';
             var base_url = '<?php echo base_url(); ?>';
-            function FBinit() {
-                window.fbAsyncInit = function() {
-                    FB.init({
-                        appId      : '380703318658533',
-                        status     : true, 
-                        cookie     : true,
-                        xfbml      : true,
-                        oauth      : true
-                    });
                 
-                    /*FB.getLoginStatus(function(response) {
-                        
-                        if (response.status === 'connected') {
-                            //window.location = 'programmerlogged';
-                            //console.log(response.status);
-                        }
-                    });*/
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : appId,
+                    status     : true, 
+                    cookie     : true,
+                    xfbml      : true,
+                    oauth      : true
+                });
+                                    
+                /*FB.Event.subscribe('auth.login', function(response) {
+                    if (response.status == 'connected') {
+                            
+                        FB.api('/me', function(response) {
+                                
+                            var data = {
+                                uid : response.id,
+                                email : response.email
+                            };
+                                
+                            $.ajax({
+                                type : 'POST',
+                                dataType : 'json',
+                                data : data,
+                                url : base_url + 'index/login',
+                                success : function() {
+                                    document.location.reload();
+                                }
+                            });
+                        });
+                    }                        
+                });*/
+                                    
+                /*FB.Event.subscribe('auth.logout', function(response) {
+                    
+                    console.log(response);
+                    
+                    if (response.status != 'connected') {
+                        $.ajax({
+                            type : 'POST',
+                            dataType : 'json',
+                            url : base_url + 'index/logout',
+                            success : function() {
+                                //document.location.reload();
+                                window.location = base_url + 'index/signout';
+                            }
+                        });
+                    }
+                });*/
+            };
+            
+            function fbLogin() {
                 
-                    //FB.getLoginStatus(updateButton);
-                    //FB.Event.subscribe('auth.statusChange', updateButton);
-                    
-                    FB.Event.subscribe('auth.login', function(response) {
-                        window.location = 'programmerlogged';
-                    });
-                    
-                    /*FB.Event.subscribe('auth.statusChange', function(response) {
+                //FB.getLoginStatus(function(response) {
+                  //  if (response.session) {
+                    //    console.log(response);
+                    //} else {
                         
-                        console.log(response.status);
-                        
-                        var button = document.getElementById('aimg');
-                        
-                        var srcLogout = button.src = base_url + 'assets/images/fb/logout.png'; 
-                        var srcLogin = button.src = base_url + 'assets/images/fb/login.png'; 
-                        
-                        if (response.status == 'connected') {
-                            button.src = srcLogout;
-                        } else {
-                            button.src = srcLogin;
-                        }
-                        
-                    });*/
-                };                
+                        FB.login(function(data) {
+                            //if (response.session) {
+                                FB.api('/me', function(response) {
+                                
+                                    var data = {
+                                        uid : response.id,
+                                        email : response.email
+                                    };
+                                
+                                    $.ajax({
+                                        type : 'POST',
+                                        dataType : 'json',
+                                        data : data,
+                                        url : base_url + 'index/login',
+                                        success : function() {
+                                            document.location.reload();
+                                        }
+                                    });
+                                });
+                            //}
+                        });
+                 //   }
+                //});
             }
             
-            FBinit();
-           
-            
+            function fbLogout() {
+                $.ajax({
+                    type : 'POST',
+                    dataType : 'json',
+                    url : base_url + 'index/logout'
+                });
+                FB.logout(function(response) {
+                    window.location = base_url + 'index/signout';
+                });
+            };
+                        
             (function(d){
                 var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
                 js = d.createElement('script'); js.id = id; js.async = true;
                 js.src = "//connect.facebook.net/en_US/all.js";
                 d.getElementsByTagName('head')[0].appendChild(js);
             }(document));
-            
-            
-            function fbStatus() {
-                
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        window.location = 'programmerlogged';
-                    } 
-                });
-            }
-            
-            /*function fbLogout(url) {
-                //FB.logout();
-                //window.location = 'index';
-                var redirect = '/logout';
-                
-                if (url != undefined || url != null) {
-                    redirect = url;    
-                }
-                
-                FB.Connect.logoutAndRedirect(redirect); 
-                return false;
-            }*/
-            
-            function updateButton(response) {
-                
-                var button = document.getElementById('aimg');
-                var suplink = document.getElementById('suplink');
-                
-                if (button != null) {
-                
-                    if (response.status === 'connected') {
-                        //button.innerHTML = '<div class="fb-login-button">Logout</div>';
-                        //button.innerHTML = 'Logout';
-                        button.src = base_url + 'assets/images/fb/logout.png';
-                        suplink.style.display = 'block';
-                        button.onclick = function() {
-                            FB.logout(function(response) {
-                                                        
-                                //Log.info('FB.logout callback', response);
-                                window.location = 'index';
-                            });
-                        };
-                    } else {
-                
-                        //button.innerHTML = '<div class="fb-login-button">Login</div>';
-                        //button.innerHTML = 'Login';
-                        button.src = base_url+ 'assets/images/fb/login.png';
-                        suplink.style.display = 'none';
-                        button.onclick = function() {
                         
-                            FB.login(function(response) {
-                                //Log.info('FB.login callback', response);
-                                //if (response.status === 'connected') {
-                                
-                                //Log.info('User is logged in');
-                                //} else {
-                                //Log.info('User is logged out');
-                                //}
-                            });
-                        }
-  
-                    }
-                }
-            }
-            
-            function fbLogin() {
-                
-                FB.login(function(response) {
-                    if (response.authResponse) {
-                        
-                        //FB.api('/me', function(response) {  
-                        //});
-                        
-                        //window.location = 'programmerlogged'
-                        
-                    }
-                },{scope: 'email'});
-            };
-            
-            function fbLogout() {
-                FB.logout(function() {
-                    window.location = 'index';
-                });
-            }
-                        
-            window.onload = function() {
-                
-                var fbLogount = document.getElementById('abtnlogin');
-                var fbLogin = document.getElementById('fbLogin');
-                
-                FB.getLoginStatus(function(response) {
-                    
-                    if (response.status === 'connected') {
-                        fbLogin.style.display = 'none';
-                        fbLogount.style.display = 'block';
-                    } else {
-                        fbLogin.style.display = 'block';
-                        fbLogount.style.display = 'none';
-                    }
-                    
-                });
-            };
-            
         </script>
 
         <div class="navbar navbar-fixed-top">
@@ -226,13 +171,6 @@
                     <div class="nav-collapse">
 
                         <ul class="nav pull-right">
-
-                            <!--<li>
-                                <a id="abtnlogins" >
-                            <!--<div class="fb-login-button">Login with Facebook</div>
-                            <fb:login-button id="abtnlogin">Login with Facebook</fb:login-button>
-                        </a>
-                    </li> -->
 
                             <li class="active">						
                                 <a href="<?php echo base_url(); ?>">
@@ -253,6 +191,13 @@
                                 <a href="<?php echo base_url(); ?>index/contact">
                                     Contact Us
                                 </a>						
+                            </li>
+                            <li>
+                                <?php if (!$this->session->userdata('uid') > 0) : ?>
+                                    <a href="#">Sign-in</a>
+                                <?php else: ?>
+                                    <a href="#" onclick="fbLogout();" >Sign-out</a>
+                                <?php endif; ?>
                             </li>
                         </ul>
 
