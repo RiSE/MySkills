@@ -17,7 +17,7 @@
 
             <div class="span6">
 
-                <h3><span class="slash">//</span> Recruiting</h3>
+                <h3><span class="slash">//</span> Recruiter</h3>
 
                 <p>Are you a head hunter? Login below and signup to find your dream team.</p>
 
@@ -49,7 +49,7 @@
 
             <div class="span6">
 
-                <h3><span class="slash">//</span> Finished the iOS trainning course?</h3>
+                <h3><span class="slash">//</span> Developer</h3>
 
                 <p>
                     If you are a programmer, just sign-in and put you code and e-mail so that we can know you.

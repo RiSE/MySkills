@@ -161,7 +161,7 @@ class Index extends CI_Controller {
         $this->load->model('endereco_model');
 
         $data = array(
-            'title' => 'Are you a recruiter or a programmer?'
+            'title' => 'Are you a Recruiter or a Developer?'
         );
 
         $data['ufs'] = $this->endereco_model->loadUfs();

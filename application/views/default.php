@@ -164,7 +164,7 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
                             </li>
                             <li>						
                                 <a href="<?php echo base_url(); ?>index/programmer">
-                                    Programmer of the Week
+                                    Developer of the Week
                                 </a>						
                             </li>
                             <li>						

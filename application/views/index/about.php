@@ -17,7 +17,7 @@
 
             <div class="span12">
 
-                <div class="big-intro">We certificate programmers with a badge system to improve recruitment and learning.</div>
+                <div class="big-intro">We certificate developers with a badge system to improve recruitment and learning.</div>
 
             </div> <!-- /span12 -->
 
