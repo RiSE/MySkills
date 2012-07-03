@@ -1,30 +1,24 @@
 var Facebook = {
     
-    username : null,
-    
-    teste: function(){
-      alert(1);  
-    },
-    
-    onReady : function() {
+    onReady : function(appId) {
         
         window.fbAsyncInit = function() {
             
             FB.init({
-                appId      : '380703318658533',
+                appId      : appId,
                 status     : true, 
                 cookie     : true,
                 xfbml      : true,
                 oauth      : true
             });
                 
-            FB.login(function(response) {
+            /*FB.login(function(response) {
                 if (response.authResponse) {
                     FB.api('/me', function(data) {
                         Facebook.username = data.name;
                     });
                 }
-            });
+            });*/
                 
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {                        
@@ -51,33 +45,6 @@ var Facebook = {
     
     updateButton : function() {
         
-        var button = document.getElementById('abtnlogin');
-                
-        if (response.status === 'connected') {
-            //button.innerHTML = '<div class="fb-login-button">Logout</div>';
-            button.innerHTML = 'Logout';
-            button.onclick = function() {
-                FB.logout(function(response) {
-                    //Log.info('FB.logout callback', response);
-                    window.location = 'index';
-                });
-            };
-        } else {
-            //button.innerHTML = '<div class="fb-login-button">Login</div>';
-            button.innerHTML = 'Login';
-            button.onclick = function() {
-                        
-                FB.login(function(response) {
-                    Log.info('FB.login callback', response);
-                    if (response.status === 'connected') {
-                    //Log.info('User is logged in');
-                    } else {
-                    //Log.info('User is logged out');
-                    }
-                });
-            }
-  
-        }
     },
     
     fbStatus : function() {
@@ -93,7 +60,16 @@ var Facebook = {
     fbLogout : function() {
         //FB.logout();
         //window.location = 'index';
-        FB.Connect.logoutAndRedirect('/logout'); 
-        return false;
+        //FB.Connect.logoutAndRedirect('/logout'); 
+        //return false;
+        Facebook.onReady();
+        $.ajax({
+            type : 'POST',
+            dataType : 'json',
+            url : base_url + 'index/logout'
+        });
+        FB.logout(function(response) {
+            window.location = base_url + 'index/logout';
+        });
     }  
 };

@@ -10,16 +10,9 @@
     <div class="container">
 
         <div class="row">
-
-            <div class="span8">
-
-                <h3><span class="slash">//</span>  Sorry, this page was not found :(</h3>
-
-                <p>
-
-                </p>
-
-            </div> <!-- /span8 -->
+            <div class="span6 landing-text">
+                <h2>You was registered successfully. We will be in touch :)</h2>
+            </div>
         </div>
 
     </div>

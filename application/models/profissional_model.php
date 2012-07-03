@@ -17,6 +17,12 @@ class Profissional_model extends CI_Model {
         
         $this->db->insert('profissional', $data);
     }
+    
+    public function updateProfissional($data = array()) {
+        
+        $this->db->where('fbuid', $data['fbuid']);
+        $this->db->update('profissional', $data);
+    }
 }
 
 ?>

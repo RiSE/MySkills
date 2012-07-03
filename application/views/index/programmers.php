@@ -1,48 +1,62 @@
-<div class="row">
+<div id="subheader">
+    <div class="inner">
+        <div class="container">
+            <h1><?php echo $title; ?></h1>
+        </div>
+    </div>
+</div>
 
-    <div class="span12">
+<div id="subpage">	
+    <div class="container">
 
-        <h3><span class="slash">//</span> Finished the iOS trainning course?</h3>
+        <div class="row">
 
-        <p>
-            If you are a programmer, just sign-in and put you code and e-mail so that we can know you.
-        </p>
+            <div class="span12">
 
-        <?php if (!$this->session->userdata('uid') > 0) : ?>
+                <h3><span class="slash">//</span> Finished the iOS trainning course?</h3>
 
-            <!--<div id="fbLogin" class="fb-login-button" onclick="fbLogin();" size="xlarge" scope="email">Login with Facebook</div>-->
-            <a href="#" onclick="fbLogin();"><img src="<?php echo base_url()?>assets/images/fb/login.png"></img></a>
-            
-        <?php else: ?>
+                <p>
+                    If you are a programmer, just sign-in and put you code and e-mail so that we can know you.
+                </p>
 
-            <form method="POST" name="frmProgrammer">
-                <label>Certficate Code</label>
-                <input type="text" id="code" name="code" />
-                <span><?php echo form_error('code'); ?></span>
+                <?php if (!$this->session->userdata('uid') > 0) : ?>
 
-                <label>E-mail</label>
-                <input type="text" id="email" name="email" />
-                <span><?php echo form_error('email'); ?></span>            
+                    <!--<div id="fbLogin" class="fb-login-button" onclick="fbLogin();" size="xlarge" scope="email">Login with Facebook</div>-->
+                    <a href="#" onclick="fbLogin();"><img src="<?php echo base_url() ?>assets/images/fb/login.png"></img></a>
 
-                <label>State:</label>
-                <select name="selectUf">
-                    <option value="">--SELECIONE--</option>
-                    <?php foreach ($ufs as $uf) : ?>
-                        <option value="<?php echo $uf->id_uf; ?>"><?php if ($uf->sigla != 'OC') : echo $uf->sigla; else: echo $uf->nome;endif; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <span><?php echo form_error('selectUf'); ?></span>
+                <?php else: ?>
 
-                <br />
-                
-                <input type="submit" value="Sigup" name="signup" />
-            </form>
+                    <form method="POST" name="frmProgrammer">
+                        <label>Certficate Code</label>
+                        <input type="text" id="code" name="code" />
+                        <span><?php echo form_error('code'); ?></span>
 
-        <?php endif; ?>
+                        <label>E-mail</label>
+                        <input type="text" id="email" name="email" />
+                        <span><?php echo form_error('email'); ?></span>            
 
-    </div> <!-- /span12 -->
+                        <label>State:</label>
+                        <select name="selectUf">
+                            <option value="">--SELECIONE--</option>
+                            <?php foreach ($ufs as $uf) : ?>
+                                <option value="<?php echo $uf->id_uf; ?>"><?php if ($uf->sigla != 'OC') : echo $uf->sigla; else: echo $uf->nome; endif; ?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <span><?php echo form_error('selectUf'); ?></span>
 
-    <div class="span6">		
+                        <br />
 
-    </div> <!-- /span6 -->
+                        <input type="submit" value="Sigup" name="signup" />
+                    </form>
+
+                <?php endif; ?>
+
+            </div> <!-- /span12 -->
+
+            <div class="span6">		
+
+            </div> <!-- /span6 -->
+        </div>
+        
+    </div>
 </div>

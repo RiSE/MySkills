@@ -19,13 +19,8 @@
             b[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);b._i.push([a,c,f])};window.mixpanel=b})(document,window.mixpanel||[]);
             mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
             mixpanel.track("Home");
-            mixpanel.track("Programmer of the Week");
-            mixpanel.track("How it Works");
-            mixpanel.track("Contacts Us");
-            mixpanel.track("Recruiters");
-            mixpanel.track("Programmers");
-            mixpanel.track("Success");
-    </script><!-- end Mixpanel -->    
+    </script><!-- end Mixpanel -->        
+    
     <head>
 
         <meta charset="utf-8">
@@ -47,8 +42,6 @@
 
         <link href="<?php echo base_url(); ?>assets/css/pages/homepage.css" rel="stylesheet">
 
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.js"></script>
-
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,75 +52,13 @@
     <body>
 
         <div id="fb-root"></div>
-
-        <script type="text/javascript">
-            
-    var appId = '<?php echo $this->facebook_model->getAppId(); ?>';
-    var base_url = '<?php echo base_url(); ?>';
-            
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : appId,
-            status     : true, 
-            cookie     : true,
-            xfbml      : true,
-            oauth      : true
-        });
-                
-        FB.getLoginStatus('/me', function(response) {
-            console.log(response);  
-        });
-                
-        FB.api('/me', function(response) {
-            console.log(response);  
-        });
-
-    };
-            
-    function fbLogin() {
-                
-        FB.login(function(data) {
-            FB.api('/me', function(response) {
-                                
-                var data = {
-                    uid : response.id,
-                    email : response.email
-                };
-                                
-                $.ajax({
-                    type : 'POST',
-                    dataType : 'json',
-                    data : data,
-                    url : base_url + 'index/login',
-                    success : function() {
-                        document.location.reload();
-                    }
-                });
-            });
-                            
-        });
-    };
-            
-    function fbLogout() {
-        $.ajax({
-            type : 'POST',
-            dataType : 'json',
-            url : base_url + 'index/logout'
-        });
-        FB.logout(function(response) {
-            window.location = base_url + 'index/logout';
-        });
-    };
-
-        </script>
-
         <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=" + appId ;
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=421791307842403";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 
         <div class="navbar navbar-fixed-top">
 
@@ -148,7 +79,7 @@
                                     Home
                                 </a>						
                             </li>
-
+                            
                             <li>						
                                 <a href="<?php echo base_url(); ?>index/programmer">
                                     Programmer of the Week
@@ -166,7 +97,7 @@
                                 </a>						
                             </li>
                             <li>
-                                <?php if (!$this->session->userdata('uid') > 0) : ?>
+                                <?php if (!$this->session->userdata('uid') > 0) :?>
                                     <a href="#">Sign-in</a>
                                 <?php else: ?>
                                     <a href="#" onclick="fbLogout();" >Sign-out</a>
@@ -203,20 +134,10 @@
                             <p>If you are a programmer, become a better coder and get a better job or even a promotion in your actual job.</p>
 
                             <p class="landing-actions">
-<<<<<<< HEAD
-                                <a href="http://www.myskills.com.br/index/recruiters" class="btn btn-small btn-primary">Recruiter - Sign-up here</a>
-                                <a href="http://www.myskills.com.br/index/programmers" class="btn btn-warning">Developer - Sign-up here</a>
-=======
-                                <?php if ($this->session->userdata('uid') > 0) : ?>
-                                                <!--<a href="<?php echo base_url(); ?>index/recruiters" class="btn btn-small btn-inverse">Recruiters - R$ 25,00</a>
-                                                <a href="<?php echo base_url(); ?>index/programmers" class="btn btn-small">Programmers - Free</a>-->
-                                    <a href="<?php echo base_url(); ?>index/logged" class="btn btn-small btn-inverse">Recruiters - R$ 25,00</a>
-                                    <a href="<?php echo base_url(); ?>index/logged" class="btn btn-small">Programmers - Free</a>
-                                <?php else: ?>
-                                    <a href="#" onclick="fbLogin();"><img src="<?php echo base_url() ?>assets/images/fb/login.png"></img></a>
-                                <?php endif; ?>
->>>>>>> commit
+                                <a href="<?php echo base_url(); ?>index/recruiters" class="btn btn-small btn-primary">Recruiter - Sign-up here</a>
+                                <a href="<?php echo base_url(); ?>index/programmers" class="btn btn-warning">Developer - Sign-up here</a>
                             </p>		
+
 
                         </div> <!-- /landing-text -->							
 
@@ -326,5 +247,9 @@
 
         </div> <!-- /footer -->
 
+        <!-- begin olark code --><script data-cfasync="false" type='text/javascript'>/*{literal}<![CDATA[*/
+        window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){f[z]=function(){(a.s=a.s||[]).push(arguments)};var a=f[z]._={},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={0:+new Date};a.P=function(u){a.p[u]=new Date-a.p[0]};function s(){a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{b.contentWindow[g].open()}catch(w){c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{var t=b.contentWindow[g];t.write(p());t.close()}catch(x){b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+        /* custom configuration goes here (www.olark.com/documentation) */
+        olark.identify('8338-468-10-6680');/*]]>{/literal}*/</script><noscript><a href="https://www.olark.com/site/8338-468-10-6680/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript><!-- end olark code -->        
     </body>
 </html>

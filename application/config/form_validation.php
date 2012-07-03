@@ -14,25 +14,30 @@ if (!defined('BASEPATH'))
  * @version             0.1
  */
 $config = array(
-    
     'programmer' => array(
         array(
-            'label' => 'Code',
-            'rules' => 'numeric',
-            'rules' => 'numeric|max_length[30]'
-        ),
-        array(
-            'field' => 'email',
+            'field' => 'emailp',
             'label' => 'Email',
-            'rules' => 'required|valid_emailmax_length[255]'
+            'rules' => 'required|valid_email|max_length[255]'
         ),
         array(
-            'field' => 'selectUf',
+            'field' => 'selectUfp',
             'label' => 'UF',
             'rules' => 'numeric|max_length[2]'
         )
     ),
-    
+    'programmer/claimbadges' => array(
+        array(
+            'field' => 'ioscode',
+            'label' => 'iOS Certificate COde',
+            'rules' => 'numeric|max_length[30]'
+        ),
+        array(
+            'field' => 'zendcode',
+            'label' => 'Zend Certificate Code',
+            'rules' => 'numeric|max_length[30]'
+        )
+    ),
     'recruiter' => array(
         array(
             'field' => 'company',
@@ -40,12 +45,12 @@ $config = array(
             'rules' => 'required|max_length[100]'
         ),
         array(
-            'field' => 'email',
+            'field' => 'emailr',
             'label' => 'Email',
             'rules' => 'required|valid_email|max_length[255]'
         ),
         array(
-            'field' => 'selectUf',
+            'field' => 'selectUfr',
             'label' => 'UF',
             'rules' => 'numeric|max_length[2]'
         )

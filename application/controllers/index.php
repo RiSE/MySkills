@@ -19,17 +19,23 @@ class Index extends CI_Controller {
 
     public function index() {
 
-        $this->load->view('index/index');
+        $data = array(
+            'title' => 'index'
+        );
+
+        $this->layout->view('index/index2', $data);
     }
 
     public function login() {
 
         $uid = $this->input->post('uid');
         $email = $this->input->post('email');
+        $name = $this->input->post('name');
 
         $suerdata = array(
             'uid' => $uid,
-            'email' => $email
+            'email' => $email,
+            'name' => $name
         );
 
         $this->session->set_userdata($suerdata);
@@ -39,7 +45,7 @@ class Index extends CI_Controller {
     }
 
     public function logout() {
-        
+
         $this->session->sess_destroy();
 
         echo json_encode(array('logout' => true));
@@ -63,7 +69,7 @@ class Index extends CI_Controller {
     }
 
     public function recruiters() {
-        
+
         $this->load->model('recruiter_model');
 
         $data = array(
@@ -98,53 +104,11 @@ class Index extends CI_Controller {
             );
 
             $this->recruiter_model->insertRecruiter($data);
-            
+
             redirect(base_url() . 'index/success');
         }
 
         $this->layout->view('index/recruiters', $data);
-    }
-
-    public function recruiterlogged() {
-
-        $this->load->model('recruiter_model');
-
-        $data = array(
-            'title' => 'Recruiters',
-            'errors' => ''
-        );
-
-        $data['ufs'] = $this->db->query('SELECT * FROM uf')->result_object();
-
-        if ($this->form_validation->run('recruiter') !== false) {
-
-            $email = (string) $this->input->post('email');
-            $company = (string) $this->input->post('company');
-            $selectUf = (int) $this->input->post('selectUf');
-
-            if (!empty($selectUf)) {
-                $sigla = $this->db->query('SELECT * FROM uf WHERE id_uf = ?', $selectUf)->result_object();
-
-                if (empty($sigla)) {
-                    redirect(base_url() . 'index/programmerlogged');
-                }
-                $uf = $sigla[0]->sigla;
-            }
-
-            $data = array(
-                'email' => $email,
-                'razao' => $company,
-                'uf' => $uf,
-                'data_registro' => date('Y-m-d')
-            );
-
-            $this->recruiter_model->insertRecruiter($data);
-            redirect(base_url());
-        } else {
-            $data['errors'] = validation_errors();
-        }
-
-        $this->layout->view('index/recruiterlogged', $data);
     }
 
     public function programmers() {
@@ -192,47 +156,155 @@ class Index extends CI_Controller {
         $this->layout->view('index/programmers', $data);
     }
 
-    public function programmerlogged() {
+    public function logged() {
 
-        $this->load->model('profissional_model');
+        $this->load->model('endereco_model');
 
         $data = array(
-            'title' => 'Programmers',
-            'errors' => ''
+            'title' => 'Are you a recruiter or a programmer?'
         );
 
-        $data['ufs'] = $this->db->query('SELECT * FROM uf')->result_object();
+        $data['ufs'] = $this->endereco_model->loadUfs();
 
-        if ($this->form_validation->run('programmer') !== false) {
 
-            $email = (string) $this->input->post('email');
-            $code = $this->input->post('code');
-            $uf = (int) $this->input->post('selectUf');
+        $this->layout->view('index/logged', $data);
+    }
 
-            if (!empty($uf)) {
-                $sigla = $this->db->query('SELECT * FROM uf WHERE id_uf = ?', $uf)->result_object();
+    public function addRecruiter() {
 
-                if (empty($sigla)) {
-                    redirect(base_url() . 'index/programmerlogged');
-                }
-                $uf = $sigla[0]->sigla;
+        $this->load->model('recruiter_model');
+        $this->load->model('endereco_model');
+
+        $data = array(
+            'title' => 'Are you a recruiter or a programmer?'
+        );
+
+        $data['ufs'] = $this->endereco_model->loadUfs();
+
+        $selectUf = (int) $this->input->post('selectUfr');
+
+        if (!empty($selectUf)) {
+            $sigla = $this->db->query('SELECT * FROM uf WHERE id_uf = ?', $selectUf)->result_object();
+            if (empty($sigla)) {
+                redirect(base_url() . 'index/recruiters');
             }
+            $selectUf = $sigla[0]->sigla;
+        }
+
+        if ($this->form_validation->run('recruiter') !== false) {
+
+            $email = (string) $this->input->post('emailr');
+            $company = (string) $this->input->post('company');
+            //$selectUf = (int) $this->input->post('selectUf');
 
             $data = array(
                 'email' => $email,
-                'codigo' => $code,
-                'uf' => $uf,
-                'data_registro' => date('Y-m-d')
+                'company' => $company,
+                'state' => $selectUf,
+                'fbuid' => $this->session->userdata('uid'),
+                'created' => date('Y-m-d')
             );
 
-            $this->profissional_model->insertProfissional($data);
+            $this->recruiter_model->insertRecruiter($data);
 
-            redirect(base_url());
-        } else {
-            $data['errors'] = validation_errors();
+            redirect(base_url() . 'index/recruiterProfile');
         }
 
-        $this->layout->view('index/programmerlogged', $data);
+        $this->layout->view('index/recruiters', $data);
+    }
+
+    public function addProfessional() {
+
+        $this->load->model('professional_model');
+        $this->load->model('endereco_model');
+
+        $data = array(
+            'title' => 'Are you a recruiter or a programmer?'
+        );
+
+        $selectUf = (int) $this->input->post('selectUfp');
+        
+        $data['ufs'] = $this->endereco_model->loadUfs();
+
+        if (!empty($selectUf)) {
+            $sigla = $this->endereco_model->loadUfs(array('id_uf' => $selectUf));
+
+            if (empty($sigla)) {
+                redirect(base_url() . 'index/logged');
+            }
+            $selectUf = $sigla[0]->sigla;
+        }
+
+        if ($this->form_validation->run('programmer') !== false) {
+
+            $email = (string) $this->input->post('emailp');
+
+            $data = array(
+                'email' => $email,
+                'fbuid' => $this->session->userdata('uid'),
+                'state' => $selectUf,
+                'created' => date('Y-m-d')
+            );
+
+            $this->professional_model->insertProfessional($data);
+
+            redirect(base_url() . 'index/professionalProfile');
+        } else {
+            $this->layout->view('index/logged', $data);
+        }
+    }
+
+    public function recruiterProfile() {
+
+        $this->load->model('professional_model');
+
+        $data = array(
+            'title' => 'Recruiter Profile'
+        );
+
+        $data['professionals'] = $this->professional_model->listProfessionals();
+
+        $this->layout->view('index/recruiterProfile', $data);
+    }
+
+    public function professionalProfile() {
+
+        $this->load->model('professional_model');
+        $this->load->model('badge_model');
+
+        $data = array(
+            'title' => 'Professional Profile',
+            'badge_error' => ''
+        );
+
+        $data['badges'] = $this->badge_model->listBadges();
+        if ($this->form_validation->run('programmer/claimbadges') !== false) {
+
+            $fbuid = $this->session->userdata('uid');
+            $idBage = (int) $this->input->post('selectBadges');
+            $code = (string) $this->input->post('code');
+
+            $badge = $this->badge_model->loadBadge($idBage);
+
+            if (!empty($badge)) {
+
+                $professional = $this->professional_model->loadProfessional($fbuid);
+
+                $insert = array(
+                    'id_professional' => $professional[0]->id_professional,
+                    'id_badge' => $badge[0]->id_badge,
+                    'code' => $code
+                );
+
+                $this->badge_model->insertBadgeProfessional($insert);
+
+                redirect(base_url() . 'index/');
+            } else {
+                $data['badge_error'] = 'Invalid Badge';
+            }
+        }
+
+        $this->layout->view('index/professionalProfile', $data);
     }
 
     public function success() {
@@ -242,6 +314,24 @@ class Index extends CI_Controller {
         );
 
         $this->layout->view('index/success', $data);
+    }
+
+    public function successProfessional() {
+
+        $data = array(
+            'title' => 'Success!'
+        );
+
+        $this->layout->view('index/successProfessional', $data);
+    }
+
+    public function successRecruiter() {
+
+        $data = array(
+            'title' => 'Success!'
+        );
+
+        $this->layout->view('index/successRecruiter', $data);
     }
 
     public function about() {
