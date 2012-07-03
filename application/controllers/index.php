@@ -23,7 +23,7 @@ class Index extends CI_Controller {
             'title' => 'index'
         );
 
-        $this->layout->view('index/index2', $data);
+        $this->layout->view('index/index', $data);
     }
 
     public function login() {
