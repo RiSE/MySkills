@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    mixpanel.track("Success Recruiter");
+</script>
+
 <div id="subheader">
     <div class="inner">
         <div class="container">

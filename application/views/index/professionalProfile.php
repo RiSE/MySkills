@@ -21,11 +21,11 @@
 
                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal"  style="border:thick groove green;" />
 
-                    <img src="<?php base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
+                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
+                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
+                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
+                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
+                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
 
                     <div class="row-fluid">
                         <div class="span9">
