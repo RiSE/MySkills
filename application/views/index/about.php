@@ -54,13 +54,13 @@
 
                 <p>By displaying skills and achievements that traditional degrees and transcripts often leave out, badges can lead to jobs, community recognition, and new learning opportunities.</p>
 
-                <h4>Who can Earn Badges? Programmers</h4>
+                <h4>Who can Earn Badges? Developers</h4>
 
-                <p>A Badge Earner is any programmer who collects and stores their badges within our systems. MySkills.com.br acts as the conduit between a Badge Issuer and a Badge Earner, permitting an earner to earn, accept, store, and manage badges within their Mozilla Backpack. From there they can choose to display their badges on a variety of sites, including blogs, social media sites, and personal websites.</p>
+                <p>A Badge Earner is any developer who collects and stores their badges within our systems. MySkills.com.br acts as the conduit between a Badge Issuer and a Badge Earner, permitting an earner to earn, accept, store, and manage badges within their Mozilla Backpack. From there they can choose to display their badges on a variety of sites, including blogs, social media sites, and personal websites.</p>
 
                 <h4>Who can  Provide Badges? Our Partners</h4>
 
-                <p>We are creating partnerships with Badge Issuers (for example, after-school programs, free online courses, and vocational institutes) who can award Badges to programmers like you. Learners/badge earners can then collect and manage their badges in a Badge Backpack. 
+                <p>We are creating partnerships with Badge Issuers (for example, after-school programs, free online courses, and vocational institutes) who can award Badges to developers like you. Learners/badge earners can then collect and manage their badges in a Badge Backpack. 
                     This makes it easy to display your skills and achievements across a range of different Display Sites - from your personal resume or web site, to social networking profiles, to employment sites. The result? Jobs, new learning opportunities and unlocked potential.". </p>					
 
 

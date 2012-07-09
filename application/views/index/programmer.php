@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    mixpanel.track("Programmer of the Week");
+    mixpanel.track("Developer of the Week");
 </script>
 
 <div id="subheader">
@@ -12,7 +12,6 @@
 
 <div id="subpage">	
     <div class="container">
-
 
         <div class="row">
 
@@ -89,11 +88,12 @@
                     <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="50" align="left"/>
 
                     <p>
-                        The Unlock badge is used as a visual representation for programmers and 
-                        recruiters that the programmer can unlock other badges in the future to improve his profile page.
+                        The Unlock badge is used as a visual representation for developers and 
+                        recruiters that the developer can unlock other badges in the future to improve his profile page.
                     </p>
 
                 </div>
+                <a href="http://openbadges.org/en-US/"><h4><span class="slash">//</span> See more about badges here</h4></a>
             </div>
         </div>
 

@@ -14,11 +14,11 @@
 
                 <div class="span6 landing-text">
 
-                    <h1>The best way to hire programmers in Brazil.</h1>
+                    <h1>The best way to hire developers.</h1>
                     <h2>A badge ranking system.</h2>
 
                     <p>If you are a recruiter, reach skilled developers in a categorized validated environment.</p>
-                    <p>If you are a programmer, become a better coder and get a better job or even a promotion in your actual job.</p>
+                    <p>If you are a developer, become a better coder and get a better job or even a promotion in your actual job.</p>
 
                     <p class="landing-actions">
                         <?php if ($this->session->userdata('uid') > 0) : ?>

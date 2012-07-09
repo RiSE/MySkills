@@ -39,8 +39,12 @@
                                     <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            <?php echo form_error('selectBadges');?>
                             <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
+                            <?php echo form_error('code');?>
+                            
                             <input type="submit" value="Claim Right now!" name="claim" />
+                            <?php echo $badge_error; ?>
                         </div>
                         <div class="span3">
                             <div class="sidebar">

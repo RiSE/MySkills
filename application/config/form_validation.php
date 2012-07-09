@@ -28,14 +28,14 @@ $config = array(
     ),
     'programmer/claimbadges' => array(
         array(
-            'field' => 'ioscode',
-            'label' => 'iOS Certificate COde',
-            'rules' => 'numeric|max_length[30]'
+            'field' => 'code',
+            'label' => 'Code Certificate',
+            'rules' => 'required|max_length[30]'
         ),
         array(
-            'field' => 'zendcode',
-            'label' => 'Zend Certificate Code',
-            'rules' => 'numeric|max_length[30]'
+            'field' => 'selectBadges',
+            'label' => 'Badge',
+            'rules' => 'numeric|required'
         )
     ),
     'recruiter' => array(

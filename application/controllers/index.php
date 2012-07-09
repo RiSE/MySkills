@@ -11,10 +11,7 @@ if (!defined('BASEPATH'))
 class Index extends CI_Controller {
 
     public function __construct() {
-
         parent::__construct();
-
-        $this->load->model('facebook_model');
     }
 
     public function index() {
@@ -116,7 +113,7 @@ class Index extends CI_Controller {
         $this->load->model('profissional_model');
 
         $data = array(
-            'title' => 'Programmers',
+            'title' => 'Developers',
             'errors' => '',
             'success' => ''
         );
@@ -176,7 +173,7 @@ class Index extends CI_Controller {
         $this->load->model('endereco_model');
 
         $data = array(
-            'title' => 'Are you a recruiter or a programmer?'
+            'title' => 'Are you a recruiter or a developer?'
         );
 
         $data['ufs'] = $this->endereco_model->loadUfs();
@@ -219,11 +216,11 @@ class Index extends CI_Controller {
         $this->load->model('endereco_model');
 
         $data = array(
-            'title' => 'Are you a recruiter or a programmer?'
+            'title' => 'Are you a recruiter or a developer?'
         );
 
         $selectUf = (int) $this->input->post('selectUfp');
-        
+
         $data['ufs'] = $this->endereco_model->loadUfs();
 
         if (!empty($selectUf)) {
@@ -290,15 +287,21 @@ class Index extends CI_Controller {
 
                 $professional = $this->professional_model->loadProfessional($fbuid);
 
-                $insert = array(
-                    'id_professional' => $professional[0]->id_professional,
-                    'id_badge' => $badge[0]->id_badge,
-                    'code' => $code
-                );
+                $hasThisBadge = $this->badge_model->listBadgesProfessional($professional[0]->id_professional, $badge[0]->id_badge);
 
-                $this->badge_model->insertBadgeProfessional($insert);
+                if (empty($hasThisBadge)) {
+                    $insert = array(
+                        'id_professional' => $professional[0]->id_professional,
+                        'id_badge' => $badge[0]->id_badge,
+                        'code' => $code
+                    );
 
-                redirect(base_url() . 'index/');
+                    $this->badge_model->insertBadgeProfessional($insert);
+
+                    redirect(base_url() . 'index/');
+                } else {
+                    $data['badge_error'] = 'You already have this badge';
+                }
             } else {
                 $data['badge_error'] = 'Invalid Badge';
             }
@@ -346,7 +349,7 @@ class Index extends CI_Controller {
     public function programmer() {
 
         $data = array(
-            'title' => 'Programmer of the Week'
+            'title' => 'Developer of the Week'
         );
 
         $this->layout->view('index/programmer', $data);

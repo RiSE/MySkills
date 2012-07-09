@@ -48,6 +48,23 @@ class Badge_model extends CI_Model {
 
         return $result;
     }
+    
+    public function listBadgesProfessional($idProfessional, $idBadge) {
+        
+        $result = array();
+        
+        $this->db->select('id_professional, id_badge');
+        $this->db->where('id_professional', $idProfessional);
+        $this->db->where('id_badge', $idBadge);
+        
+        $query = $this->db->get('badges_professional');
+        
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+        
+        return $result;
+    }
 
     public function insertBadgeProfessional($data = array()) {
 
