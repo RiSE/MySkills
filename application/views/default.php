@@ -28,6 +28,7 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
         <meta name="apple-mobile-web-app-capable" content="yes">
 
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/css/bootstrap-tab.css" rel="stylesheet">
 
         <link href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -44,6 +45,7 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
 
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/facebook.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_tab.js"></script>
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>

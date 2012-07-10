@@ -309,6 +309,49 @@ class Index extends CI_Controller {
 
         $this->layout->view('index/professionalProfile', $data);
     }
+    public function claimBadges() {
+		$this->load->model('professional_model');
+        $this->load->model('badge_model');
+
+        $data = array(
+            'title' => 'Claim a Badges',
+            'badge_error' => ''
+        );
+
+        $data['badges'] = $this->badge_model->listBadges();
+        if ($this->form_validation->run('programmer/claimbadges') !== false) {
+			$fbuid = $this->session->userdata('uid');
+            $idBage = (int) $this->input->post('badges');
+            $code = (string) $this->input->post('code');
+
+            $badge = $this->badge_model->loadBadge($idBage);
+
+            if (!empty($badge)) {
+
+                $professional = $this->professional_model->loadProfessional($fbuid);
+
+                $hasThisBadge = $this->badge_model->listBadgesProfessional($professional[0]->id_professional, $badge[0]->id_badge);
+
+                if (empty($hasThisBadge)) {
+                    $insert = array(
+                        'id_professional' => $professional[0]->id_professional,
+                        'id_badge' => $badge[0]->id_badge,
+                        'code' => $code
+                    );
+
+                    $this->badge_model->insertBadgeProfessional($insert);
+
+                    redirect(base_url() . 'index/');
+                } else {
+                    $data['badge_error'] = 'You already have this badge';
+                }
+            } else {
+                $data['badge_error'] = 'Invalid Badge';
+            }
+        }
+
+        $this->layout->view('index/claimBadge', $data);
+    }
 
     public function success() {
 

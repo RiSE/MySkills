@@ -33,7 +33,7 @@ $config = array(
             'rules' => 'required|max_length[30]'
         ),
         array(
-            'field' => 'selectBadges',
+            'field' => 'badges',
             'label' => 'Badge',
             'rules' => 'numeric|required'
         )
