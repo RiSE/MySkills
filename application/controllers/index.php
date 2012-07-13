@@ -516,6 +516,7 @@ class Index extends CI_Controller {
 
         if ($company != false) {
             
+            $company = (string) $company;
             $recruiter = $this->recruiter_model->loadRecruiter(null, $company);
             if (!empty($recruiter)) {
                 $dataJobs['id_recruiter'] = $recruiter[0]->id_recruiter;
