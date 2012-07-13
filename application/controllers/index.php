@@ -500,7 +500,7 @@ class Index extends CI_Controller {
         $this->load->model('professional_model');
         $this->load->model('job_model');
 
-        $company = $this->input->get('name');
+        $company = $this->input->get('company');
 
         $data = array(
             'title' => 'Apply for a Job',
@@ -508,9 +508,9 @@ class Index extends CI_Controller {
             'applieds' => array()
         );
 
-        $fbuid = $this->session->userdata('uid');
+        $fbuid = $this->session->userdata('uid');        
         $professional = $this->professional_model->loadProfessional($fbuid);
-
+        
         $recruiter = null;
         $dataJobs = array();
 
@@ -526,7 +526,14 @@ class Index extends CI_Controller {
         }
         
         $data['jobs'] = $this->job_model->listJobs($dataJobs);
-        $data['applieds'] = $this->job_model->listJobsApplied($professional[0]->id_professional);
+        
+        $dataProfessional = array();
+        $data['applieds'] = array();
+        if (!empty($professional)) {            
+            $data['applieds'] = $this->job_model->listJobsApplied($professional[0]->id_professional);
+        }
+        
+        
 
         $this->layout->view('index/applyforajob', $data);
     }

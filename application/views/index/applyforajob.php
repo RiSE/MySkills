@@ -23,12 +23,12 @@
 
             <div class="span2">
                 <ul class="nav nav-tabs nav-stacked">
-                    <li class="">
+                    <!--<li class="">
                         <a href="<?php echo base_url(); ?>professional/applyforajob?type=web">Web Development</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>professional/applyforajob?type=mobile">Mobile Development</a>
-                    </li>
+                    </li>-->
                 </ul>
 
                 <!--<div class="tabbable tabs-left">
