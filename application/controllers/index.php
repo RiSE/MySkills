@@ -24,18 +24,28 @@ class Index extends CI_Controller {
     }
 
     public function login() {
+        
+        $this->load->model('professional_model');
 
         $uid = $this->input->post('uid');
         $email = $this->input->post('email');
         $name = $this->input->post('name');
-
+        $existdb = false;
+        
+        $professional = $this->professional_model->loadProfessional($uid);
+                
+        if (!empty($professional)) {
+            $existdb = true;
+        }
+        
         $suerdata = array(
             'uid' => $uid,
             'email' => $email,
             'name' => $name,
+            'existdb' => $existdb,
             'loggedin' => true
         );
-
+                
         $this->session->set_userdata($suerdata);
 
         echo json_encode(array('loggin' => true));
