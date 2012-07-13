@@ -21,7 +21,7 @@
 					        <div class="tab-content">
 					          <div class="tab-pane" id="lA">
 					           <?php foreach ($badges as $badge) : 
-					           		if($badge->id_badge == 3 || $badge->id_badge == 4 ){
+					           		if($badge->id_badge == 2 || $badge->id_badge == 4 ){
 					           ?>
                                     <div class="row">
                                     <form method="POST" name="frmClaim">
@@ -29,7 +29,7 @@
                                 	   
 					            <?php 
 					            		switch ($badge->id_badge){
-					            			case 3 : 
+					            			case 2 : 
 					            			echo '<div class="span8">
 					            					<div class="span2">
 					            						<img src="'.base_url().'assets/images/badges/php.png" width="100"></img>
@@ -51,7 +51,7 @@
 					            			case 4: 
 						            			echo '<div class="span8">
 						            					<div class="span2">
-						            						<img src="'.base_url().'assets/images/badges/androidbadges.png" width="100"></img>
+						            						<img src="'.base_url().'assets/images/badges/php.png" width="100"></img>
 						            					</div>';
 						            			echo '<div class="span5">
 						                                    The Zend badge is provided for students that participated on an 
@@ -75,7 +75,7 @@
 					          </div>
 					          <div class="tab-pane active" id="lB">
 					            <?php foreach ($badges as $badge) : 
-					            		if($badge->id_badge == 1 || $badge->id_badge == 2 ){
+					            		if($badge->id_badge == 1 || $badge->id_badge == 3 ){
 					            ?>
 	                                    <div class="row">
 	                                    <form method="POST" name="frmClaim">
@@ -102,7 +102,7 @@
 						            			echo form_error('code');
 					            			   echo form_error('badge_error');
 						            			break;	
-						            			case 2: 
+						            			case 3: 
 							            			echo '<div class="span8">
 							            					<div class="span2">
 							            						<img src="'.base_url().'assets/images/badges/androidbadges.png" width="100"></img>
@@ -113,7 +113,7 @@
 							                                    practice in Android application development including: Tablet, Phones and iPod touch.
 							                                    Unlock Badge.
 							                                    <br />
-							                                    <input type="submit" value="Claim Right now!" class="btn btn-warning" name="claim" />
+							                                    <input type="submit" value="Claim Right now!" disabled="disabled" class="btn btn-warning" name="claim" />
 							                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
 							                              </div>
 							                               </div>';
