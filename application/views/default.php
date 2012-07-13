@@ -179,11 +179,6 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
                                     Contact Us
                                 </a>						
                             </li>
-                            <li>
-                                <?php if (!$this->session->userdata('uid') > 0) : ?>
-                                    <a href="#">Sign-in</a>
-                                <?php endif; ?>
-                            </li>
                             <?php if ($this->session->userdata('uid') > 0) : ?>
                                 <li>
                                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
