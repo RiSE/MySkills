@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="span3">
-                        <a href="<?php echo base_url(); ?>index/applyforajob" class="btn btn-success btn-large">Apply for a Job</a>
+                        <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
                     </div>
                     <div class="span3">
                         <a href="<?php echo base_url(); ?>index/claimbadges" class="btn btn-warning btn-large">Claim your Badges</a>

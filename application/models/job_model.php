@@ -18,11 +18,15 @@ class Job_model extends CI_Model {
         $this->table = 'job';
     }
 
-    public function listJobs() {
+    public function listJobs($data = array()) {
 
         $result = array();
 
         $this->db->select('id_job, title, created');
+        
+        if (isset($data['id_recruiter']) && !empty($data['id_recruiter'])) {
+            $this->db->where('id_recruiter', $data['id_recruiter']);
+        }
 
         $query = $this->db->get($this->table);
 

@@ -24,20 +24,20 @@ class Index extends CI_Controller {
     }
 
     public function login() {
-        
+
         $this->load->model('professional_model');
 
         $uid = $this->input->post('uid');
         $email = $this->input->post('email');
         $name = $this->input->post('name');
         $existdb = false;
-        
+
         $professional = $this->professional_model->loadProfessional($uid);
-                
+
         if (!empty($professional)) {
             $existdb = true;
         }
-        
+
         $suerdata = array(
             'uid' => $uid,
             'email' => $email,
@@ -45,7 +45,7 @@ class Index extends CI_Controller {
             'existdb' => $existdb,
             'loggedin' => true
         );
-                
+
         $this->session->set_userdata($suerdata);
 
         echo json_encode(array('loggin' => true));
@@ -78,45 +78,45 @@ class Index extends CI_Controller {
 
     public function recruiters() {
 
-        /*$this->load->model('recruiter_model');
+        /* $this->load->model('recruiter_model');
 
-        $data = array(
-            'title' => 'Recruiters',
-            'errors' => ''
-        );
+          $data = array(
+          'title' => 'Recruiters',
+          'errors' => ''
+          );
 
-        $data['ufs'] = $this->db->query('SELECT * FROM uf')->result_object();
+          $data['ufs'] = $this->db->query('SELECT * FROM uf')->result_object();
 
-        $selectUf = (int) $this->input->post('selectUf');
+          $selectUf = (int) $this->input->post('selectUf');
 
-        if (!empty($selectUf)) {
-            $sigla = $this->db->query('SELECT * FROM uf WHERE id_uf = ?', $selectUf)->result_object();
-            if (empty($sigla)) {
-                redirect(base_url() . 'index/recruiters');
-            }
-            $selectUf = $sigla[0]->sigla;
-        }
+          if (!empty($selectUf)) {
+          $sigla = $this->db->query('SELECT * FROM uf WHERE id_uf = ?', $selectUf)->result_object();
+          if (empty($sigla)) {
+          redirect(base_url() . 'index/recruiters');
+          }
+          $selectUf = $sigla[0]->sigla;
+          }
 
-        if ($this->form_validation->run('recruiter') !== false) {
+          if ($this->form_validation->run('recruiter') !== false) {
 
-            $email = (string) $this->input->post('email');
-            $company = (string) $this->input->post('company');
-            //$selectUf = (int) $this->input->post('selectUf');
+          $email = (string) $this->input->post('email');
+          $company = (string) $this->input->post('company');
+          //$selectUf = (int) $this->input->post('selectUf');
 
-            $data = array(
-                'email' => $email,
-                'razao' => $company,
-                'uf' => $selectUf,
-                'fbuid' => $this->session->userdata('uid'),
-                'data_registro' => date('Y-m-d')
-            );
+          $data = array(
+          'email' => $email,
+          'razao' => $company,
+          'uf' => $selectUf,
+          'fbuid' => $this->session->userdata('uid'),
+          'data_registro' => date('Y-m-d')
+          );
 
-            $this->recruiter_model->insertRecruiter($data);
+          $this->recruiter_model->insertRecruiter($data);
 
-            redirect(base_url() . 'index/success');
-        }
+          redirect(base_url() . 'index/success');
+          }
 
-        $this->layout->view('index/recruiters', $data);*/
+          $this->layout->view('index/recruiters', $data); */
         die('not implemented yet');
     }
 
@@ -493,23 +493,35 @@ class Index extends CI_Controller {
         $this->layout->view('index/profile', $data);
     }
 
-    public function applyforajob() {
+    public function jobs() {
 
+        $this->load->model('recruiter_model');
         $this->load->model('professional_model');
         $this->load->model('job_model');
+
+        $company = (string) $this->input->get('name');
 
         $data = array(
             'title' => 'Apply for a Job'
         );
 
         $fbuid = $this->session->userdata('uid');
-                        
+
         $professional = $this->professional_model->loadProfessional($fbuid);
+
+        $recruiter = null;
+        if (!empty($company)) {
+            $recruiter = $this->recruiter_model->loadRecruiter(null, $company);
+        }
         
-        
-        $data['jobs'] = $this->job_model->listJobs();
+        $dataJobs = array();
+        if (!empty($recruiter)) {
+            $dataJobs['id_recruiter'] = $recruiter[0]->id_recruiter;
+        }
+
+        $data['jobs'] = $this->job_model->listJobs($dataJobs);
         $data['applieds'] = $this->job_model->listJobsApplied($professional[0]->id_professional);
-        
+
         $this->layout->view('index/applyforajob', $data);
     }
 

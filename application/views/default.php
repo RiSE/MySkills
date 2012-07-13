@@ -167,7 +167,7 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
                             </li>
                             <?php if ($this->session->userdata('uid') > 0 && $this->session->userdata('existdb') == true) : ?>
                             <li>						
-                                <a href="<?php echo base_url(); ?>index/applyforajob">
+                                <a href="<?php echo base_url(); ?>index/jobs">
                                     Apply for a job
                                 </a>
                             </li>
