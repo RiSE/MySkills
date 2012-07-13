@@ -49,12 +49,12 @@ class Professional_model extends CI_Model {
     public function loadProfessional($fbuid) {
 
         $result = array();
-
-        $this->db->select('id_professional, created');
+		
+        $this->db->select('id_professional, created, email');
         $this->db->where('fbuid', $fbuid);
-
+		
         $query = $this->db->get($this->table);
-
+		
         if ($query->num_rows() > 0) {
             $result = $query->result_object();
         }

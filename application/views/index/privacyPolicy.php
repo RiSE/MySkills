@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    mixpanel.track("How it Works");
+    mixpanel.track("<?php echo $title; ?>");
 </script>
 
 <div id="subheader">

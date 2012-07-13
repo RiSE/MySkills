@@ -18,7 +18,36 @@
     <script type="text/javascript">(function(c,b){var a,d,h,e;a=c.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===c.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(a,d);b._i=[];b.init=function(a,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=b;"undefined"!==typeof f?g=
             b[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);b._i.push([a,c,f])};window.mixpanel=b})(document,window.mixpanel||[]);
 mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
-    </script><!-- end Mixpanel -->        
+
+// novo Mixpanel 
+
+(function(c,a){var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?g=
+	a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1;window.mixpanel=a})(document,window.mixpanel||[]);
+	mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
+
+<?php  
+	if($this->session->userdata('uid')):
+		
+		$professionalexist = $this->professional_model->loadProfessional($this->session->userdata('uid'));
+		
+		if($professionalexist):
+			$email = $professionalexist[0]->email;
+			$datacadastro = $professionalexist[0]->created;
+		else:  
+			$recruiterexist = $this->recruiter_model->loadRecruiter($this->session->userdata('uid'));
+			$email = $recruiterexist[0]->email;
+			$datacadastro = $recruiterexist[0]->created;
+		endif;
+?>
+mixpanel.identify("<?php echo $this->session->userdata('uid');?>");
+mixpanel.people.set({
+    "name": "<?php echo $this->session->userdata('name');?>",
+    "$email": "<?php echo $email;?>",
+    "$created": "<?php echo $datacadastro;?>"
+});
+mixpanel.name_tag("<?php echo $this->session->userdata('name');?>");
+<?php endif;?>
+</script><!-- end Mixpanel -->        
     <head>
 
         <meta charset="utf-8">
