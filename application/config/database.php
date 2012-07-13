@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '127.0.0.1';
+$db['default']['hostname'] = 'www.myskills.com.br';
 $db['default']['port'] = 5432;
-$db['default']['username'] = 'postgres';
-$db['default']['password'] = 'admin';
-$db['default']['database'] = 'skillsdb';
+$db['default']['username'] = 'skillsuser';
+$db['default']['password'] = 'splc2012';
+$db['default']['database'] = 'skillsdb_teste';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
