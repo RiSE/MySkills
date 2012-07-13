@@ -165,8 +165,13 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
                                 </a>						
                             </li>
                             <li>						
-                                <a href="<?php echo base_url(); ?>index/programmer">
-                                    Developer of the Week
+                                <a href="<?php echo base_url(); ?>index/applyforajob">
+                                    Apply for a job
+                                </a>						
+                            </li>
+                            <li>						
+                                <a href="<?php echo base_url(); ?>index/claimBadges">
+                                    Claim Badge
                                 </a>						
                             </li>
                             <li>						
