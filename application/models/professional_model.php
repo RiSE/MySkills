@@ -19,6 +19,8 @@ class Professional_model extends CI_Model {
     }
 
     public function listProfessionals() {
+        
+        $result = array();
 
         $this->db->select('id_professional, fbuid , created');
 
