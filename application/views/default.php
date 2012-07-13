@@ -22,7 +22,7 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
     <head>
 
         <meta charset="utf-8">
-        <title>MySkills.com.br</title>
+        <title><?php echo $title; ?></title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">

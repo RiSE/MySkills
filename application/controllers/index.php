@@ -17,7 +17,7 @@ class Index extends CI_Controller {
     public function index() {
 
         $data = array(
-            'title' => 'index'
+            'title' => 'Home'
         );
 
         $this->layout->view('index/index', $data);
@@ -401,6 +401,7 @@ class Index extends CI_Controller {
 
         $this->layout->view('index/about', $data);
     }
+
     public function privacyPolicy() {
 
         $data = array(
@@ -499,26 +500,30 @@ class Index extends CI_Controller {
         $this->load->model('professional_model');
         $this->load->model('job_model');
 
-        $company = (string) $this->input->get('name');
+        $company = $this->input->get('name');
 
         $data = array(
-            'title' => 'Apply for a Job'
+            'title' => 'Apply for a Job',
+            'jobs' => array(),
+            'applieds' => array()
         );
 
         $fbuid = $this->session->userdata('uid');
-
         $professional = $this->professional_model->loadProfessional($fbuid);
 
         $recruiter = null;
-        if (!empty($company)) {
+        $dataJobs = array();
+
+        if ($company != false) {
+            
             $recruiter = $this->recruiter_model->loadRecruiter(null, $company);
+            if (!empty($recruiter)) {
+                $dataJobs['id_recruiter'] = $recruiter[0]->id_recruiter;
+            } else {
+                $dataJobs['exist'] = false;
+            }
         }
         
-        $dataJobs = array();
-        if (!empty($recruiter)) {
-            $dataJobs['id_recruiter'] = $recruiter[0]->id_recruiter;
-        }
-
         $data['jobs'] = $this->job_model->listJobs($dataJobs);
         $data['applieds'] = $this->job_model->listJobsApplied($professional[0]->id_professional);
 
