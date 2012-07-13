@@ -47,7 +47,7 @@
 </div> <!-- /landing -->
 
 <!-- SPAN4 subiu pra SPAN12 somente para apresentar o icone do Facebook-->
-<div class="span4">
+<!-- <div class="span4">
 
     <h3><span class="slash">//</span> Stay In Touch</h3>
 
@@ -55,7 +55,7 @@
     <p>There are real people behind MySkills.com.br, so if you have a question or suggestion (no matter how small) please get in touch with us:</p>
 
     <ul class="social-icons-container">
-        <!--
+        
         <li>
                 <a href="javascript:;" class="social-icon social-icon-twitter">
                         Twitter
@@ -67,18 +67,18 @@
                         Google +
                 </a>
         </li>
-        -->
+       
         <li>							
             <a href="http://www.facebook.com/MySkills.com.br" class="social-icon social-icon-facebook">
                 Facebook
             </a>
         </li>
 
-    </ul> <!-- /extra-social -->
+    </ul>--> <!-- /extra-social --> 
 
-</div> <!-- /span4 -->
+<!--  </div>  --><!-- /span4 -->
 
-<div class="span8">
+<!-- <div class="span8">
 
     <div class="fb-like-box" data-href="http://www.facebook.com/MySkills.com.br" data-width="800" data-colorscheme="dark" data-show-faces="true" data-stream="false" data-header="false"></div>
 
@@ -99,4 +99,4 @@
     </form>
     -->
 
-</div> <!-- /span4 -->
+<!-- </div>  --><!-- /span4 -->

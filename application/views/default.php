@@ -216,9 +216,60 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
                 <div class="container">
 
                     <div class="row">
-                        <div id="footer-copyright" class="span4">
-                            &copy; 2012 RiSE.
-                        </div>
+                        <!-- SPAN4 subiu pra SPAN12 somente para apresentar o icone do Facebook-->
+						<div class="span4">
+											
+											<h3><span class="slash">//</span> Quick Links</h3>
+											
+											
+											<ul class="footer-links clearfix">
+						                        <li><a href="./">Home</a></li>
+						                       <!-- <li><a href="./pricing.html">Plans</a></li>
+						                        <li><a href="../features.html">Features</a></li>
+						                        <li><a href="./about.html">About</a></li>
+						                        <li><a href="./faq.html">FAQ</a></li>-->
+						                    </ul>
+						                    
+						                    <ul class="footer-links clearfix">  	
+						                       <!--   <li><a href="javascript:;">Support</a></li>
+						                        <li><a href="javascript:;">License</a></li>
+						                        <li><a href="javascript:;">Terms of Use</a></li>-->
+						                        <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
+						                        <!-- <li><a href="javascript:;">Something Else</a></li> -->
+						                    </ul>
+											
+										</div>
+						<div class="span4">
+						
+						    <h3><span class="slash">//</span> Stay In Touch</h3>
+						
+						
+						    <p>There are real people behind MySkills.com.br, so if you have a question or suggestion (no matter how small) please get in touch with us:</p>
+						
+						    <ul class="social-icons-container">
+						        <!--
+						        <li>
+						                <a href="javascript:;" class="social-icon social-icon-twitter">
+						                        Twitter
+						                </a>
+						        </li>
+						                
+						        <li>
+						                <a href="javascript:;" class="social-icon social-icon-googleplus">
+						                        Google +
+						                </a>
+						        </li>
+						        -->
+						        <li>							
+						            <a href="http://www.facebook.com/MySkills.com.br" class="social-icon social-icon-facebook">
+						                Facebook
+						            </a>
+						        </li>
+						
+						    </ul> <!-- /extra-social -->
+						
+						</div> <!-- /span4 -->
+
 
                         <div id="footer-terms" class="span8"></div> 
                     </div> 

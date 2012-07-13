@@ -401,6 +401,14 @@ class Index extends CI_Controller {
 
         $this->layout->view('index/about', $data);
     }
+    public function privacyPolicy() {
+
+        $data = array(
+            'title' => 'Privacy Policy'
+        );
+
+        $this->layout->view('index/privacyPolicy', $data);
+    }
 
     public function programmer() {
 
