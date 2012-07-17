@@ -11,15 +11,18 @@
         <div class="container">
 
             <div class="row">
+                
+                <div class="span6 landing-screenshot">
+                    <iframe width="560" height="400" src="http://www.youtube.com/embed/BCH9lpp1XZg" frameborder="0" allowfullscreen></iframe>
+<!-- <img src="./img/grab.png" class="screengrab" alt="Screenshot" /> -->
+                </div>                
 
                 <div class="span6 landing-text">
 
-                    <h1>The best way to hire developers.</h1>
-                    <h2>A badge ranking system.</h2>
-
-                    <p>If you are a recruiter, reach skilled developers in a categorized validated environment.</p>
-                    <p>If you are a developer, become a better coder and get a better job or even a promotion in your actual job.</p>
-
+                    <h1>We help you recruit software developers.</h1>
+                    <h2>MySkills.com.br - A developer ranking system.</h2>
+                    
+                    <center>
                     <p class="landing-actions">
                         <?php if ($this->session->userdata('uid') > 0) : ?>
                             <a href="<?php echo base_url(); ?>index/logged" class="btn btn-small btn-primary">Recruiter - Sign-up here</a>
@@ -27,16 +30,15 @@
                         <?php else: ?>
                             <a href="#" onclick="fbLogin();"><img src="<?php echo base_url() ?>assets/images/fb/login.png"></img></a>
                         <?php endif; ?>
-                    </p>		
+                    </p>
+                    </center>                    
+
+                    <p>If you are a recruiter, reach skilled developers in a categorized validated environment.</p>
+                    <p>If you are a developer, become a better coder and get a better job or even a promotion in your actual job.</p>
 
                 </div> <!-- /landing-text -->							
 
 <!-- <iframe width="560" height="315" src="http://www.youtube.com/embed/iqVidWPVBKA" frameborder="0" allowfullscreen></iframe> -->
-
-                <div class="span6 landing-screenshot">	
-                    <iframe width="560" height="400" src="http://www.youtube.com/embed/iqVidWPVBKA" frameborder="0" allowfullscreen></iframe>
-<!-- <img src="./img/grab.png" class="screengrab" alt="Screenshot" /> -->
-                </div>
 
             </div> <!-- .row -->
 

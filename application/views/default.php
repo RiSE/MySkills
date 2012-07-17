@@ -22,32 +22,32 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
 // novo Mixpanel 
 
 (function(c,a){var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?g=
-	a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1;window.mixpanel=a})(document,window.mixpanel||[]);
-	mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
+            a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1;window.mixpanel=a})(document,window.mixpanel||[]);
+mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
 
-<?php  
-	if($this->session->userdata('uid')):
-		
-		$professionalexist = $this->professional_model->loadProfessional($this->session->userdata('uid'));
-		
-		if($professionalexist):
-			$email = $professionalexist[0]->email;
-			$datacadastro = $professionalexist[0]->created;
-		else:  
-			$recruiterexist = $this->recruiter_model->loadRecruiter($this->session->userdata('uid'));
-			$email = $recruiterexist[0]->email;
-			$datacadastro = $recruiterexist[0]->created;
-		endif;
-?>
-mixpanel.identify("<?php echo $this->session->userdata('uid');?>");
-mixpanel.people.set({
-    "name": "<?php echo $this->session->userdata('name');?>",
-    "$email": "<?php echo $email;?>",
-    "$created": "<?php echo $datacadastro;?>"
-});
-mixpanel.name_tag("<?php echo $this->session->userdata('name');?>");
-<?php endif;?>
-</script><!-- end Mixpanel -->        
+<?php
+if ($this->session->userdata('uid')):
+
+    $professionalexist = $this->professional_model->loadProfessional($this->session->userdata('uid'));
+
+    if ($professionalexist):
+        $email = $professionalexist[0]->email;
+        $datacadastro = $professionalexist[0]->created;
+    else:
+        $recruiterexist = $this->recruiter_model->loadRecruiter($this->session->userdata('uid'));
+        $email = $recruiterexist[0]->email;
+        $datacadastro = $recruiterexist[0]->created;
+    endif;
+    ?>
+    mixpanel.identify("<?php echo $this->session->userdata('uid'); ?>");
+    mixpanel.people.set({
+    "name": "<?php echo $this->session->userdata('name'); ?>",
+    "$email": "<?php echo $email; ?>",
+    "$created": "<?php echo $datacadastro; ?>"
+    });
+    mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");
+<?php endif; ?>
+    </script><!-- end Mixpanel -->        
     <head>
 
         <meta charset="utf-8">
@@ -159,8 +159,8 @@ mixpanel.name_tag("<?php echo $this->session->userdata('name');?>");
             }
         });
         //FB.logout(function(response) {
-            //window.location = base_url + 'index/logout';
-            //window.location = base_url;
+        //window.location = base_url + 'index/logout';
+        //window.location = base_url;
         //});
     };                   
 
@@ -195,18 +195,18 @@ mixpanel.name_tag("<?php echo $this->session->userdata('name');?>");
                                 </a>						
                             </li>
                             <?php if ($this->session->userdata('uid') > 0 && $this->session->userdata('existdb') == true) : ?>
-                            <li>						
-                                <a href="<?php echo base_url(); ?>index/jobs">
-                                    Apply for a job
-                                </a>
-                            </li>
+                                <li>						
+                                    <a href="<?php echo base_url(); ?>index/jobs">
+                                        Apply for a job
+                                    </a>
+                                </li>
                             <?php endif; ?>
                             <?php if ($this->session->userdata('uid') > 0 && $this->session->userdata('existdb') == true) : ?>
-                            <li>						
-                                <a href="<?php echo base_url(); ?>index/claimBadges">
-                                    Claim Badge
-                                </a>						
-                            </li>
+                                <li>						
+                                    <a href="<?php echo base_url(); ?>index/claimBadges">
+                                        Claim Badge
+                                    </a>						
+                                </li>
                             <?php endif; ?>
                             <li>
                                 <a href="<?php echo base_url(); ?>index/about">
@@ -246,58 +246,58 @@ mixpanel.name_tag("<?php echo $this->session->userdata('name');?>");
 
                     <div class="row">
                         <!-- SPAN4 subiu pra SPAN12 somente para apresentar o icone do Facebook-->
-						<div class="span4">
-											
-											<h3><span class="slash">//</span> Quick Links</h3>
-											
-											
-											<ul class="footer-links clearfix">
-						                        <li><a href="./">Home</a></li>
-						                       <!-- <li><a href="./pricing.html">Plans</a></li>
-						                        <li><a href="../features.html">Features</a></li>
-						                        <li><a href="./about.html">About</a></li>
-						                        <li><a href="./faq.html">FAQ</a></li>-->
-						                    </ul>
-						                    
-						                    <ul class="footer-links clearfix">  	
-						                       <!--   <li><a href="javascript:;">Support</a></li>
-						                        <li><a href="javascript:;">License</a></li>
-						                        <li><a href="javascript:;">Terms of Use</a></li>-->
-						                        <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
-						                        <!-- <li><a href="javascript:;">Something Else</a></li> -->
-						                    </ul>
-											
-										</div>
-						<div class="span4">
-						
-						    <h3><span class="slash">//</span> Stay In Touch</h3>
-						
-						
-						    <p>There are real people behind MySkills.com.br, so if you have a question or suggestion (no matter how small) please get in touch with us:</p>
-						
-						    <ul class="social-icons-container">
-						        <!--
-						        <li>
-						                <a href="javascript:;" class="social-icon social-icon-twitter">
-						                        Twitter
-						                </a>
-						        </li>
-						                
-						        <li>
-						                <a href="javascript:;" class="social-icon social-icon-googleplus">
-						                        Google +
-						                </a>
-						        </li>
-						        -->
-						        <li>							
-						            <a href="http://www.facebook.com/MySkills.com.br" class="social-icon social-icon-facebook">
-						                Facebook
-						            </a>
-						        </li>
-						
-						    </ul> <!-- /extra-social -->
-						
-						</div> <!-- /span4 -->
+                        <div class="span4">
+
+                            <h3><span class="slash">//</span> Quick Links</h3>
+
+
+                            <ul class="footer-links clearfix">
+                                <li><a href="./">Home</a></li>
+                                <!-- <li><a href="./pricing.html">Plans</a></li>
+                                 <li><a href="../features.html">Features</a></li>
+                                 <li><a href="./about.html">About</a></li>
+                                 <li><a href="./faq.html">FAQ</a></li>-->
+                            </ul>
+
+                            <ul class="footer-links clearfix">  	
+                                <!--   <li><a href="javascript:;">Support</a></li>
+                                 <li><a href="javascript:;">License</a></li>
+                                 <li><a href="javascript:;">Terms of Use</a></li>-->
+                                <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
+                                <!-- <li><a href="javascript:;">Something Else</a></li> -->
+                            </ul>
+
+                        </div>
+                        <div class="span4">
+
+                            <h3><span class="slash">//</span> Stay In Touch</h3>
+
+
+                            <p>There are real people behind MySkills.com.br, so if you have a question or suggestion (no matter how small) please get in touch with us:</p>
+
+                            <ul class="social-icons-container">
+                                <!--
+                                <li>
+                                        <a href="javascript:;" class="social-icon social-icon-twitter">
+                                                Twitter
+                                        </a>
+                                </li>
+                                        
+                                <li>
+                                        <a href="javascript:;" class="social-icon social-icon-googleplus">
+                                                Google +
+                                        </a>
+                                </li>
+                                -->
+                                <li>							
+                                    <a href="http://www.facebook.com/MySkills.com.br" class="social-icon social-icon-facebook">
+                                        Facebook
+                                    </a>
+                                </li>
+
+                            </ul> <!-- /extra-social -->
+
+                        </div> <!-- /span4 -->
 
 
                         <div id="footer-terms" class="span8"></div> 
