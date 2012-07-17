@@ -420,6 +420,15 @@ class Index extends CI_Controller {
         
         $this->layout->view('index/privacyPolicy', $data);
     }
+    public function features() {
+        
+        $data = array(
+            'title' => 'Features',
+            'mixpanel' => 'Features',
+        );
+        
+        $this->layout->view('index/features', $data);
+    }
 
     public function programmer() {
 

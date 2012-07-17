@@ -214,8 +214,8 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
                                 </li>
                             <?php endif; ?>
                             <li>
-                                <a href="<?php echo base_url(); ?>index/about">
-                                    How It Works
+                                <a href="<?php echo base_url(); ?>index/features">
+                                    Features
                                 </a>
                             </li>
                             <li>						
