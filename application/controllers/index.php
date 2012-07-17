@@ -20,7 +20,7 @@ class Index extends CI_Controller {
             'title' => 'Home',
             'mixpanel' => 'Home'
         );
-
+        
         $this->layout->view('index/index', $data);
     }
 

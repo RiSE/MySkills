@@ -74,14 +74,12 @@
 
 <!--  </div>  --><!-- /span4 -->
 
-<!-- <div class="span8">
+ <div class="span4">
 
-    <div class="fb-like-box" data-href="http://www.facebook.com/MySkills.com.br" data-width="800" data-colorscheme="dark" data-show-faces="true" data-stream="false" data-header="false"></div>
+    <div class="fb-like-box" data-href="http://www.facebook.com/MySkills.com.br" data-width="350" data-colorscheme="dark" data-show-faces="true" data-stream="false" data-header="false"></div>
 
-    <!--
-    <h3><span class="slash">//</span> Subscribe and get updates</h3>
-    
-
+<!--
+<h3><span class="slash">//</span> Subscribe and get updates</h3>
     <p>Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
     
     
@@ -92,7 +90,7 @@
             <br />
             
             <button class="btn ">Subscribe</button>
-    </form>
-    -->
+    </form>-->
 
-<!-- </div>  --><!-- /span4 -->
+
+ </div><!-- /span4 -->
