@@ -403,11 +403,11 @@ class Index extends CI_Controller {
     }
 
     public function privacyPolicy() {
-
+        
         $data = array(
             'title' => 'Privacy Policy'
         );
-
+        
         $this->layout->view('index/privacyPolicy', $data);
     }
 
