@@ -253,7 +253,7 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
                         <!-- SPAN4 subiu pra SPAN12 somente para apresentar o icone do Facebook-->
                         <div class="span4">
 
-                            <h3 class="textohome"><span class="slash">//</span> Quick Links</h3>
+                            <h3><span class="slash">//</span> Quick Links</h3>
 
 
                             <ul class="footer-links clearfix">
