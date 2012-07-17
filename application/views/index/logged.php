@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    mixpanel.track("Form Sign up");
-</script>
-
 <div id="subheader">
     <div class="inner">
         <div class="container">

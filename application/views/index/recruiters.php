@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    mixpanel.track("Recruiters");
-</script>
-
 <div id="subheader">
     <div class="inner">
         <div class="container">

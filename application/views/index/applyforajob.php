@@ -1,11 +1,3 @@
-<script type="text/javascript">
-    mixpanel.track("Apply for a Job");
-    
-    $(document).ready(function() {
-        //$('#myModal').modal('toggle');
-    });
-</script>
-
 <div id="subheader">
     <div class="inner">
         <div class="container">

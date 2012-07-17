@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    mixpanel.track("Success Profesisonal");
-</script>
-
 <div id="subheader">
     <div class="inner">
         <div class="container">

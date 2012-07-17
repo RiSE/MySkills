@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    mixpanel.track("How it Works");
-</script>
-
 <div id="subheader">
     <div class="inner">
         <div class="container">

@@ -1,7 +1,3 @@
-<script type="text/javascript">
-    mixpanel.track("<?php echo $title; ?>");
-</script>
-
 <div id="subheader">
     <div class="inner">
         <div class="container">

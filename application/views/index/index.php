@@ -1,9 +1,3 @@
-<!-- start Mixpanel -->
-<script>
-    mixpanel.track("Home");
-</script>
-<!-- End Mixpanel -->
-
 <div id="landing">
 
     <div class="inner">

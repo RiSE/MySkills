@@ -17,7 +17,8 @@ class Index extends CI_Controller {
     public function index() {
 
         $data = array(
-            'title' => 'Home'
+            'title' => 'Home',
+            'mixpanel' => 'Home'
         );
 
         $this->layout->view('index/index', $data);
@@ -126,6 +127,7 @@ class Index extends CI_Controller {
 
         $data = array(
             'title' => 'Developers',
+            'mixpanel' => 'Developers',
             'errors' => '',
             'success' => ''
         );
@@ -170,7 +172,8 @@ class Index extends CI_Controller {
         $this->load->model('endereco_model');
 
         $data = array(
-            'title' => 'Are you a Recruiter or a Developer?'
+            'title' => 'Are you a Recruiter or a Developer?',
+            'mixpanel' => 'Form Sign Up'
         );
 
         $data['ufs'] = $this->endereco_model->loadUfs();
@@ -268,7 +271,8 @@ class Index extends CI_Controller {
         $this->load->model('professional_model');
 
         $data = array(
-            'title' => 'Recruiter Profile'
+            'title' => 'Recruiter Profile',
+            'mixpanel' => 'Recruiter Profile',
         );
 
         $data['professionals'] = $this->professional_model->listProfessionals();
@@ -283,6 +287,7 @@ class Index extends CI_Controller {
 
         $data = array(
             'title' => 'Professional Profile',
+            'mixpanel' => 'Professional Profile',
             'badge_error' => ''
         );
 
@@ -328,6 +333,7 @@ class Index extends CI_Controller {
 
         $data = array(
             'title' => 'Claim a Badges',
+            'mixpanel' => 'Claim a Badges',
             'badge_error' => ''
         );
 
@@ -378,7 +384,8 @@ class Index extends CI_Controller {
     public function successProfessional() {
 
         $data = array(
-            'title' => 'Success!'
+            'title' => 'Success!',
+            'mixpanel' => 'Success Professional',
         );
 
         $this->layout->view('index/successProfessional', $data);
@@ -387,7 +394,8 @@ class Index extends CI_Controller {
     public function successRecruiter() {
 
         $data = array(
-            'title' => 'Success!'
+            'title' => 'Success!',
+            'mixpanel' => 'Success Recruiter',
         );
 
         $this->layout->view('index/successRecruiter', $data);
@@ -396,7 +404,8 @@ class Index extends CI_Controller {
     public function about() {
 
         $data = array(
-            'title' => 'How it Works'
+            'title' => 'How it Works',
+            'mixpanel' => 'How it Works'
         );
 
         $this->layout->view('index/about', $data);
@@ -405,7 +414,8 @@ class Index extends CI_Controller {
     public function privacyPolicy() {
         
         $data = array(
-            'title' => 'Privacy Policy'
+            'title' => 'Privacy Policy',
+            'mixpanel' => 'Privacy Policy',
         );
         
         $this->layout->view('index/privacyPolicy', $data);
@@ -423,7 +433,8 @@ class Index extends CI_Controller {
     public function contact() {
 
         $data = array(
-            'title' => 'Contact Us'
+            'title' => 'Contact Us',
+            'mixpanel' => 'Contact'
         );
 
         $this->layout->view('index/contact', $data);
@@ -455,6 +466,7 @@ class Index extends CI_Controller {
 
         $data = array(
             'title' => 'Professional Profile',
+            'mixpanel' => 'Professional Profile',
             'badge_error' => ''
         );
 
@@ -504,6 +516,7 @@ class Index extends CI_Controller {
 
         $data = array(
             'title' => 'Apply for a Job',
+            'mixpanel' => 'Apply for a Job',
             'jobs' => array(),
             'applieds' => array()
         );
