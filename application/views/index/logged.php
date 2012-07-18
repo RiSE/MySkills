@@ -21,7 +21,11 @@
 
                     <label>Company</label>
                     <input type="text" id="company" name="company" />
-                    <span><?php echo form_error('company'); ?></span>
+                    <div class="alert alert-info">
+					 <a class="close" data-dismiss="alert" href="#">×</a>
+					   <span><?php echo form_error('company');?></span>
+					</div>
+                    
 
                     <label>E-mail</label>
                     <input type="text" id="emailr" name="emailr" />
