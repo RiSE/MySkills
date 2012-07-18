@@ -55,6 +55,8 @@ class Index extends CI_Controller {
             'email' => $email,
             'name' => $name,
             'existdb' => $existdb,
+            'pro' => $redirectPro,
+            'rec' => $redirectRec,
             'loggedin' => true
         );
 
@@ -179,6 +181,15 @@ class Index extends CI_Controller {
     }
 
     public function logged() {
+        
+        if ($this->session->userdata('existdb') == true) {
+            
+            if ($this->session->userdata('pro') == true) {
+                redirect(base_url() . 'index/profile');
+            } else if ($this->session->userdata('rec') == true) {
+                redirect(base_url() . 'index/recruiterProfile');
+            }
+        }
 
         $this->load->model('endereco_model');
 
