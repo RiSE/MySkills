@@ -80,6 +80,7 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/facebook.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_tab.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_alert.js"></script>
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
