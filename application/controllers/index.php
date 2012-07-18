@@ -27,16 +27,27 @@ class Index extends CI_Controller {
     public function login() {
 
         $this->load->model('professional_model');
+        $this->load->model('recruiter_model');
 
         $uid = $this->input->post('uid');
         $email = $this->input->post('email');
         $name = $this->input->post('name');
         $existdb = false;
+        
+        $redirectPro = false;
+        $redirectRec = false;
 
         $professional = $this->professional_model->loadProfessional($uid);
 
         if (!empty($professional)) {
             $existdb = true;
+            $redirectPro = true;
+        }
+        
+        $recruiter = $this->recruiter_model->loadRecruiter($uid);
+        if (!empty($recruiter)) {
+            $existdb = true;
+            $redirectRec = true;
         }
 
         $suerdata = array(
@@ -49,7 +60,7 @@ class Index extends CI_Controller {
 
         $this->session->set_userdata($suerdata);
 
-        echo json_encode(array('loggin' => true));
+        echo json_encode(array('loggin' => true, 'professional' => $redirectPro, 'recruiter' => $redirectRec));
         die();
     }
 

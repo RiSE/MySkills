@@ -11,6 +11,24 @@
 <div id="subpage">	
     <div class="container">
 
+        <!--<div class="row-fluid">
+
+            <div class="tabbable tabs-left">
+                <ul class="nav nav-tabs ">
+                    <li class="active"><a href="#lA" data-toggle="tab">Web Development</a></li>
+                    <li class=""><a href="#lB" data-toggle="tab">Mobile Development</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="lA">
+                        1A
+                    </div>
+                    <div class="tab-pane" id="lB">
+                        1B
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
         <div class="row">
 
             <div class="span2">
@@ -23,16 +41,6 @@
                     </li>-->
                 </ul>
 
-                <!--<div class="tabbable tabs-left">
-                    <ul class="nav nav-tabs">
-                      <li class="active">
-                          <a href="#lA" data-toggle="tab">Section 1</a>
-                      </li>
-                    </ul>
-                    <div class="tab-content">
-                      
-                    </div>
-                </div>-->
             </div>
 
             <div class="span10">

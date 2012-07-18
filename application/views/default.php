@@ -119,12 +119,12 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
     };
 
     function me(response) {
-        var hname = document.getElementById('hname');
+        /*var hname = document.getElementById('hname');
         var hwork = document.getElementById('hwork');
 
         console.log(response[0].work[0]);
         hname.innerHTML += response[0].name;
-        hwork.innerHTML += response[0].work[0].position.name + ' at ' + response[0].work[0].employer.name;
+        hwork.innerHTML += response[0].work[0].position.name + ' at ' + response[0].work[0].employer.name;*/
     }
 
     function fbLogin() {
@@ -143,8 +143,14 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
                     dataType : 'json',
                     data : data,
                     url : base_url + 'index/login',
-                    success : function() {
-                        document.location.reload();
+                    success : function(rs) {
+                        if (rs.professional == true) {
+                            window.location = base_url + 'index/profile';
+                        } else if (rs.recruiter == true) {
+                            window.location = base_url + 'index/profileRecruiter';
+                        } else {
+                            document.location.reload();
+                        }
                     }
                 });
             }, {scope: 'user_photos'});

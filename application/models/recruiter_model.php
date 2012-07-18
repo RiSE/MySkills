@@ -28,7 +28,14 @@ class Recruiter_model extends CI_Model {
         $result = array();
 
         $this->db->select('id_recruiter, created, email');
-        $this->db->where('lower(company)', $company);
+
+        if (isset($fbuid) && !empty($fbuid)) {
+            $this->db->where('fbuid', $fbuid);
+        }
+
+        if (isset($company) && !empty($company)) {
+            $this->db->where('lower(company)', $company);
+        }
 
         $query = $this->db->get($this->table);
 
