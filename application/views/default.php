@@ -46,9 +46,9 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
     ?>
     mixpanel.identify("<?php echo $this->session->userdata('uid'); ?>");
     mixpanel.people.set({
-    "name": "<?php echo $this->session->userdata('name'); ?>",
-    "$email": "<?php echo $email; ?>",
-    "$created": "<?php echo $datacadastro; ?>"
+        "name": "<?php echo $this->session->userdata('name'); ?>",
+        "$email": "<?php echo $email; ?>",
+        "$created": "<?php echo $datacadastro; ?>"
     });
     mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");
 <?php endif; ?>
@@ -174,7 +174,25 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
         //window.location = base_url + 'index/logout';
         //window.location = base_url;
         //});
-    };                   
+    };
+    
+    window.onload = function() {
+        isAppUser();
+    }
+    
+    function isAppUser() {
+        FB.getLoginStatus(function(response) {
+            if (response.status == 'connected') {
+                var FQL = 'SELECT uid FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+                FB.api({
+                    method : 'fql.query',
+                    query : FQL
+                }, function(rs) {
+                    console.log(rs);
+                });                
+            }
+        });
+    }
 
     (function(d){
         var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
@@ -251,74 +269,74 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
         <?php echo $content_for_layout; ?> 
 
         <div id="footer">
-		<div id="extra">
-            <div class="inner">
+            <div id="extra">
+                <div class="inner">
 
-                <div class="container">
+                    <div class="container">
 
-                    <div class="row">
-                        <!-- SPAN4 subiu pra SPAN12 somente para apresentar o icone do Facebook-->
-                        <div class="span4">
+                        <div class="row">
+                            <!-- SPAN4 subiu pra SPAN12 somente para apresentar o icone do Facebook-->
+                            <div class="span4">
 
-                            <h3><span class="slash">//</span> Quick Links</h3>
-
-
-                            <ul class="footer-links clearfix">
-                                <li><a href="./">Home</a></li>
-                                <!-- <li><a href="./pricing.html">Plans</a></li>
-                                 <li><a href="../features.html">Features</a></li>
-                                 <li><a href="./about.html">About</a></li>
-                                 <li><a href="./faq.html">FAQ</a></li>-->
-                            </ul>
-
-                            <ul class="footer-links clearfix">  	
-                                <!--   <li><a href="javascript:;">Support</a></li>
-                                 <li><a href="javascript:;">License</a></li>
-                                 <li><a href="javascript:;">Terms of Use</a></li>-->
-                                <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
-                                <!-- <li><a href="javascript:;">Something Else</a></li> -->
-                            </ul>
-
-                        </div>
-                        <div class="span4">
-
-                            <h3><span class="slash">//</span> Stay In Touch</h3>
+                                <h3><span class="slash">//</span> Quick Links</h3>
 
 
-                            <p>There are real people behind MySkills.com.br, so if you have a question or suggestion (no matter how small) please get in touch with us:</p>
+                                <ul class="footer-links clearfix">
+                                    <li><a href="./">Home</a></li>
+                                    <!-- <li><a href="./pricing.html">Plans</a></li>
+                                     <li><a href="../features.html">Features</a></li>
+                                     <li><a href="./about.html">About</a></li>
+                                     <li><a href="./faq.html">FAQ</a></li>-->
+                                </ul>
 
-                            <ul class="social-icons-container">
-                                <!--
-                                <li>
-                                        <a href="javascript:;" class="social-icon social-icon-twitter">
-                                                Twitter
+                                <ul class="footer-links clearfix">  	
+                                    <!--   <li><a href="javascript:;">Support</a></li>
+                                     <li><a href="javascript:;">License</a></li>
+                                     <li><a href="javascript:;">Terms of Use</a></li>-->
+                                    <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
+                                    <!-- <li><a href="javascript:;">Something Else</a></li> -->
+                                </ul>
+
+                            </div>
+                            <div class="span4">
+
+                                <h3><span class="slash">//</span> Stay In Touch</h3>
+
+
+                                <p>There are real people behind MySkills.com.br, so if you have a question or suggestion (no matter how small) please get in touch with us:</p>
+
+                                <ul class="social-icons-container">
+                                    <!--
+                                    <li>
+                                            <a href="javascript:;" class="social-icon social-icon-twitter">
+                                                    Twitter
+                                            </a>
+                                    </li>
+                                            
+                                    <li>
+                                            <a href="javascript:;" class="social-icon social-icon-googleplus">
+                                                    Google +
+                                            </a>
+                                    </li>
+                                    -->
+                                    <li>							
+                                        <a href="http://www.facebook.com/MySkills.com.br" class="social-icon social-icon-facebook">
+                                            Facebook
                                         </a>
-                                </li>
-                                        
-                                <li>
-                                        <a href="javascript:;" class="social-icon social-icon-googleplus">
-                                                Google +
-                                        </a>
-                                </li>
-                                -->
-                                <li>							
-                                    <a href="http://www.facebook.com/MySkills.com.br" class="social-icon social-icon-facebook">
-                                        Facebook
-                                    </a>
-                                </li>
+                                    </li>
 
-                            </ul> <!-- /extra-social -->
+                                </ul> <!-- /extra-social -->
 
-                        </div> <!-- /span4 -->
+                            </div> <!-- /span4 -->
 
 
-                        <div id="footer-terms" class="span8"></div> 
-                    </div> 
+                            <div id="footer-terms" class="span8"></div> 
+                        </div> 
 
-                </div>
+                    </div>
 
-            </div> 
-           </div>
+                </div> 
+            </div>
 
         </div>
 
