@@ -24,8 +24,8 @@
 
 @font-face {
     font-family: 'FontAwesome';
-    src: url('http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff');
-    src: url('http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff?#iefix') format('embedded-opentype'), url('http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff') format('woff'), url('http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff') format('truetype'), url('http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff#FontAwesomeRegular') format('svg'), url('http://themes.googleusercontent.com/static/fonts/opensans/v6/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff') format('svg');
+    src: url('http://wbpreview.com/previews/WB000C138/font/fontawesome-webfont.woff');
+    src: url('http://wbpreview.com/previews/WB000C138/font/fontawesome-webfont.woff?#iefix') format('embedded-opentype'), url('http://wbpreview.com/previews/WB000C138/font/fontawesome-webfont.woff') format('woff'), url('http://wbpreview.com/previews/WB000C138/font/fontawesome-webfont.woff') format('truetype'), url('http://wbpreview.com/previews/WB000C138/font/fontawesome-webfont.woff#FontAwesomeRegular') format('svg'), url('http://wbpreview.com/previews/WB000C138/font/fontawesome-webfont.woff') format('svg');
     font-weight: normal;
     font-style: normal;
 }
