@@ -41,7 +41,8 @@ $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
 
-    $professionalexist = $this->professional_model->loadProfessional($fbuid);
+    if (isset($fbuid) && !empty($fbuid)) {
+            $professionalexist = $this->professional_model->loadProfessional($fbuid);
 
     if ($professionalexist):
         $email = $professionalexist[0]->email;
@@ -51,14 +52,18 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         $email = $recruiterexist[0]->email;
         $datacadastro = $recruiterexist[0]->created;
     endif;
+      ?>
+        mixpanel.identify("<?php echo $fbuid; ?>");
+        mixpanel.people.set({
+            "name": "<?php echo $this->session->userdata('name'); ?>",
+            "$email": "<?php echo $email; ?>",
+            "$created": "<?php echo $datacadastro; ?>"
+        });
+        mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");        
+      <?php
+    }
     ?>
-    mixpanel.identify("<?php echo $fbuid; ?>");
-    mixpanel.people.set({
-        "name": "<?php echo $this->session->userdata('name'); ?>",
-        "$email": "<?php echo $email; ?>",
-        "$created": "<?php echo $datacadastro; ?>"
-    });
-    mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");
+        
 <?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
