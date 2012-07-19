@@ -25,26 +25,34 @@ mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
             a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1;window.mixpanel=a})(document,window.mixpanel||[]);
 mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
 
+<?php 
+//578648267 eduardo 
+//1781396621 eliakim
+//100000634528702 tiago
+$fbuid = $this->session->userdata('uid');
+$arrBlockedIds = array('100000634528702', '578648267', '1781396621');
+?>
 
-<?php if ($_SERVER['HTTP_HOST'] != 'localhost') : ?>
+<?php if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') : ?>
     mixpanel.track('<?php echo $mixpanel; ?>');
 <?php endif; ?>
 
 <?php
-if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
 
-    $professionalexist = $this->professional_model->loadProfessional($this->session->userdata('uid'));
+if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
+
+    $professionalexist = $this->professional_model->loadProfessional($fbuid);
 
     if ($professionalexist):
         $email = $professionalexist[0]->email;
         $datacadastro = $professionalexist[0]->created;
     else:
-        $recruiterexist = $this->recruiter_model->loadRecruiter($this->session->userdata('uid'));
+        $recruiterexist = $this->recruiter_model->loadRecruiter($fbuid);
         $email = $recruiterexist[0]->email;
         $datacadastro = $recruiterexist[0]->created;
     endif;
     ?>
-    mixpanel.identify("<?php echo $this->session->userdata('uid'); ?>");
+    mixpanel.identify("<?php echo $fbuid; ?>");
     mixpanel.people.set({
         "name": "<?php echo $this->session->userdata('name'); ?>",
         "$email": "<?php echo $email; ?>",
@@ -120,12 +128,10 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
     };
 
     function me(response) {
-        /*var hname = document.getElementById('hname');
-        var hwork = document.getElementById('hwork');
-
-        console.log(response[0].work[0]);
+        var hname = document.getElementById('hname');
         hname.innerHTML += response[0].name;
-        hwork.innerHTML += response[0].work[0].position.name + ' at ' + response[0].work[0].employer.name;*/
+        //var hwork = document.getElementById('hwork');
+        //hwork.innerHTML += response[0].work[0].position.name + ' at ' + response[0].work[0].employer.name;
     }
 
     function fbLogin() {
@@ -154,7 +160,7 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
                         }
                     }
                 });
-            }, {scope: 'user_photos'});
+            }, {scope: 'user_photos,email'});
 
         });
     };
@@ -177,7 +183,7 @@ if ($this->session->userdata('uid') && $_SERVER['HTTP_HOST'] != 'localhost'):
     };
     
     window.onload = function() {
-        isAppUser();
+        //isAppUser();
     }
     
     function isAppUser() {
