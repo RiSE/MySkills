@@ -57,7 +57,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                 </div>
                 <hr/>
-                <a href="<?php echo base_url(); ?>recruiter/addVacancy" class="btn btn-small btn-primary">Add Job Vacancy</a>
+                <!--<a href="<?php echo base_url(); ?>recruiter/addVacancy" class="btn btn-small btn-primary">Add Job Vacancy</a>-->
             </div>
         </div>
 
