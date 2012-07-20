@@ -255,30 +255,23 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                 </a>						
                             </li>
                             <?php if ($this->session->userdata('uid') > 0) : ?>
-                                <!--<li>
+                                <li>
                                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
-                                    <a><?php echo $this->session->userdata('name'); ?></a>
-                                </li>-->
-
+                                </li>
+                                <li>
+                                    <?php if ($this->session->userdata('pro') == true) {
+                                        $link = 'index/profile';
+                                    } else if ($this->session->userdata('rec') == true) {
+                                        $link = 'index/recruiterProfile';
+                                    }
+                                    ?>
+                                    <a href="<?php echo base_url() . $link; ?>" title="Profile"><?php echo $this->session->userdata('name'); ?></a>
+                                </li>
                                 <li>
                                     <a href="#" onclick="fbLogout();" >Sign-out</a>
                                 </li>
                             <?php endif; ?>
                         </ul>
-                        <?php if ($this->session->userdata('uid') > 0) : ?>
-                        <ul>
-                            <li>
-                                <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
-                                <?php if ($this->session->userdata('pro') == true) {
-                                    $link = 'index/profile';
-                                } else if ($this->session->userdata('rec') == true) {
-                                    $link = 'index/recruiterProfile';
-                                }
-                                ?>
-                                <a href="<?php echo base_url() . $link; ?>"><?php echo $this->session->userdata('name'); ?></a>
-                            </li>
-                        </ul>
-                        <?php endif; ?>
                     </div>
 
                 </div>
