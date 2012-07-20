@@ -33,10 +33,6 @@ $fbuid = $this->session->userdata('uid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 ?>
 
-<?php if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') : ?>
-    mixpanel.track('<?php echo $mixpanel; ?>');
-<?php endif; ?>
-
 <?php
 
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):

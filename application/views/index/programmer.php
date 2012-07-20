@@ -1,7 +1,13 @@
-<script type="text/javascript">
-    mixpanel.track("Developer of the Week");
-</script>
+<?php
+$fbuid = $this->session->userdata('uid');
+$arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 
+if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
+    ?>
+    <script type="text/javascript">
+        mixpanel.track('Developer of the Week');
+    </script>
+<?php endif; ?>
 <div id="subheader">
     <div class="inner">
         <div class="container">

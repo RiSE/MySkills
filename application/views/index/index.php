@@ -1,3 +1,14 @@
+<?php
+$fbuid = $this->session->userdata('uid');
+$arrBlockedIds = array('100000634528702', '578648267', '1781396621');
+
+if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
+    ?>
+    <script type="text/javascript">
+        mixpanel.track('Home');
+    </script>
+<?php endif; ?>
+    
 <div id="landing">
 
     <div class="inner">

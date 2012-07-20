@@ -354,8 +354,8 @@ class Index extends CI_Controller {
         $this->load->model('badge_model');
 
         $data = array(
-            'title' => 'Claim a Badges',
-            'mixpanel' => 'Claim a Badges',
+            'title' => 'Claim Badges',
+            'mixpanel' => 'Claim Badges',
             'badge_error' => ''
         );
 
