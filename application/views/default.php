@@ -173,7 +173,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                     success : function() {
                         FB.logout();
                         //document.location.reload();
-                        window.location = base_url + 'index/index';
+                        window.location = base_url + 'index/home';
                     }
                 });
                 //FB.logout(function(response) {
@@ -226,7 +226,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                         <ul class="nav pull-right">
 
                             <li class="active">						
-                                <a href="<?php echo base_url(); ?>">
+                                <a href="<?php echo base_url(); ?>index/home">
                                     Home
                                 </a>						
                             </li>

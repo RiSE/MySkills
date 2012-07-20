@@ -14,7 +14,7 @@ class Index extends CI_Controller {
         parent::__construct();
     }
 
-    public function index() {
+    public function home() {
 
         $data = array(
             'title' => 'Home',
