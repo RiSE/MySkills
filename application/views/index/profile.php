@@ -1,6 +1,8 @@
 <?php
 $fbuid = $this->session->userdata('uid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
+$professional = $this->professional_model->loadProfessional($fbuid);
+$ThisBadge = $this->badge_model->listBadgesProfessionalByProfessional($professional[0]->id_professional);
 
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     ?>
@@ -29,15 +31,19 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 <div class="span2" name="divProfile">
                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal" style="border:thick groove green;" />
                     <br /><br />
-
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>                        
+					
+				<?php for($i=0; $i<=7;$i++){ 
+                    if($i >= count($ThisBadge)){?>
+                    	<img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+                <?php	}else{
+                			if($ThisBadge[$i]->active == 1){?>
+                    	<img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge)?>" width="65"></img>
+                    <?php }else{?>
+                    	<img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+                <?php	} 
+                	  } 
+                    } ?>
+					                                            
                 </div>
 
                 <div class="span10" name="divContainer">
@@ -75,11 +81,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="span3">
                         <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
                     </div>
+                    
                     <div class="span3">
                         <a href="<?php echo base_url(); ?>index/claimbadges" class="btn btn-warning btn-large">Claim your Badges</a>
                     </div>
+                    
                     <div class="span3">
-                        <a class="btn btn-success btn-large" disabled="disabled">Apply for a Course</a>
+                        &nbsp;<a class="btn btn-success btn-large" disabled="disabled">Apply for a Course</a>
                     </div>
 
                     <div class="row">

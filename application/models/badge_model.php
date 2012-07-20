@@ -53,7 +53,7 @@ class Badge_model extends CI_Model {
         
         $result = array();
         
-        $this->db->select('id_professional, id_badge');
+        $this->db->select('id_professional, id_badge, active');
         $this->db->where('id_professional', $idProfessional);
         $this->db->where('id_badge', $idBadge);
         
@@ -65,7 +65,49 @@ class Badge_model extends CI_Model {
         
         return $result;
     }
+    public function listBadgesProfessionalByProfessional($idProfessional) {
+        
+        $result = array();
+        
+        $this->db->select('id_professional, id_badge, active');
+        $this->db->where('id_professional', $idProfessional);
+        
+        $query = $this->db->get('badges_professional');
+        
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+        
+        return $result;
+    }
 
+    public  function getImgBadgs($idBadges){
+    	$img = "";
+    	switch($idBadges){
+    		case 1:
+    			 $img = "iOSBadge100.png";
+    		break;
+    		case 2:
+    			 $img = "php.png";
+    		break;
+    		case 3:
+    			 $img = "androidbadges.png";
+    		break;
+    		case 4:
+    			 $img = "php.png";
+    		break;
+    		/*case 1:
+    			 $img = "iOSBadge100.png";
+    		break;
+    		case 1:
+    			 $img = "iOSBadge100.png";
+    		break;
+    		case 1:
+    			 $img = "iOSBadge100.png";
+    		break;*/
+    	}
+    	return $img;
+    }
     public function insertBadgeProfessional($data = array()) {
 
         $this->db->trans_start();

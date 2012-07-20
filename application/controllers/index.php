@@ -396,8 +396,8 @@ class Index extends CI_Controller {
                     );
 
                     $this->badge_model->insertBadgeProfessional($insert);
-
-                    redirect(base_url() . 'index/');
+					
+                    redirect(base_url() . 'index/claimBadges');
                 } else {
                     $data['badge_error'] = 'You already have this badge';
                 }
