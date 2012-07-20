@@ -316,6 +316,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
                                     <!-- <li><a href="javascript:;">Something Else</a></li> -->
                                 </ul>
+                                
+                                <ul class="footer-links clearfix">
+                                    <li><a href="<?php echo base_url();?>index/features">Features</a></li>
+                                </ul>                                
+
+                                <ul class="footer-links clearfix">
+                                    <li><a href="<?php echo base_url();?>index/contact">Contact Us</a></li>
+                                </ul>                                
 
                             </div>
                             <div class="span4">
