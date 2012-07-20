@@ -129,9 +129,15 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
 
             function me(response) {
                 var hname = document.getElementById('hname');
-                hname.innerHTML += response[0].name;
-                //var hwork = document.getElementById('hwork');
-                //hwork.innerHTML += response[0].work[0].position.name + ' at ' + response[0].work[0].employer.name;
+                var hwork = document.getElementById('hwork');
+                
+                if (hname != null) {
+                    hname.innerHTML += response[0].name;
+                }
+                
+                if (hwork != null) {
+                    hwork.innerHTML += response[0].work[0].position.name + ' at ' + response[0].work[0].employer.name;
+                }                
             }
 
             function fbLogin() {
