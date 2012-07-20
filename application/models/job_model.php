@@ -27,9 +27,12 @@ class Job_model extends CI_Model {
         if (isset($data['id_recruiter']) && !empty($data['id_recruiter'])) {
             $this->db->where('id_recruiter', $data['id_recruiter']);
         }        
+        
         if (isset($data['exist']) && $data['exist'] == false) {
             $this->db->limit(0, 0);
         }
+        
+        $this->db->order_by('created', 'DESC');
 
         $query = $this->db->get($this->table);
 
