@@ -182,6 +182,10 @@ class Index extends CI_Controller {
 
     public function logged() {
         
+        $this->load->model('endereco_model');
+        $this->load->model('recruiter_model');
+        $this->load->model('professional_model');
+        
         if ($this->session->userdata('existdb') == true) {
             
             if ($this->session->userdata('pro') == true) {
@@ -190,8 +194,15 @@ class Index extends CI_Controller {
                 redirect(base_url() . 'index/recruiterProfile');
             }
         }
-
-        $this->load->model('endereco_model');
+        
+        $recruiterexist = $this->recruiter_model->loadRecruiter($fbuid);        
+        $professionalexist = $this->professional_model->loadProfessional($fbuid);
+        
+        if (!empty($recruiterexist)) {
+            redirect(base_url() . 'index/recruiterProfile');
+        } else if (!empty($professionalexist)) {
+            redirect(base_url() . 'index/profile');
+        }
 
         $data = array(
             'title' => 'Are you a Recruiter or a Developer?',
