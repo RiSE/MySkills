@@ -28,11 +28,11 @@ class Hook extends CI_Controller {
                         
             if (in_array($controller, $arrController)) {                
                 if (!in_array($acao, $arrAcoes)) {
-                    //redirect(base_url() . 'index/home');
+                    redirect(base_url() . 'index/home');
                 }
             } else {
                 if (!in_array($acao, $arrAcoes)) {
-                    //redirect(base_url() . 'index/home');
+                    redirect(base_url() . 'index/home');
                 }
             }
         }
