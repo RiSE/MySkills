@@ -635,6 +635,55 @@ class Index extends CI_Controller {
         die();
     }
 
+
+    public function courses() {
+
+        $this->load->model('professional_model');
+        $this->load->model('course_model');
+
+        $data = array(
+            'title' => 'Apply for a Courses',
+            'mixpanel' => 'Apply for a Courses',
+            'courses' => array(),
+            'applieds' => array()
+        );
+
+        $fbuid = $this->session->userdata('uid');        
+        $professional = $this->professional_model->loadProfessional($fbuid);
+               
+        $data['courses'] = $this->course_model->listCourses();
+        
+        $dataProfessional = array();
+        $data['applieds'] = array();
+        if (!empty($professional)) {            
+            $data['applieds'] = $this->course_model->listCoursesApplied($professional[0]->id_professional);
+        }
+        
+        $this->layout->view('index/applyforacourse', $data);
+    }
+
+    public function applyCourse() {
+
+        $this->load->model('professional_model');
+        $this->load->model('course_model');
+
+        $fbuid = $this->session->userdata('uid');
+        $idCourse = (int) $this->input->post('ids');
+
+        $professional = $this->professional_model->loadProfessional($fbuid);
+
+        $dataCourseProfessional = array(
+            'id_professional' => $professional[0]->id_professional,
+            'id_course' => $idCourse
+        );
+
+        $save = $this->course_model->insertCourseProfessional($dataCourseProfessional);
+        
+       // if ($save) {
+        	redirect(base_url() . 'index/profile');
+        //}
+    }
+
 }
 
 ?>

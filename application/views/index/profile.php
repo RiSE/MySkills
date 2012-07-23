@@ -115,7 +115,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     </div>
 
                     <div class="span3">
-                        &nbsp;<a class="btn btn-success btn-large" disabled="disabled">Apply for a Course</a>
+                        &nbsp;<a href="<?php echo base_url(); ?>index/courses" class="btn btn-success btn-large" >Apply for a Course</a>
                     </div>
 
                     <div class="row">
