@@ -10,7 +10,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         mixpanel.track('Professional Profile');
     </script>
 <?php endif; ?>
-    
+
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -28,22 +28,50 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
             <div class="row">
                 <!-- -->
+
+                <?php if ($this->session->flashdata('signup') == true) : ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Well done!</strong> Your subscription was successfully
+                    </div>
+                <?php endif; ?>
+                
+                <?php if ($this->session->flashdata('applyforajob') == true) : ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Well done!</strong> You applied for a job
+                    </div>                
+                <?php endif; ?>
+                
+                <?php if ($this->session->flashdata('claimbadge') == true) : ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Well done!</strong> You claimed a badge
+                    </div>                
+                <?php endif; ?>
+
                 <div class="span2" name="divProfile">
                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal" style="border:thick groove green;" />
                     <br /><br />
-					
-				<?php for($i=0; $i<=7;$i++){ 
-                    if($i >= count($ThisBadge)){?>
-                    	<img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                <?php	}else{
-                			if($ThisBadge[$i]->active == 1){?>
-                    	<img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge)?>" width="65"></img>
-                    <?php }else{?>
-                    	<img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                <?php	} 
-                	  } 
-                    } ?>
-					                                            
+
+                    <?php
+                    for ($i = 0; $i <= 7; $i++) {
+                        if ($i >= count($ThisBadge)) {
+                            ?>
+                            <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+                            <?php
+                        } else {
+                            if ($ThisBadge[$i]->active == 1) {
+                                ?>
+                                <img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge) ?>" width="65"></img>
+                            <?php } else { ?>
+                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+                                <?php
+                            }
+                        }
+                    }
+                    ?>
+
                 </div>
 
                 <div class="span10" name="divContainer">
@@ -81,11 +109,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="span3">
                         <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
                     </div>
-                    
+
                     <div class="span3">
                         <a href="<?php echo base_url(); ?>index/claimbadges" class="btn btn-warning btn-large">Claim your Badges</a>
                     </div>
-                    
+
                     <div class="span3">
                         &nbsp;<a class="btn btn-success btn-large" disabled="disabled">Apply for a Course</a>
                     </div>
@@ -188,7 +216,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             <select name="selectBadges">
                                 <option value="">--SELECT--</option>
             <?php foreach ($badges as $badge) : ?>
-                                                                                                                                                                            <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
+                                                                                                                                                                                            <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
             <?php endforeach; ?>
                             </select>
             <?php echo form_error('selectBadges'); ?>

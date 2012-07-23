@@ -215,6 +215,7 @@ class Index extends CI_Controller {
 
         $data['ufs'] = $this->endereco_model->loadUfs();
 
+        $this->session->set_flashdata('signup', true);
 
         $this->layout->view('index/logged', $data);
     }
@@ -396,8 +397,10 @@ class Index extends CI_Controller {
                     );
 
                     $this->badge_model->insertBadgeProfessional($insert);
+                    
+                    $this->session->set_flashdata('claimbadge', true);
 					
-                    redirect(base_url() . 'index/claimBadges');
+                    redirect(base_url() . 'index/profile');
                 } else {
                     $data['badge_error'] = 'You already have this badge';
                 }
@@ -405,7 +408,7 @@ class Index extends CI_Controller {
                 $data['badge_error'] = 'Invalid Badge';
             }
         }
-
+        
         $this->layout->view('index/claimBadge', $data);
     }
 
@@ -586,14 +589,12 @@ class Index extends CI_Controller {
         
         $data['jobs'] = $this->job_model->listJobs($dataJobs);
         
-        $dataProfessional = array();
         $data['applieds'] = array();
         if (!empty($professional)) {            
             $data['applieds'] = $this->job_model->listJobsApplied($professional[0]->id_professional);
         }
         
         
-
         $this->layout->view('index/applyforajob', $data);
     }
 
@@ -613,6 +614,9 @@ class Index extends CI_Controller {
         );
 
         $save = $this->job_model->insertJobProfessional($dataJobProfessional);
+        
+        $this->session->set_flashdata('applyforajob', true);
+        
         //if ($save) {
         redirect(base_url() . 'index/profile');
         //}

@@ -19,30 +19,39 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
 <div id="subpage">	
     <div class="container">
-            <div class="row-fluid">
-					<div class="tabbable tabs-left">
-					        <ul class="nav nav-tabs ">
-					          <li class=""><a href="#lA" data-toggle="tab">Web Development</a></li>
-					          <li class="active"><a href="#lB" data-toggle="tab">Mobile Development</a></li>
-					        </ul>
-					        <div class="tab-content">
-					          <div class="tab-pane" id="lA">
-					           <?php foreach ($badges as $badge) : 
-					           		if($badge->id_badge == 2 || $badge->id_badge == 4 ){
-					           ?>
-                                    <div class="row">
+        <div class="row-fluid">
+
+            <?php if (isset($badge_error) && !empty($badge_error)) : ?>
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Oh snap!</strong> <?php echo $badge_error; ?>
+                </div>                
+            <?php endif; ?>
+
+            <div class="tabbable tabs-left">
+                <ul class="nav nav-tabs ">
+                    <li class=""><a href="#lA" data-toggle="tab">Web Development</a></li>
+                    <li class="active"><a href="#lB" data-toggle="tab">Mobile Development</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="lA">
+                        <?php
+                        foreach ($badges as $badge) :
+                            if ($badge->id_badge == 2 || $badge->id_badge == 4) {
+                                ?>
+                                <div class="row">
                                     <form method="POST" name="frmClaim">
-                                    <input type="hidden" name="badges" value="<?php echo $badge->id_badge; ?>" />
-                                	   
-					            <?php 
-					            		switch ($badge->id_badge){
-					            			case 2 : 
-					            			echo '<div class="span8">
+                                        <input type="hidden" name="badges" value="<?php echo $badge->id_badge; ?>" />
+
+                                        <?php
+                                        switch ($badge->id_badge) {
+                                            case 2 :
+                                                echo '<div class="span8">
 					            					<div class="span2">
-					            						<img src="'.base_url().'assets/images/badges/php.png" width="100"></img>
+					            						<img src="' . base_url() . 'assets/images/badges/php.png" width="100"></img>
 					            					</div>';
-					            					
-					            			echo '<div class="span5">
+
+                                                echo '<div class="span5">
 					                                    The PHP badge is provided for students that participated on an 
 					                                    Zend technology trainning. This course provided content and 
 					                                    practice in web application development.
@@ -52,15 +61,15 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 					                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
 					                               </div>
 					                               </div>';
-					            			echo form_error('code');
-					            			echo form_error('badge_error');
-					            			break;	
-					            			case 4: 
-						            			echo '<div class="span8">
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
+                                            case 4:
+                                                echo '<div class="span8">
 						            					<div class="span2">
-						            						<img src="'.base_url().'assets/images/badges/php.png" width="100"></img>
+						            						<img src="' . base_url() . 'assets/images/badges/php.png" width="100"></img>
 						            					</div>';
-						            			echo '<div class="span5">
+                                                echo '<div class="span5">
 						                                    The Zend badge is provided for students that participated on an 
 						                                    Zend technology trainning. This course provided content and 
 						                                    practice in Web application development.
@@ -70,33 +79,36 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
 						                              </div>
 						                               </div>';
-						            			echo form_error('code');
-					            			echo form_error('badge_error');
-						            			break;
-					            		}?>
-					            		</form>
-					            		</div>
-					            		<br />
-					            	 <?php }
-					            	 endforeach; ?>
-					          </div>
-					          <div class="tab-pane active" id="lB">
-					            <?php foreach ($badges as $badge) : 
-					            		if($badge->id_badge == 1 || $badge->id_badge == 3 ){
-					            ?>
-	                                    <div class="row">
-	                                    <form method="POST" name="frmClaim">
-	                                    <input type="hidden" name="badges" value="<?php echo $badge->id_badge; ?>" />
-	                                	   
-						            <?php 
-						            		switch ($badge->id_badge){
-						            			case 1 : 
-						            			echo '<div class="span8">
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
+                                        }
+                                        ?>
+                                    </form>
+                                </div>
+                                <br />
+    <?php }
+endforeach;
+?>
+                    </div>
+                    <div class="tab-pane active" id="lB">
+<?php
+foreach ($badges as $badge) :
+    if ($badge->id_badge == 1 || $badge->id_badge == 3) {
+        ?>
+                                <div class="row">
+                                    <form method="POST" name="frmClaim">
+                                        <input type="hidden" name="badges" value="<?php echo $badge->id_badge; ?>" />
+
+                                        <?php
+                                        switch ($badge->id_badge) {
+                                            case 1 :
+                                                echo '<div class="span8">
 						            					<div class="span2">
-						            						<img src="'.base_url().'assets/images/badges/iOSBadge100.png" width="100"></img>
+						            						<img src="' . base_url() . 'assets/images/badges/iOSBadge100.png" width="100"></img>
 						            					</div>';
-						            					
-						            			echo '<div class="span5">
+
+                                                echo '<div class="span5">
 						                                    The iOS badge is provided for students that participated on an 
 						                                    Apple technology trainning. This course provided content and 
 						                                    practice in iOS application development including: iPad, iPhone and iPod touch.
@@ -106,15 +118,15 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
 						                               </div>
 						                               </div>';
-						            			echo form_error('code');
-					            			   echo form_error('badge_error');
-						            			break;	
-						            			case 3: 
-							            			echo '<div class="span8">
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
+                                            case 3:
+                                                echo '<div class="span8">
 							            					<div class="span2">
-							            						<img src="'.base_url().'assets/images/badges/androidbadges.png" width="100"></img>
+							            						<img src="' . base_url() . 'assets/images/badges/androidbadges.png" width="100"></img>
 							            					</div>';
-							            			echo '<div class="span5">
+                                                echo '<div class="span5">
 							                                    The Android badge is provided for students that participated on an 
 							                                    Google technology trainning. This course provided content and 
 							                                    practice in Android application development including: Tablet, Phones and iPod touch.
@@ -124,20 +136,21 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 							                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
 							                              </div>
 							                               </div>';
-							            			echo form_error('code');
-					            			        echo form_error('badge_error');
-							            			break;
-							            			
-						            		}?>
-						            		</form>
-						            		</div>
-						            		<br/>
-					            	 <?php 
-					            		}
-					            	 	endforeach; ?>
-					          </div>
-					        </div>
-					      </div>
-				</div>
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
+                                        }
+                                        ?>
+                                    </form>
+                                </div>
+                                <br/>
+        <?php
+    }
+endforeach;
+?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
