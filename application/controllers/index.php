@@ -13,18 +13,18 @@ class Index extends CI_Controller {
     public function __construct() {
         parent::__construct();
     }
-    
+
     public function index() {
         redirect(base_url() . 'index/home');
     }
-    
+
     public function home() {
 
         $data = array(
             'title' => 'Home',
             'mixpanel' => 'Home'
         );
-        
+
         $this->layout->view('index/index', $data);
     }
 
@@ -37,7 +37,7 @@ class Index extends CI_Controller {
         $email = $this->input->post('email');
         $name = $this->input->post('name');
         $existdb = false;
-        
+
         $redirectPro = false;
         $redirectRec = false;
 
@@ -47,7 +47,7 @@ class Index extends CI_Controller {
             $existdb = true;
             $redirectPro = true;
         }
-        
+
         $recruiter = $this->recruiter_model->loadRecruiter($uid);
         if (!empty($recruiter)) {
             $existdb = true;
@@ -185,23 +185,23 @@ class Index extends CI_Controller {
     }
 
     public function logged() {
-        
+
         $this->load->model('endereco_model');
         $this->load->model('recruiter_model');
         $this->load->model('professional_model');
-        
+
         if ($this->session->userdata('existdb') == true) {
-            
+
             if ($this->session->userdata('pro') == true) {
                 redirect(base_url() . 'index/profile');
             } else if ($this->session->userdata('rec') == true) {
                 redirect(base_url() . 'index/recruiterProfile');
             }
         }
-        
-        $recruiterexist = $this->recruiter_model->loadRecruiter($fbuid);        
+
+        $recruiterexist = $this->recruiter_model->loadRecruiter($fbuid);
         $professionalexist = $this->professional_model->loadProfessional($fbuid);
-        
+
         if (!empty($recruiterexist)) {
             redirect(base_url() . 'index/recruiterProfile');
         } else if (!empty($professionalexist)) {
@@ -397,9 +397,9 @@ class Index extends CI_Controller {
                     );
 
                     $this->badge_model->insertBadgeProfessional($insert);
-                    
+
                     $this->session->set_flashdata('claimbadge', true);
-					
+
                     redirect(base_url() . 'index/profile');
                 } else {
                     $data['badge_error'] = 'You already have this badge';
@@ -408,7 +408,7 @@ class Index extends CI_Controller {
                 $data['badge_error'] = 'Invalid Badge';
             }
         }
-        
+
         $this->layout->view('index/claimBadge', $data);
     }
 
@@ -452,21 +452,22 @@ class Index extends CI_Controller {
     }
 
     public function privacyPolicy() {
-        
+
         $data = array(
             'title' => 'Privacy Policy',
             'mixpanel' => 'Privacy Policy',
         );
-        
+
         $this->layout->view('index/privacyPolicy', $data);
     }
+
     public function features() {
-        
+
         $data = array(
             'title' => 'Features',
             'mixpanel' => 'Features',
         );
-        
+
         $this->layout->view('index/features', $data);
     }
 
@@ -570,14 +571,14 @@ class Index extends CI_Controller {
             'applieds' => array()
         );
 
-        $fbuid = $this->session->userdata('uid');        
+        $fbuid = $this->session->userdata('uid');
         $professional = $this->professional_model->loadProfessional($fbuid);
-        
+
         $recruiter = null;
         $dataJobs = array();
 
         if ($company != false) {
-            
+
             $company = (string) $company;
             $recruiter = $this->recruiter_model->loadRecruiter(null, $company);
             if (!empty($recruiter)) {
@@ -586,15 +587,14 @@ class Index extends CI_Controller {
                 $dataJobs['exist'] = false;
             }
         }
-        
+
         $data['jobs'] = $this->job_model->listJobs($dataJobs);
-        
+
         $data['applieds'] = array();
-        if (!empty($professional)) {            
+        if (!empty($professional)) {
             $data['applieds'] = $this->job_model->listJobsApplied($professional[0]->id_professional);
         }
-        
-        
+
         $this->layout->view('index/applyforajob', $data);
     }
 
@@ -604,22 +604,35 @@ class Index extends CI_Controller {
         $this->load->model('job_model');
 
         $fbuid = $this->session->userdata('uid');
-        $idJob = (int) $this->input->post('ids');
+        $idJob = $this->input->post('id_job');
+
+        $data = array(
+            'redirect' => ''
+        );
 
         $professional = $this->professional_model->loadProfessional($fbuid);
 
-        $dataJobProfessional = array(
-            'id_professional' => $professional[0]->id_professional,
-            'id_job' => $idJob
-        );
+        $hasThisJob = $this->job_model->listJobsApplied($professional[0]->id_professional, $idJob);
 
-        $save = $this->job_model->insertJobProfessional($dataJobProfessional);
-        
-        $this->session->set_flashdata('applyforajob', true);
-        
-        //if ($save) {
-        redirect(base_url() . 'index/profile');
-        //}
+        if (empty($hasThisJob)) {
+
+            $dataJobProfessional = array(
+                'id_professional' => $professional[0]->id_professional,
+                'id_job' => $idJob
+            );
+
+            $this->job_model->insertJobProfessional($dataJobProfessional);
+            $this->session->set_flashdata('applyforajob', true);
+            $data['redirect'] = base_url() . 'index/profile';
+            //redirect(base_url() . 'index/profile');
+        } else {
+
+            $this->session->set_flashdata('hasapplied', true);
+            $data['redirect'] = base_url() . 'index/jobs';
+            //redirect(base_url() . 'index/jobs');
+        }
+        echo json_encode($data);
+        die();
     }
 
 }

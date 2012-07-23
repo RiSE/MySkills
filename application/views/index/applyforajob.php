@@ -1,3 +1,10 @@
+<script type="text/javascript" src="<?php echo base_url();?>assets/js/professional.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        Professional.onReady();
+    })
+</script>
+
 <?php
 $fbuid = $this->session->userdata('uid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
@@ -42,6 +49,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
         <div class="row">
 
+            <?php if ($this->session->flashdata('hasapplied') == true) : ?>
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Oh snap!</strong> You already applied for this job
+                </div>
+            <?php endif; ?>
+
+
             <div class="span2">
                 <ul class="nav nav-tabs nav-stacked">
                     <!--<li class="">
@@ -56,7 +71,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
             <div class="span10">
                 <div class="span8 sidebar ">
-                    <form method="POST" name="frmJob" action="<?php echo base_url(); ?>index/apply">
+                    <form method="POST" id="frmJob" name="frmJob">
                         <?php foreach ($jobs as $job) : ?>
 
                             <div class="span6">
@@ -73,10 +88,10 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             <?php endforeach; ?>
 
                             <div class="span1">
-                                <input type="submit" <?php echo $disabled; ?> class="btn btn-primary btn-large" value="Apply" />
+                                <input type="submit" id="<?php echo $job->id_job; ?>" <?php echo $disabled; ?> class="btn btn-primary btn-large" value="Apply" />
                             </div>                        
 
-                            <input type="hidden" name="ids" value="<?php echo $job->id_job; ?>" />
+                            <input type="hidden" name="ids[]" value="<?php echo $job->id_job; ?>" />
                         <?php endforeach; ?>
                     </form>
                 </div>

@@ -43,12 +43,16 @@ class Job_model extends CI_Model {
         return $result;
     }
 
-    public function listJobsApplied($idProfessional) {
+    public function listJobsApplied($idProfessional , $idJob = null) {
 
         $result = array();
         
         $this->db->select('id_professional, id_job');
         $this->db->where('id_professional', $idProfessional);
+        
+        if (isset($idJob) && !empty($idJob)) {
+            $this->db->where('id_job', $idJob);
+        }
 
         $query = $this->db->get('jobs_professional');
 
