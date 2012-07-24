@@ -32,15 +32,29 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                     <label>Company</label>
                     <input type="text" id="company" name="company" />
-                    <div class="alert alert-info">
-					 <a class="close" data-dismiss="alert" href="#">×</a>
-					   <span><?php echo form_error('company');?></span>
-					</div>
-                    
+
+                    <?php
+                    $company = form_error('company');
+                    if (isset($company) && !empty($company)) :
+                        ?>
+                        <div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>Oh snap!</strong> <?php echo $company; ?>
+                        </div>
+                    <?php endif; ?>
 
                     <label>E-mail</label>
                     <input type="text" id="emailr" name="emailr" />
-                    <span><?php echo form_error('emailr'); ?></span>            
+                    
+                    <?php
+                    $emailr = form_error('emailr');
+                    if (isset($emailr) && !empty($emailr)) :
+                        ?>
+                        <div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>Oh snap!</strong> <?php echo $emailr; ?>
+                        </div>
+                    <?php endif; ?>                    
 
                     <label>State:</label>
                     <select name="selectUfr">
@@ -70,14 +84,23 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                     <label>E-mail</label>
                     <input type="text" id="emailp" name="emailp" />
-                    <span><?php echo form_error('emailp'); ?></span>            
+
+                    <?php
+                    $emailp = form_error('emailp');
+                    if (isset($emailp) && !empty($emailp)) :
+                        ?>
+                        <div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>Oh snap!</strong> <?php echo $emailp; ?>
+                        </div>
+<?php endif; ?>
 
                     <label>State:</label>
                     <select name="selectUfp">
                         <option value="">--SELECT--</option>
-                        <?php foreach ($ufs as $uf) : ?>
+<?php foreach ($ufs as $uf) : ?>
                             <option value="<?php echo $uf->id_uf; ?>"><?php echo $uf->sigla; ?></option>
-                        <?php endforeach; ?>
+<?php endforeach; ?>
                     </select>
                     <span><?php echo form_error('selectUfp'); ?></span>
 

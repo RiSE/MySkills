@@ -228,7 +228,7 @@ class Index extends CI_Controller {
         $this->load->model('endereco_model');
 
         $data = array(
-            'title' => 'Are you a recruiter or a developer?'
+            'title' => 'Are you a Recruiter or a Developer?'
         );
 
         $data['ufs'] = $this->endereco_model->loadUfs();
@@ -262,9 +262,10 @@ class Index extends CI_Controller {
             $this->session->set_flashdata('signup', true);
 
             redirect(base_url() . 'index/recruiterProfile');
+        } else {
+            $this->layout->view('index/logged', $data);
         }
-
-        $this->layout->view('index/recruiters', $data);
+        //$this->layout->view('index/recruiters', $data);
     }
 
     public function addProfessional() {
