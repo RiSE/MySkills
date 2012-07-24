@@ -49,6 +49,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <strong>Well done!</strong> You claimed a badge
                     </div>                
                 <?php endif; ?>
+                
+                <?php if ($this->session->flashdata('applyforacourse') == true) : ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Well done!</strong> You applied for a course
+                    </div>                
+                <?php endif; ?>
 
                 <div class="span2" name="divProfile">
                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal" style="border:thick groove green;" />

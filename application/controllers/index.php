@@ -189,7 +189,7 @@ class Index extends CI_Controller {
         $this->load->model('endereco_model');
         $this->load->model('recruiter_model');
         $this->load->model('professional_model');
-        
+
         $fbuid = $this->session->userdata('uid');
 
         if ($this->session->userdata('existdb') == true) {
@@ -258,7 +258,7 @@ class Index extends CI_Controller {
             );
 
             $this->recruiter_model->insertRecruiter($data);
-            
+
             $this->session->set_flashdata('signup', true);
 
             redirect(base_url() . 'index/recruiterProfile');
@@ -302,7 +302,7 @@ class Index extends CI_Controller {
             );
 
             $this->professional_model->insertProfessional($data);
-            
+
             $this->session->set_flashdata('signup', true);
 
             redirect(base_url() . 'index/profile');
@@ -642,7 +642,6 @@ class Index extends CI_Controller {
         die();
     }
 
-
     public function courses() {
 
         $this->load->model('professional_model');
@@ -655,17 +654,16 @@ class Index extends CI_Controller {
             'applieds' => array()
         );
 
-        $fbuid = $this->session->userdata('uid');        
+        $fbuid = $this->session->userdata('uid');
         $professional = $this->professional_model->loadProfessional($fbuid);
-               
+
         $data['courses'] = $this->course_model->listCourses();
-        
-        $dataProfessional = array();
+
         $data['applieds'] = array();
-        if (!empty($professional)) {            
+        if (!empty($professional)) {
             $data['applieds'] = $this->course_model->listCoursesApplied($professional[0]->id_professional);
         }
-        
+
         $this->layout->view('index/applyforacourse', $data);
     }
 
@@ -685,10 +683,9 @@ class Index extends CI_Controller {
         );
 
         $save = $this->course_model->insertCourseProfessional($dataCourseProfessional);
-        
-       // if ($save) {
-        	redirect(base_url() . 'index/profile');
-        //}
+        $this->session->set_flashdata('applyforacourse', true);
+
+        redirect(base_url() . 'index/profile');
     }
 
 }
