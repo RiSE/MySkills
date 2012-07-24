@@ -39,26 +39,32 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
     if (isset($fbuid) && !empty($fbuid)) {
         $professionalexist = $this->professional_model->loadProfessional($fbuid);
 
-        if ($professionalexist):
+        if (isset($professionalexist) && !empty($professionalexist)):
             $email = $professionalexist[0]->email;
             $datacadastro = $professionalexist[0]->created;
         else:
             $recruiterexist = $this->recruiter_model->loadRecruiter($fbuid);
-            $email = $recruiterexist[0]->email;
-            $datacadastro = $recruiterexist[0]->created;
+            if (isset($recruiterexist) && !empty($recruiterexist)) {
+                $email = $recruiterexist[0]->email;
+                $datacadastro = $recruiterexist[0]->created;
+            }
         endif;
-        ?>
-                  mixpanel.identify("<?php echo $fbuid; ?>");
-                  mixpanel.people.set({
-                      "name": "<?php echo $this->session->userdata('name'); ?>",
-                      "$email": "<?php echo $email; ?>",
-                      "$created": "<?php echo $datacadastro; ?>"
-                  });
-                  mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");        
-        <?php
+
+        if (isset($professionalexist) && !empty($professionalexist) ||
+                isset($recruiterexist) && !empty($recruiterexist)) :
+            ?>
+                        mixpanel.identify("<?php echo $fbuid; ?>");
+                        mixpanel.people.set({
+                            "name": "<?php echo $this->session->userdata('name'); ?>",
+                            "$email": "<?php echo $email; ?>",
+                            "$created": "<?php echo $datacadastro; ?>"
+                        });
+                        mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");        
+            <?php
+        endif;
     }
     ?>
-            
+                    
 <?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
@@ -265,7 +271,9 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
                                 </li>
                                 <li>
-                                    <?php if ($this->session->userdata('pro') == true) {
+                                    <?php
+                                    $link = null;
+                                    if ($this->session->userdata('pro') == true) {
                                         $link = 'index/profile';
                                     } else if ($this->session->userdata('rec') == true) {
                                         $link = 'index/recruiterProfile';
@@ -315,13 +323,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
                                     <!-- <li><a href="javascript:;">Something Else</a></li> -->
                                 </ul>
-                                
+
                                 <ul class="footer-links clearfix">
-                                    <li><a href="<?php echo base_url();?>index/features">Features</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index/features">Features</a></li>
                                 </ul>                                
 
                                 <ul class="footer-links clearfix">
-                                    <li><a href="<?php echo base_url();?>index/contact">Contact Us</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index/contact">Contact Us</a></li>
                                 </ul>                                
 
                             </div>

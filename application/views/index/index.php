@@ -54,7 +54,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 </div> <!-- /landing -->
 
 <div id="content"> 
-<<<<<<< HEAD
 				
 	<div class="inner">		
 		
