@@ -23,6 +23,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         <form method="POST" name="frmClaim">
 
             <div class="row-fluid">
+                
+                <?php if ($this->session->flashdata('signup') == true) : ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Well done!</strong> Your subscription was successfully
+                    </div>
+                <?php endif; ?>                
 
                 <div class="span12">
 

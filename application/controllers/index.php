@@ -258,6 +258,8 @@ class Index extends CI_Controller {
             );
 
             $this->recruiter_model->insertRecruiter($data);
+            
+            $this->session->set_flashdata('signup', true);
 
             redirect(base_url() . 'index/recruiterProfile');
         }
@@ -299,6 +301,8 @@ class Index extends CI_Controller {
             );
 
             $this->professional_model->insertProfessional($data);
+            
+            $this->session->set_flashdata('signup', true);
 
             redirect(base_url() . 'index/profile');
         } else {

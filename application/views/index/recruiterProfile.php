@@ -8,7 +8,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         mixpanel.track('Recruiter Profile');
     </script>
 <?php endif; ?>
-    
+
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -21,6 +21,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     <div class="container">
 
         <div class="row-fluid">
+
+            <?php if ($this->session->flashdata('signup') == true) : ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Well done!</strong> Your subscription was successfully
+                </div>
+            <?php endif; ?>              
+
             <div class="span2">
                 <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal"  style="border:thick groove green;" />                
             </div>
