@@ -56,9 +56,9 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
             <div class="span10">
                 <div class="span8 sidebar ">
-                    <form method="POST" name="frmJob" action="<?php echo base_url(); ?>index/applyCourse">
+                    
                         <?php foreach ($courses as $course) : ?>
-
+						<form method="POST" name="frmJob" action="<?php echo base_url(); ?>index/applyCourse">
                             <div class="span7">
                                 <div class="span5">
                                     <h4><?php echo $course->title; ?></h4>
@@ -77,8 +77,9 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </div>
 
                             <input type="hidden" name="ids" value="<?php echo $course->id_course; ?>" />
+                          </form>
                         <?php endforeach; ?>
-                    </form>
+                    
                 </div>
             </div>
 
