@@ -189,6 +189,8 @@ class Index extends CI_Controller {
         $this->load->model('endereco_model');
         $this->load->model('recruiter_model');
         $this->load->model('professional_model');
+        
+        $fbuid = $this->session->userdata('uid');
 
         if ($this->session->userdata('existdb') == true) {
 
