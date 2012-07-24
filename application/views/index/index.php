@@ -63,7 +63,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 			
 				<div class="span8">
 				
-						<h3><span class="slash">//</span> What You'll Get</h3>
+						<h3><span class="slash"></span>Features</h3>
 						
 						
 						<ul class="features-list">
@@ -77,10 +77,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 								</div> <!-- /feature-thumbnail -->
 								
 								<div class="feature-content">
-									<h3>Feature #1</h3>
-									<p>Nunc metus ligula, fringilla quis porta ut, tellus arcu  mi eget adipiscing dictum ut turpis. Aliquam eget odio.</p>									
+									<h3>Recruiter - Add jobs by skills</h3>
+									<p>If you are a recruiter you can define which skills you want for a given job opportunity. No more resumes from developers not related to your opportunity.</p>									
 								</div> <!-- /feature-content -->
 							</li>
+
 							<li class="feature">
 								<div class="feature-thumbnail">
 									<div class="circle-icon">
@@ -91,8 +92,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 								</div> <!-- /feature-thumbnail -->
 								
 								<div class="feature-content">
-									<h3>Feature #2</h3>
-									<p>Vestibulum ante ipsum primis tellus arcu  mi eget adipiscing in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+									<h3>Developer - Apply for a Job</h3>
+									<p>On MySkills developers can apply for a list of jobs on tech companies based on your skills. You will also receive by e-mail job oportunities related to your skills in your area.</p>
 							</div> <!-- /feature-content -->
 							</li>
 							<li class="feature">
@@ -105,22 +106,23 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 								</div> <!-- /feature-thumbnail -->
 								
 								<div class="feature-content">
-									<h3>Feature #3</h3>
-									<p>Aliquam justo massa, rhoncus quis tellus arcu  mi eget adipiscing suscipit eget, malesuada vel nulla. Sed ac nunc.</p>
+									<h3>Recruiter - Search the Leaderboard</h3>
+									<p>The Leaderboard is our ranking system. Based on developer skills and what we call "skill points", we emphasize those software developers who stand out.</p>
 							</div> <!-- /feature-content -->
 							</li>
+
 							<li class="feature">
 								<div class="feature-thumbnail">
 									<div class="circle-icon">
 										<div>
-											<i class="icon-tint"></i>
+											<i class="icon-trophy"></i>
 										</div>
 									</div> <!-- /circle-icon -->
 								</div> <!-- /feature-thumbnail -->
 								
 								<div class="feature-content">
-									<h3>Feature #4</h3>
-									<p>Phasellus mollis, tortor vitae ornare commodo, augue tellus arcu  mi eget adipiscing risus varius quam, sit amet.</p>
+									<h3>Developer - Claim a badge</h3>
+									<p>Badges are our way of providing recognition for software development skills. As a developer you can claim badges related to: courses, certification, online tests, events or Apps developed.</p>
 							</div> <!-- /feature-content -->
 							</li>
 							<li class="feature">
@@ -133,8 +135,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 								</div> <!-- /feature-thumbnail -->
 								
 								<div class="feature-content">
-									<h3>Feature #5</h3>
-									<p>Sed feugiat pellentesque tellus arcu  mi eget adipiscing dui, laoreet aliquet enim condimentum quis commodo.</p>
+									<h3>Recruiter - Schedule an interview</h3>
+									<p>As a recruiter you can schedule an interview with a developer. Filter the skills you want for your job opportunity, rank the developers you chose and schedule an interview.</p>
 							</div> <!-- /feature-content -->
 							</li>
 							<li class="feature">
@@ -147,8 +149,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 								</div> <!-- /feature-thumbnail -->
 								
 								<div class="feature-content">
-									<h3>Feature #6</h3>
-									<p>Phasellus varius sapien id ante ultrices eu malesuada mauris molestie. Cras erat tellus arcu  mi eget adipiscing quam.</p>
+									<h3>Developer - Apply for a Course</h3>
+									<p>You want to improve your software development skills? Join other users in your area and apply for a course in one of our software development trainning center partners.</p>
 							</div> <!-- /feature-content -->
 							</li>
 						</ul> <!-- /features-list -->
@@ -159,7 +161,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 				
 				<div class="span4">
 				
-						<h3><span class="slash">//</span> Testimonials</h3>
+						<h3><span class="slash"></span> Testimonials</h3>
 						
 						
 						<ul class="testimonials-list">
@@ -167,14 +169,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 							<li>
 								<div class="testimonial-avatar">
 									<div class="img">
-										<img alt="Thumbnail" src="http://wbpreview.com/previews/WB000C138/img/avatar.png">									
+										<img src="../assets/images/Testemonial-MichaelDaugherty.png" alt="Thumbnail">									
 									</div>
 								</div> <!-- /testimonial-avatar -->
 								
 								<div class="testimonial-text">
 									<p>
-										<span class="testimonial-author">John Doe</span>
-										Morbi a tellus tellus. Integer et ipsum ipsum, blandit pharetra nisl. In vitae lorem a magna.
+										<span class="testimonial-author">Michael Daugherty</span>
+										 "I checked out your site, BTW. I really like the idea of authenticated badges to reliably indicate skills and experiences. I've done some hiring myself, and it can be tough to figure out who has really done great work and who hasn't". - HackerBeers.com - Beijing - China.
 										
 									</p>								
 								</div> <!-- /testimonial-text -->
@@ -183,35 +185,18 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 							<li>
 								<div class="testimonial-avatar">
 									<div class="img">
-										<img alt="Thumbnail" src="http://wbpreview.com/previews/WB000C138/img/avatar2.png">									
-									</div>
+										<img src="../assets/images/Testemonial-DavidJohnston.png" alt="Thumbnail">										</div>
 								</div> <!-- /testimonial-avatar -->
 								
 								<div class="testimonial-text">
 									<p>
-										<span class="testimonial-author">John Doe</span>
-										Morbi a tellus tellus. Integer et ipsum ipsum, blandit pharetra nisl. In vitae lorem a magna.
+										<span class="testimonial-author">David A Johnston</span>
+										"I'll be interested to try out your website. Our team will be looking for a good Front End Developer toward the end of our Alpha period and certainly for the Beta". - LDEngine.com  - USA
 										
 									</p>								
 								</div> <!-- /testimonial-text -->
 							</li>
 								
-								
-							<li>
-								<div class="testimonial-avatar">
-									<div class="img">
-										<img alt="Thumbnail" src="http://wbpreview.com/previews/WB000C138/img/avatar3.png">									
-									</div>
-								</div> <!-- /testimonial-avatar -->
-								
-								<div class="testimonial-text">
-									<p>
-										<span class="testimonial-author">John Doe</span>
-										Morbi a tellus tellus. Integer et ipsum ipsum, blandit pharetra nisl. In vitae lorem a magna.
-										
-									</p>								
-								</div> <!-- /testimonial-text -->
-							</li>
 							
 						</ul>	
 					
