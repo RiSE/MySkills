@@ -23,6 +23,7 @@ class Professional_model extends CI_Model {
         $result = array();
 
         $this->db->select('id_professional, fbuid , created');
+        $this->db->order_by('created', 'DESC');
 
         $query = $this->db->get($this->table);
 

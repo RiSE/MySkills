@@ -78,112 +78,6 @@ class Index extends CI_Controller {
         die();
     }
 
-    public function signin() {
-
-        $data = array(
-            'title' => 'Sign-in'
-        );
-
-        $this->layout->view('index/signin', $data);
-    }
-
-    public function signout() {
-        //$this->facebook_model->sessDestroy();
-        //setcookie('fbs_' . $this->facebook_model->getAppId(), '', time() - 100, '/', 'localhost');
-        $this->session->sess_destroy();
-        redirect(base_url());
-    }
-
-    public function recruiters() {
-
-        /* $this->load->model('recruiter_model');
-
-          $data = array(
-          'title' => 'Recruiters',
-          'errors' => ''
-          );
-
-          $data['ufs'] = $this->db->query('SELECT * FROM uf')->result_object();
-
-          $selectUf = (int) $this->input->post('selectUf');
-
-          if (!empty($selectUf)) {
-          $sigla = $this->db->query('SELECT * FROM uf WHERE id_uf = ?', $selectUf)->result_object();
-          if (empty($sigla)) {
-          redirect(base_url() . 'index/recruiters');
-          }
-          $selectUf = $sigla[0]->sigla;
-          }
-
-          if ($this->form_validation->run('recruiter') !== false) {
-
-          $email = (string) $this->input->post('email');
-          $company = (string) $this->input->post('company');
-          //$selectUf = (int) $this->input->post('selectUf');
-
-          $data = array(
-          'email' => $email,
-          'razao' => $company,
-          'uf' => $selectUf,
-          'fbuid' => $this->session->userdata('uid'),
-          'data_registro' => date('Y-m-d')
-          );
-
-          $this->recruiter_model->insertRecruiter($data);
-
-          redirect(base_url() . 'index/success');
-          }
-
-          $this->layout->view('index/recruiters', $data); */
-        die('not implemented yet');
-    }
-
-    public function programmers() {
-
-        $this->load->model('profissional_model');
-
-        $data = array(
-            'title' => 'Developers',
-            'mixpanel' => 'Developers',
-            'errors' => '',
-            'success' => ''
-        );
-
-        $data['ufs'] = $this->db->query('SELECT * FROM uf')->result_object();
-
-        $selectUf = (int) $this->input->post('selectUf');
-
-        if (!empty($selectUf)) {
-            $sigla = $this->db->query('SELECT * FROM uf WHERE id_uf = ?', $selectUf)->result_object();
-
-            if (empty($sigla)) {
-                redirect(base_url() . 'index/programmers');
-            }
-            $selectUf = $sigla[0]->sigla;
-        }
-
-        if ($this->form_validation->run('programmer') !== false) {
-
-            $email = (string) $this->input->post('email');
-            $code = $this->input->post('code');
-            //$uf = (int) $this->input->post('selectUf');
-
-            $data = array(
-                'email' => $email,
-                'codigo' => $code,
-                'fbuid' => $this->session->userdata('uid'),
-                'uf' => $selectUf,
-                'data_registro' => date('Y-m-d')
-            );
-
-            $this->profissional_model->insertProfissional($data);
-
-            redirect(base_url() . 'index/success');
-        }
-
-        $this->layout->view('index/programmers', $data);
-    }
-
     public function logged() {
 
         $this->load->model('endereco_model');
@@ -688,6 +582,30 @@ class Index extends CI_Controller {
         redirect(base_url() . 'index/profile');
     }
 
+    public function leaderboard() {
+
+        $this->load->model('professional_model');
+
+        $data = array(
+            'title' => 'Leaderboard'
+        );
+
+        $data['professionals'] = $this->professional_model->listProfessionals();
+        
+        $this->layout->view('index/leaderboard', $data);
+    }
+    
+    public function listProfessionals() {
+        
+        $data = array();
+        
+        $this->load->model('professional_model');
+        
+        $data['professionals'] = $this->professional_model->listProfessionals();
+                
+        echo json_encode($data); die();
+    }
+    
 }
 
 ?>
