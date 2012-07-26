@@ -152,7 +152,44 @@ class Index extends CI_Controller {
             );
 
             $this->recruiter_model->insertRecruiter($data);
+			// multiple recipients
+			//$to  = 'eduardo.cruz@rise.com.br' . ', '; // note the comma
+			//$to .= 'tiago.perrelli@rise.com.br' . ', '; // note the comma
+			$to = 'eliakim.ramos@rise.com.br';
+			// subject
+			$subject = 'Insert Recruiiter';
 
+			// message
+			$message = '
+			<html>
+			<head>
+			 <title>recruit registered</title>
+			</head>
+			<body>
+			<table>
+			 <tr>
+			  <td>E-mail:</th><td>'.$email.'</td>
+			 </tr>
+			 <tr>
+			  <td>Company:</td><td>'.$company.'</td>
+			 </tr>
+			 <tr>
+			  <td>Facebook id:</td><td>'.$this->session->userdata('uid').'</td>
+			 </tr>
+			 <tr>
+			  <td>Date registered:</td><td>'.date('Y-m-d').'</td>
+			 </tr>
+			</table>
+			</body>
+			</html>
+			';
+
+			// To send HTML mail, the Content-type header must be set
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			
+			// Mail it
+			mail($to, $subject, $message, $headers);
             $this->session->set_flashdata('signup', true);
 
             redirect(base_url() . 'index/recruiterProfile');
@@ -196,6 +233,44 @@ class Index extends CI_Controller {
             );
 
             $this->professional_model->insertProfessional($data);
+            //$to  = 'eduardo.cruz@rise.com.br' . ', '; // note the comma
+			//$to .= 'tiago.perrelli@rise.com.br' . ', '; // note the comma
+			$to = 'eliakim.ramos@rise.com.br';
+
+			// subject
+			$subject = 'Insert Professional';
+
+			// message
+			$message = '
+			<html>
+			<head>
+			 <title>Professional registered</title>
+			</head>
+			<body>
+			<table>
+			 <tr>
+			  <td>E-mail:</th><td>'.$email.'</td>
+			 </tr>
+			 <tr>
+			  <td>State:</td><td>'.$selectUf.'</td>
+			 </tr>
+			 <tr>
+			  <td>Facebook id:</td><td>'.$this->session->userdata('uid').'</td>
+			 </tr>
+			 <tr>
+			  <td>Date registered:</td><td>'.date('Y-m-d').'</td>
+			 </tr>
+			</table>
+			</body>
+			</html>
+			';
+
+			// To send HTML mail, the Content-type header must be set
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			
+			// Mail it
+			mail($to, $subject, $message, $headers);
 
             $this->session->set_flashdata('signup', true);
 
@@ -298,6 +373,43 @@ class Index extends CI_Controller {
                     );
 
                     $this->badge_model->insertBadgeProfessional($insert);
+		            //$to  = 'eduardo.cruz@rise.com.br' . ', '; // note the comma
+					//$to .= 'tiago.perrelli@rise.com.br' . ', '; // note the comma
+					$to = 'eliakim.ramos@rise.com.br';
+					// subject
+					$subject = 'Claim Badges';
+		
+					// message
+					$message = '
+					<html>
+					<head>
+					 <title>Claim Badges</title>
+					</head>
+					<body>
+					<table>
+					 <tr>
+					  <td>E-mail:</th><td>'.$professional[0]->email.'</td>
+					 </tr>
+					 <tr>
+					  <td>Badges:</td><td>'.$badge[0]->name.'</td>
+					 </tr>
+					 <tr>
+					  <td>code:</td><td>'.$code.'</td>
+					 </tr>
+					 <tr>
+					  <td>Date registered:</td><td>'.date('Y-m-d').'</td>
+					 </tr>
+					</table>
+					</body>
+					</html>
+					';
+		
+					// To send HTML mail, the Content-type header must be set
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					
+					// Mail it
+					mail($to, $subject, $message, $headers);
 
                     $this->session->set_flashdata('claimbadge', true);
 
@@ -523,6 +635,42 @@ class Index extends CI_Controller {
             );
 
             $this->job_model->insertJobProfessional($dataJobProfessional);
+            		//$to  = 'eduardo.cruz@rise.com.br' . ', '; // note the comma
+					//$to .= 'tiago.perrelli@rise.com.br' . ', '; // note the comma
+					$to = 'eliakim.ramos@rise.com.br';
+		
+					// subject
+					$subject = 'Apply for a job';
+		
+					// message
+					$message = '
+					<html>
+					<head>
+					 <title>Apply for a job</title>
+					</head>
+					<body>
+					<table>
+					 <tr>
+					  <td>E-mail:</th><td>'.$professional[0]->email.'</td>
+					 </tr>
+					 <tr>
+					  <td>Id the Job:</td><td>'.$idJob.'</td>
+					 </tr>
+					 <tr>
+					  <td>Date registered:</td><td>'.date('Y-m-d').'</td>
+					 </tr>
+					</table>
+					</body>
+					</html>
+					';
+		
+					// To send HTML mail, the Content-type header must be set
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					
+					// Mail it
+					mail($to, $subject, $message, $headers);
+            
             $this->session->set_flashdata('applyforajob', true);
             $data['redirect'] = base_url() . 'index/profile';
             //redirect(base_url() . 'index/profile');
@@ -565,6 +713,7 @@ class Index extends CI_Controller {
 
         $this->load->model('professional_model');
         $this->load->model('course_model');
+        $this->load->library('email');
 
         $fbuid = $this->session->userdata('uid');
         $idCourse = (int) $this->input->post('ids');
@@ -577,6 +726,52 @@ class Index extends CI_Controller {
         );
 
         $save = $this->course_model->insertCourseProfessional($dataCourseProfessional);
+          		
+        			$this->email->from('noreply@myskills.com.br', 'NOREPLY');
+					$this->email->to('eliakim.ramos@hotmail.com');
+					/*$this->email->cc('another@another-example.com');
+					$this->email->bcc('them@their-example.com');*/
+					
+					$this->email->subject('Email Test');
+					$this->email->message('Testing the email class.');
+					
+					$this->email->send();
+					
+					echo $this->email->print_debugger();
+					/*
+					// subject
+					$subject = 'Apply for a Course';
+		
+					// message
+					$message = '
+					<html>
+					<head>
+					 <title>Apply for a Course</title>
+					</head>
+					<body>
+					<table>
+					 <tr>
+					  <td>E-mail:</th><td>'.$professional[0]->email.'</td>
+					 </tr>
+					 <tr>
+					  <td>Id the Course:</td><td>'.$idCourse.'</td>
+					 </tr>
+					 <tr>
+					  <td>Date registered:</td><td>'.date('Y-m-d').'</td>
+					 </tr>
+					</table>
+					</body>
+					</html>
+					';
+		
+					// To send HTML mail, the Content-type header must be set
+					$headers = 'From: eliakim.ramos@rise.com.br' . "\r\n" .
+    							'Reply-To: webmaster@example.com' . "\r\n" .
+    							'X-Mailer: PHP/' . phpversion();
+					phpinfo();
+					// Mail it
+					mail("eliakim.ramos@hotmail.com","teste","teste",$headers,"-feliakim.ramos@rise.com.br")or die("error email");
+        			*/
         $this->session->set_flashdata('applyforacourse', true);
 
         redirect(base_url() . 'index/profile');
