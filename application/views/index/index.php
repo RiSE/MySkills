@@ -201,7 +201,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						</ul>	
 					
 				</div> <!-- /span4 -->
-				
+			  <div class="span4">
+
+			    <div class="fb-like-box" data-href="http://www.facebook.com/MySkills.com.br" data-width="350" data-colorscheme="dark" data-show-faces="true" data-stream="false" data-header="false"></div>
+			
+			</div><!-- /span4 -->
 			</div> <!-- /row -->			
 			
 		</div> <!-- /container -->	
@@ -243,23 +247,4 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
 <!--  </div>  --><!-- /span4 -->
 
-<div class="span4">
 
-    <div class="fb-like-box" data-href="http://www.facebook.com/MySkills.com.br" data-width="350" data-colorscheme="dark" data-show-faces="true" data-stream="false" data-header="false"></div>
-
-    <!--
-    <h3><span class="slash">//</span> Subscribe and get updates</h3>
-        <p>Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-        
-        
-        <form>
-                
-                <input type="text" name="subscribe_email" placeholder="Your Email" />
-                
-                <br />
-                
-                <button class="btn ">Subscribe</button>
-        </form>-->
-
-
-</div><!-- /span4 -->

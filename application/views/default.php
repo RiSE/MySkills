@@ -88,6 +88,16 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         <link href="<?php echo base_url(); ?>assets/css/themes/green/theme.css" rel="stylesheet">
 
         <link href="<?php echo base_url(); ?>assets/css/pages/homepage.css" rel="stylesheet">
+        <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+        <style type="text/css">
+				#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+			
+				/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+			
+				   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+			
+			</style>
+        
 
         <!--<link href="<?php echo base_url(); ?>assets/js/lightbox/themes/default/jquery.lightbox.css" rel="stylesheet">-->
 
@@ -95,6 +105,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/facebook.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_tab.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_alert.js"></script>
+        
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -310,28 +321,22 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
 
                                 <ul class="footer-links clearfix">
                                     <li><a href="./">Home</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index/features">Features</a></li>
+                                    <li><a href="http://myskills.tumblr.com" target="_blank">BLOG</a></li>
                                     <!-- <li><a href="./pricing.html">Plans</a></li>
-                                     <li><a href="../features.html">Features</a></li>
-                                     <li><a href="./about.html">About</a></li>
+                                      <li><a href="./about.html">About</a></li>
                                      <li><a href="./faq.html">FAQ</a></li>-->
                                 </ul>
 
                                 <ul class="footer-links clearfix">  	
-                                    <!--   <li><a href="javascript:;">Support</a></li>
-                                     <li><a href="javascript:;">License</a></li>
+                                   <li><a href="https://myskills.desk.com/" target="_blank">Support</a></li>
+                                    <!-- <li><a href="javascript:;">License</a></li>
                                      <li><a href="javascript:;">Terms of Use</a></li>-->
                                     <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index/contact">Contact Us</a></li>
                                     <!-- <li><a href="javascript:;">Something Else</a></li> -->
                                 </ul>
-
-                                <ul class="footer-links clearfix">
-                                    <li><a href="<?php echo base_url(); ?>index/features">Features</a></li>
-                                </ul>                                
-
-                                <ul class="footer-links clearfix">
-                                    <li><a href="<?php echo base_url(); ?>index/contact">Contact Us</a></li>
-                                </ul>                                
-
+                                
                             </div>
                             <div class="span4">
 
@@ -365,7 +370,33 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                             </div> <!-- /span4 -->
 
 
-                            <div id="footer-terms" class="span8"></div> 
+                           <div class="span4">
+					
+									<h3><span class="slash">//</span> Subscribe and get updates</h3>
+									
+				
+									<p>Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+									
+									
+									<div id="mc_embed_signup1">
+									
+									<form action="http://myskills.us5.list-manage1.com/subscribe/post?u=c22dec5cbd87c068118755814&amp;id=30cd3f42fe" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+														
+										<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+									
+										<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+									
+									</form>
+									<script type="text/javascript" language="JavaScript" src="http://myskills.us5.list-manage1.com/subscriber-count?b=28&u=00d2e3de-199f-4c91-ae5a-5433b3ea5e9f&id=30cd3f42fe"></script>
+									</div>
+									
+									
+									
+									<!--End mc_embed_signup-->
+						</div> <!-- span 4 -->
+                            
+                            
+                            </div> 
                         </div> 
 
                     </div>
