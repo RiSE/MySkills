@@ -59,41 +59,53 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 <ul class="nav nav-tabs nav-stacked">
                 </ul>
             </div>-->
-
-            <div class="span12">
+            
+            <div class="span3">
+                &nbsp;
+            </div>
+            
+            <div class="span6">
 
                 <ul class="testimonials-list">
+                    <li>
+                        <p>
+                        texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+                        </p>
+                    </li>
                     <?php foreach ($professionals as $professional) : ?>
                         <li>
-                            <div class="testimonial-avatar span4">
+<!--                            <h3><span class="slash"></span>Developers are here</h3>-->
+                            <div class="testimonial-avatar span1">
                                 <div class="img">
                                     <!--<img src="../assets/images/Testemonial-MichaelDaugherty.png" alt="Thumbnail">-->
                                     <img id="userpic" src="https://graph.facebook.com/<?php echo $professional->fbuid; ?>/picture&type=large" alt="Thumbnail" />
                                 </div>
                             </div>
-
-                            <!--<div class="span1">&nbsp</div>-->
-                            <div class="span4">
+                            
+                            <div class="testimonial-text span2">
+                                <p>
+                                    <span class="testimonial-author">Name: </span>
+                                    <strong id="fb_<?php echo $professional->fbuid; ?>"></strong>
+                                </p>
+                            </div>
+                            
+                            <div class="testimonial-text span2">
+                                <p>
+                                    <span class="testimonial-author">Since: </span>
+                                    <strong><?php echo date('d/m/Y', strtotime($professional->created)); ?></strong>
+                                </p>
+                            </div>
+                            
+                            <!--<div class="span2">
                                 <strong>Name:</strong>
                                 <strong id="fb_<?php echo $professional->fbuid; ?>"></strong>
-                                <!--<p id="fb_<w?php echo $professional->fbuid; ?>"> </p>-->
-                            </div>
+                                <!--<p id="fb_<w?php echo $professional->fbuid; ?>"> </p>
+                            </div>-->
 
-
-                            <!--                            <div class="span4">
-                                                            
-                                                        </div>-->
-
-                            <!--<div class="row"></div>-->
-
-
-                            <!--<div class="span1">&nbsp</div>-->
-
-                            <div class="span3">
+                            <!--<div class="span2">
                                 <strong>Since: <?php echo date('d/m/Y', strtotime($professional->created)); ?></strong>
-                            </div>
-
-                            <!--<div class="span1"></div>-->
+                            </div>-->
+                            
                         </li>
                     <?php endforeach; ?>
                 </ul>
