@@ -55,28 +55,28 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 </div>
             <?php endif; ?>
 
-            <div class="span3">
+            <!--<div class="span2">
                 <ul class="nav nav-tabs nav-stacked">
                 </ul>
-            </div>         
+            </div>-->
 
-            <div class="span6">
+            <div class="span12">
 
                 <ul class="testimonials-list">
                     <?php foreach ($professionals as $professional) : ?>
                         <li>
-                            <div class="testimonial-avatar">
+                            <div class="testimonial-avatar span4">
                                 <div class="img">
                                     <!--<img src="../assets/images/Testemonial-MichaelDaugherty.png" alt="Thumbnail">-->
                                     <img id="userpic" src="https://graph.facebook.com/<?php echo $professional->fbuid; ?>/picture&type=large" alt="Thumbnail" />
                                 </div>
                             </div>
 
-                            <div class="span1">&nbsp</div>
-                            <div class="span5">
+                            <!--<div class="span1">&nbsp</div>-->
+                            <div class="span4">
                                 <strong>Name:</strong>
                                 <strong id="fb_<?php echo $professional->fbuid; ?>"></strong>
-                                <!--<p id="fb_<?php echo $professional->fbuid; ?>"> </p>-->
+                                <!--<p id="fb_<w?php echo $professional->fbuid; ?>"> </p>-->
                             </div>
 
 
@@ -84,34 +84,34 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                                             
                                                         </div>-->
 
-                            <div class="row"></div>
+                            <!--<div class="row"></div>-->
 
 
-                            <div class="span1">&nbsp</div>
+                            <!--<div class="span1">&nbsp</div>-->
 
-                            <div class="span5">
-                            <p>Since: <?php echo date('d/m/Y', strtotime($professional->created)); ?></p>
+                            <div class="span3">
+                                <strong>Since: <?php echo date('d/m/Y', strtotime($professional->created)); ?></strong>
                             </div>
 
-                            <div class="span1"></div>
+                            <!--<div class="span1"></div>-->
                         </li>
                     <?php endforeach; ?>
                 </ul>
 
                 <!--<div class="span8 sidebar ">
                 <?php foreach ($professionals as $professional) : ?>
-                                <div class="span4">
-                                    <p>
-                                        <img id="userpic" src="https://graph.facebook.com/<?php echo $professional->fbuid; ?>/picture&type=small" style="border:thick groove green;" />
-                                    </p>
-                                </div>
+                                    <div class="span4">
+                                        <p>
+                                            <img id="userpic" src="https://graph.facebook.com/<?php echo $professional->fbuid; ?>/picture&type=small" style="border:thick groove green;" />
+                                        </p>
+                                    </div>
 
-                                <div class="span1">
-                                    <p id="fbs_<?php echo $professional->fbuid; ?>"></p>
-                                </div>
-                                <div class="span1">
-                                    <p><?php echo date('d/m/Y', strtotime($professional->created)); ?></p>
-                                </div>
+                                    <div class="span1">
+                                        <p id="fbs_<?php echo $professional->fbuid; ?>"></p>
+                                    </div>
+                                    <div class="span1">
+                                        <p><?php echo date('d/m/Y', strtotime($professional->created)); ?></p>
+                                    </div>
                 <?php endforeach; ?>
                 </div>-->
             </div>
