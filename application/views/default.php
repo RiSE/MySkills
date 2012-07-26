@@ -267,6 +267,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     </a>						
                                 </li>
                             <?php endif; ?>
+                            <?php if ($this->session->userdata('uid') > 0 && $this->session->userdata('existdb') == true) : ?>
+                                <li>						
+                                    <a href="<?php echo base_url(); ?>index/courses">
+                                        Apply for a Course
+                                    </a>						
+                                </li>
+                            <?php endif; ?>
                             <li>
                                 <a href="<?php echo base_url(); ?>index/features">
                                     Features
