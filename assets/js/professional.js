@@ -46,7 +46,7 @@ var Professional = {
                         async: false,
                         success: function(ret) {                            
                             var pName = document.getElementById('fb_' + ret.id);
-                            pName.innerHTML = ret.first_name;
+                            pName.innerHTML += ret.first_name;
                         }
                     });
                 }
