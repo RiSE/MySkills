@@ -23,6 +23,7 @@ class Badge_model extends CI_Model {
         $result = array();
 
         $this->db->select('id_badge, name, created');
+        $this->db->order_by('created', 'DESC');
 
         $query = $this->db->get($this->table);
 
@@ -56,6 +57,7 @@ class Badge_model extends CI_Model {
         $this->db->select('id_professional, id_badge, active');
         $this->db->where('id_professional', $idProfessional);
         $this->db->where('id_badge', $idBadge);
+        
         
         $query = $this->db->get('badges_professional');
         

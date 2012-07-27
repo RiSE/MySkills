@@ -30,14 +30,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
             <div class="tabbable tabs-left">
                 <ul class="nav nav-tabs ">
-                    <li class=""><a href="#lA" data-toggle="tab">Web Development</a></li>
-                    <li class="active"><a href="#lB" data-toggle="tab">Mobile Development</a></li>
+                    <li class="active"><a href="#lA" data-toggle="tab">Badges</a></li>
+                    <!--  <li class=""><a href="#lB" data-toggle="tab">Mobile Development</a></li>-->
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane" id="lA">
+                    <div class="tab-pane active" id="lA">
                         <?php
                         foreach ($badges as $badge) :
-                            if ($badge->id_badge == 2 || $badge->id_badge == 4) {
+                            
                                 ?>
                                 <div class="row">
                                     <form method="POST" name="frmClaim">
@@ -45,7 +45,46 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                                         <?php
                                         switch ($badge->id_badge) {
-                                            case 2 :
+                                            case 1 :
+                                                echo '<div class="span8">
+						            					<div class="span2">
+						            						<img src="' . base_url() . 'assets/images/badges/iOSBadge100.png" width="100"></img>
+						            					</div>';
+
+                                                echo '<div class="span5">
+						                                    The iOS badge is provided for students that participated on an 
+						                                    Apple technology trainning. This course provided content and 
+						                                    practice in iOS application development including: iPad, iPhone and iPod touch.
+						                                    Unlock Badge.
+						                                    <br />
+						                                    <input type="submit" value="Claim Right now!" name="claim" class="btn btn-warning" />
+						                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
+						                               </div>
+						                               </div>';
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
+                                            case 3:
+                                                echo '<div class="span8">
+							            					<div class="span2">
+							            						<img src="' . base_url() . 'assets/images/badges/androidbadges.png" width="100"></img>
+							            					</div>';
+                                                echo '<div class="span5">
+							                                    The Android badge is provided for students that participated on an 
+							                                    Google technology trainning. This course provided content and 
+							                                    practice in Android application development including: Tablet, Phones and iPod touch.
+							                                    Unlock Badge.
+							                                    <br />
+							                                    <input type="submit" value="Claim Right now!" class="btn btn-warning" name="claim" />
+							                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
+							                              </div>
+							                               </div>';
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
+                                        	
+                                        	
+                                        	case 2 :
                                                 echo '<div class="span8">
 					            					<div class="span2">
 					            						<img src="' . base_url() . 'assets/images/badges/php.png" width="100"></img>
@@ -82,18 +121,52 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                                 echo form_error('code');
                                                 echo form_error('badge_error');
                                                 break;
+                                            case 5:
+                                                echo '<div class="span8">
+						            					<div class="span2">
+						            						<img src="' . base_url() . 'assets/images/badges/campus-badge.png" width="100"></img>
+						            					</div>';
+                                                echo '<div class="span5">
+						                                    The Campus party badge is provided for developes that participated on an 
+						                                    Campus party.
+						                                    <br />
+						                                    <input type="submit" value="Claim Right now!" class="btn btn-warning" name="claim" />
+						                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
+						                              </div>
+						                               </div>';
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
+                                            case 6:
+                                                echo '<div class="span8">
+						            					<div class="span2">
+						            						<img src="' . base_url() . 'assets/images/badges/java-badge.jpg" width="100"></img>
+						            					</div>';
+                                                echo '<div class="span5">
+						                                    The Java badge is provided for students that participated on an 
+						                                    Java technology trainning. This course provided content and 
+						                                    practice in application development.
+						                                    Unlock Badge.
+						                                    <br />
+						                                    <input type="submit" value="Claim Right now!" class="btn btn-warning" name="claim" />
+						                                    <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
+						                              </div>
+						                               </div>';
+                                                echo form_error('code');
+                                                echo form_error('badge_error');
+                                                break;
                                         }
                                         ?>
                                     </form>
                                 </div>
                                 <br />
-    <?php }
+    <?php 
 endforeach;
 ?>
                     </div>
-                    <div class="tab-pane active" id="lB">
+                    <!--  <div class="tab-pane active" id="lB">
 <?php
-foreach ($badges as $badge) :
+/*foreach ($badges as $badge) :
     if ($badge->id_badge == 1 || $badge->id_badge == 3) {
         ?>
                                 <div class="row">
@@ -146,9 +219,9 @@ foreach ($badges as $badge) :
                                 <br/>
         <?php
     }
-endforeach;
+endforeach;*/
 ?>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

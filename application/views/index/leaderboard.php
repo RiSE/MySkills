@@ -64,15 +64,21 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 &nbsp;
             </div>
             
-            <div class="span6">
+            <div class="span12">
 
                 <ul class="testimonials-list">
                     <li>
-                        <p>
-                        texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
-                        </p>
+                        <div class="testimonial-text span1"><span class="testimonial-author">&nbsp;</span></div>
+                        <div class="testimonial-text span2"><span class="testimonial-author">Name </span></div>
+                        <div class="testimonial-text span2"> <span class="testimonial-author">Since </span></div>
+                        <div class="testimonial-text span1"><span class="testimonial-author" style="text-align:right">&nbsp;Points </span></div>
+                        <div class="testimonial-text span3"><span class="testimonial-author" style="text-align:center">Badges </span></div>
+                         
                     </li>
-                    <?php foreach ($professionals as $professional) : ?>
+                    <?php foreach ($professionals as $professional) : 
+                    	$ThisBadge = $this->badge_model->listBadgesProfessionalByProfessional($professional->id_professional);
+                    
+                    ?>
                         <li>
 <!--                            <h3><span class="slash"></span>Developers are here</h3>-->
                             <div class="testimonial-avatar span1">
@@ -83,19 +89,43 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </div>
                             
                             <div class="testimonial-text span2">
-                                <p>
-                                    <span class="testimonial-author">Name: </span>
-                                    <strong id="fb_<?php echo $professional->fbuid; ?>"></strong>
-                                </p>
+                    
+                                    <h3><strong id="fb_<?php echo $professional->fbuid; ?>"></strong></h3>
+                              
                             </div>
                             
                             <div class="testimonial-text span2">
-                                <p>
-                                    <span class="testimonial-author">Since: </span>
-                                    <strong><?php echo date('d/m/Y', strtotime($professional->created)); ?></strong>
-                                </p>
+                                
+                                   
+                                    <h3><strong><?php echo date('d/m/Y', strtotime($professional->created)); ?></strong></h3>
+                                
                             </div>
-                            
+                            <div class="testimonial-text span2">
+                           
+                                  <h3 style="text-align:center" >0</h3>
+                                
+                            </div>
+                            <div class="testimonial-text span3">
+                            			<span class="testimonial-author">
+                            				<?php
+								                    for ($i = 0; $i <= 2; $i++) {
+								                        if ($i >= count($ThisBadge)) {
+								                            ?>
+								                            <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+								                            <?php
+								                        } else {
+								                            if ($ThisBadge[$i]->active == 1) {
+								                                ?>
+								                                <img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge) ?>" width="65"></img>
+								                            <?php } else { ?>
+								                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+								                                <?php
+								                            }
+								                        }
+								                    }
+								              ?>
+										 </span>
+							</div>
                             <!--<div class="span2">
                                 <strong>Name:</strong>
                                 <strong id="fb_<?php echo $professional->fbuid; ?>"></strong>

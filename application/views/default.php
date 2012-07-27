@@ -279,6 +279,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     Features
                                 </a>
                             </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>index/leaderboard">
+                                    Leaderboard
+                                </a>
+                            </li>
                             <li>						
                                 <a href="<?php echo base_url(); ?>index/contact">
                                     Contact Us
