@@ -362,6 +362,16 @@ class Index extends CI_Controller {
 
         $this->layout->view('index/privacyPolicy', $data);
     }
+    
+    public function mailingArchive() {
+
+        $data = array(
+            'title' => 'Mailing Archive',
+            'mixpanel' => 'Mailing Archive',
+        );
+
+        $this->layout->view('index/mailingArchive', $data);
+    }
 
     public function features() {
 

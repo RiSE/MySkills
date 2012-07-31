@@ -22,7 +22,7 @@ class Hook extends CI_Controller {
         $acao = $this->uri->segment(2);
                 
         $arrController = array('index');
-        $arrAcoes = array('index', 'home', 'about', 'contact', 'login', 'logout', 'privacyPolicy','features','leaderboard');
+        $arrAcoes = array('index', 'home', 'about', 'contact', 'login', 'logout', 'privacyPolicy','features','leaderboard','mailingArchive');
                         
         if ($loggedin === false) {
                         

@@ -335,17 +335,17 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     <li><a href="./">Home</a></li>
                                     <li><a href="<?php echo base_url(); ?>index/features">Features</a></li>
                                     <li><a href="http://myskills.tumblr.com" target="_blank">BLOG</a></li>
-                                    <!-- <li><a href="./pricing.html">Plans</a></li>
-                                      <li><a href="./about.html">About</a></li>
+                                     <li><a href="<?php echo base_url(); ?>index/mailingArchive">Mailing Archive</a></li>
+                                    <!--  <li><a href="./about.html">About</a></li>
                                      <li><a href="./faq.html">FAQ</a></li>-->
                                 </ul>
 
                                 <ul class="footer-links clearfix">  	
                                    <li><a href="https://myskills.desk.com/" target="_blank">Support</a></li>
+                                   <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index/contact">Contact Us</a></li>
                                     <!-- <li><a href="javascript:;">License</a></li>
                                      <li><a href="javascript:;">Terms of Use</a></li>-->
-                                    <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
-                                    <li><a href="<?php echo base_url(); ?>index/contact">Contact Us</a></li>
                                     <!-- <li><a href="javascript:;">Something Else</a></li> -->
                                 </ul>
                                 
