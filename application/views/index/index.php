@@ -30,8 +30,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <center>
                         <p class="landing-actions">
                             <?php if ($this->session->userdata('uid') > 0) : ?>
-                                <a href="<?php echo base_url(); ?>index/logged" class="btn btn-small btn-primary">Recruiter - Sign-up here</a>
-                                <a href="<?php echo base_url(); ?>index/logged" class="btn btn-warning">Developer - Sign-up here</a>
+                                <!--<a href="<?php echo base_url(); ?>index/logged" class="btn btn-small btn-primary">Recruiter - Sign-up here</a>
+                                <a href="<?php echo base_url(); ?>index/logged" class="btn btn-warning">Developer - Sign-up here</a>-->
                             <?php else: ?>
                                 <a href="#" onclick="fbLogin();"><img src="<?php echo base_url() ?>assets/images/fb/login.png"></img></a>
                             <?php endif; ?>

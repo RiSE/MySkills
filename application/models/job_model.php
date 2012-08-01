@@ -19,13 +19,13 @@ class Job_model extends CI_Model {
     }
 
     public function listJobs($data = array()) {
-
+        
         $result = array();
 
         $this->db->select('id_job, title, created');
         
-        if (isset($data['id_recruiter']) && !empty($data['id_recruiter'])) {
-            $this->db->where('id_recruiter', $data['id_recruiter']);
+        if (isset($data['id_user']) && !empty($data['id_user'])) {
+            $this->db->where('id_user', $data['id_user']);
         }        
         
         if (isset($data['exist']) && $data['exist'] == false) {
@@ -55,6 +55,26 @@ class Job_model extends CI_Model {
         }
 
         $query = $this->db->get('jobs_professional');
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
+    
+    public function listJobsAppliedUser($idUser , $idJob = null) {
+
+        $result = array();
+        
+        $this->db->select('id_user, id_job');
+        $this->db->where('id_user', $idUser);
+        
+        if (isset($idJob) && !empty($idJob)) {
+            $this->db->where('id_job', $idJob);
+        }
+
+        $query = $this->db->get('jobs_user');
 
         if ($query->num_rows() > 0) {
             $result = $query->result_object();

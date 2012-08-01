@@ -253,21 +253,21 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     Home
                                 </a>						
                             </li>
-                            <?php if ($this->session->userdata('uid') > 0 && $this->session->userdata('existdb') == true) : ?>
+                            <?php if ($this->session->userdata('uid') > 0) : ?>
                                 <li>						
                                     <a href="<?php echo base_url(); ?>index/jobs">
                                         Apply for a job
                                     </a>
                                 </li>
                             <?php endif; ?>
-                            <?php if ($this->session->userdata('uid') > 0 && $this->session->userdata('existdb') == true) : ?>
+                            <?php if ($this->session->userdata('uid') > 0) : ?>
                                 <li>						
                                     <a href="<?php echo base_url(); ?>index/claimBadges">
                                         Claim Badge
                                     </a>						
                                 </li>
                             <?php endif; ?>
-                            <?php if ($this->session->userdata('uid') > 0 && $this->session->userdata('existdb') == true) : ?>
+                            <?php if ($this->session->userdata('uid') > 0) : ?>
                                 <li>						
                                     <a href="<?php echo base_url(); ?>index/courses">
                                         Apply for a Course

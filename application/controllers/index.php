@@ -30,43 +30,33 @@ class Index extends CI_Controller {
 
     public function login() {
 
-        $this->load->model('professional_model');
-        $this->load->model('recruiter_model');
+        $this->load->model('user_model');
 
         $uid = $this->input->post('uid');
-        $email = $this->input->post('email');
         $name = $this->input->post('name');
-        $existdb = false;
+        $email = $this->input->post('email');
 
-        $redirectPro = false;
-        $redirectRec = false;
-
-        $professional = $this->professional_model->loadProfessional($uid);
-
-        if (!empty($professional)) {
-            $existdb = true;
-            $redirectPro = true;
+        $datauser = array(
+            'fbuid' => $uid,
+            'name' => $name,
+            'email' => $email,
+        );
+        
+        $user = $this->user_model->loadUser($uid);
+        if (empty($user)) {
+            $this->user_model->insertUser($datauser);
         }
 
-        $recruiter = $this->recruiter_model->loadRecruiter($uid);
-        if (!empty($recruiter)) {
-            $existdb = true;
-            $redirectRec = true;
-        }
-
-        $suerdata = array(
+        $session = array(
             'uid' => $uid,
             'email' => $email,
             'name' => $name,
-            'existdb' => $existdb,
-            'pro' => $redirectPro,
-            'rec' => $redirectRec,
             'loggedin' => true
         );
 
-        $this->session->set_userdata($suerdata);
+        $this->session->set_userdata($session);
 
-        echo json_encode(array('loggin' => true, 'professional' => $redirectPro, 'recruiter' => $redirectRec));
+        echo json_encode(array('loggin' => true));
         die();
     }
 
@@ -278,27 +268,27 @@ class Index extends CI_Controller {
         );
 
         $data['badges'] = $this->badge_model->listBadges();
-        
+
         if ($this->form_validation->run('programmer/claimbadges') !== false) {
             $fbuid = $this->session->userdata('uid');
             $idBage = (int) $this->input->post('badges');
             $code = (string) $this->input->post('code');
 
             $badge = $this->badge_model->loadBadge($idBage);
-			
+
             if (!empty($badge)) {
 
                 $professional = $this->professional_model->loadProfessional($fbuid);
 
                 $hasThisBadge = $this->badge_model->listBadgesProfessional($professional[0]->id_professional, $badge[0]->id_badge);
-				
+
                 if (empty($hasThisBadge)) {
                     $insert = array(
                         'id_professional' => $professional[0]->id_professional,
                         'id_badge' => $badge[0]->id_badge,
                         'code' => $code
                     );
-                     
+
                     $this->badge_model->insertBadgeProfessional($insert);
                     $this->session->set_flashdata('claimbadge', true);
 
@@ -362,7 +352,7 @@ class Index extends CI_Controller {
 
         $this->layout->view('index/privacyPolicy', $data);
     }
-    
+
     public function mailingArchive() {
 
         $data = array(
@@ -535,7 +525,7 @@ class Index extends CI_Controller {
 
             $this->job_model->insertJobProfessional($dataJobProfessional);
 
-            
+
             $this->session->set_flashdata('applyforajob', true);
             $data['redirect'] = base_url() . 'index/profile';
             //redirect(base_url() . 'index/profile');
@@ -591,29 +581,29 @@ class Index extends CI_Controller {
         );
 
         $save = $this->course_model->insertCourseProfessional($dataCourseProfessional);
-          		/*
-        			$config['protocol'] = 'smtp';
-					$config['smtp_host'] = 'smtp.gmail.com';
-					$config['smtp_user'] = 'noreply@myskills.com.br';
-					$config['smtp_pass'] = ' NS=9urZL';
-										
-					$this->email->initialize($config);
-					
-        			//$this->email->from('noreply@myskills.com.br', 'NOREPLY');
-					$this->email->to('eliakim.ramos@hotmail.com');
-					/*$this->email->cc('another@another-example.com');
-					$this->email->bcc('them@their-example.com');*/
-					/*
-					$this->email->subject('Email Test');
-					$this->email->message('Testing the email class.');
-					
-					
-					
-					$this->email->send();
-					
-					echo $this->email->print_debugger();die;
-					*/
-		
+        /*
+          $config['protocol'] = 'smtp';
+          $config['smtp_host'] = 'smtp.gmail.com';
+          $config['smtp_user'] = 'noreply@myskills.com.br';
+          $config['smtp_pass'] = ' NS=9urZL';
+
+          $this->email->initialize($config);
+
+          //$this->email->from('noreply@myskills.com.br', 'NOREPLY');
+          $this->email->to('eliakim.ramos@hotmail.com');
+          /*$this->email->cc('another@another-example.com');
+          $this->email->bcc('them@their-example.com'); */
+        /*
+          $this->email->subject('Email Test');
+          $this->email->message('Testing the email class.');
+
+
+
+          $this->email->send();
+
+          echo $this->email->print_debugger();die;
+         */
+
         $this->session->set_flashdata('applyforacourse', true);
 
         redirect(base_url() . 'index/profile');
@@ -629,21 +619,22 @@ class Index extends CI_Controller {
         );
 
         $data['professionals'] = $this->professional_model->listProfessionals();
-        
+
         $this->layout->view('index/leaderboard', $data);
     }
-    
+
     public function listProfessionals() {
-        
+
         $data = array();
-        
+
         $this->load->model('professional_model');
-        
+
         $data['professionals'] = $this->professional_model->listProfessionals();
-                
-        echo json_encode($data); die();
+
+        echo json_encode($data);
+        die();
     }
-    
+
 }
 
 ?>
