@@ -42,17 +42,21 @@ class Index extends CI_Controller {
             'email' => $email,
         );
         
-        $user = $this->user_model->loadUser($uid);
-        if (empty($user)) {
-            $this->user_model->insertUser($datauser);
-        }
-
         $session = array(
+            'userid' => null,
             'uid' => $uid,
             'email' => $email,
             'name' => $name,
             'loggedin' => true
-        );
+        );        
+        
+        $user = $this->user_model->loadUser(array('fbuid' => $uid));
+        if (empty($user)) {
+            $userid = $this->user_model->insertUser($datauser);
+            $session['userid'] = $userid;
+        } else {
+            $session['userid'] = $user[0]->id_user;
+        }
 
         $this->session->set_userdata($session);
 

@@ -26,6 +26,8 @@ class User_model extends CI_Model {
         $this->db->insert($this->table, $data);
 
         $this->db->trans_complete();
+        
+        return $this->db->insert_id();
     }
 
     public function loadUser($data) {
