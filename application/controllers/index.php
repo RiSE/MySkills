@@ -638,6 +638,22 @@ class Index extends CI_Controller {
         echo json_encode($data);
         die();
     }
+    
+
+    public function companies() {
+        
+        $this->load->model('group_model');
+        $this->load->model('company_model');
+        
+         $data = array(
+            'title' => 'Companies',
+         	'mixpanel' => 'Companies'
+        );
+		$data['groups'] = $this->group_model->listGroup();
+        
+                
+        $this->layout->view('index/companies', $data);
+    }
 
 }
 

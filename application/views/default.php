@@ -284,6 +284,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     Leaderboard
                                 </a>
                             </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>index/companies">
+                                    Companies
+                                </a>
+                            </li>
                             <li>						
                                 <a href="<?php echo base_url(); ?>index/contact">
                                     Contact Us

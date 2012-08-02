@@ -23,7 +23,7 @@ class Hook extends CI_Controller {
                 
         $arrController = array('index');
         $arrAcoes = array('index', 'home', 'about', 'contact', 'login', 'logout', 
-            'privacyPolicy','features','leaderboard','mailingArchive','listProfessionals');
+            'privacyPolicy','features','leaderboard','mailingArchive','listProfessionals','companies');
                         
         if ($loggedin === false) {
                         

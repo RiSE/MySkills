@@ -19,6 +19,37 @@ class Company_model extends CI_Model {
         $this->table = 'company';
     }
 
+    public function listCompanyInGroup($idGroup) {
+
+        $result = array();
+        
+        $this->db->select('id_company, id_group');
+        $this->db->where('id_group', $idGroup);
+
+        $query = $this->db->get('company_group');
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
+    
+ public function loadCompany($idCompany){
+   		  $result = array();
+        
+        $this->db->select('id_company, company, created');
+        $this->db->where('id_company', $idCompany);
+
+        $query = $this->db->get('company');
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+   }
+   
     public function listCompanies($data = array()) {
 
         $result = array();

@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/professional.js"></script>
+﻿<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/professional.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         Professional.onReady();
@@ -28,24 +28,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 <div id="subpage">	
     <div class="container">
 
-        <!--<div class="row-fluid">
-
-            <div class="tabbable tabs-left">
-                <ul class="nav nav-tabs ">
-                    <li class="active"><a href="#lA" data-toggle="tab">Web Development</a></li>
-                    <li class=""><a href="#lB" data-toggle="tab">Mobile Development</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="lA">
-                        1A
-                    </div>
-                    <div class="tab-pane" id="lB">
-                        1B
-                    </div>
-                </div>
-            </div>
-        </div>-->
-
         <div class="row">
 
             <?php if ($this->session->flashdata('hasapplied') == true) : ?>
@@ -55,10 +37,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 </div>
             <?php endif; ?>
 
-            <!--<div class="span2">
-                <ul class="nav nav-tabs nav-stacked">
-                </ul>
-            </div>-->
             
             <div class="span3">
                 &nbsp;
@@ -80,17 +58,15 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     
                     ?>
                         <li>
-<!--                            <h3><span class="slash"></span>Developers are here</h3>-->
                             <div class="testimonial-avatar span1">
                                 <div class="img">
-                                    <!--<img src="../assets/images/Testemonial-MichaelDaugherty.png" alt="Thumbnail">-->
-                                    <img id="userpic" src="https://graph.facebook.com/<?php echo $professional->fbuid; ?>/picture&type=large" alt="Thumbnail" />
+                                  <img id="userpic" src="https://graph.facebook.com/<?php echo $professional->fbuid; ?>/picture&type=large" alt="Thumbnail"/>
                                 </div>
                             </div>
                             
                             <div class="testimonial-text span2">
                     
-                                    <h3><strong id="fb_<?php echo $professional->fbuid; ?>"></strong></h3>
+                                    <h3><strong><?php echo $professional->name; ?></strong></h3>
                               
                             </div>
                             
@@ -102,60 +78,32 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </div>
                             <div class="testimonial-text span2">
                            
-                                  <h3 style="text-align:center" >0</h3>
+                                  <h3 style="text-align:center" ><?php echo $professional->points; ?></h3>
                                 
                             </div>
                             <div class="testimonial-text span3">
-                            			<span class="testimonial-author">
-                            				<?php
-								                    for ($i = 0; $i <= 2; $i++) {
-								                        if ($i >= count($ThisBadge)) {
-								                            ?>
-								                            <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-								                            <?php
-								                        } else {
-								                            if ($ThisBadge[$i]->active == 1) {
-								                                ?>
-								                                <img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge) ?>" width="65"></img>
-								                            <?php } else { ?>
-								                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-								                                <?php
+				<span class="testimonial-author">
+					<?php
+						for ($i = 0; $i <= 3; $i++) {
+							if ($i >= count($ThisBadge)) { ?>
+								<img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+							<?php } else {
+								if ($ThisBadge[$i]->active == 1) { ?>
+								<img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge) ?>" width="65"></img>
+								<?php } else { ?>
+									<img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+								<?php
 								                            }
 								                        }
 								                    }
 								              ?>
 										 </span>
 							</div>
-                            <!--<div class="span2">
-                                <strong>Name:</strong>
-                                <strong id="fb_<?php echo $professional->fbuid; ?>"></strong>
-                                <!--<p id="fb_<w?php echo $professional->fbuid; ?>"> </p>
-                            </div>-->
-
-                            <!--<div class="span2">
-                                <strong>Since: <?php echo date('d/m/Y', strtotime($professional->created)); ?></strong>
-                            </div>-->
                             
                         </li>
                     <?php endforeach; ?>
                 </ul>
 
-                <!--<div class="span8 sidebar ">
-                <?php foreach ($professionals as $professional) : ?>
-                                    <div class="span4">
-                                        <p>
-                                            <img id="userpic" src="https://graph.facebook.com/<?php echo $professional->fbuid; ?>/picture&type=small" style="border:thick groove green;" />
-                                        </p>
-                                    </div>
-
-                                    <div class="span1">
-                                        <p id="fbs_<?php echo $professional->fbuid; ?>"></p>
-                                    </div>
-                                    <div class="span1">
-                                        <p><?php echo date('d/m/Y', strtotime($professional->created)); ?></p>
-                                    </div>
-                <?php endforeach; ?>
-                </div>-->
             </div>
 
         </div>
