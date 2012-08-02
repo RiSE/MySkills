@@ -53,18 +53,18 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         if (isset($professionalexist) && !empty($professionalexist) ||
                 isset($recruiterexist) && !empty($recruiterexist)) :
             ?>
-                        mixpanel.identify("<?php echo $fbuid; ?>");
-                        mixpanel.people.set({
-                            "name": "<?php echo $this->session->userdata('name'); ?>",
-                            "$email": "<?php echo $email; ?>",
-                            "$created": "<?php echo $datacadastro; ?>"
-                        });
-                        mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");        
+                            mixpanel.identify("<?php echo $fbuid; ?>");
+                            mixpanel.people.set({
+                                "name": "<?php echo $this->session->userdata('name'); ?>",
+                                "$email": "<?php echo $email; ?>",
+                                "$created": "<?php echo $datacadastro; ?>"
+                            });
+                            mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");        
             <?php
         endif;
     }
     ?>
-                    
+                        
 <?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
@@ -90,14 +90,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         <link href="<?php echo base_url(); ?>assets/css/pages/homepage.css" rel="stylesheet">
         <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
         <style type="text/css">
-				#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-			
-				/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-			
-				   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-			
-			</style>
-        
+            #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+
+            /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+    
+               We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+
+        </style>
+
 
         <!--<link href="<?php echo base_url(); ?>assets/js/lightbox/themes/default/jquery.lightbox.css" rel="stylesheet">-->
 
@@ -105,7 +105,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/facebook.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_tab.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_alert.js"></script>
-        
+
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -335,20 +335,20 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     <li><a href="./">Home</a></li>
                                     <li><a href="<?php echo base_url(); ?>index/features">Features</a></li>
                                     <li><a href="http://myskills.tumblr.com" target="_blank">BLOG</a></li>
-                                     <li><a href="<?php echo base_url(); ?>index/mailingArchive">Mailing Archive</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index/mailingArchive">Mailing Archive</a></li>
                                     <!--  <li><a href="./about.html">About</a></li>
                                      <li><a href="./faq.html">FAQ</a></li>-->
                                 </ul>
 
                                 <ul class="footer-links clearfix">  	
-                                   <li><a href="https://myskills.desk.com/" target="_blank">Support</a></li>
-                                   <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
+                                    <li><a href="https://myskills.desk.com/" target="_blank">Support</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
                                     <li><a href="<?php echo base_url(); ?>index/contact">Contact Us</a></li>
                                     <!-- <li><a href="javascript:;">License</a></li>
                                      <li><a href="javascript:;">Terms of Use</a></li>-->
                                     <!-- <li><a href="javascript:;">Something Else</a></li> -->
                                 </ul>
-                                
+
                             </div>
                             <div class="span4">
 
@@ -382,45 +382,45 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                             </div> <!-- /span4 -->
 
 
-                           <div class="span4">
-					
-									<h3><span class="slash">//</span> Subscribe and get updates</h3>
-									
-				
-									<p>Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-									
-									
-									<div id="mc_embed_signup1">
-									
-									<form action="http://myskills.us5.list-manage1.com/subscribe/post?u=c22dec5cbd87c068118755814&amp;id=30cd3f42fe" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-														
-										<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-									
-										<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-									
-									</form>
-									<script type="text/javascript" language="JavaScript" src="http://myskills.us5.list-manage1.com/subscriber-count?b=28&u=00d2e3de-199f-4c91-ae5a-5433b3ea5e9f&id=30cd3f42fe"></script>
-									</div>
-									
-									
-									
-									<!--End mc_embed_signup-->
-						</div> <!-- span 4 -->
-                            
-                            
-                            </div> 
+                            <div class="span4">
+
+                                <h3><span class="slash">//</span> Subscribe and get updates</h3>
+
+
+                                <p>Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+
+
+                                <div id="mc_embed_signup1">
+
+                                    <form action="http://myskills.us5.list-manage1.com/subscribe/post?u=c22dec5cbd87c068118755814&amp;id=30cd3f42fe" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+
+                                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+
+                                        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+
+                                    </form>
+                                    <script type="text/javascript" language="JavaScript" src="http://myskills.us5.list-manage1.com/subscriber-count?b=28&u=00d2e3de-199f-4c91-ae5a-5433b3ea5e9f&id=30cd3f42fe"></script>
+                                </div>
+
+
+
+                                <!--End mc_embed_signup-->
+                            </div> <!-- span 4 -->
+
+
                         </div> 
+                    </div> 
 
-                    </div>
+                </div>
 
-                </div> 
-            </div>
-
+            </div> 
         </div>
 
-        <!-- begin olark code --><script data-cfasync="false" type='text/javascript'>/*{literal}<![CDATA[*/
-            window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){f[z]=function(){(a.s=a.s||[]).push(arguments)};var a=f[z]._={},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={0:+new Date};a.P=function(u){a.p[u]=new Date-a.p[0]};function s(){a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{b.contentWindow[g].open()}catch(w){c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{var t=b.contentWindow[g];t.write(p());t.close()}catch(x){b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
-            /* custom configuration goes here (www.olark.com/documentation) */
-            olark.identify('8338-468-10-6680');/*]]>{/literal}*/</script><noscript><a href="https://www.olark.com/site/8338-468-10-6680/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript><!-- end olark code -->        
-    </body>
+    </div>
+
+    <!-- begin olark code --><script data-cfasync="false" type='text/javascript'>/*{literal}<![CDATA[*/
+        window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){f[z]=function(){(a.s=a.s||[]).push(arguments)};var a=f[z]._={},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={0:+new Date};a.P=function(u){a.p[u]=new Date-a.p[0]};function s(){a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{b.contentWindow[g].open()}catch(w){c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{var t=b.contentWindow[g];t.write(p());t.close()}catch(x){b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+        /* custom configuration goes here (www.olark.com/documentation) */
+        olark.identify('8338-468-10-6680');/*]]>{/literal}*/</script><noscript><a href="https://www.olark.com/site/8338-468-10-6680/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript><!-- end olark code -->        
+</body>
 </html>
