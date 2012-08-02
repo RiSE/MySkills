@@ -64,7 +64,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         endif;
     }
     ?>
-                                    
+                                            
 <?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
@@ -174,18 +174,19 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                             data : data,
                             url : base_url + 'index/login',
                             success : function(rs) {
-                                if (rs.professional == true) {
+                                /*if (rs.professional == true) {
                                     window.location = base_url + 'index/profile';
                                 } else if (rs.recruiter == true) {
                                     window.location = base_url + 'index/profileRecruiter';
                                 } else {
                                     document.location.reload();
-                                }
+                                }*/
+                                window.location = base_url + 'index/dashboard';
                             }
                         });
-                    }, {scope: 'user_photos,email'});
+                    });
 
-                });
+                }, {scope: 'user_photos,email'});
             };
 
             function fbLogout() {
@@ -248,18 +249,15 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
 
                         <ul class="nav pull-right">
 
-                            <li class="active">						
-                                <a href="<?php echo base_url(); ?>index/home">
-                                    Home
-                                </a>						
-                            </li>
-                            <?php if ($this->session->userdata('uid') > 0) : ?>
-                                <li>
+                            <li class="active">
+                                <?php if ($this->session->userdata('uid') > 0) : ?>
                                     <a href="<?php echo base_url(); ?>index/dashboard">
-                                        Dashboard
-                                    </a>
-                                </li>
-                            <?php endif; ?>
+                                    <?php else: ?>
+                                        <a href="<?php echo base_url(); ?>index/home">
+                                        <?php endif; ?>
+                                        Home
+                                    </a>						
+                            </li>
                             <?php if ($this->session->userdata('uid') > 0) : ?>
                                 <li>						
                                     <a href="<?php echo base_url(); ?>index/jobs">
@@ -308,11 +306,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                 <li>
                                     <?php
                                     $link = null;
-                                    if ($this->session->userdata('pro') == true) {
-                                        $link = 'index/profile';
-                                    } else if ($this->session->userdata('rec') == true) {
-                                        $link = 'index/recruiterProfile';
-                                    }
+                                    if ($this->session->userdata('uid') > 0) :
+                                        $link = 'index/dashboard';
+                                    else:
+                                        $link = 'index/home';
+                                    endif;
                                     ?>
                                     <a href="<?php echo base_url() . $link; ?>" title="Profile"><?php echo $this->session->userdata('name'); ?></a>
                                 </li>
