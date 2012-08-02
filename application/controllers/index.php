@@ -32,35 +32,42 @@ class Index extends CI_Controller {
 
         $this->load->model('user_model');
 
+        $data = array('login' => false);
+
         $uid = $this->input->post('uid');
         $name = $this->input->post('name');
         $email = $this->input->post('email');
 
-        $datauser = array(
-            'fbuid' => $uid,
-            'name' => $name,
-            'email' => $email,
-        );
+        if (isset($uid) && !empty($uid)) {
 
-        $session = array(
-            'userid' => null,
-            'uid' => $uid,
-            'email' => $email,
-            'name' => $name,
-            'loggedin' => true
-        );
-        
-        $user = $this->user_model->loadUser(array('fbuid' => $uid));
-        if (empty($user)) {
-            $userid = $this->user_model->insertUser($datauser);
-            $session['userid'] = $userid;
-        } else {
-            $session['userid'] = $user[0]->id_user;
+            $datauser = array(
+                'fbuid' => $uid,
+                'name' => $name,
+                'email' => $email,
+            );
+
+            $session = array(
+                'userid' => null,
+                'uid' => $uid,
+                'email' => $email,
+                'name' => $name,
+                'loggedin' => true
+            );
+
+            $user = $this->user_model->loadUser(array('fbuid' => $uid));
+            if (empty($user)) {
+                $userid = $this->user_model->insertUser($datauser);
+                $session['userid'] = $userid;
+            } else {
+                $session['userid'] = $user[0]->id_user;
+            }
+
+            $this->session->set_userdata($session);
+
+            $data['login'] = true;
         }
 
-        $this->session->set_userdata($session);
-
-        echo json_encode(array('loggin' => true));
+        echo json_encode($data);
         die();
     }
 
@@ -648,20 +655,19 @@ class Index extends CI_Controller {
         echo json_encode($data);
         die();
     }
-    
 
     public function companies() {
-        
+
         $this->load->model('group_model');
         $this->load->model('company_model');
-        
-         $data = array(
+
+        $data = array(
             'title' => 'Companies',
-         	'mixpanel' => 'Companies'
+            'mixpanel' => 'Companies'
         );
-		$data['groups'] = $this->group_model->listGroup();
-        
-                
+        $data['groups'] = $this->group_model->listGroup();
+
+
         $this->layout->view('index/companies', $data);
     }
 

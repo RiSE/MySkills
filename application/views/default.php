@@ -64,7 +64,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         endif;
     }
     ?>
-                                            
+                                                                                
 <?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
@@ -158,38 +158,41 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
             }
 
             function fbLogin() {
+                FB.getLoginStatus(function(response) {
+                    console.log(response.status);
+                    FB.login(function(data) {
+                        FB.api('/me', function(response) {
 
-                FB.login(function(data) {
-                    FB.api('/me', function(response) {
-
-                        var data = {
-                            uid   : response.id,
-                            email : response.email,
-                            name  : response.name
-                        };
-
-                        $.ajax({
-                            type : 'POST',
-                            dataType : 'json',
-                            data : data,
-                            url : base_url + 'index/login',
-                            success : function(rs) {
-                                /*if (rs.professional == true) {
-                                    window.location = base_url + 'index/profile';
-                                } else if (rs.recruiter == true) {
-                                    window.location = base_url + 'index/profileRecruiter';
-                                } else {
-                                    document.location.reload();
-                                }*/
-                                window.location = base_url + 'index/dashboard';
+                            var data = {
+                                uid   : response.id,
+                                email : response.email,
+                                name  : response.name
+                            };
+                            
+                            if (data.uid == undefined || data.uid == null) {
+                                return false;
                             }
-                        });
-                    });
 
-                }, {scope: 'user_photos,email'});
+                            $.ajax({
+                                type : 'POST',
+                                dataType : 'json',
+                                data : data,
+                                url : base_url + 'index/login',
+                                success : function(rs) {
+                                    if (rs.login == true) {
+                                        window.location = base_url + 'index/dashboard';
+                                    }
+                                }
+                            });
+                        });
+
+                    }, {scope: 'user_photos,email'});
+                   
+                });
             };
 
             function fbLogout() {
+                    
                 $.ajax({
                     type : 'POST',
                     dataType : 'json',
