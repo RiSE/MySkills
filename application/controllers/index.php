@@ -50,10 +50,6 @@ class Index extends CI_Controller {
             'loggedin' => true
         );
         
-        print_r('<pre>');
-        print_r($datauser);
-        die('</pre>');
-
         $user = $this->user_model->loadUser(array('fbuid' => $uid));
         if (empty($user)) {
             $userid = $this->user_model->insertUser($datauser);

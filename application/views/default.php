@@ -167,8 +167,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                             email : response.email,
                             name  : response.name
                         };
-                        
-                        console.log(data); return false;
 
                         $.ajax({
                             type : 'POST',
