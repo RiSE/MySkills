@@ -22,9 +22,9 @@ class Group_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_group, group');
+        $this->db->select('id_group, group, order');
              
-        $this->db->order_by('group', 'ASC');
+        $this->db->order_by('order', 'ASC');
 
         $query = $this->db->get($this->table);
 

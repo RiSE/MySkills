@@ -21,15 +21,30 @@ class Company_model extends CI_Model {
 
     public function listCompanyInGroup($idGroup) {
 
+        $result1 = array();
         $result = array();
         
-        $this->db->select('id_company, id_group');
+        $this->db->select('id_company');
         $this->db->where('id_group', $idGroup);
 
         $query = $this->db->get('company_group');
 
         if ($query->num_rows() > 0) {
-            $result = $query->result_object();
+            $result1 = $query->result_object();
+	        foreach ($result1 as $dadosresult1){
+            	$aux[] = $dadosresult1->id_company;
+            }
+	       
+	        $aux = implode(",",$aux);
+	        
+	        $sql="select * from company where id_company in (".$aux.") order by company";
+	        $query = $this->db->query($sql);
+	        $objResult = $query->result();
+	        if (!empty($objResult)) {
+	            $result = $objResult;
+	        }else{
+	        	$result = "";
+	        }
         }
 
         return $result;
