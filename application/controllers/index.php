@@ -41,15 +41,19 @@ class Index extends CI_Controller {
             'name' => $name,
             'email' => $email,
         );
-        
+
         $session = array(
             'userid' => null,
             'uid' => $uid,
             'email' => $email,
             'name' => $name,
             'loggedin' => true
-        );        
+        );
         
+        print_r('<pre>');
+        print_r($datauser);
+        die('</pre>');
+
         $user = $this->user_model->loadUser(array('fbuid' => $uid));
         if (empty($user)) {
             $userid = $this->user_model->insertUser($datauser);
@@ -403,6 +407,16 @@ class Index extends CI_Controller {
         );
 
         $this->layout->view('page404/notfound', $data);
+    }
+
+    public function dashboard() {
+
+        $data = array(
+            'title' => 'Dashboard',
+            'mixpanel' => 'Dashboard'
+        );
+
+        $this->layout->view('index/dashboard', $data);
     }
 
     public function profile() {

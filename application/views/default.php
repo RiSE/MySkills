@@ -64,7 +64,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         endif;
     }
     ?>
-                        
+                                    
 <?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
@@ -167,6 +167,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                             email : response.email,
                             name  : response.name
                         };
+                        
+                        console.log(data); return false;
 
                         $.ajax({
                             type : 'POST',
@@ -253,6 +255,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                     Home
                                 </a>						
                             </li>
+                            <?php if ($this->session->userdata('uid') > 0) : ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>index/dashboard">
+                                        Dashboard
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                             <?php if ($this->session->userdata('uid') > 0) : ?>
                                 <li>						
                                     <a href="<?php echo base_url(); ?>index/jobs">
