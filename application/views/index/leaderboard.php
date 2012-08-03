@@ -45,6 +45,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
             <div class="span12">
 
                 <ul class="testimonials-list">
+                    Do you want to unlock your badges? Go to our homepage, login, choose the option CLAIM BADGE and choose those that you are able to have. We have the following badges: Java Certified developer, PHP and Zend certified developer and also Try Git and Try Ruby (15 minutes course). Go ahead, choose your badge and present your skills. New badges coming soon.                   
                     <li>
                         <div class="testimonial-text span1"><span class="testimonial-author">&nbsp;</span></div>
                         <div class="testimonial-text span2"><span class="testimonial-author">Name </span></div>
@@ -66,7 +67,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             
                             <div class="testimonial-text span2">
                     
-                                    <h3><strong><?php echo $professional->name; ?></strong></h3>
+                                <h3><strong id="fb_<?php echo $professional->fbuid; ?>"><?php //echo $professional->name; ?></strong></h3>
                               
                             </div>
                             

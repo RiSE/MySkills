@@ -641,7 +641,7 @@ class Index extends CI_Controller {
         );
 
         $data['professionals'] = $this->professional_model->listProfessionals();
-
+        
         $this->layout->view('index/leaderboard', $data);
     }
 
