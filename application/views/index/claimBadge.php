@@ -20,7 +20,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 <div id="subpage">	
     <div class="container">
         <div class="row-fluid">
-
+		  <dir class="span8">
             <?php if (isset($badge_error) && !empty($badge_error)) : ?>
                 <div class="alert alert-error">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -223,6 +223,29 @@ endforeach;*/
 ?>
                     </div>-->
                 </div>
+            </div>
+           </dir>
+           <div class="span3">
+                  <div class="sidebar">
+                                <h4><span class="slash">//</span>iOS Training Badge</h4>
+                                <img src="<?php echo base_url(); ?>assets/images/badges/iOSBadge100.png" width="50" align="left" />
+
+                                <p>
+                                    The iOS badge is provided for students that participated on an 
+                                    Apple technology trainning. This course provided content and 
+                                    practice in iOS application development including: iPad, iPhone and iPod touch.
+                                    Unlock Badge.
+                                </p>
+
+                                <h4><span class="slash">//</span>The Unlock Badge</h4>
+                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="50" align="left"/>
+
+                                <p>
+                                    The Unlock badge is used as a visual representation for programmers and 
+                                    recruiters that the programmer can unlock other badges in the future to improve his profile page.
+                                </p>
+
+                  </div>
             </div>
         </div>
     </div>
