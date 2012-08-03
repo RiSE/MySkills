@@ -72,7 +72,8 @@ class Index extends CI_Controller {
     }
 
     public function logout() {
-
+        
+        $this->session->set_userdata('uid', null);
         $this->session->sess_destroy();
 
         echo json_encode(array('logout' => true));
