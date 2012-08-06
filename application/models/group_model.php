@@ -22,7 +22,7 @@ class Group_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_group, group, order');
+        $this->db->select('id_company_group, name, order');
              
         $this->db->order_by('order', 'ASC');
 
@@ -39,7 +39,7 @@ class Group_model extends CI_Model {
 
         $result = array();
         
-        $this->db->select('id_company, id_group');
+        $this->db->select('id_company, id_company_group');
         $this->db->where('id_company', $idCompany);
 
         $query = $this->db->get('company_group');

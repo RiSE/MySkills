@@ -22,8 +22,8 @@ class Professional_model extends CI_Model {
         
         $result = array();
 
-        $this->db->select('id_professional, fbuid, points, created');
-        $this->db->order_by('created', 'DESC');
+        $this->db->select('id_professional, fbuid, points, created, name');
+        $this->db->order_by('points', 'DESC');
 
         $query = $this->db->get($this->table);
 

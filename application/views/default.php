@@ -31,9 +31,7 @@
 //100000634528702 tiago
 $fbuid = $this->session->userdata('uid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
-?>
 
-<?php
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
 
     if (isset($fbuid) && !empty($fbuid)) {
@@ -68,7 +66,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
 <?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
-
         <meta charset="utf-8">
         <title><?php echo $title; ?></title>
 
@@ -113,9 +110,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
         <![endif]-->
 
     </head>
-
     <body>
-
         <div id="fb-root"></div>
         <script type="text/javascript">
                        
@@ -235,7 +230,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
             }(document));
                         
         </script>
-
         <div class="navbar navbar-fixed-top">
 
             <div class="navbar-inner">
@@ -323,14 +317,10 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                             <?php endif; ?>
                         </ul>
                     </div>
-
                 </div>
-
             </div>
         </div>
-
         <?php echo $content_for_layout; ?> 
-
         <div id="footer">
             <div id="extra">
                 <div class="inner">

@@ -18,15 +18,23 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 </div>
 
 <div id="subpage">	
-    <div class="container">
-        <div class="row-fluid">
+
+   <div class="container">
+<div class="alert alert-info">
+<button class="close" data-dismiss="alert">x</button>
+  <strong>Companies - </strong> Here you will find information about potential recruiters. (COMING SOON)
+</div>
+       <div class="row-fluid">
+
 			<dir class="span8">
+
 	           <div class="tabbable tabs-left">
+
 	                <ul class="nav nav-tabs ">
 	                   <?php 
 	                   		$i= 1;
 	                   		foreach ($groups as $group):?>
-	                    	<li <?php if($i == 1){?>class="active"<?php }?>><a href="#<?php echo $i;?>A" data-toggle="tab"><?php echo $group->group?></a></li>
+	                    	<li <?php if($i == 1){?>class="active"<?php }?>><a href="#<?php echo $i;?>A" data-toggle="tab"><?php echo $group->name?></a></li>
 	                    <!--  <li class=""><a href="#lB" data-toggle="tab">Mobile Development</a></li>-->
 	                    <?php $i++; endforeach;?>
 	                </ul>
@@ -38,27 +46,36 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 	                    		<div class="row">
 	                                    <div class="span6">
 	                                        
-	                                        <table class="table  table-striped">
+	                                        <table class="table  table-striped table-condensed">
+							
 										        <colgroup>
 										          <col class="span2">
 										           <!-- <col class="span4"> -->
 										        </colgroup>
+<thead>
+								<tr><th>Company</th><th>Applicants(0)</th><th>Skill Points(0)</th><th></th></tr>
+							</thead>
 										    	 <tbody>
 					                        <?php
-					                        $companies = $this->company_model->listCompanyInGroup($group->id_group);
+					                        $companies = $this->company_model->listCompanyInGroup($group->id_company_group);
 					                        foreach ($companies as $dadoscompany) :
 					                              
 					                                ?>
 	                                
 												        
 												          <tr>
-												            <td>
-												             	 <?php echo $dadoscompany->company; 
+												            <td width=40%>
+												             	 <?php echo $dadoscompany->name; 
 											                     	   //echo $company[0]->company;
 											                     	?>
 											                  
 												            </td>
-												           
+													    <td> 0 </td>
+													    <td> 0 </td>
+													    <td><button btn btn-primary disabled btn-small>
+														Add to Wishlist
+														</button>
+													     </td>						
 												          </tr>
 	    <?php 
 	endforeach;
@@ -78,23 +95,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
              </dir>
              <div class="span3">
                   <div class="sidebar">
-                                <h4><span class="slash">//</span>iOS Training Badge</h4>
-                                <img src="<?php echo base_url(); ?>assets/images/badges/iOSBadge100.png" width="50" align="left" />
+                                <h4><span class="slash">Applicants (Coming Soon)</span></h4>
+                                <p>Are you the only one who wants to work in this company? Find out here.</p>
 
-                                <p>
-                                    The iOS badge is provided for students that participated on an 
-                                    Apple technology trainning. This course provided content and 
-                                    practice in iOS application development including: iPad, iPhone and iPod touch.
-                                    Unlock Badge.
-                                </p>
-
-                                <h4><span class="slash">//</span>The Unlock Badge</h4>
-                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="50" align="left"/>
-
-                                <p>
-                                    The Unlock badge is used as a visual representation for programmers and 
-                                    recruiters that the programmer can unlock other badges in the future to improve his profile page.
-                                </p>
+                                <h4><span class="slash">Skill Points (Coming Soon)</span></h4>
+                                <p>The developers in this company are skilled? Here you find how many skill points this company has.</p>
+                                <h4><span class="slash">Wishlist (Coming Soon)</span></h4>
+                                <p>Do you wish to work in a specific company? Add it to your Wishlist and we might help you.</p>
 
                   </div>
               </div>

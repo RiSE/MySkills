@@ -25,19 +25,19 @@ class Company_model extends CI_Model {
         $result = array();
         
         $this->db->select('id_company');
-        $this->db->where('id_group', $idGroup);
+        $this->db->where('id_company_group', $idGroup);
 
-        $query = $this->db->get('company_group');
+        $query = $this->db->get('groups_company');
 
         if ($query->num_rows() > 0) {
             $result1 = $query->result_object();
-	        foreach ($result1 as $dadosresult1){
+            foreach ($result1 as $dadosresult1){
             	$aux[] = $dadosresult1->id_company;
             }
 	       
 	        $aux = implode(",",$aux);
 	        
-	        $sql="select * from company where id_company in (".$aux.") order by company";
+	        $sql="select * from company where id_company in (".$aux.")and published = 1 order by company";
 	        $query = $this->db->query($sql);
 	        $objResult = $query->result();
 	        if (!empty($objResult)) {
