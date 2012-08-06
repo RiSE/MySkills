@@ -25,45 +25,6 @@
                     a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1;window.mixpanel=a})(document,window.mixpanel||[]);
         mixpanel.init("7f870774942301f4f0b1e8a1dd1f3e68");
 
-<?php
-//578648267 eduardo 
-//1781396621 eliakim
-//100000634528702 tiago
-$fbuid = $this->session->userdata('uid');
-$arrBlockedIds = array('100000634528702', '578648267', '1781396621');
-
-if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
-
-    if (isset($fbuid) && !empty($fbuid)) {
-        $professionalexist = $this->professional_model->loadProfessional($fbuid);
-
-        if (isset($professionalexist) && !empty($professionalexist)):
-            $email = $professionalexist[0]->email;
-            $datacadastro = $professionalexist[0]->created;
-        else:
-            $recruiterexist = $this->recruiter_model->loadRecruiter($fbuid);
-            if (isset($recruiterexist) && !empty($recruiterexist)) {
-                $email = $recruiterexist[0]->email;
-                $datacadastro = $recruiterexist[0]->created;
-            }
-        endif;
-
-        if (isset($professionalexist) && !empty($professionalexist) ||
-                isset($recruiterexist) && !empty($recruiterexist)) :
-            ?>
-                            mixpanel.identify("<?php echo $fbuid; ?>");
-                            mixpanel.people.set({
-                                "name": "<?php echo $this->session->userdata('name'); ?>",
-                                "$email": "<?php echo $email; ?>",
-                                "$created": "<?php echo $datacadastro; ?>"
-                            });
-                            mixpanel.name_tag("<?php echo $this->session->userdata('name'); ?>");        
-            <?php
-        endif;
-    }
-    ?>
-                                                                                
-<?php endif; ?>
     </script><!-- end Mixpanel -->        
     <head>
         <meta charset="utf-8">
@@ -106,7 +67,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://html5shim.googlxecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
     </head>
@@ -175,6 +136,18 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost'):
                                 url : base_url + 'index/login',
                                 success : function(rs) {
                                     if (rs.login == true) {
+                                        
+                                        if (rs.justcreated == true) {
+                                                                                        
+                                            mixpanel.identify(rs.fbuid);
+                                            mixpanel.people.set({
+                                                "name": rs.name,
+                                                "$email": rs.email,
+                                                "$created": rs.created
+                                            });
+                                            mixpanel.name_tag(rs.name);
+                                        }
+                                        
                                         window.location = base_url + 'index/dashboard';
                                     }
                                 }

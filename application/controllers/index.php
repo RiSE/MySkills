@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -31,7 +32,10 @@ class Index extends CI_Controller {
 
         $this->load->model('user_model');
 
-        $data = array('login' => false);
+        $data = array(
+            'login' => false,
+            'justcreated' => false
+        );
 
         $uid = $this->input->post('uid');
         $name = $this->input->post('name');
@@ -57,6 +61,12 @@ class Index extends CI_Controller {
             if (empty($user)) {
                 $userid = $this->user_model->insertUser($datauser);
                 $session['userid'] = $userid;
+                
+                $data['name'] = $name;
+                $data['email'] = $email;
+                $data['fbuid'] = $uid;
+                $data['justcreated'] = true;
+                $data['created'] = date('Y-m-d');
             } else {
                 $session['userid'] = $user[0]->id_user;
             }
@@ -71,7 +81,7 @@ class Index extends CI_Controller {
     }
 
     public function logout() {
-        
+
         $this->session->set_userdata('uid', null);
         $this->session->sess_destroy();
 
@@ -640,7 +650,7 @@ class Index extends CI_Controller {
         );
 
         $data['professionals'] = $this->professional_model->listProfessionals();
-        
+
         $this->layout->view('index/leaderboard', $data);
     }
 
