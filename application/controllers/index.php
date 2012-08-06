@@ -47,6 +47,7 @@ class Index extends CI_Controller {
                 'fbuid' => $uid,
                 'name' => $name,
                 'email' => $email,
+                'created' => date('Y-m-d H:i:s')
             );
 
             $session = array(
@@ -66,7 +67,7 @@ class Index extends CI_Controller {
                 $data['email'] = $email;
                 $data['fbuid'] = $uid;
                 $data['justcreated'] = true;
-                $data['created'] = date('Y-m-d');
+                $data['created'] = date('Y-m-d H:i:s');
             } else {
                 $session['userid'] = $user[0]->id_user;
             }
