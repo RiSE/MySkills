@@ -550,6 +550,7 @@ class Index extends CI_Controller {
 
     public function jobs() {
 
+        $this->load->model('user_model');
         $this->load->model('recruiter_model');
         $this->load->model('professional_model');
         $this->load->model('job_model');
@@ -565,6 +566,12 @@ class Index extends CI_Controller {
 
         $fbuid = $this->session->userdata('uid');
         $professional = $this->professional_model->loadProfessional($fbuid);
+        
+        //$professional = 
+        
+        print_r('<pre>');
+        print_r($professional);
+        die('</pre>');
 
         $recruiter = null;
         $dataJobs = array();
