@@ -89,6 +89,13 @@ class Job_model extends CI_Model {
         $this->db->insert('jobs_professional', $data);
         $this->db->trans_complete();
     }
+    
+    public function insertJobUser($data = array()) {
+
+        $this->db->trans_start();
+        $this->db->insert('jobs_user', $data);
+        $this->db->trans_complete();
+    }
 
 }
 

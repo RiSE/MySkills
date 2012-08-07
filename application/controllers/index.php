@@ -565,13 +565,8 @@ class Index extends CI_Controller {
         );
 
         $fbuid = $this->session->userdata('uid');
-        $professional = $this->professional_model->loadProfessional($fbuid);
         
-        //$professional = 
-        
-        print_r('<pre>');
-        print_r($professional);
-        die('</pre>');
+        $professional = $this->user_model->loadUser(array('fbuid' => $fbuid));
 
         $recruiter = null;
         $dataJobs = array();
@@ -579,19 +574,20 @@ class Index extends CI_Controller {
         if ($company != false) {
 
             $company = (string) $company;
-            $recruiter = $this->recruiter_model->loadRecruiter(null, $company);
+                        
+            $recruiter = $this->user_model->loadUser(array('company' => $company));
+                                    
             if (!empty($recruiter)) {
-                $dataJobs['id_recruiter'] = $recruiter[0]->id_recruiter;
+                $dataJobs['id_user'] = $recruiter[0]->id_user;
             } else {
                 $dataJobs['exist'] = false;
             }
         }
-
+        
         $data['jobs'] = $this->job_model->listJobs($dataJobs);
-
-        $data['applieds'] = array();
+        $data['applieds'] = array();        
         if (!empty($professional)) {
-            $data['applieds'] = $this->job_model->listJobsApplied($professional[0]->id_professional);
+            $data['applieds'] = $this->job_model->listJobsAppliedUser($professional[0]->id_user);
         }
 
         $this->layout->view('index/applyforajob', $data);
@@ -599,6 +595,7 @@ class Index extends CI_Controller {
 
     public function apply() {
 
+        $this->load->model('user_model');
         $this->load->model('professional_model');
         $this->load->model('job_model');
 
@@ -608,20 +605,18 @@ class Index extends CI_Controller {
         $data = array(
             'redirect' => ''
         );
-
-        $professional = $this->professional_model->loadProfessional($fbuid);
-
-        $hasThisJob = $this->job_model->listJobsApplied($professional[0]->id_professional, $idJob);
+        
+        $professional = $this->user_model->loadUser(array('fbuid' => $fbuid));
+        $hasThisJob = $this->job_model->listJobsAppliedUser($professional[0]->id_user, $idJob);
 
         if (empty($hasThisJob)) {
 
-            $dataJobProfessional = array(
-                'id_professional' => $professional[0]->id_professional,
+            $dataJobUser = array(
+                'id_user' => $professional[0]->id_user,
                 'id_job' => $idJob
             );
 
-            $this->job_model->insertJobProfessional($dataJobProfessional);
-
+            $this->job_model->insertJobUser($dataJobUser);
 
             $this->session->set_flashdata('applyforajob', true);
             $data['redirect'] = base_url() . 'index/profile';

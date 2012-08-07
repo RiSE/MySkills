@@ -34,10 +34,10 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, created, email');
+        $this->db->select('user.id_user, user.created, user.email');
 
         if (isset($data['fbuid']) && !empty($data['fbuid'])) {
-            $this->db->where('fbuid', $data['fbuid']);
+            $this->db->where('user.fbuid', $data['fbuid']);
         }
 
         if (isset($data['company']) && !empty($data['company'])) {
