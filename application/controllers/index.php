@@ -284,7 +284,7 @@ class Index extends CI_Controller {
     }
 
     public function claimBadges() {
-        $this->load->model('professional_model');
+        $this->load->model('user_model');
         $this->load->model('badge_model');
 
         $data = array(
@@ -304,13 +304,13 @@ class Index extends CI_Controller {
 
             if (!empty($badge)) {
 
-                $professional = $this->professional_model->loadProfessional($fbuid);
+                $professional = $this->user_model->loadUserOfFacebookId($fbuid);
 
-                $hasThisBadge = $this->badge_model->listBadgesProfessional($professional[0]->id_professional, $badge[0]->id_badge);
+                $hasThisBadge = $this->badge_model->listBadgesProfessional($professional[0]->id_user, $badge[0]->id_badge);
 
                 if (empty($hasThisBadge)) {
                     $insert = array(
-                        'id_professional' => $professional[0]->id_professional,
+                        'id_user' => $professional[0]->id_user,
                         'id_badge' => $badge[0]->id_badge,
                         'code' => $code
                     );
