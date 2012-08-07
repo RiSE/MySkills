@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo base_url(); ?>js/dashboard.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/dashboard.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         Dashboard.onReady();
