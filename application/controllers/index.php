@@ -30,6 +30,7 @@ class Index extends CI_Controller {
 
     public function login() {
 
+        $this->load->model('profile_model');
         $this->load->model('user_model');
 
         $data = array(
@@ -75,9 +76,27 @@ class Index extends CI_Controller {
                 /* end mixpanel data */
             } else {
                 $session['userid'] = $user[0]->id_user;
-                $session['id_profile'] = isset($user[0]->id_profile) ? $user[0]->id_profile : null;
+
+                if (isset($user[0]->id_profile)) {
+
+                    $profile = $this->profile_model->loadProfile($user[0]->id_profile);
+                    $session['id_profile'] = $user[0]->id_profile;
+
+                    $name = $profile[0]->name;
+                    switch ($name) {
+                        default : false;
+                        case 'Recruiter' :
+                            $session['recruiter'] = true;
+                            break;
+                        case 'Developer' :
+                            $session['developer'] = true;
+                            break;
+                    }
+                } else {
+                    $session['id_profile'] = null;
+                }
             }
-            
+
             $this->session->set_userdata($session);
 
             $data['login'] = true;
@@ -435,7 +454,7 @@ class Index extends CI_Controller {
             'title' => 'Dashboard',
             'mixpanel' => 'Dashboard'
         );
-        
+
         $this->layout->view('index/dashboard', $data);
     }
 
@@ -471,12 +490,14 @@ class Index extends CI_Controller {
 
             switch ($name) {
                 default : false;
-                case 'Recruiter' : $this->session->set_userdata('recruiter', true);
+                case 'Recruiter' :
+                    $this->session->set_userdata('recruiter', true);
                     break;
-                case 'Developer' : $this->session->set_userdata('developer', true);
+                case 'Developer' :
+                    $this->session->set_userdata('developer', true);
                     break;
             }
-            
+
             $this->session->set_flashdata('setprofile', true);
         }
 
@@ -505,11 +526,11 @@ class Index extends CI_Controller {
             'mixpanel' => 'Professional Profile',
             'badge_error' => ''
         );
-        
+
         $fbuid = $this->session->userdata('uid');
-        
-        $user = $this->user_model->loadUser(array('fbuid' => $fbuid));        
-        
+
+        $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
+
         $data['badges'] = $this->badge_model->listBadges();
         $data['ThisBadge'] = $this->badge_model->listBadgesProfessionalByUser($user[0]->id_user);
 
@@ -565,7 +586,7 @@ class Index extends CI_Controller {
         );
 
         $fbuid = $this->session->userdata('uid');
-        
+
         $professional = $this->user_model->loadUser(array('fbuid' => $fbuid));
 
         $recruiter = null;
@@ -574,18 +595,18 @@ class Index extends CI_Controller {
         if ($company != false) {
 
             $company = (string) $company;
-                        
+
             $recruiter = $this->user_model->loadUser(array('company' => $company));
-                                    
+
             if (!empty($recruiter)) {
                 $dataJobs['id_user'] = $recruiter[0]->id_user;
             } else {
                 $dataJobs['exist'] = false;
             }
         }
-        
+
         $data['jobs'] = $this->job_model->listJobs($dataJobs);
-        $data['applieds'] = array();        
+        $data['applieds'] = array();
         if (!empty($professional)) {
             $data['applieds'] = $this->job_model->listJobsAppliedUser($professional[0]->id_user);
         }
@@ -605,7 +626,7 @@ class Index extends CI_Controller {
         $data = array(
             'redirect' => ''
         );
-        
+
         $professional = $this->user_model->loadUser(array('fbuid' => $fbuid));
         $hasThisJob = $this->job_model->listJobsAppliedUser($professional[0]->id_user, $idJob);
 
