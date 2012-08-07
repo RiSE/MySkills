@@ -67,8 +67,10 @@ class User_model extends CI_Model {
         $this->db->update($this->table, $data);
 
         $this->db->trans_complete();
+        
+        
     }
-
+    
 }
 
 ?>

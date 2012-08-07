@@ -67,6 +67,7 @@ class Badge_model extends CI_Model {
         
         return $result;
     }
+    
     public function listBadgesProfessionalByProfessional($idProfessional) {
         
         $result = array();
@@ -75,6 +76,22 @@ class Badge_model extends CI_Model {
         $this->db->where('id_professional', $idProfessional);
         
         $query = $this->db->get('badges_professional');
+        
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+        
+        return $result;
+    }
+    
+    public function listBadgesProfessionalByUser($idUser) {
+        
+        $result = array();
+        
+        $this->db->select('id_user, id_badge, active');
+        $this->db->where('id_user', $idUser);
+        
+        $query = $this->db->get('badges_user');
         
         if ($query->num_rows() > 0) {
             $result = $query->result_object();

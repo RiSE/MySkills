@@ -474,9 +474,9 @@ class Index extends CI_Controller {
                 case 'Developer' : $this->session->set_userdata('developer', true);
                     break;
             }
-            
+
             $session = $this->session->all_userdata();
-            
+
             $this->session->set_flashdata('setprofile', true);
         }
 
@@ -497,6 +497,7 @@ class Index extends CI_Controller {
           $this->layout->view('recruiter/profile', $data); */
 
         $this->load->model('professional_model');
+        $this->load->model('user_model');
         $this->load->model('badge_model');
 
         $data = array(
@@ -504,8 +505,14 @@ class Index extends CI_Controller {
             'mixpanel' => 'Professional Profile',
             'badge_error' => ''
         );
-
+        
+        $fbuid = $this->session->userdata('uid');
+        
+        $user = $this->user_model->loadUser(array('fbuid' => $fbuid));        
+        
         $data['badges'] = $this->badge_model->listBadges();
+        $data['ThisBadge'] = $this->badge_model->listBadgesProfessionalByUser($user[0]->id_user);
+
         if ($this->form_validation->run('programmer/claimbadges') !== false) {
 
             $fbuid = $this->session->userdata('uid');

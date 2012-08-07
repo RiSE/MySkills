@@ -1,9 +1,6 @@
 <?php
 $fbuid = $this->session->userdata('uid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
-$professional = $this->professional_model->loadProfessional($fbuid);
-$ThisBadge = $this->badge_model->listBadgesProfessionalByProfessional($professional[0]->id_professional);
-
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     ?>
     <script type="text/javascript">
