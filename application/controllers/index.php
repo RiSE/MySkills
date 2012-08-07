@@ -75,7 +75,7 @@ class Index extends CI_Controller {
                 $session['userid'] = $user[0]->id_user;
                 $session['id_profile'] = isset($user[0]->id_profile) ? $user[0]->id_profile : null;
             }
-
+            
             $this->session->set_userdata($session);
 
             $data['login'] = true;

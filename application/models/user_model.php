@@ -34,7 +34,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('user.id_user, user.created, user.email');
+        $this->db->select('user.id_user, user.created, user.email, user.id_profile');
 
         if (isset($data['fbuid']) && !empty($data['fbuid'])) {
             $this->db->where('user.fbuid', $data['fbuid']);
