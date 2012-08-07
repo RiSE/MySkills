@@ -668,7 +668,7 @@ class Index extends CI_Controller {
         $user = $this->user_model->loadUserOfFacebookId($fbuid);
 
         $dataCourseProfessional = array(
-            'id_professional' => $user[0]->id_user,
+            'id_user' => $user[0]->id_user,
             'id_course' => $idCourse
         );
 
