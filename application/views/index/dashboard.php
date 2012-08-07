@@ -43,7 +43,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
             <div class="span12">
                 <div class="sidebar">
-                    <?php if ($this->session->userdata('id_profile') == null) : ?>
+                    <?php if ($this->session->userdata('developer') == false && $this->session->userdata('recruiter') == false) : ?>
                         <center>
                             <h3><span class="slash">//</span>Are you...</h3>
                             <p class="landing-actions">

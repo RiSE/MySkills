@@ -475,8 +475,6 @@ class Index extends CI_Controller {
                     break;
             }
 
-            $session = $this->session->all_userdata();
-
             $this->session->set_flashdata('setprofile', true);
         }
 
