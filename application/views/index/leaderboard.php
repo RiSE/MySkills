@@ -55,7 +55,7 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                          
                     </li>
                     <?php foreach ($professionals as $professional) : 
-                    	$ThisBadge = $this->badge_model->listBadgesProfessionalByProfessional($professional->id_professional);
+                    	$ThisBadge = $this->badge_model->listBadgesProfessionalByProfessional($professional->id_user);
                     
                     ?>
                         <li>

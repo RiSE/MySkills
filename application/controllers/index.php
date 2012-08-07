@@ -680,14 +680,14 @@ class Index extends CI_Controller {
 
     public function leaderboard() {
 
-        $this->load->model('professional_model');
+        $this->load->model('user_model');
         $this->load->model('badge_model');
 
         $data = array(
             'title' => 'Leaderboard'
         );
 
-        $data['professionals'] = $this->professional_model->listProfessionals();
+        $data['professionals'] = $this->user_model->listUsers();
 
         $this->layout->view('index/leaderboard', $data);
     }

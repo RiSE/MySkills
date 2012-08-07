@@ -87,6 +87,22 @@ class User_model extends CI_Model {
         return $result;
     }
     
+	public function listUsers() {
+	        
+	        $result = array();
+	
+	        $this->db->select('id_user, fbuid, points, created, name');
+	        $this->db->order_by('points', 'DESC');
+	
+	        $query = $this->db->get($this->table);
+	
+	        if ($query->num_rows() > 0) {
+	            $result = $query->result_object();
+	        }
+	
+	        return $result;
+	    }
+    
 }
 
 ?>

@@ -50,16 +50,16 @@ class Badge_model extends CI_Model {
         return $result;
     }
     
-    public function listBadgesProfessional($idProfessional, $idBadge) {
+    public function listBadgesProfessional($idUser, $idBadge) {
         
         $result = array();
         
-        $this->db->select('id_professional, id_badge, active');
-        $this->db->where('id_professional', $idProfessional);
+        $this->db->select('id_user, id_badge, active');
+        $this->db->where('id_user', $idUser);
         $this->db->where('id_badge', $idBadge);
         
         
-        $query = $this->db->get('badges_professional');
+        $query = $this->db->get('badges_user');
         
         if ($query->num_rows() > 0) {
             $result = $query->result_object();
@@ -68,14 +68,14 @@ class Badge_model extends CI_Model {
         return $result;
     }
     
-    public function listBadgesProfessionalByProfessional($idProfessional) {
+    public function listBadgesProfessionalByProfessional($idUser) {
         
         $result = array();
         
-        $this->db->select('id_professional, id_badge, active');
-        $this->db->where('id_professional', $idProfessional);
+        $this->db->select('id_user, id_badge, active');
+        $this->db->where('id_user', $idUser);
         
-        $query = $this->db->get('badges_professional');
+        $query = $this->db->get('badges_user');
         
         if ($query->num_rows() > 0) {
             $result = $query->result_object();
@@ -130,7 +130,7 @@ class Badge_model extends CI_Model {
     public function insertBadgeProfessional($data = array()) {
 
         $this->db->trans_start();
-        $this->db->insert('badges_professional', $data);
+        $this->db->insert('badges_user', $data);
         $this->db->trans_complete();
     }
 
