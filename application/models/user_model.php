@@ -70,6 +70,21 @@ class User_model extends CI_Model {
         
         
     }
+public function loadUserOfFacebookId($fbuid) {
+
+        $result = array();
+		
+        $this->db->select('id_user, created, email');
+        $this->db->where('fbuid', $fbuid);
+		
+        $query = $this->db->get($this->table);
+		
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
     
 }
 
