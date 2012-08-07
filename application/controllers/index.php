@@ -633,7 +633,7 @@ class Index extends CI_Controller {
 
     public function courses() {
 
-        $this->load->model('professional_model');
+        $this->load->model('user_model');
         $this->load->model('course_model');
 
         $data = array(
@@ -644,13 +644,13 @@ class Index extends CI_Controller {
         );
 
         $fbuid = $this->session->userdata('uid');
-        $professional = $this->professional_model->loadProfessional($fbuid);
+        $user = $this->user_model->loadUserOfFacebookId($fbuid);
 
         $data['courses'] = $this->course_model->listCourses();
 
         $data['applieds'] = array();
-        if (!empty($professional)) {
-            $data['applieds'] = $this->course_model->listCoursesApplied($professional[0]->id_professional);
+        if (!empty($user)) {
+            $data['applieds'] = $this->course_model->listCoursesApplied($user[0]->id_user);
         }
 
         $this->layout->view('index/applyforacourse', $data);
@@ -658,44 +658,21 @@ class Index extends CI_Controller {
 
     public function applyCourse() {
 
-        $this->load->model('professional_model');
+        $this->load->model('user_model');
         $this->load->model('course_model');
         $this->load->library('email');
 
         $fbuid = $this->session->userdata('uid');
         $idCourse = (int) $this->input->post('ids');
 
-        $professional = $this->professional_model->loadProfessional($fbuid);
+        $user = $this->user_model->loadUserOfFacebookId($fbuid);
 
         $dataCourseProfessional = array(
-            'id_professional' => $professional[0]->id_professional,
+            'id_professional' => $user[0]->id_user,
             'id_course' => $idCourse
         );
 
         $save = $this->course_model->insertCourseProfessional($dataCourseProfessional);
-        /*
-          $config['protocol'] = 'smtp';
-          $config['smtp_host'] = 'smtp.gmail.com';
-          $config['smtp_user'] = 'noreply@myskills.com.br';
-          $config['smtp_pass'] = ' NS=9urZL';
-
-          $this->email->initialize($config);
-
-          //$this->email->from('noreply@myskills.com.br', 'NOREPLY');
-          $this->email->to('eliakim.ramos@hotmail.com');
-          /*$this->email->cc('another@another-example.com');
-          $this->email->bcc('them@their-example.com'); */
-        /*
-          $this->email->subject('Email Test');
-          $this->email->message('Testing the email class.');
-
-
-
-          $this->email->send();
-
-          echo $this->email->print_debugger();die;
-         */
-
         $this->session->set_flashdata('applyforacourse', true);
 
         redirect(base_url() . 'index/profile');

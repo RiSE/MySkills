@@ -35,14 +35,14 @@ class Course_model extends CI_Model {
         return $result;
     }
 
-    public function listCoursesApplied($idProfessional) {
+    public function listCoursesApplied($idUser) {
 
         $result = array();
         
-        $this->db->select('id_professional, id_course');
-        $this->db->where('id_professional', $idProfessional);
+        $this->db->select('id_user, id_course');
+        $this->db->where('id_user', $idUser);
 
-        $query = $this->db->get('courses_professional');
+        $query = $this->db->get('courses_user');
 
         if ($query->num_rows() > 0) {
             $result = $query->result_object();
@@ -54,7 +54,7 @@ class Course_model extends CI_Model {
     public function insertCourseProfessional($data = array()) {
 
         $this->db->trans_start();
-        $this->db->insert('courses_professional', $data);
+        $this->db->insert('courses_user', $data);
         $this->db->trans_complete();
     }
 

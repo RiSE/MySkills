@@ -70,7 +70,8 @@ class User_model extends CI_Model {
         
         
     }
-public function loadUserOfFacebookId($fbuid) {
+
+    public function loadUserOfFacebookId($fbuid) {
 
         $result = array();
 		

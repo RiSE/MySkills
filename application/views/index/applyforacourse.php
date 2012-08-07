@@ -42,19 +42,19 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
         <div class="row">
 
-            <div class="span2">
+            <!-- <div class="span2">
                 <ul class="nav nav-tabs nav-stacked">
-                    <!--<li class="">
+                   <li class="">
                         <a href="<?php echo base_url(); ?>professional/applyforajob?type=web">Web Development</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>professional/applyforajob?type=mobile">Mobile Development</a>
-                    </li>-->
+                    </li>
                 </ul>
 
-            </div>
+            </div>-->
 
-            <div class="span10">
+            <div class="span12">
                 <div class="span8 sidebar ">
                     
                         <?php foreach ($courses as $course) : ?>
