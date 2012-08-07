@@ -274,14 +274,14 @@
                                     <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
                                 </li>
                                 <li>
-                                    <?php
-                                    $link = null;
-                                    if ($this->session->userdata('uid') > 0) :
-                                        $link = 'index/dashboard';
-                                    else:
-                                        $link = 'index/home';
-                                    endif;
-                                    ?>
+                                    <?php $link = null; ?>
+                                    <?php if ($this->session->userdata('recruiter') == true) : ?>
+                                    <?php $link = 'index/recruiterProfile'; ?>
+                                    <?php elseif ($this->session->userdata('developer') == true) : ?>
+                                    <?php $link = 'index/profile'; ?>
+                                    <?php else: ?>
+                                    <?php $link = 'index/dashboard'; ?>
+                                    <?php endif; ?>
                                     <a href="<?php echo base_url() . $link; ?>" title="Profile"><?php echo $this->session->userdata('name'); ?></a>
                                 </li>
                                 <li>

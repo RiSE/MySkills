@@ -55,6 +55,7 @@ class Index extends CI_Controller {
                 'uid' => $uid,
                 'email' => $email,
                 'name' => $name,
+                'id_profile' => null,
                 'loggedin' => true
             );
 
@@ -62,14 +63,17 @@ class Index extends CI_Controller {
             if (empty($user)) {
                 $userid = $this->user_model->insertUser($datauser);
                 $session['userid'] = $userid;
-                
+
+                /* mixpanel data */
                 $data['name'] = $name;
                 $data['email'] = $email;
                 $data['fbuid'] = $uid;
                 $data['justcreated'] = true;
                 $data['created'] = date('Y-m-d H:i:s');
+                /* end mixpanel data */
             } else {
                 $session['userid'] = $user[0]->id_user;
+                $session['id_profile'] = isset($user[0]->id_profile) ? $user[0]->id_profile : null;
             }
 
             $this->session->set_userdata($session);
@@ -431,6 +435,53 @@ class Index extends CI_Controller {
         );
 
         $this->layout->view('index/dashboard', $data);
+    }
+
+    public function defineType() {
+
+        $this->load->model('profile_model');
+        $this->load->model('user_model');
+
+        $data = array(
+            'error' => false,
+            'success' => false,
+            'message' => ''
+        );
+
+        $type = (int) $this->input->post('type');
+
+        $profile = $this->profile_model->loadProfile($type);
+        if (empty($profile)) {
+            $data['error'] = true;
+            $data['message'] = 'Invalid entry. Please try again.';
+        } else {
+
+            $name = $profile[0]->name;
+
+            $user = array(
+                'id_user' => $this->session->userdata('userid'),
+                'id_profile' => $type
+            );
+
+            $this->user_model->updateUser($user);
+
+            $this->session->set_userdata('id_profile', $type);
+
+            switch ($name) {
+                default : false;
+                case 'Recruiter' : $this->session->set_userdata('recruiter', true);
+                    break;
+                case 'Developer' : $this->session->set_userdata('developer', true);
+                    break;
+            }
+            
+            $session = $this->session->all_userdata();
+            
+            $this->session->set_flashdata('setprofile', true);
+        }
+
+        echo json_encode($data);
+        die();
     }
 
     public function profile() {
