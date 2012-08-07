@@ -56,6 +56,8 @@ class Index extends CI_Controller {
                 'email' => $email,
                 'name' => $name,
                 'id_profile' => null,
+                'recruiter' => null,
+                'developer' => null,
                 'loggedin' => true
             );
 
@@ -433,7 +435,7 @@ class Index extends CI_Controller {
             'title' => 'Dashboard',
             'mixpanel' => 'Dashboard'
         );
-
+        
         $this->layout->view('index/dashboard', $data);
     }
 
@@ -474,7 +476,7 @@ class Index extends CI_Controller {
                 case 'Developer' : $this->session->set_userdata('developer', true);
                     break;
             }
-
+            
             $this->session->set_flashdata('setprofile', true);
         }
 
