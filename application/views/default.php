@@ -317,7 +317,7 @@
                                 </ul>
 
                                 <ul class="footer-links clearfix">  	
-                                    <li><a href="https://myskills.desk.com/" target="_blank">Support</a></li>
+                                    <li><a href="http://myskills.uservoice.com/" target="_blank">Support</a></li>
                                     <li><a href="<?php echo base_url(); ?>index/privacyPolicy">Privacy Policy</a></li>
                                     <li><a href="<?php echo base_url(); ?>index/contact">Contact Us</a></li>
                                     <!-- <li><a href="javascript:;">License</a></li>

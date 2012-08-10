@@ -100,7 +100,7 @@ class Badge_model extends CI_Model {
         return $result;
     }
 
-    public  function getImgBadgs($idBadges){
+ public  function getImgBadgs($idBadges){
     	$img = "";
     	switch($idBadges){
     		case 1:
@@ -114,6 +114,24 @@ class Badge_model extends CI_Model {
     		break;
     		case 4:
     			 $img = "php.png";
+    		break;
+    		case 5:
+    			 $img = "campus-badge.png";
+    		break;
+    		case 6:
+    			 $img = "java-badge.png";
+    		break;
+    		case 7:
+    			 $img = "php5-badge.png";
+    		break;
+    		case 8:
+    			 $img = "php53-badge.png";
+    		break;
+    		case 9:
+    			 $img = "tryruby-badge.png";
+    		break;
+    		case 10:
+    			 $img = "trygit-badge.png";
     		break;
     		/*case 1:
     			 $img = "iOSBadge100.png";
