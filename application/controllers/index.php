@@ -72,7 +72,13 @@ class Index extends CI_Controller {
                 $data['email'] = $email;
                 $data['fbuid'] = $uid;
                 $data['justcreated'] = true;
-                $data['created'] = date('Y-m-d H:i:s');
+                $data['created'] = date('Y/m/d');
+                $session['nameU'] = $name;
+                $session['emailU'] = $email;
+                $session['fbuidU'] = $uid;
+                $session['justcreatedU'] = true;
+                $session['createdU'] = date('Y/m/d');
+                
                 /* end mixpanel data */
             } else {
                 $session['userid'] = $user[0]->id_user;
