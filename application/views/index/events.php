@@ -45,7 +45,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="tab-content">
                         <?php
                         $k = 1;
-                        foreach ($groups as $group):
+                        foreach ($groups as $ind => $group):
                             ?>
                             <div class="tab-pane <?php
                         if ($k == 1) {
@@ -65,20 +65,18 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                                 <tr><th>Event</th><th>Applicants(0)</th><th>Skill Points(0)</th><th></th></tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($groups as $ind => $gp): ?>
-                                                    <?php foreach ($groups[$ind]->events as $eventgroup) : ?>
-                                                        <tr>
-                                                            <td width=40%>
-                                                                <?php echo $eventgroup->name; ?>
-                                                            </td>
-                                                            <td> 0 </td>
-                                                            <td> 0 </td>
-                                                            <td><button btn btn-primary disabled btn-small>
-                                                                    Add to Wishlist
-                                                                </button>
-                                                            </td>						
-                                                        </tr>
-                                                    <?php endforeach; ?>
+                                                <?php foreach ($groups[$ind]->events as $eventgroup) : ?>
+                                                    <tr>
+                                                        <td width=40%>
+                                                            <?php echo $eventgroup->name; ?>
+                                                        </td>
+                                                        <td> 0 </td>
+                                                        <td> 0 </td>
+                                                        <td><button btn btn-primary disabled btn-small>
+                                                                Add to Wishlist
+                                                            </button>
+                                                        </td>						
+                                                    </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
