@@ -746,6 +746,33 @@ class Index extends CI_Controller {
         $this->layout->view('index/companies', $data);
     }
 
+    public function events() {
+
+        $this->load->model('eventgroup_model');
+        $this->load->model('event_model');
+
+        $data = array(
+            'title' => 'Events',
+            'mixpanel' => 'Events'
+        );
+
+        $data['groups'] = $this->eventgroup_model->listGroup();
+        $data['events_group'] = $this->event_model->listEventInGroup();
+        
+        $data['eventsgroup'] = $data['groups'];
+        foreach ($data['eventsgroup'] as $i => $group) {
+            
+            $data['eventsgroup'][$i]->events = array();
+            foreach ($data['events_group'] as $eventGroup) {
+                if ($group->id_event_group == $eventGroup->id_event_group) {
+                    array_push($data['eventsgroup'][$i]->events, $eventGroup);
+                }
+            }
+        }
+                        
+        $this->layout->view('index/events', $data);
+    }
+
 }
 
 ?>
