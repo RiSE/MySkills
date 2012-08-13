@@ -759,17 +759,16 @@ class Index extends CI_Controller {
         $data['groups'] = $this->eventgroup_model->listGroup();
         $data['events_group'] = $this->event_model->listEventInGroup();
         
-        $data['eventsgroup'] = $data['groups'];
-        foreach ($data['eventsgroup'] as $i => $group) {
+        foreach ($data['groups'] as $i => $group) {
             
-            $data['eventsgroup'][$i]->events = array();
+            $data['groups'][$i]->events = array();
             foreach ($data['events_group'] as $eventGroup) {
                 if ($group->id_event_group == $eventGroup->id_event_group) {
-                    array_push($data['eventsgroup'][$i]->events, $eventGroup);
+                    array_push($data['groups'][$i]->events, $eventGroup);
                 }
             }
         }
-                        
+                                
         $this->layout->view('index/events', $data);
     }
 
