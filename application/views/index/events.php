@@ -22,7 +22,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     <div class="container">
         <div class="alert alert-info">
             <button class="close" data-dismiss="alert">x</button>
-            <strong>Companies - </strong> Here you will find information about potential recruiters. (COMING SOON)
+            <strong>Events - </strong> Here you will find information about events.
         </div>
         <div class="row-fluid">
 
