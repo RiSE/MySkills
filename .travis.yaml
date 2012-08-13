@@ -1,4 +1,17 @@
+# Eduardo Cruz 13/08/2012
+# based on https://github.com/travis-ci/travis-ci-php-example/blob/master/.travis.yml
+
+# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
+
+# list any PHP version you want to test against
 php:
-  - "5.4"
-  - "5.3"
+
+ # using major version aliases
+
+  # aliased to 5.2.17
+  - 5.2
+  # aliased to a recent 5.3.x version
+  - 5.3
+  # aliased to a recent 5.4.x version
+  - 5.4
