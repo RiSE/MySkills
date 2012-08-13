@@ -64,8 +64,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                             <thead>
                                                 <tr>
                                                     <th>Event</th>
-                                                    <th>Begin</th>
-                                                    <th>End</th>
+                                                    <th>Starts</th>
+                                                    <th>Ends</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
