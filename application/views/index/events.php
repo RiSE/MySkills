@@ -62,7 +62,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                                  <!-- <col class="span4"> -->
                                             </colgroup>
                                             <thead>
-                                                <tr><th>Event</th><th>Applicants(0)</th><th>Skill Points(0)</th><th></th></tr>
+                                                <tr>
+                                                    <th>Event</th>
+                                                    <th>Begin</th>
+                                                    <th>End</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($groups[$ind]->events as $eventgroup) : ?>
@@ -70,8 +74,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                                         <td width=40%>
                                                             <?php echo $eventgroup->name; ?>
                                                         </td>
-                                                        <td> 0 </td>
-                                                        <td> 0 </td>
+                                                        <td><?php echo $eventgroup->starts;?></td>
+                                                        <td><?php echo $eventgroup->ends;?></td>
                                                         <td><button btn btn-primary disabled btn-small>
                                                                 Add to Wishlist
                                                             </button>
