@@ -66,10 +66,12 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						          </div>
 						        </fieldset>
 		     				 </form>
-		     				 		     				 	<pre><img id="userpic" src="https://graph.facebook.com//picture&type=small" style="border:thick groove green;" />tste novo</pre>
-		     				 		     				 	<pre><img id="userpic" src="https://graph.facebook.com//picture&type=small" style="border:thick groove green;" />tese eliakim 1324</pre>
-		     				 		     				 	<pre><img id="userpic" src="https://graph.facebook.com//picture&type=small" style="border:thick groove green;" />teste eliakim</pre>
-		     				                                    
+		     				 <?php foreach ($messages as $dadosMessages){
+		     				 				$userResult = $this->user_model->loadUserOfUserId($dadosMessages->id_user);
+		     				 ?>
+		     				 		     	<pre><img id="userpic" src="https://graph.facebook.com/<?php echo $userResult[0]->fbuid; ?>/picture&type=small" style="border:thick groove green;" /><?php echo"&nbsp;".$userResult[0]->name." said:&nbsp;".$dadosMessages->message;?></pre>
+		     				 		     				 	
+		     				 <?php } ?>
                     <?php endif; ?>
                 </div>
             </div>

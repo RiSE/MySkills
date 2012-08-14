@@ -84,6 +84,21 @@ class User_model extends CI_Model {
 
         return $result;
     }
+    public function loadUserOfUserId($userid) {
+
+        $result = array();
+
+        $this->db->select('fbuid, created, email, name');
+        $this->db->where('id_user', $userid);
+
+        $query = $this->db->get($this->table);
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
 
     public function listUsers() {
 
