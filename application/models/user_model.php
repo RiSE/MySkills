@@ -56,57 +56,72 @@ class User_model extends CI_Model {
     }
 
     public function updateUser($data = array()) {
-    
+
         $this->db->trans_start();
-        
+
         $idUser = (int) $data['id_user'];
         unset($data['id_user']);
-        
+
         $this->db->where('id_user', $idUser);
-        
+
         $this->db->update($this->table, $data);
 
         $this->db->trans_complete();
-        
-        
     }
 
     public function loadUserOfFacebookId($fbuid) {
 
         $result = array();
-		
+
         $this->db->select('id_user, created, email');
         $this->db->where('fbuid', $fbuid);
-		
+
         $query = $this->db->get($this->table);
-		
+
         if ($query->num_rows() > 0) {
             $result = $query->result_object();
         }
 
         return $result;
     }
-    
-	public function listUsers() {
-	        
-	        $result = array();
-			$Profile = array('2');
-	        $this->db->select('id_user, fbuid, points, created, name');
-	        $this->db->where('published', "1");
-	        //$this->db->where('id_profile', "is null");
-	        $this->db->where_not_in('id_profile', $Profile);
-	        $this->db->order_by('points', 'DESC');
-	        $this->db->order_by('created', 'DESC');
-	
-	        $query = $this->db->get($this->table);
-	
-	        if ($query->num_rows() > 0) {
-	            $result = $query->result_object();
-	        }
-	
-	        return $result;
-	    }
-    
+
+    public function listUsers() {
+
+        $result = array();
+        $Profile = array('2');
+        $this->db->select('id_user, fbuid, points, created, name');
+        $this->db->where('published', "1");
+        //$this->db->where('id_profile', "is null");
+        $this->db->where_not_in('id_profile', $Profile);
+        $this->db->order_by('points', 'DESC');
+        $this->db->order_by('created', 'DESC');
+
+        $query = $this->db->get($this->table);
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
+
+    public function listProfessionals() {
+
+        $result = array();
+
+        $this->db->select('id_user as id_professional, fbuid, points, created, name');
+        $this->db->where('id_profile', 1);
+        $this->db->order_by('points', 'DESC');
+
+        $query = $this->db->get($this->table);
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
+
 }
 
 ?>

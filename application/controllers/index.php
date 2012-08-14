@@ -578,8 +578,6 @@ class Index extends CI_Controller {
     public function jobs() {
 
         $this->load->model('user_model');
-        $this->load->model('recruiter_model');
-        $this->load->model('professional_model');
         $this->load->model('job_model');
 
         $company = $this->input->get('company');
@@ -623,7 +621,6 @@ class Index extends CI_Controller {
     public function apply() {
 
         $this->load->model('user_model');
-        $this->load->model('professional_model');
         $this->load->model('job_model');
 
         $fbuid = $this->session->userdata('uid');
@@ -722,10 +719,10 @@ class Index extends CI_Controller {
     public function listProfessionals() {
 
         $data = array();
-
-        $this->load->model('professional_model');
-
-        $data['professionals'] = $this->professional_model->listProfessionals();
+        
+        $this->load->model('user_model');
+        
+        $data['professionals'] = $this->user_model->listProfessionals();
 
         echo json_encode($data);
         die();
