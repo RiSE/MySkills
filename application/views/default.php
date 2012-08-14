@@ -277,7 +277,7 @@
                             </li>
                             <li>
                                 <a href="<?php echo base_url(); ?>index/events">
-                                    Companies
+                                    Events
                                 </a>
                             </li>
                             <li>						
