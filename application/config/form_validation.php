@@ -38,6 +38,13 @@ $config = array(
             'rules' => 'numeric|required'
         )
     ),
+    'message' => array(
+        array(
+            'field' => 'message',
+            'label' => 'Activity Feed',
+            'rules' => 'required|max_length[140]'
+        )
+    ),
     'recruiter' => array(
         array(
             'field' => 'company',
