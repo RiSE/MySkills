@@ -52,7 +52,24 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </p>
                         </center>
                     <?php else: ?>
-                        <h3><span class="slash">//</span>Comming soon... :)</h3>
+                       <form class="form-horizontal" method="POST" name="frmDBoard">
+						        <fieldset>
+						        <div class="control-group">
+						            <label class="control-label" for="textarea">Activity Feed</label>
+						            <div class="controls">
+						              <textarea name="message" class="input-xlarge" style="width: 480px;" id="textarea" rows="3" ></textarea>
+						            </div>
+						          </div>
+						          <div class="form-actions">
+						            <button type="submit" class="btn btn-primary">Save changes</button>
+						            <button class="btn">Cancel</button>
+						          </div>
+						        </fieldset>
+		     				 </form>
+		     				 		     				 	<pre><img id="userpic" src="https://graph.facebook.com//picture&type=small" style="border:thick groove green;" />tste novo</pre>
+		     				 		     				 	<pre><img id="userpic" src="https://graph.facebook.com//picture&type=small" style="border:thick groove green;" />tese eliakim 1324</pre>
+		     				 		     				 	<pre><img id="userpic" src="https://graph.facebook.com//picture&type=small" style="border:thick groove green;" />teste eliakim</pre>
+		     				                                    
                     <?php endif; ?>
                 </div>
             </div>
