@@ -32,8 +32,10 @@ class Event_model extends CI_Model {
         if (isset($data['name']) && !empty($data['name'])) {
             $this->db->where('LOWER(name)', $data['name']);
         }
+        
+        $this->db->where('published', 1);
 
-        $this->db->order_by('created', 'DESC');
+        $this->db->order_by('starts', 'ASC');
 
         $query = $this->db->get($this->table);
 
