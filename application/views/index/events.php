@@ -27,7 +27,10 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         <div class="row-fluid">
 
             <dir class="span8">
-
+                
+                <center>
+                    <a href="http://www.thedevelopersconference.com.br" target="_blank" style="text-decoration:none;" ><img src="http://www.thedevelopersconference.com.br/banners/2012/banner-TDC2012-floripa-468x60.png" style="border:none;" title=" The Developers Conference 2012, um evento organizado pela Globalcode" alt=" The Developers Conference 2012, um evento organizado pela Globalcode" /></a>
+                </center>
                 <div class="tabbable tabs-left">
 
                     <!--<ul class="nav nav-tabs ">
@@ -94,7 +97,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         ?>
 
                         <div class="row">
-                            <div class="span6">
+                            <div class="span8">
 
                                 <table class="table  table-striped table-condensed">
 
