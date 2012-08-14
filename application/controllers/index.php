@@ -748,7 +748,7 @@ class Index extends CI_Controller {
 
     public function events() {
 
-        $this->load->model('eventgroup_model');
+        //$this->load->model('eventgroup_model');
         $this->load->model('event_model');
 
         $data = array(
@@ -756,10 +756,10 @@ class Index extends CI_Controller {
             'mixpanel' => 'Events'
         );
 
-        $data['groups'] = $this->eventgroup_model->listGroup();
-        $data['events_group'] = $this->event_model->listEventInGroup();
+        //$data['groups'] = $this->eventgroup_model->listGroup();
+        //$data['events_group'] = $this->event_model->listEventInGroup();
         
-        foreach ($data['groups'] as $i => $group) {
+        /*foreach ($data['groups'] as $i => $group) {
             
             $data['groups'][$i]->events = array();
             foreach ($data['events_group'] as $eventGroup) {
@@ -767,8 +767,10 @@ class Index extends CI_Controller {
                     array_push($data['groups'][$i]->events, $eventGroup);
                 }
             }
-        }
-                                
+        }*/
+        
+        $data['events'] = $this->event_model->listEvents();
+                                        
         $this->layout->view('index/events', $data);
     }
 

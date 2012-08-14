@@ -30,68 +30,97 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                 <div class="tabbable tabs-left">
 
-                    <ul class="nav nav-tabs ">
-                        <?php
-                        $i = 1;
-                        foreach ($groups as $group):
-                            ?>
-                            <li <?php if ($i == 1) { ?>class="active"<?php } ?>><a href="#<?php echo $i; ?>A" data-toggle="tab"><?php echo $group->name ?></a></li>
-                            <!--  <li class=""><a href="#lB" data-toggle="tab">Mobile Development</a></li>-->
-                            <?php
-                            $i++;
-                        endforeach;
-                        ?>
-                    </ul>
+                    <!--<ul class="nav nav-tabs ">
+                    <?php
+                    /* $i = 1;
+                      foreach ($groups as $group):
+                      ?>
+                      <li <?php if ($i == 1) { ?>class="active"<?php } ?>><a href="#<?php echo $i; ?>A" data-toggle="tab"><?php echo $group->name ?></a></li>
+                      <!--  <li class=""><a href="#lB" data-toggle="tab">Mobile Development</a></li>-->
+                      <?php
+                      $i++;
+                      endforeach; */
+                    ?>
+                    </ul>-->
                     <div class="tab-content">
                         <?php
-                        $k = 1;
-                        foreach ($groups as $ind => $group):
-                            ?>
-                            <div class="tab-pane <?php
-                        if ($k == 1) {
-                            echo "active";
-                        }
-                            ?>" id="<?php echo $k; ?>A">
-                                <div class="row">
-                                    <div class="span6">
+                        /* $k = 1;
+                          foreach ($groups as $ind => $group):
+                          ?>
+                          <div class="tab-pane <?php
+                          if ($k == 1) {
+                          echo "active";
+                          }
+                          ?>" id="<?php echo $k; ?>A">
+                          <div class="row">
+                          <div class="span6">
 
-                                        <table class="table  table-striped table-condensed">
+                          <table class="table  table-striped table-condensed">
 
-                                            <colgroup>
-                                                <col class="span2">
-                                                 <!-- <col class="span4"> -->
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th>Event</th>
-                                                    <th>Starts</th>
-                                                    <th>Ends</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($groups[$ind]->events as $eventgroup) : ?>
-                                                    <tr>
-                                                        <td width=40%>
-                                                            <?php echo $eventgroup->name; ?>
-                                                        </td>
-                                                        <td><?php echo $eventgroup->starts;?></td>
-                                                        <td><?php echo $eventgroup->ends;?></td>
-                                                        <td><button btn btn-primary disabled btn-small>
-                                                                Add to Wishlist
-                                                            </button>
-                                                        </td>						
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                          <colgroup>
+                          <col class="span2">
+                          <!-- <col class="span4"> -->
+                          </colgroup>
+                          <thead>
+                          <tr>
+                          <th>Event</th>
+                          <th>Starts</th>
+                          <th>Ends</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <?php foreach ($groups[$ind]->events as $eventgroup) : ?>
+                          <tr>
+                          <td width=40%>
+                          <?php echo $eventgroup->name; ?>
+                          </td>
+                          <td><?php echo $eventgroup->starts;?></td>
+                          <td><?php echo $eventgroup->ends;?></td>
+                          <td><button btn btn-primary disabled btn-small>
+                          Add to Wishlist
+                          </button>
+                          </td>
+                          </tr>
+                          <?php endforeach; ?>
+                          </tbody>
+                          </table>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                            $k++;
-                        endforeach;
+                          </div>
+                          </div>
+                          </div>
+                          <?php
+                          $k++;
+                          endforeach; */
                         ?>
+
+                        <div class="row">
+                            <div class="span6">
+
+                                <table class="table  table-striped table-condensed">
+
+                                    <colgroup>
+                                        <col class="span2">
+                                         <!-- <col class="span4"> -->
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>Events</th>                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($events as $event) : ?>
+                                            <tr>
+                                                <td width="40%">
+                                                    <?php echo $event->name; ?>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>                                
+                            </div>
+                        </div>
                     </div>                
                 </div>
             </dir>
