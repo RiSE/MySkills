@@ -275,6 +275,11 @@
                                     Companies
                                 </a>
                             </li>
+                            <li>
+                                <a href="<?php echo base_url(); ?>index/events">
+                                    Companies
+                                </a>
+                            </li>
                             <li>						
                                 <a href="<?php echo base_url(); ?>index/contact">
                                     Contact Us
