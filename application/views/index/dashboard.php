@@ -55,21 +55,21 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                        <form class="form-horizontal" method="POST" name="frmDBoard">
 						        <fieldset>
 						        <div class="control-group">
-						            <label class="control-label" for="textarea">Activity Feed</label>
-						            <div class="controls">
-						              <textarea name="message" class="input-xlarge" style="width: 480px;" id="textarea" rows="3" ></textarea>
+						           <div class="controls" style="text-align:center">
+						              <textarea name="message" class="input-xlarge" style="width: 500px;" id="textarea" rows="3" >Send a public message (limited to 140 characters)</textarea>
+						            	<button type="submit" class="btn-primary btn-large">Post Message</button>
 						            </div>
 						          </div>
-						          <div class="form-actions">
-						            <button type="submit" class="btn btn-primary">Save changes</button>
-						            <button class="btn">Cancel</button>
-						          </div>
+						         
 						        </fieldset>
 		     				 </form>
+		     				  <div class="form-actions">
+						            <h2 style="text-align:left">Activity Feed</h2>
+						       </div>
 		     				 <?php foreach ($messages as $dadosMessages){
 		     				 				$userResult = $this->user_model->loadUserOfUserId($dadosMessages->id_user);
 		     				 ?>
-		     				 		     	<pre><img id="userpic" src="https://graph.facebook.com/<?php echo $userResult[0]->fbuid; ?>/picture&type=small" style="border:thick groove green;" /><?php echo"&nbsp;".$userResult[0]->name." said:&nbsp;".$dadosMessages->message;?></pre>
+		     				 		     	<pre><img id="userpic" src="https://graph.facebook.com/<?php echo $userResult[0]->fbuid; ?>/picture&type=small" /><?php echo"&nbsp;".$userResult[0]->name." said:&nbsp;".$dadosMessages->message;?></pre>
 		     				 		     				 	
 		     				 <?php } ?>
                     <?php endif; ?>
