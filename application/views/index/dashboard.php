@@ -11,19 +11,7 @@
 				$("#frmDBoard").submit();
 			}
 		}); 
-
-		$("#Message").focus(function(){
-			if($.trim($("#Message").val()) == $.trim("Send a public message. (limited to 140 characters) Will appear after you refresh the page.")){
-				$("#Message").val("");
-			}				
-		});
-
-		$("#Message").blur(function(){
-			if($.trim($("#Message").val()) == ""){
-				$("#Message").val("Send a public message. (limited to 140 characters) Will appear after you refresh the page.");
-			}				
-		});
-		
+	
 		$("#Message").keyup(function(event){
 			var num = $(this).val().length;
 			if(event.keyCode == 8 || event.keyCode == 46){
@@ -93,7 +81,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						        <fieldset>
 						        <div class="control-group">
 						           <div class="controls" style="text-align:center">
-						              <textarea name="message" class="input-xlarge" id="Message" style="width: 500px;" id="textarea" rows="3" >Send a public message. (limited to 140 characters) Will appear after you refresh the page.</textarea>
+						              <textarea name="message" placeholder="Send a public message. (limited to 140 characters) Will appear after you refresh the page." class="input-xlarge" id="Message" style="width: 520px;" id="textarea" rows="3" ></textarea>
 						            	<button type="button" id="PostMessage" class="btn-primary btn-large">Post Message</button>
 						            	<br>
 						            	<span id="limitecaracter">0</span>
