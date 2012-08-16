@@ -23,6 +23,22 @@
 				$("#Message").val("Send a public message. (limited to 140 characters) Will appear after you refresh the page.");
 			}				
 		});
+		
+		$("#Message").keyup(function(event){
+			var num = $(this).val().length;
+			if(event.keyCode == 8 || event.keyCode == 46){
+				if(num != 1){
+					$('#limitecaracter').text(-num+140);
+				}
+			}else{
+				if($('#limitecaracter').text() == "1"){
+					var texto = $(this).val();
+					$(this).val(texto.substring(0,140));
+				}else{
+					$("#limitecaracter").text(-num+140);
+				}
+			}
+		});
     });
 </script>
 
@@ -79,7 +95,10 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						           <div class="controls" style="text-align:center">
 						              <textarea name="message" class="input-xlarge" id="Message" style="width: 500px;" id="textarea" rows="3" >Send a public message. (limited to 140 characters) Will appear after you refresh the page.</textarea>
 						            	<button type="button" id="PostMessage" class="btn-primary btn-large">Post Message</button>
+						            	<br>
+						            	<span id="limitecaracter">0</span>
 						            </div>
+						            
 						          </div>
 						         
 						        </fieldset>
