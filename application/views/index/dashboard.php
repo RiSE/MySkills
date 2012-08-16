@@ -2,6 +2,15 @@
 <script type="text/javascript">
     $(document).ready(function() {
         Dashboard.onReady();
+		$("#PostMessage").click(function(){
+			if($.trim($("#Message").val()) =="" ||$.trim($("#Message").val()) == $.trim("Send a public message. (limited to 140 characters) Will appear after you refresh the page.")){
+				$("#divError").show();
+				$("#msnerro").html(" fields can't be empty");
+			}else{
+				$("#frmDBoard").submit();
+			}
+		}); 
+        
     });
 </script>
 
@@ -31,7 +40,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
             <div id="divError" class="alert alert-error" style="display: none">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Oh snap!</strong> 
+                <strong>Oh snap!</strong><span id="msnerro"></span> 
             </div>
 
             <?php if ($this->session->flashdata('setprofile')) : ?>
@@ -52,12 +61,12 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </p>
                         </center>
                     <?php else: ?>
-                       <form class="form-horizontal" method="POST" name="frmDBoard">
+                       <form class="form-horizontal" method="POST" name="frmDBoard" id="frmDBoard">
 						        <fieldset>
 						        <div class="control-group">
 						           <div class="controls" style="text-align:center">
-						              <textarea name="message" class="input-xlarge" style="width: 500px;" id="textarea" rows="3" >Send a public message (limited to 140 characters)</textarea>
-						            	<button type="submit" class="btn-primary btn-large">Post Message</button>
+						              <textarea name="message" class="input-xlarge" id="Message" style="width: 500px;" id="textarea" rows="3" >Send a public message. (limited to 140 characters) Will appear after you refresh the page.</textarea>
+						            	<button type="button" id="PostMessage" class="btn-primary btn-large">Post Message</button>
 						            </div>
 						          </div>
 						         
