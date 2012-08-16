@@ -2,6 +2,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         Dashboard.onReady();
+
 		$("#PostMessage").click(function(){
 			if($.trim($("#Message").val()) =="" ||$.trim($("#Message").val()) == $.trim("Send a public message. (limited to 140 characters) Will appear after you refresh the page.")){
 				$("#divError").show();
@@ -10,11 +11,13 @@
 				$("#frmDBoard").submit();
 			}
 		}); 
+
 		$("#Message").focus(function(){
 			if($.trim($("#Message").val()) == $.trim("Send a public message. (limited to 140 characters) Will appear after you refresh the page.")){
 				$("#Message").val("");
 			}				
 		});
+
 		$("#Message").blur(function(){
 			if($.trim($("#Message").val()) == ""){
 				$("#Message").val("Send a public message. (limited to 140 characters) Will appear after you refresh the page.");

@@ -476,6 +476,7 @@ class Index extends CI_Controller {
 
                     $this->message_model->insertMessage($insert);
                     $this->session->set_flashdata('Message', true);
+                    $data['messages'] = $this->message_model->listMessages();
         }
         $this->layout->view('index/dashboard', $data);
     }
