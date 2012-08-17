@@ -78,7 +78,7 @@ class Index extends CI_Controller {
                 $session['fbuidU'] = $uid;
                 $session['justcreatedU'] = true;
                 $session['createdU'] = date('Y-m-d');
-                
+
                 /* end mixpanel data */
             } else {
                 $session['userid'] = $user[0]->id_user;
@@ -455,13 +455,13 @@ class Index extends CI_Controller {
     }
 
     public function dashboard() {
-		$this->load->model('user_model');
+        $this->load->model('user_model');
         $this->load->model('message_model');
         $data = array(
             'title' => 'Dashboard',
             'mixpanel' => 'Dashboard'
         );
-		
+
         $data['messages'] = $this->message_model->listMessages();
 
         if ($this->form_validation->run('message') !== false) {
@@ -469,14 +469,14 @@ class Index extends CI_Controller {
             $message = (string) $this->input->post('message');
 
             $professional = $this->user_model->loadUserOfFacebookId($fbuid);
-                    $insert = array(
-                        'id_user' => $professional[0]->id_user,
-                        'message' => $message
-                    );
+            $insert = array(
+                'id_user' => $professional[0]->id_user,
+                'message' => $message
+            );
 
-                    $this->message_model->insertMessage($insert);
-                    $this->session->set_flashdata('Message', true);
-                    $data['messages'] = $this->message_model->listMessages();
+            $this->message_model->insertMessage($insert);
+            $this->session->set_flashdata('Message', true);
+            $data['messages'] = $this->message_model->listMessages();
         }
         $this->layout->view('index/dashboard', $data);
     }
@@ -590,6 +590,19 @@ class Index extends CI_Controller {
         }
 
         $this->layout->view('index/profile', $data);
+    }
+
+    public function editProfile() {
+        
+        $this->load->model('user_model');
+
+        $data = array(
+            'title' => 'Edit Profile',
+            'mixpanel' => 'Edit Profile',
+            'badge_error' => ''
+        );
+
+        $this->layout->view('index/editProfile', $data);
     }
 
     public function jobs() {
@@ -736,9 +749,9 @@ class Index extends CI_Controller {
     public function listProfessionals() {
 
         $data = array();
-        
+
         $this->load->model('user_model');
-        
+
         $data['professionals'] = $this->user_model->listProfessionals();
 
         echo json_encode($data);
@@ -772,19 +785,19 @@ class Index extends CI_Controller {
 
         //$data['groups'] = $this->eventgroup_model->listGroup();
         //$data['events_group'] = $this->event_model->listEventInGroup();
-        
-        /*foreach ($data['groups'] as $i => $group) {
-            
-            $data['groups'][$i]->events = array();
-            foreach ($data['events_group'] as $eventGroup) {
-                if ($group->id_event_group == $eventGroup->id_event_group) {
-                    array_push($data['groups'][$i]->events, $eventGroup);
-                }
-            }
-        }*/
-        
+
+        /* foreach ($data['groups'] as $i => $group) {
+
+          $data['groups'][$i]->events = array();
+          foreach ($data['events_group'] as $eventGroup) {
+          if ($group->id_event_group == $eventGroup->id_event_group) {
+          array_push($data['groups'][$i]->events, $eventGroup);
+          }
+          }
+          } */
+
         $data['events'] = $this->event_model->listEvents();
-                                        
+
         $this->layout->view('index/events', $data);
     }
 

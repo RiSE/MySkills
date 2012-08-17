@@ -305,7 +305,7 @@ if ($this->session->userdata('justcreatedU') == true) {
                                         <?php endif; ?>
 
                                         <li><a href="<?php echo base_url() . $link; ?>" title="View Profile">View Profile</a></li>
-                                        <li><a href="<?php echo base_url() . $link; ?>" title="Edit Profile">Edit Profile</a></li>
+                                        <li><a href="<?php echo base_url(); ?>index/editProfile" title="Edit Profile">Edit Profile</a></li>
                                         <li><a href="#" onclick="fbLogout();" title="Sign-out">Sign-out</a></li>
 
                                         <!--<li class="divider"></li>
