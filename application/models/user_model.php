@@ -31,13 +31,13 @@ class User_model extends CI_Model {
     }
 
     public function updatesUser($data) {
-        
+
         $fbuid = $data['fbuid'];
 
         $this->db->trans_start();
-        
+
         $this->db->where('fbuid', $fbuid);
-        
+
         $this->db->update($this->table, $data);
 
         $this->db->trans_complete();
@@ -46,11 +46,11 @@ class User_model extends CI_Model {
     public function loadUser($data) {
 
         $result = array();
-
+        
         $this->db->select('user.id_user, user.created, user.email, user.video_url, user.id_profile');
 
         if (isset($data['fbuid']) && !empty($data['fbuid'])) {
-            
+
             $this->db->where('user.fbuid', $data['fbuid']);
         }
 

@@ -625,18 +625,16 @@ class Index extends CI_Controller {
                 
                 $this->session->set_flashdata('success_message', 'Your profile was updated successfully!');
                 
+                redirect(base_url() .'index/editProfile');
+                
             } else {
-
                 if (validation_errors() != '') {
-
-
                     throw new Exception(validation_errors());
                 }
             }
         } catch (Exception $e) {
-            die('exp');
-            //$data['error_message'] = $e->getMessage();
             $this->session->set_flashdata('error_message', $e->getMessage());
+            redirect(base_url() .'index/editProfile');
         }
 
         $this->layout->view('index/editProfile', $data);
