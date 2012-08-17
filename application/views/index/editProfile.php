@@ -21,13 +21,20 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     <div class="container">
 
         <form method="POST" name="frmEditProfile">
-            
-            <?php if ($this->session->flashdata('error_message') !=  '') : ?>
+
+            <?php if ($this->session->flashdata('error_message') != '') : ?>
                 <div class="alert alert-error">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Oh snap!</strong> <?php echo $this->session->flashdata('error_message'); ?>
                 </div>
-            <?php endif; ?>            
+            <?php endif; ?>
+
+            <?php if ($this->session->flashdata('success_message') != '') : ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Well done!</strong> <?php echo $this->session->flashdata('success_message'); ?>
+                </div>
+            <?php endif; ?>
 
             <div class="row-fluid">
 

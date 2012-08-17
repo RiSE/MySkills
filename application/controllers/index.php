@@ -599,7 +599,8 @@ class Index extends CI_Controller {
         $data = array(
             'title' => 'Edit Profile',
             'mixpanel' => 'Edit Profile',
-            'error_message' => ''
+            'error_message' => '',
+            'success_message' => '',
         );
 
         try {
@@ -616,6 +617,8 @@ class Index extends CI_Controller {
                 );
                 
                 $this->user_model->updatesUser($dataUser);
+                
+                $this->session->set_flashdata('success_message', 'Your profile was updated successfully!');
                 
             } else {
 
