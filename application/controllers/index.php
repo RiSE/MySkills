@@ -251,7 +251,6 @@ class Index extends CI_Controller {
 
     public function recruiterProfile() {
 
-        //$this->load->model('professional_model');
         $this->load->model('user_model');
 
         $data = array(
