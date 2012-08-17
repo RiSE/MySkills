@@ -593,14 +593,42 @@ class Index extends CI_Controller {
     }
 
     public function editProfile() {
-        
+
         $this->load->model('user_model');
 
         $data = array(
             'title' => 'Edit Profile',
             'mixpanel' => 'Edit Profile',
-            'badge_error' => ''
+            'error_message' => ''
         );
+
+        try {
+
+            if ($this->form_validation->run('editProfile') !== false) {
+
+                $fbuid = $this->session->userdata('uid');
+                $video_url = (string) $this->input->post('video_url');
+
+                $dataUser = array(
+                    'video_url' => $video_url,
+                    'updated' => date('Y-m-d'),
+                    'fbuid' => $fbuid
+                );
+                
+                $this->user_model->updatesUser($dataUser);
+                
+            } else {
+
+                if (validation_errors() != '') {
+
+
+                    throw new Exception(validation_errors());
+                }
+            }
+        } catch (Exception $e) {
+            //$data['error_message'] = $e->getMessage();
+            $this->session->set_flashdata('error_message', $e->getMessage());
+        }
 
         $this->layout->view('index/editProfile', $data);
     }

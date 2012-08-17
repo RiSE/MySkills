@@ -21,6 +21,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     <div class="container">
 
         <form method="POST" name="frmEditProfile">
+            
+            <?php if ($this->session->flashdata('error_message') !=  '') : ?>
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Oh snap!</strong> <?php echo $this->session->flashdata('error_message'); ?>
+                </div>
+            <?php endif; ?>            
 
             <div class="row-fluid">
 
@@ -28,18 +35,24 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                     <!--<img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal"  style="border:thick groove green;" />-->
 
-                    <div class="row">
-
+                    <!--<div class="row">
                         <div class="span6">
+                            <span class="label label-info">Name</span>
                             <input type="text" >
                         </div>
-                    </div>
+                    </div>-->
                     <div class="row">
                         <div class="span6">
-                            <input type="text" >
+                            <span class="label label-info">Video-url</span>
+                            <input type="text" class="span4" name="video_url" />
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="span1">
+                            <input type="submit" class="btn btn-primary btn-large" value="Save" />
+                        </div>                        
+                    </div>
 
                 </div>
 

@@ -30,6 +30,19 @@ class User_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function updatesUser($data) {
+        
+        $fbuid = $data['fbuid'];
+
+        $this->db->trans_start();
+        
+        $this->db->where('fbuid', $fbuid);
+        
+        $this->db->update($this->table, $data);
+
+        $this->db->trans_complete();
+    }
+
     public function loadUser($data) {
 
         $result = array();
@@ -84,6 +97,7 @@ class User_model extends CI_Model {
 
         return $result;
     }
+
     public function loadUserOfUserId($userid) {
 
         $result = array();

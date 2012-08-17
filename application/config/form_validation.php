@@ -45,6 +45,13 @@ $config = array(
             'rules' => 'required|max_length[140]'
         )
     ),
+    'editProfile' => array(
+        array(
+            'field' => 'video_url',
+            'label' => 'Video URL',
+            'rules' => 'max_length[255]'
+        )        
+    ),
     'recruiter' => array(
         array(
             'field' => 'company',
