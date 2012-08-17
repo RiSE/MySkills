@@ -51,7 +51,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="row">
                         <div class="span6">
                             <span class="label label-info">Video-url</span>
-                            <input type="text" class="span4" name="video_url" />
+                            <input type="text" class="span4" name="video_url" value="<?php echo $user->video_url; ?>"/>
                         </div>
                     </div>
 

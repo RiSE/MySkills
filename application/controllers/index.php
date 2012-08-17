@@ -602,12 +602,17 @@ class Index extends CI_Controller {
             'error_message' => '',
             'success_message' => '',
         );
-
+        
+        $fbuid = $this->session->userdata('uid');
+        
+        $data['user'] = $this->user_model->loadUser(array('fbuid' => $fbuid));
+        $data['user'] = !empty($data['user']) ? $data['user'][0] : array();
+        
         try {
 
             if ($this->form_validation->run('editProfile') !== false) {
 
-                $fbuid = $this->session->userdata('uid');
+                
                 $video_url = (string) $this->input->post('video_url');
 
                 $dataUser = array(
@@ -629,6 +634,7 @@ class Index extends CI_Controller {
                 }
             }
         } catch (Exception $e) {
+            die('exp');
             //$data['error_message'] = $e->getMessage();
             $this->session->set_flashdata('error_message', $e->getMessage());
         }
