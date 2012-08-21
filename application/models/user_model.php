@@ -87,7 +87,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, created, email');
+        $this->db->select('id_user, created, email, id_profile');
         $this->db->where('fbuid', $fbuid);
 
         $query = $this->db->get($this->table);

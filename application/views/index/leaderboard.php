@@ -1,12 +1,6 @@
-﻿<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/professional.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        Professional.onReady();
-        Professional.leaderboard();
-    })
-</script>
-<?php
+﻿<?php
 $fbuid = $this->session->userdata('uid');
+$userData = $this->user_model->loadUserOfFacebookId($fbuid);
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
@@ -15,7 +9,13 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         mixpanel.track('Leaderboard');
     </script>
 <?php endif; ?>
-
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/professional.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        Professional.onReady();
+        Professional.leaderboard();
+    })
+</script>
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -66,7 +66,13 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                             
                             <div class="testimonial-text span2">
                     
-                                    <h3><a href="<?php echo base_url()."index/profile?".$professional->fbuid;?>"><strong><?php echo $professional->name; ?></strong></a></h3>
+                                    <h3>
+                                    	<?php if($userData[0]->id_profile != "2"){?>
+                                    		<a href="<?php echo base_url()."index/profile?".$professional->fbuid;?>"><strong><?php echo $professional->name; ?></strong></a></h3>
+                                    	<?php }else{?>	
+                                    		<strong><?php echo $professional->name; ?></strong>
+                                    	<?php }?>
+                                    </h3>
                               
                             </div>
                             
