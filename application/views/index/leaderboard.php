@@ -5,7 +5,6 @@
         Professional.leaderboard();
     })
 </script>
-
 <?php
 $fbuid = $this->session->userdata('uid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
@@ -67,7 +66,7 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                             
                             <div class="testimonial-text span2">
                     
-                                    <h3><strong><?php echo $professional->name; ?></strong></h3>
+                                    <h3><a href="<?php echo base_url()."index/profile?".$professional->fbuid;?>"><strong><?php echo $professional->name; ?></strong></a></h3>
                               
                             </div>
                             

@@ -7,7 +7,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         mixpanel.track('Professional Profile');
     </script>
 <?php endif; ?>
-
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -15,7 +14,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         </div>
     </div>
 </div>
-
 <div id="subpage">	
     <div class="container">
 
@@ -55,7 +53,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 <?php endif; ?>
 
                 <div class="span2" name="divProfile">
-                    <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal" style="border:thick groove green;" />
+                    <img id="userpic" src="https://graph.facebook.com/<?php echo $user[0]->fbuid; ?>/picture&type=normal" style="border:thick groove green;" />
                     <br /><br />
 
                     <?php
@@ -80,7 +78,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                 <div class="span10" name="divContainer">
 
-                    <h3 id="hname"><span class="slash">Professional:</span></h3>
+                    <h3 id="name"><span class="slash">Professional:</span><?php echo $user[0]->name; ?></h3>
 
                     <div class="row">
                         <div class="span8">

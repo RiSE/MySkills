@@ -549,45 +549,20 @@ class Index extends CI_Controller {
             'mixpanel' => 'Professional Profile',
             'badge_error' => ''
         );
-
-        $fbuid = $this->session->userdata('uid');
-
+		$valuesarray = array_keys($_GET);
+		
+        if(empty($valuesarray[0])){
+        	$fbuid = $this->session->userdata('uid');
+		}else{
+			$fbuid = $valuesarray[0];
+		}
+		//var_dump($fbuid);die;
         $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
 
         $data['badges'] = $this->badge_model->listBadges();
         $data['ThisBadge'] = $this->badge_model->listBadgesProfessionalByUser($user[0]->id_user);
-
-        if ($this->form_validation->run('programmer/claimbadges') !== false) {
-
-            $fbuid = $this->session->userdata('uid');
-            $idBage = (int) $this->input->post('selectBadges');
-            $code = (string) $this->input->post('code');
-
-            $badge = $this->badge_model->loadBadge($idBage);
-
-            if (!empty($badge)) {
-
-                $professional = $this->professional_model->loadProfessional($fbuid);
-
-                $hasThisBadge = $this->badge_model->listBadgesProfessional($professional[0]->id_professional, $badge[0]->id_badge);
-
-                if (empty($hasThisBadge)) {
-                    $insert = array(
-                        'id_professional' => $professional[0]->id_professional,
-                        'id_badge' => $badge[0]->id_badge,
-                        'code' => $code
-                    );
-
-                    $this->badge_model->insertBadgeProfessional($insert);
-
-                    redirect(base_url() . 'index/');
-                } else {
-                    $data['badge_error'] = 'You already have this badge';
-                }
-            } else {
-                $data['badge_error'] = 'Invalid Badge';
-            }
-        }
+		$data['user'] = $user;
+        
 
         $this->layout->view('index/profile', $data);
     }
