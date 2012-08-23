@@ -709,9 +709,9 @@ class Index extends CI_Controller {
 
         $fbuid = $this->session->userdata('uid');
         $user = $this->user_model->loadUserOfFacebookId($fbuid);
-
-        $data['courses'] = $this->course_model->listCourses();
-
+		$data['courses'] = $this->course_model->listCourses();
+		
+		
         $data['applieds'] = array();
         if (!empty($user)) {
             $data['applieds'] = $this->course_model->listCoursesApplied($user[0]->id_user);

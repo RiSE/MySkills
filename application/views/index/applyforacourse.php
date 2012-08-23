@@ -1,5 +1,6 @@
 <?php
 $fbuid = $this->session->userdata('uid');
+$userData = $this->user_model->loadUserOfFacebookId($fbuid);
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
@@ -78,8 +79,39 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                             <input type="hidden" name="ids" value="<?php echo $course->id_course; ?>" />
                           </form>
+                          <ul class="testimonials-list">
+				              <?php 
+				              		$users = $this->user_model->listUserOfCourse($course->id_course);
+				              		foreach ($users as $dadosuser){
+				              			
+				              	?>
+	                          	<li>
+		                          	 <div class="testimonial-avatar span1">
+		                                <div class="img">
+		                                  <img id="userpic" src="https://graph.facebook.com/<?php echo $dadosuser->fbuid; ?>/picture&type=small" alt="Thumbnail"/>
+		                                </div>
+		                            </div>
+		                            <div class="testimonial-text span2">
+		                    
+		                                    <h3>
+		                                    <?php if(!empty($userData[0]->id_profile)){ 
+		                                    		if($userData[0]->id_profile == "1"){?>
+		                                    		<a href="<?php echo base_url()."index/profile?".$dadosuser->fbuid;?>"><strong><?php echo $dadosuser->name; ?></strong></a></h3>
+		                                    	<?php }else{?>	
+		                                    		<strong><?php echo $dadosuser->name; ?></strong>
+		                                    	<?php }
+		                                    	}else{
+		                                    	?>
+		                                    	<strong><?php echo $dadosuser->name; ?></strong>
+		                                    	<?php } ?>
+		                                    </h3>
+		                              
+		                            </div>
+	                           </li>
+	                            <?php }?>
+	                         </ul>
                         <?php endforeach; ?>
-                    
+                   
                 </div>
                 <div class="span3">
                   <div class="sidebar">

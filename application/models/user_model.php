@@ -68,7 +68,24 @@ class User_model extends CI_Model {
 
         return $result;
     }
+	
+    public function listUserOfCourse($idCourse){
+    	 $result = array();
+        
+        $this->db->select('user.id_user, user.id_profile,user.name, user.fbuid');
+		$this->db->join('courses_user', 'courses_user.id_user=user.id_user', 'INNER');
+		$this->db->join('courses', 'courses.id_course = courses_user.id_course', 'INNER');
+        $this->db->where('courses.id_course', $idCourse);
+        
 
+        $query = $this->db->get($this->table);
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
     public function updateUser($data = array()) {
 
         $this->db->trans_start();

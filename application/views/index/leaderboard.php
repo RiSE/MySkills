@@ -67,11 +67,16 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                             <div class="testimonial-text span2">
                     
                                     <h3>
-                                    	<?php if($userData[0]->id_profile != "2"){?>
+                                    <?php if(!empty($userData[0]->id_profile)){ 
+                                    		if($userData[0]->id_profile == "1"){?>
                                     		<a href="<?php echo base_url()."index/profile?".$professional->fbuid;?>"><strong><?php echo $professional->name; ?></strong></a></h3>
                                     	<?php }else{?>	
                                     		<strong><?php echo $professional->name; ?></strong>
-                                    	<?php }?>
+                                    	<?php }
+                                    	}else{
+                                    	?>
+                                    	<strong><?php echo $professional->name; ?></strong>
+                                    	<?php } ?>
                                     </h3>
                               
                             </div>
