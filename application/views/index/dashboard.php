@@ -1,32 +1,7 @@
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/dashboard.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/dashboard/dashboard.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         Dashboard.onReady();
-
-		$("#PostMessage").click(function(){
-			if($.trim($("#Message").val()) =="" ||$.trim($("#Message").val()) == $.trim("Send a public message. (limited to 140 characters) Will appear after you refresh the page.")){
-				$("#divError").show();
-				$("#msnerro").html(" fields can't be empty");
-			}else{
-				$("#frmDBoard").submit();
-			}
-		}); 
-	
-		$("#Message").keyup(function(event){
-			var num = $(this).val().length;
-			if(event.keyCode == 8 || event.keyCode == 46){
-				if(num != 1){
-					$('#limitecaracter').text(-num+140);
-				}
-			}else{
-				if($('#limitecaracter').text() == "1"){
-					var texto = $(this).val();
-					$(this).val(texto.substring(0,140));
-				}else{
-					$("#limitecaracter").text(-num+140);
-				}
-			}
-		});
     });
 </script>
 
@@ -56,7 +31,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
             <div id="divError" class="alert alert-error" style="display: none">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Oh snap!</strong><span id="msnerro"></span> 
+                <strong>Oh snap! </strong><span id="msnerro"></span> 
             </div>
 
             <?php if ($this->session->flashdata('setprofile')) : ?>
