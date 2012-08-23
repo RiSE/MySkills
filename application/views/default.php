@@ -288,28 +288,25 @@ if ($this->session->userdata('justcreatedU') == true) {
                             </li>
                             <?php if ($this->session->userdata('uid') > 0) : ?>
 
-                                <li class="dropdown" id="menu1">
-
+                                <li>
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                         <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
                                     </a>
-                                    <ul class="dropdown-menu">
-
-                                        <?php $link = null; ?>
-                                        <?php if ($this->session->userdata('recruiter') == true) : ?>
-                                            <?php $link = 'index/recruiterProfile'; ?>
-                                        <?php elseif ($this->session->userdata('developer') == true) : ?>
-                                            <?php $link = 'index/profile'; ?>
-                                        <?php else: ?>
-                                            <?php $link = 'index/dashboard'; ?>
-                                        <?php endif; ?>
-
+                                </li>
+                                <li class="dropdown" id="fat-menu">
+                                    <?php $link = null; ?>
+                                    <?php if ($this->session->userdata('recruiter') == true) : ?>
+                                        <?php $link = 'index/recruiterProfile'; ?>
+                                    <?php elseif ($this->session->userdata('developer') == true) : ?>
+                                        <?php $link = 'index/profile'; ?>
+                                    <?php else: ?>
+                                        <?php $link = 'index/dashboard'; ?>
+                                    <?php endif; ?>                                    
+                                    <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('name'); ?> <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                                         <li><a href="<?php echo base_url() . $link; ?>" title="View Profile">View Profile</a></li>
                                         <li><a href="<?php echo base_url(); ?>index/editProfile" title="Edit Profile">Edit Profile</a></li>
                                         <li><a href="#" onclick="fbLogout();" title="Sign-out">Sign-out</a></li>
-
-                                        <!--<li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>-->
                                     </ul>
                                 </li>
                             <?php endif; ?>
