@@ -40,14 +40,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <strong>Well done!</strong> You just set your profile
                 </div>
             <?php endif; ?>
-            
+
             <?php if ($this->session->flashdata('message_sent') == true) : ?>
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Well done!</strong> You just sent a message
                 </div>            
             <?php endif; ?>
-            
+
             <div class="span12">
                 <div class="sidebar">
                     <?php if ($this->session->userdata('id_profile') == null) : ?>
@@ -59,6 +59,15 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </p>
                         </center>
                     <?php else: ?>
+
+                        <div class="span4">
+                            <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal"  style="border:thick groove green;" />
+                        </div>
+                        <div class="row"></div>
+                        <div class="span4">
+                            <b>Name: <?php echo $this->session->userdata('name'); ?></b>
+                        </div>
+
                         <form class="form-horizontal" method="POST" name="frmDBoard" id="frmDBoard">
                             <fieldset>
                                 <div class="control-group">
