@@ -66,7 +66,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <div class="row"></div>
                         <div class="span4">
                             <b>Name: <?php echo $this->session->userdata('name'); ?></b>
-                        </div>
+                        </div>                    
 
                         <form class="form-horizontal" method="POST" name="frmDBoard" id="frmDBoard">
                             <fieldset>
@@ -74,12 +74,10 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                     <div class="controls" style="text-align:center">
                                         <textarea name="message" placeholder="Send a public message. (limited to 140 characters) Will appear after you refresh the page." class="input-xlarge" id="Message" style="width: 580px;" id="textarea" rows="3" ></textarea>
                                         <button type="button" id="PostMessage" class="btn-primary btn-large">Post Message</button>
-                                        <br>
+                                        <div class="row"></div>
                                         <span id="limitecaracter">0</span>
                                     </div>
-
                                 </div>
-
                             </fieldset>
                         </form>
                         <div class="form-actions">
