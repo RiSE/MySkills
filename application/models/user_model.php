@@ -100,13 +100,16 @@ class User_model extends CI_Model {
         $this->db->trans_complete();
     }
 
-    public function loadUserOfFacebookId($fbuid) {
+    public function loadUserOfFacebookId($fbuid = 0) {
 
         $result = array();
 
         $this->db->select('id_user, created, email, id_profile');
-        $this->db->where('fbuid', $fbuid);
-
+        
+        if ($fbuid > 0) {
+            $this->db->where('fbuid', $fbuid);
+        }
+        
         $query = $this->db->get($this->table);
 
         if ($query->num_rows() > 0) {
@@ -116,12 +119,15 @@ class User_model extends CI_Model {
         return $result;
     }
 
-    public function loadUserOfUserId($userid) {
+    public function loadUserOfUserId($userid = 0) {
 
         $result = array();
 
-        $this->db->select('fbuid, created, email, name');
-        $this->db->where('id_user', $userid);
+        $this->db->select('id_user, fbuid, created, email, name');
+        
+        if ($userid > 0) {
+            $this->db->where('id_user', $userid);
+        }
 
         $query = $this->db->get($this->table);
 

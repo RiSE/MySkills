@@ -32,7 +32,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
             <div id="divError" class="alert alert-error" style="display: none">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>Oh snap! </strong><span id="msnerro"></span> 
-            </div>
+            </div>            
 
             <?php if ($this->session->flashdata('setprofile')) : ?>
                 <div class="alert alert-success">
@@ -40,7 +40,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <strong>Well done!</strong> You just set your profile
                 </div>
             <?php endif; ?>
-
+            
+            <?php if ($this->session->flashdata('message_sent') == true) : ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Well done!</strong> You just sent a message
+                </div>            
+            <?php endif; ?>
+            
             <div class="span12">
                 <div class="sidebar">
                     <?php if ($this->session->userdata('id_profile') == null) : ?>
@@ -52,29 +59,28 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </p>
                         </center>
                     <?php else: ?>
-                       <form class="form-horizontal" method="POST" name="frmDBoard" id="frmDBoard">
-						        <fieldset>
-						        <div class="control-group">
-						           <div class="controls" style="text-align:center">
-						              <textarea name="message" placeholder="Send a public message. (limited to 140 characters) Will appear after you refresh the page." class="input-xlarge" id="Message" style="width: 580px;" id="textarea" rows="3" ></textarea>
-						            	<button type="button" id="PostMessage" class="btn-primary btn-large">Post Message</button>
-						            	<br>
-						            	<span id="limitecaracter">0</span>
-						            </div>
-						            
-						          </div>
-						         
-						        </fieldset>
-		     				 </form>
-		     				  <div class="form-actions">
-						            <h2 style="text-align:left">Activity Feed</h2>
-						       </div>
-		     				 <?php foreach ($messages as $dadosMessages){
-		     				 				$userResult = $this->user_model->loadUserOfUserId($dadosMessages->id_user);
-		     				 ?>
-		     				 		     	<pre><img id="userpic" src="https://graph.facebook.com/<?php echo $userResult[0]->fbuid; ?>/picture&type=small" /><?php echo"&nbsp;".$userResult[0]->name." said:&nbsp;".$dadosMessages->message;?></pre>
-		     				 		     				 	
-		     				 <?php } ?>
+                        <form class="form-horizontal" method="POST" name="frmDBoard" id="frmDBoard">
+                            <fieldset>
+                                <div class="control-group">
+                                    <div class="controls" style="text-align:center">
+                                        <textarea name="message" placeholder="Send a public message. (limited to 140 characters) Will appear after you refresh the page." class="input-xlarge" id="Message" style="width: 580px;" id="textarea" rows="3" ></textarea>
+                                        <button type="button" id="PostMessage" class="btn-primary btn-large">Post Message</button>
+                                        <br>
+                                        <span id="limitecaracter">0</span>
+                                    </div>
+
+                                </div>
+
+                            </fieldset>
+                        </form>
+                        <div class="form-actions">
+                            <h2 style="text-align:left">Activity Feed</h2>
+                        </div>
+
+                        <?php foreach ($userMessages as $userMessage) : ?>
+                            <pre><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
+                            <?php endforeach; ?>
+
                     <?php endif; ?>
                 </div>
             </div>

@@ -455,6 +455,7 @@ class Index extends CI_Controller {
     }
 
     public function dashboard() {
+        
         $this->load->model('user_model');
         $this->load->model('message_model');
         $data = array(
@@ -463,20 +464,37 @@ class Index extends CI_Controller {
         );
 
         $data['messages'] = $this->message_model->listMessages();
+        $allMessages = $this->message_model->listMessages();
+        $allUsers = $this->user_model->loadUserOfUserId();
 
+        $userMessages = array();
+        foreach ($allMessages as $message) {
+            foreach ($allUsers as $usr) {
+                if ($usr->id_user == $message->id_user) {
+                    array_push($userMessages, array(
+                        'fbuid' => $usr->fbuid,
+                        'name' => $usr->name,
+                        'message' => $message->message
+                    ));
+                }
+            }
+        }
+        $data['userMessages'] = $userMessages;
+                
         if ($this->form_validation->run('message') !== false) {
+            
             $fbuid = $this->session->userdata('uid');
             $message = (string) $this->input->post('message');
 
-            $professional = $this->user_model->loadUserOfFacebookId($fbuid);
+            $user = $this->user_model->loadUserOfFacebookId($fbuid);
             $insert = array(
-                'id_user' => $professional[0]->id_user,
+                'id_user' => $user[0]->id_user,
                 'message' => $message
             );
 
             $this->message_model->insertMessage($insert);
-            $this->session->set_flashdata('Message', true);
-            $data['messages'] = $this->message_model->listMessages();
+            $this->session->set_flashdata('message_sent', true);
+            redirect(base_url() . 'index/dashboard');
         }
         $this->layout->view('index/dashboard', $data);
     }
