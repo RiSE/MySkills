@@ -71,11 +71,19 @@ class User_model extends CI_Model {
 	
     public function listUserOfCourse($idCourse){
     	 $result = array();
-        
-        $this->db->select('user.id_user, user.id_profile,user.name, user.fbuid, user.state, courses_user.created');
+        /* user.id_profile,*/
+        $this->db->select('user.id_user, user.name, user.fbuid, user.state, courses_user.created');
 		$this->db->join('courses_user', 'courses_user.id_user=user.id_user', 'INNER');
 		$this->db->join('courses', 'courses.id_course = courses_user.id_course', 'INNER');
         $this->db->where('courses.id_course', $idCourse);
+        $this->db->group_by('user.state');
+        $this->db->group_by('user.id_user');
+        $this->db->group_by('user.name');
+        $this->db->group_by('user.fbuid');
+        $this->db->group_by('courses_user.created');
+        $this->db->order_by('user.state', 'ASC');
+        $this->db->order_by('courses_user.created', 'DESC');
+        $this->db->order_by('user.name', 'ASC');
         
 
         $query = $this->db->get($this->table);

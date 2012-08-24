@@ -89,7 +89,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 										State
 									</th>
 									<th>
-										Date that was applied
+										Date
 									</th>
 					        <!-- <colgroup>
 					          <col class="span2">
