@@ -59,19 +59,21 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             </p>
                         </center>
                     <?php else: ?>
-
+					<!-- 
                         <div class="span4">
-                            <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal"  style="border:thick groove green;" />
+                            <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal" />
                         </div>
                         <div class="row"></div>
                         <div class="span4">
                             <b>Name: <?php echo $this->session->userdata('name'); ?></b>
                         </div>                    
-
+ -->
                         <form class="form-horizontal" method="POST" name="frmDBoard" id="frmDBoard">
                             <fieldset>
                                 <div class="control-group">
+                                <dir class="span2"><h2 style="text-align:left">Activity Feed</h2></dir>
                                     <div class="controls" style="text-align:center">
+                                   
                                         <textarea name="message" placeholder="Send a public message. (limited to 140 characters) Will appear after you refresh the page." class="input-xlarge" id="Message" style="width: 580px;" id="textarea" rows="3" ></textarea>
                                         <button type="button" id="PostMessage" class="btn-primary btn-large">Post Message</button>
                                         <div class="row"></div>
@@ -80,9 +82,9 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                                 </div>
                             </fieldset>
                         </form>
-                        <div class="form-actions">
-                            <h2 style="text-align:left">Activity Feed</h2>
-                        </div>
+                        <!-- <div class="form-actions"> -->
+                            
+                        <!-- </div> -->
 
                         <?php foreach ($userMessages as $userMessage) : ?>
                             <pre><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
