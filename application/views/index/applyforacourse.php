@@ -1,6 +1,5 @@
 <?php
 $fbuid = $this->session->userdata('uid');
-$userData = $this->user_model->loadUserOfFacebookId($fbuid);
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
@@ -58,7 +57,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
             <div class="span12">
                 <div class="span8 sidebar ">
                     
-                        <?php foreach ($courses as $course) : ?>
+                        <?php $c = 0;
+                        	foreach ($courses as $course) : ?>
 						<form method="POST" name="frmJob" action="<?php echo base_url(); ?>index/applyCourse">
                             <div class="span7">
                                 <div class="span5">
@@ -79,21 +79,20 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                             <input type="hidden" name="ids" value="<?php echo $course->id_course; ?>" />
                           </form>
-                          <ul class="testimonials-list">
+                         <table class="table  table-striped table-condensed">
+		
+					        <!-- <colgroup>
+					          <col class="span2">
+					           <!-- <col class="span4"> -->
+					        <!--</colgroup> -->
+					        <tbody>
 				              <?php 
-				              		$users = $this->user_model->listUserOfCourse($course->id_course);
-				              		foreach ($users as $dadosuser){
+				              		
+				              		foreach ($users[$c] as $dadosuser){ 
 				              			
 				              	?>
-	                          	<li>
-		                          	 <div class="testimonial-avatar span1">
-		                                <div class="img">
-		                                  <img id="userpic" src="https://graph.facebook.com/<?php echo $dadosuser->fbuid; ?>/picture&type=small" alt="Thumbnail"/>
-		                                </div>
-		                            </div>
-		                            <div class="testimonial-text span2">
-		                    
-		                                    <h3>
+		                         <tr>
+		                             <td>
 		                                    <?php if(!empty($userData[0]->id_profile)){ 
 		                                    		if($userData[0]->id_profile == "1"){?>
 		                                    		<a href="<?php echo base_url()."index/profile?".$dadosuser->fbuid;?>"><strong><?php echo $dadosuser->name; ?></strong></a></h3>
@@ -104,13 +103,22 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 		                                    	?>
 		                                    	<strong><?php echo $dadosuser->name; ?></strong>
 		                                    	<?php } ?>
-		                                    </h3>
-		                              
-		                            </div>
-	                           </li>
-	                            <?php }?>
-	                         </ul>
-                        <?php endforeach; ?>
+		                                    
+		                              </td>
+		                              	
+		                              <td>
+		                              	<?php echo $dadosuser->state; ?>
+		                              </td>
+		                              <td>
+		                              	<?php echo $dadosuser->created; ?>
+		                              </td>
+		                           </tr>
+	                          
+	                            <?php  }?>
+	                         </tbody>
+	                         </table>
+                        <?php  $c++;
+                        endforeach; ?>
                    
                 </div>
                 <div class="span3">
