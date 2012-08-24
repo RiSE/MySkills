@@ -80,7 +80,17 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             <input type="hidden" name="ids" value="<?php echo $course->id_course; ?>" />
                           </form>
                          <table class="table  table-striped table-condensed">
-		
+							<thead>
+								<tr>
+									<th>
+										User
+									</th>
+									<th>
+										State
+									</th>
+									<th>
+										Date that was applied
+									</th>
 					        <!-- <colgroup>
 					          <col class="span2">
 					           <!-- <col class="span4"> -->
