@@ -37,9 +37,10 @@ class Index extends CI_Controller {
             'login' => false,
             'justcreated' => false
         );
-
+		
         $uid = $this->input->post('uid');
         $name = $this->input->post('name');
+        $surname = $this->input->post('surname');
         $email = $this->input->post('email');
 
         if (isset($uid) && !empty($uid)) {
@@ -47,6 +48,7 @@ class Index extends CI_Controller {
             $datauser = array(
                 'fbuid' => $uid,
                 'name' => $name,
+                'surname' => $surname,
                 'email' => $email,
                 'created' => date('Y-m-d H:i:s')
             );
@@ -64,7 +66,8 @@ class Index extends CI_Controller {
 
             $user = $this->user_model->loadUser(array('fbuid' => $uid));
             if (empty($user)) {
-                $userid = $this->user_model->insertUser($datauser);
+				
+            	$userid = $this->user_model->insertUser($datauser);
                 $session['userid'] = $userid;
 
                 /* mixpanel data */

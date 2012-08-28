@@ -18,7 +18,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 </div>
 
 <div id="subpage">	
-    <div class="container">
+   <!--  <div class="container"> -->
 
         <form method="POST" name="frmEditProfile">
 
@@ -162,5 +162,5 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
             </div>
 
         </form>
-    </div>
+  <!--  </div> container-->
 </div>

@@ -104,7 +104,7 @@ if ($this->session->userdata('justcreatedU') == true) {
                         FB.api(
                         {
                             method : 'fql.query',
-                            query : 'SELECT uid, name, pic, pic_square, work FROM user WHERE uid = me()'
+                            query : 'SELECT uid, name, first_name,middle_name,last_name,pic, pic_square, work FROM user WHERE uid = me()'
                         }
                         , me);
                     }
@@ -129,11 +129,12 @@ if ($this->session->userdata('justcreatedU') == true) {
                     console.log(response.status);
                     FB.login(function(data) {
                         FB.api('/me', function(response) {
-
+                          
                             var data = {
                                 uid   : response.id,
                                 email : response.email,
-                                name  : response.name
+                                name  : response.first_name,
+                                surname: response.last_name
                             };
                             
                             if (data.uid == undefined || data.uid == null) {
