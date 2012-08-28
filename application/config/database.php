@@ -50,9 +50,9 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'www.myskills.com.br';
 $db['default']['port'] = 5432;
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
+$db['default']['username'] = 'skillsuser';
+$db['default']['password'] = 'splc2012';
+$db['default']['database'] = 'skillsdb_test';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
@@ -67,9 +67,9 @@ $db['default']['stricton'] = FALSE;
 
 $db['production']['hostname'] = 'www.myskills.com.br';
 $db['production']['port'] = 5432;
-$db['production']['username'] = '';
-$db['production']['password'] = '';
-$db['production']['database'] = '';
+$db['production']['username'] = 'skillsuser';
+$db['production']['password'] = 'splc2012';
+$db['production']['database'] = 'skillsdb';
 $db['production']['dbdriver'] = 'postgre';
 $db['production']['dbprefix'] = '';
 $db['production']['pconnect'] = TRUE;
