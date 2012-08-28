@@ -55,7 +55,7 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                     </li>
                     <?php foreach ($professionals as $professional) : 
                     	$ThisBadge = $this->badge_model->listBadgesProfessionalByProfessional($professional->id_user);
-                    
+                        $firstName = explode(' ', $professional->name);
                     ?>
                         <li>
                             <div class="testimonial-avatar span1">
@@ -67,25 +67,20 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                             <div class="testimonial-text span2">
                     
                                     <h3>
-                                    <?php if(!empty($userData[0]->id_profile)){ 
-                                    		if($userData[0]->id_profile == "1"){?>
-                                    		<a href="<?php echo base_url()."index/profile?".$professional->fbuid;?>"><strong><?php echo $professional->name; ?></strong></a></h3>
-                                    	<?php }else{?>	
-                                    		<strong><?php echo $professional->name; ?></strong>
-                                    	<?php }
-                                    	}else{
-                                    	?>
+                                    <?php if (!empty($userData[0]->id_profile)) :
+                                    		if ($userData[0]->id_profile == "1") :?>
+                                                    <a href="<?php echo base_url()."index/profile?".$professional->fbuid;?>"><strong><?php echo $firstName[0]; ?></strong></a></h3>
+                                                <?php else: ?>	
+                                                    <strong><?php echo $professional->name; ?></strong>
+                                                <?php endif; ?>
+                                    <?php else: ?>
                                     	<strong><?php echo $professional->name; ?></strong>
-                                    	<?php } ?>
+                                    	<?php endif; ?>
                                     </h3>
-                              
                             </div>
                             
                             <div class="testimonial-text span2">
-                                
-                                   
                                     <h3><strong><?php echo date('d/m/Y', strtotime($professional->created)); ?></strong></h3>
-                                
                             </div>
                             <div class="testimonial-text span2">
 				<div class="progress progress-success">
