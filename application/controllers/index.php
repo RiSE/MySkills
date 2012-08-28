@@ -19,7 +19,16 @@ class Index extends CI_Controller {
     }
 
     public function home() {
-
+        
+        $profile = $this->session->userdata('developer');
+        $recruiter = $this->session->userdata('recruiter');
+        
+        if ($profile == 1) {
+            redirect(base_url() . 'index/professionalProfile');
+        } else if ($recruiter == 1) {
+            redirect(base_url() . 'index/recruiterProfile');
+        }
+        
         $data = array(
             'title' => 'Home',
             'mixpanel' => 'Home'
