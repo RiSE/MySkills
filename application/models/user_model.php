@@ -47,7 +47,8 @@ class User_model extends CI_Model {
 
         $result = array();
         
-        $this->db->select('user.id_user, user.created, user.email, user.video_url, user.id_profile,user.name, user.fbuid');
+        $this->db->select('user.id_user, user.created, user.email,user.surname, user.video_url, user.id_profile,user.name, user.fbuid, user.state,
+        				   user.trainee, user.another_city, user.another_country, user.employee, user.freelancer');
 
         if (isset($data['fbuid']) && !empty($data['fbuid'])) {
 
@@ -72,7 +73,7 @@ class User_model extends CI_Model {
     public function listUserOfCourse($idCourse){
     	 $result = array();
         /* user.id_profile,*/
-        $this->db->select('user.id_user, user.name, user.fbuid, user.state, courses_user.created');
+        $this->db->select('user.id_user, user.name, user.surname, user.fbuid, user.state, courses_user.created');
 		$this->db->join('courses_user', 'courses_user.id_user=user.id_user', 'INNER');
 		$this->db->join('courses', 'courses.id_course = courses_user.id_course', 'INNER');
         $this->db->where('courses.id_course', $idCourse);
@@ -112,7 +113,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, created, email, id_profile');
+        $this->db->select('id_user, surname, created, email, id_profile');
         
         if ($fbuid > 0) {
             $this->db->where('fbuid', $fbuid);
@@ -131,7 +132,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, fbuid, created, email, name');
+        $this->db->select('id_user, fbuid, created, email, name, surname');
         
         if ($userid > 0) {
             $this->db->where('id_user', $userid);
@@ -150,7 +151,7 @@ class User_model extends CI_Model {
 
         $result = array();
         $Profile = array('2');
-        $this->db->select('id_user, fbuid, points, created, name');
+        $this->db->select('id_user, fbuid, points, created, name, surname');
         $this->db->where('published', "1");
         //$this->db->where('id_profile', "is null");
         $this->db->where_not_in('id_profile', $Profile);
@@ -170,7 +171,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user as id_professional, fbuid, points, created, name');
+        $this->db->select('id_user as id_professional, fbuid, points, created, name, surname');
         $this->db->where('id_profile', 1);
         $this->db->order_by('points', 'DESC');
 

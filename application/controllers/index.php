@@ -606,9 +606,43 @@ class Index extends CI_Controller {
             if ($this->form_validation->run('editProfile') !== false) {
 
                 
+                $name = (string) $this->input->post('name');
+                $surname = (string) $this->input->post('surname');
+                $email = (string) $this->input->post('email');
+                $trainee = (integer) $this->input->post('trainee');
+                if(empty($trainee)){
+                	$trainee = 0;
+                }
+                $employee = (integer) $this->input->post('employee');
+	            if(empty($employee)){
+	                	$employee = 0;
+	                }
+                $freelancer = (integer) $this->input->post('freelancer');
+	            if(empty($freelancer)){
+	                	$freelancer = 0;
+	                }
+                $anotherCity = (integer) $this->input->post('anotherCity');
+	            if(empty($anotherCity)){
+	                	$anotherCity = 0;
+	                }
+                $anotherCountry = (integer) $this->input->post('anotherCountry');
+            	   if(empty($anotherCountry)){
+	                	$anotherCountry = 0;
+	                }
+                $state = (string) $this->input->post('state');
                 $video_url = (string) $this->input->post('video_url');
+               
 
                 $dataUser = array(
+                    'name' => $name,
+                    'surname' => $surname,
+                    'email' => $email,
+                    'trainee' => $trainee,
+                    'employee' => $employee,
+                    'freelancer' => $freelancer,
+                    'another_city' => $anotherCity,
+                    'another_country' => $anotherCountry,
+                    'state' => $state,
                     'video_url' => $video_url,
                     'updated' => date('Y-m-d'),
                     'fbuid' => $fbuid

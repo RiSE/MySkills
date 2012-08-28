@@ -50,7 +50,22 @@ $config = array(
             'field' => 'video_url',
             'label' => 'Video URL',
             'rules' => 'max_length[255]'
-        )        
+        ),        
+        array(
+            'field' => 'name',
+            'label' => 'Name',
+            'rules' => 'max_length[100]'
+        ),        
+        array(
+            'field' => 'surname',
+            'label' => 'Surname',
+            'rules' => 'max_length[200]'
+        ),        
+        array(
+            'field' => 'email',
+            'label' => 'E-mail',
+            'rules' => 'max_length[255]'
+        )
     ),
     'recruiter' => array(
         array(
