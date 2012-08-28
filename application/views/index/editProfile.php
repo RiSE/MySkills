@@ -137,14 +137,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             <input type="text" class="span4" name="video_url" value="<?php echo $user->video_url; ?>"/>
                         </div>
                     </div>
-                    
-                    <?php if ($user->video_url != null) : ?>
-                        <div class="span6 landing-screenshot">
-                            <iframe width="560" height="400" src="<?php echo $user->video_url; ?>" frameborder="0" allowfullscreen></iframe>
-                        </div>                
-                        <div class="row"></div>
-                    <?php endif; ?>
-                    
+                                        
                     <div class="row">
                         <div class="span1">
                             <input type="submit" class="btn btn-primary btn-large" value="Save" />
