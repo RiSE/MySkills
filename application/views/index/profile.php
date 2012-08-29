@@ -53,7 +53,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 <?php endif; ?>
 
                 <div class="span2" name="divProfile">
-                    <img id="userpic" src="https://graph.facebook.com/<?php echo $user[0]->fbuid; ?>/picture&type=normal" style="border:thick groove green;" />
+                    <img id="userpic" src="https://graph.facebook.com/<?php echo $user[0]->fbuid; ?>/picture&type=normal" style="/*border:thick groove green;*/" />
                     <br /><br />
 
                     <?php
@@ -91,22 +91,44 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Job Applications</a></div>
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Course Savings</a></div>-->
 
-                    <div class="row">
-                        <div class="span8">
-                            &nbsp;
-                        </div>
-                    </div>
 
                     <!--<div class="span2"><a href="#" class="btn btn-large btn disabled">Badges</a></div>
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Courses</a></div>
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Profile Views</a></div>
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Expected Salary</a></div>-->
 
-                    <div class="row">
+                    <?php if ($user[0]->video_url != null) : ?>
                         <div class="span8">
-                            &nbsp;
+                            <center>
+                                <iframe width="500" height="315" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
+                            </center>
                         </div>
-                    </div>
+
+                        <div class="row">
+                            <div class="span8">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                    <?php else: ?>
+                        <div class="row">
+                            <div class="span8">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="span8">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                    <?php endif; ?>
+
 
                     <div class="span3">
                         <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
@@ -148,12 +170,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <div class="span8">
                             &nbsp;
                         </div>
-                    </div>
-
-                    <div class="span6 sidebar">
-                        <center>
-                            <iframe width="560" height="400" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
-                        </center>
                     </div>
 
                 </div>
@@ -232,7 +248,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             <select name="selectBadges">
                                 <option value="">--SELECT--</option>
             <?php foreach ($badges as $badge) : ?>
-                                                                                                                                                                                                                <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
+                                                                                                                                                                                                                                                    <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
             <?php endforeach; ?>
                             </select>
             <?php echo form_error('selectBadges'); ?>
