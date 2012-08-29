@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 $fbuid = $this->session->userdata('uid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
