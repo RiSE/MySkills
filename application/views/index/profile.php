@@ -100,7 +100,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <?php if ($user[0]->video_url != null) : ?>
                         <div class="span8">
                             <center>
-                                <iframe width="500" height="315" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
+                                <iframe width="250" height="188" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
                             </center>
                         </div>
 

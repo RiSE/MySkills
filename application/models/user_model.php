@@ -151,7 +151,7 @@ class User_model extends CI_Model {
 
         $result = array();
         $Profile = array('2');
-        $this->db->select('id_user, fbuid, points, created, name, surname');
+        $this->db->select('id_user, fbuid, points, created, name, surname, video_url');
         $this->db->where('published', "1");
         //$this->db->where('id_profile', "is null");
         $this->db->where_not_in('id_profile', $Profile);
