@@ -24,7 +24,7 @@ class Index extends CI_Controller {
         $recruiter = $this->session->userdata('recruiter');
 
         if ($profile == 1) {
-            redirect(base_url() . 'index/professionalProfile');
+            redirect(base_url() . 'index/profile');
         } else if ($recruiter == 1) {
             redirect(base_url() . 'index/recruiterProfile');
         }
