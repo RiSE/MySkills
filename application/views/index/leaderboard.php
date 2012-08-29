@@ -1,6 +1,9 @@
 ﻿<?php
 $fbuid = $this->session->userdata('uid');
-$userData = $this->user_model->loadUserOfFacebookId($fbuid);
+$userData = array();
+if (!empty($fbuid)) {
+    $userData = $this->user_model->loadUserOfFacebookId($fbuid);
+}
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
@@ -69,10 +72,12 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                                     <h3>
                                     <?php if (!empty($userData[0]->id_profile)) :
                                     		if ($userData[0]->id_profile == "1") :?>
+                                                    <?php if ($professional->video_url != null) :?>
+                                                        <a class="btn btn-small" href="<?php echo base_url() . 'index/profile?' . $professional->fbuid; ?>"><i class="icon-facetime-video"></i></a>
+                                                    <?php else: ?>
+                                                        <a class="btn btn-small" href="<?php echo base_url() . 'index/profile?' . $professional->fbuid; ?>"><i class="icon-user"></i></a>
+                                                    <?php endif; ?>
                                                     <a href="<?php echo base_url()."index/profile?".$professional->fbuid;?>">
-                                                        <?php if ($professional->video_url != null) :?>
-                                                        <a class="btn btn-small" href="#"><i class="icon-facetime-video"></i></a>
-                                                        <?php endif; ?>
                                                         <strong><?php echo $firstName[0]; ?></strong>
                                                     </a>
                                     </h3>
@@ -80,7 +85,7 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                                                     <strong><?php echo $professional->name; ?></strong>
                                                 <?php endif; ?>
                                     <?php else: ?>
-                                    	<strong><?php echo $professional->name; ?></strong>
+                                    	<strong><?php echo $firstName[0]; ?></strong>
                                     	<?php endif; ?>
                                     </h3>
                             </div>
