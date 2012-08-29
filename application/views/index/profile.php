@@ -30,21 +30,21 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <strong>Well done!</strong> Your subscription was successfully
                     </div>
                 <?php endif; ?>
-                
+
                 <?php if ($this->session->flashdata('applyforajob') == true) : ?>
                     <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>Well done!</strong> You applied for a job
                     </div>                
                 <?php endif; ?>
-                
+
                 <?php if ($this->session->flashdata('claimbadge') == true) : ?>
                     <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>Well done!</strong> You claimed a badge
                     </div>                
                 <?php endif; ?>
-                
+
                 <?php if ($this->session->flashdata('applyforacourse') == true) : ?>
                     <div class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -126,10 +126,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         </div>
                     </div>
 
-                    <!--<div class="span8 sidebar">
-                        <p></p>
-                    </div>-->
-
                     <div class="row">
                         <div class="span8">
                             &nbsp;
@@ -140,6 +136,24 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="span8  sidebar">
                         <h2>News</h2>
                         <p></p>
+                    </div>
+
+                    <div class="row">
+                        <div class="span8">
+                            &nbsp;
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="span8">
+                            &nbsp;
+                        </div>
+                    </div>
+
+                    <div class="span6 sidebar">
+                        <center>
+                            <iframe width="560" height="400" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
+                        </center>
                     </div>
 
                 </div>
@@ -218,7 +232,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             <select name="selectBadges">
                                 <option value="">--SELECT--</option>
             <?php foreach ($badges as $badge) : ?>
-                                                                                                                                                                                            <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
+                                                                                                                                                                                                                <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
             <?php endforeach; ?>
                             </select>
             <?php echo form_error('selectBadges'); ?>

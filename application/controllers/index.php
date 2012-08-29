@@ -19,16 +19,16 @@ class Index extends CI_Controller {
     }
 
     public function home() {
-        
+
         $profile = $this->session->userdata('developer');
         $recruiter = $this->session->userdata('recruiter');
-        
+
         if ($profile == 1) {
             redirect(base_url() . 'index/professionalProfile');
         } else if ($recruiter == 1) {
             redirect(base_url() . 'index/recruiterProfile');
         }
-        
+
         $data = array(
             'title' => 'Home',
             'mixpanel' => 'Home'
@@ -46,7 +46,7 @@ class Index extends CI_Controller {
             'login' => false,
             'justcreated' => false
         );
-		
+
         $uid = $this->input->post('uid');
         $name = $this->input->post('name');
         $surname = $this->input->post('surname');
@@ -75,8 +75,8 @@ class Index extends CI_Controller {
 
             $user = $this->user_model->loadUser(array('fbuid' => $uid));
             if (empty($user)) {
-				
-            	$userid = $this->user_model->insertUser($datauser);
+
+                $userid = $this->user_model->insertUser($datauser);
                 $session['userid'] = $userid;
 
                 /* mixpanel data */
@@ -467,7 +467,7 @@ class Index extends CI_Controller {
     }
 
     public function dashboard() {
-        
+
         $this->load->model('user_model');
         $this->load->model('message_model');
         $data = array(
@@ -492,9 +492,9 @@ class Index extends CI_Controller {
             }
         }
         $data['userMessages'] = $userMessages;
-                
+
         if ($this->form_validation->run('message') !== false) {
-            
+
             $fbuid = $this->session->userdata('uid');
             $message = (string) $this->input->post('message');
 
@@ -579,20 +579,22 @@ class Index extends CI_Controller {
             'mixpanel' => 'Professional Profile',
             'badge_error' => ''
         );
-		$valuesarray = array_keys($_GET);
-		
-        if(empty($valuesarray[0])){
-        	$fbuid = $this->session->userdata('uid');
-		}else{
-			$fbuid = $valuesarray[0];
-		}
-		//var_dump($fbuid);die;
+        $valuesarray = array_keys($_GET);
+
+        if (empty($valuesarray[0])) {
+            $fbuid = $this->session->userdata('uid');
+        } else {
+            $fbuid = $valuesarray[0];
+        }
+        //var_dump($fbuid);die;
         $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
+        $video = $user[0]->video_url;
+        $video = str_replace('watch?v=', 'embed/', $video);        
+        $user[0]->video_url = $video;
 
         $data['badges'] = $this->badge_model->listBadges();
         $data['ThisBadge'] = $this->badge_model->listBadgesProfessionalByUser($user[0]->id_user);
-		$data['user'] = $user;
-        
+        $data['user'] = $user;
 
         $this->layout->view('index/profile', $data);
     }
@@ -607,43 +609,43 @@ class Index extends CI_Controller {
             'error_message' => '',
             'success_message' => '',
         );
-        
+
         $fbuid = $this->session->userdata('uid');
-        
+
         $data['user'] = $this->user_model->loadUser(array('fbuid' => $fbuid));
         $data['user'] = !empty($data['user']) ? $data['user'][0] : array();
-        
+
         try {
 
             if ($this->form_validation->run('editProfile') !== false) {
 
-                
+
                 $name = (string) $this->input->post('name');
                 $surname = (string) $this->input->post('surname');
                 $email = (string) $this->input->post('email');
                 $trainee = (integer) $this->input->post('trainee');
-                if(empty($trainee)){
-                	$trainee = 0;
+                if (empty($trainee)) {
+                    $trainee = 0;
                 }
                 $employee = (integer) $this->input->post('employee');
-	            if(empty($employee)){
-	                	$employee = 0;
-	                }
+                if (empty($employee)) {
+                    $employee = 0;
+                }
                 $freelancer = (integer) $this->input->post('freelancer');
-	            if(empty($freelancer)){
-	                	$freelancer = 0;
-	                }
+                if (empty($freelancer)) {
+                    $freelancer = 0;
+                }
                 $anotherCity = (integer) $this->input->post('anotherCity');
-	            if(empty($anotherCity)){
-	                	$anotherCity = 0;
-	                }
+                if (empty($anotherCity)) {
+                    $anotherCity = 0;
+                }
                 $anotherCountry = (integer) $this->input->post('anotherCountry');
-            	   if(empty($anotherCountry)){
-	                	$anotherCountry = 0;
-	                }
+                if (empty($anotherCountry)) {
+                    $anotherCountry = 0;
+                }
                 $state = (string) $this->input->post('state');
                 $video_url = (string) $this->input->post('video_url');
-               
+
 
                 $dataUser = array(
                     'name' => $name,
@@ -659,13 +661,12 @@ class Index extends CI_Controller {
                     'updated' => date('Y-m-d'),
                     'fbuid' => $fbuid
                 );
-                
+
                 $this->user_model->updatesUser($dataUser);
-                
+
                 $this->session->set_flashdata('success_message', 'Your profile was updated successfully!');
-                
-                redirect(base_url() .'index/editProfile');
-                
+
+                redirect(base_url() . 'index/editProfile');
             } else {
                 if (validation_errors() != '') {
                     throw new Exception(validation_errors());
@@ -673,7 +674,7 @@ class Index extends CI_Controller {
             }
         } catch (Exception $e) {
             $this->session->set_flashdata('error_message', $e->getMessage());
-            redirect(base_url() .'index/editProfile');
+            redirect(base_url() . 'index/editProfile');
         }
 
         $this->layout->view('index/editProfile', $data);
@@ -773,13 +774,12 @@ class Index extends CI_Controller {
 
         $fbuid = $this->session->userdata('uid');
         $user = $this->user_model->loadUserOfFacebookId($fbuid);
-		$data['courses'] = $this->course_model->listCourses();
-		$data['userData'] = $user;
-		foreach ($data['courses'] as $dataCourses){ 
-			$data['users'][] = $this->user_model->listUserOfCourse($dataCourses->id_course);
-			
-		}
-		$data['applieds'] = array();
+        $data['courses'] = $this->course_model->listCourses();
+        $data['userData'] = $user;
+        foreach ($data['courses'] as $dataCourses) {
+            $data['users'][] = $this->user_model->listUserOfCourse($dataCourses->id_course);
+        }
+        $data['applieds'] = array();
         if (!empty($user)) {
             $data['applieds'] = $this->course_model->listCoursesApplied($user[0]->id_user);
         }
