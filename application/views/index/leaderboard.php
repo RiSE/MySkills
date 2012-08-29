@@ -85,6 +85,13 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                                                     <strong><?php echo $professional->name; ?></strong>
                                                 <?php endif; ?>
                                     <?php else: ?>
+                                                    
+                                        <?php if ($professional->video_url != null) :?>
+                                            <a class="btn btn-small" href="#"><i class="icon-facetime-video"></i></a>
+                                        <?php else: ?>
+                                            <a class="btn btn-small" href="#"><i class="icon-user"></i></a>
+                                        <?php endif; ?>
+                                                                                                        
                                     	<strong><?php echo $firstName[0]; ?></strong>
                                     	<?php endif; ?>
                                     </h3>
