@@ -34,36 +34,36 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 		                    <strong>Well done!</strong> <?php echo $this->session->flashdata('success_message'); ?>
 		                </div>
 		            <?php endif; ?>
-			    <form method="POST" name="frmEditProfile">
+			    <form method="POST" class="form-horizontal" name="frmEditProfile">
 			   	    <legend>Legend</legend>
-					  <label>Name</label>
-					  <input type="text" placeholder="Name" class="span4" name="name" value="<?php echo $user->name; ?>">
+					  <label>First Name</label>
+					  <input type="text" placeholder="First Name" class="span4" name="name" value="<?php echo $user->name; ?>"/>
 					  <label>Last name</label>
-					  <input type="text" placeholder="Last name" class="span4" name="surname" value="<?php echo $user->surname; ?>">
+					  <input type="text" placeholder="Last name" class="span4" name="surname" value="<?php echo $user->surname; ?>"/>
 					  <label>E-mail</label>
-					  <input type="text" placeholder="E-mail" class="span4" name="email" value="<?php echo $user->email; ?>" >
+					  <span class="add-on"><i class="icon-envelope"></i><span><input type="text" placeholder="E-mail" class="span4" name="email" value="<?php echo $user->email; ?>" />
 					  <label>I want a position as:</label>
 					  		<label class="checkbox inline">
-							  <input type="checkbox" name="trainee" <?php if($user->trainee == "1"){ echo "checked = 'checked'";}?> value="1">
+							  <input type="checkbox" name="trainee" <?php if($user->trainee == "1"){ echo "checked = 'checked'";}?> value="1"/>
 							 Trainee
 							</label>
                             <label class="checkbox inline">
-							  <input type="checkbox" name="employee" <?php if($user->employee == "1"){ echo "checked = 'checked'";}?> value="1">
+							  <input type="checkbox" name="employee" <?php if($user->employee == "1"){ echo "checked = 'checked'";}?> value="1"/>
 							  Employee
 							</label>
                             <label class="checkbox inline">
-							  <input type="checkbox" name="freelancer" <?php if($user->freelancer == "1"){ echo "checked = 'checked'";}?> value="1">
+							  <input type="checkbox" name="freelancer" <?php if($user->freelancer == "1"){ echo "checked = 'checked'";}?> value="1"/>
 							  Freelancer
 							</label>
 					  
-					  <label>Availability of working:</label>
+					  <label>I am avaliable to work in:</label>
 					  <label class="checkbox inline">
-							  <input name="anotherCity" type="checkbox" <?php if($user->another_city == "1"){ echo "checked = 'checked'";}?> value="1">
-							 I want to work in Another City
+							  <input name="anotherCity" type="checkbox" <?php if($user->another_city == "1"){ echo "checked = 'checked'";}?> value="1"/>
+							 Another City
 							</label>
 							<label class="checkbox inline">
-							  <input type="checkbox" name="anotherCountry" <?php if($user->another_country == "1"){ echo "checked = 'checked'";}?> value="1">
-							 I want to work in Another Country
+							  <input type="checkbox" name="anotherCountry" <?php if($user->another_country == "1"){ echo "checked = 'checked'";}?> value="1"/>
+							  Another Country
 							</label>
 					  <label>State</label>
 					  		<select name="state">
@@ -95,10 +95,12 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 							  <option value="SE" <?php if($user->state == "SE"){ echo "selected = 'selected'";}?>>SE</option>
 							  <option value="TO" <?php if($user->state == "TO"){ echo "selected = 'selected'";}?>>TO</option>
 							</select>
-					  <label>Video-url</label>
-					  <input type="text" placeholder="video_url" class="span4" name="video_url" value="<?php echo $user->video_url; ?>">
+					  <label>1 minute introduction (youtube):</label>
+					  <input type="text" placeholder="http://www.youtube.com/watch?v=" class="span4" name="video_url" value="<?php echo $user->video_url; ?>"/>
+					  <label>Vizify portfolio:</label>
+					  <input type="text" placeholder="http://www.vizify.com/your-username" class="span4" name="vizify_portfolio" value="<?php echo $user->vizify_portfolio; ?>"/>
 					  
-					  <button type="submit" class="btn">Submit</button>
+					  <button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 			  </div><!-- span9 -->
 			      <div class="span3">

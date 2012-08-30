@@ -48,7 +48,7 @@ class User_model extends CI_Model {
         $result = array();
         
         $this->db->select('user.id_user, user.created, user.email,user.surname, user.video_url, user.id_profile,user.name, user.fbuid, user.state,
-        				   user.trainee, user.another_city, user.another_country, user.employee, user.freelancer');
+        				   user.trainee, user.another_city, user.another_country, user.employee, user.freelancer, user.vizify_portfolio');
 
         if (isset($data['fbuid']) && !empty($data['fbuid'])) {
 
