@@ -109,7 +109,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 					  </div><!-- control-group -->
 					  <div class="control-group">
     					<div class="controls">
-					  		<button type="submit" class="btn btn-primary">Submit</button>
+					  		<button type="submit" class="btn btn-large btn-primary">Submit</button>
 					  	</div><!-- controls -->
 					  </div><!-- control-group -->
 				</form>
