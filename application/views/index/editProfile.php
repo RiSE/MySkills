@@ -66,34 +66,11 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 							  Another Country
 							</label>
 					  <label>State</label>
-					  		<select name="state">
+					    	<select name="state">
 							  <option value="">select your state</option>
-							  <option value="AC" <?php if($user->state == "AC"){ echo "selected = 'selected'";}?> >AC</option>
-							  <option value="AL" <?php if($user->state == "AL"){ echo "selected = 'selected'";}?>>AL</option>
-							  <option value="AM" <?php if($user->state == "AM"){ echo "selected = 'selected'";}?>>AM</option>
-							  <option value="BA" <?php if($user->state == "BA"){ echo "selected = 'selected'";}?>>BA</option>
-							  <option value="CE" <?php if($user->state == "CE"){ echo "selected = 'selected'";}?>>CE</option>
-							  <option value="DF" <?php if($user->state == "DF"){ echo "selected = 'selected'";}?>>DF</option>
-							  <option value="ES" <?php if($user->state == "ES"){ echo "selected = 'selected'";}?>>ES</option>
-							  <option value="GO" <?php if($user->state == "GO"){ echo "selected = 'selected'";}?>>GO</option>
-							  <option value="MA" <?php if($user->state == "MA"){ echo "selected = 'selected'";}?>>MA</option>
-							  <option value="MT" <?php if($user->state == "MT"){ echo "selected = 'selected'";}?>>MT</option>
-							  <option value="MS" <?php if($user->state == "MS"){ echo "selected = 'selected'";}?>>MS</option>
-							  <option value="MG" <?php if($user->state == "MG"){ echo "selected = 'selected'";}?>>MG</option>
-							  <option value="PA" <?php if($user->state == "PA"){ echo "selected = 'selected'";}?>>PA</option>
-							  <option value="PB" <?php if($user->state == "PB"){ echo "selected = 'selected'";}?>>PB</option>
-							  <option value="PR" <?php if($user->state == "PR"){ echo "selected = 'selected'";}?>>PR</option>
-							  <option value="PE" <?php if($user->state == "PE"){ echo "selected = 'selected'";}?>>PE</option>
-							  <option value="PI" <?php if($user->state == "PI"){ echo "selected = 'selected'";}?>>PI</option>
-							  <option value="RJ" <?php if($user->state == "RJ"){ echo "selected = 'selected'";}?>>RJ</option>
-							  <option value="RN" <?php if($user->state == "RN"){ echo "selected = 'selected'";}?>>RN</option>
-							  <option value="RS" <?php if($user->state == "RS"){ echo "selected = 'selected'";}?>>RS</option>
-							  <option value="RO" <?php if($user->state == "RO"){ echo "selected = 'selected'";}?>>RO</option>
-							  <option value="RR" <?php if($user->state == "RR"){ echo "selected = 'selected'";}?>>RR</option>
-							  <option value="SC" <?php if($user->state == "SC"){ echo "selected = 'selected'";}?>>SC</option>
-							  <option value="SP" <?php if($user->state == "SP"){ echo "selected = 'selected'";}?>>SP</option>
-							  <option value="SE" <?php if($user->state == "SE"){ echo "selected = 'selected'";}?>>SE</option>
-							  <option value="TO" <?php if($user->state == "TO"){ echo "selected = 'selected'";}?>>TO</option>
+							   <?php foreach ($state as $stateDados){ ?>
+							   		<option value="<?php echo $stateDados->id_state;?>" <?php if($user->state == $stateDados->id_state){ echo "selected = 'selected'";}?>><?php echo $stateDados->name; ?></option>
+							   	<?php } ?>
 							</select>
 					  <label>1 minute introduction (youtube):</label>
 					  <input type="text" placeholder="http://www.youtube.com/watch?v=" class="span4" name="video_url" value="<?php echo $user->video_url; ?>"/>

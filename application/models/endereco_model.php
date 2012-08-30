@@ -14,30 +14,18 @@ class Endereco_model extends CI_Model {
         parent::__construct();
     }
 
-    public function loadUfs($dados = array()) {
+    public function loadUfs() {
 
         $result = array();
-        $data = array();
-
-        $sql = 'SELECT * FROM uf WHERE 1=1';
-
-        if (isset($dados['id_uf']) && !empty($dados['id_uf'])) {
-            $sql .= ' AND id_uf = ?';
-            $data[] = $dados['id_uf'];
-        }
-
-        $query = $this->db->query($sql, $data);
+       
+		$this->db->select('id_state, name, initials');
+		$this->db->order_by('name', 'ASC');
+        
+        $query = $this->db->get('state');
 
         if ($query->num_rows() > 0) {
 
-            foreach ($query->result_object() as $row) {
-
-                if ($row->sigla == 'OC') {
-                    $row->sigla = 'Other Country';
-                }
-
-                array_push($result, $row);
-            }
+            $result[] = $query->result_object();
         }
         return $result;
     }

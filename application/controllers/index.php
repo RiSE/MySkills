@@ -602,6 +602,7 @@ class Index extends CI_Controller {
     public function editProfile() {
 
         $this->load->model('user_model');
+        $this->load->model('endereco_model');
 
         $data = array(
             'title' => 'Edit Profile',
@@ -614,6 +615,9 @@ class Index extends CI_Controller {
 
         $data['user'] = $this->user_model->loadUser(array('fbuid' => $fbuid));
         $data['user'] = !empty($data['user']) ? $data['user'][0] : array();
+        $data['state'] = $this->endereco_model->loadUfs();
+        $data['state'] = !empty($data['state']) ? $data['state'][0] : array();
+        
 
         try {
 
@@ -645,6 +649,7 @@ class Index extends CI_Controller {
                 }
                 $state = (string) $this->input->post('state');
                 $video_url = (string) $this->input->post('video_url');
+                $vizify_portfolio = (string) $this->input->post('vizify_portfolio');
 
 
                 $dataUser = array(
@@ -658,6 +663,7 @@ class Index extends CI_Controller {
                     'another_country' => $anotherCountry,
                     'state' => $state,
                     'video_url' => $video_url,
+                    'vizify_portfolio' => $vizify_portfolio,
                     'updated' => date('Y-m-d'),
                     'fbuid' => $fbuid
                 );
