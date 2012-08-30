@@ -100,7 +100,9 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 					  <label>Vizify portfolio:</label>
 					  <input type="text" placeholder="http://www.vizify.com/your-username" class="span4" name="vizify_portfolio" value="<?php echo $user->vizify_portfolio; ?>"/>
 					  
-					  <button type="submit" class="btn btn-primary">Submit</button>
+					  <label>
+					  	<button type="submit" class="btn btn-primary">Submit</button>
+					  </label>
 				</form>
 			  </div><!-- span9 -->
 			      <div class="span3">
