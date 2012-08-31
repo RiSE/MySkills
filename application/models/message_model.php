@@ -42,6 +42,16 @@ class Message_model extends CI_Model {
         $this->db->trans_complete();
     }
 
+    public function deleteMessage($idMessage) {
+		try{
+	        $this->db->where('id_message', $idMessage);
+			$this->db->delete('message');
+			return true;
+		}catch (Exception $e){
+			return false;
+		}
+    }
+
 }
 
 ?>

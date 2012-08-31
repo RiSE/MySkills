@@ -486,7 +486,8 @@ class Index extends CI_Controller {
                     array_push($userMessages, array(
                         'fbuid' => $usr->fbuid,
                         'name' => $usr->name,
-                        'message' => $message->message
+                        'message' => $message->message,
+                        'id_message' => $message->id_message
                     ));
                 }
             }
@@ -838,6 +839,18 @@ class Index extends CI_Controller {
         $data['professionals'] = $this->user_model->listProfessionals();
 
         echo json_encode($data);
+        die();
+    }
+    public function delpost() {
+
+        $data = array();
+
+        $this->load->model('message_model');
+        $idMessage = $this->input->post('idpost');
+
+        $data['result'] = $this->message_model->deleteMessage($idMessage);
+
+        echo $data['result'];
         die();
     }
 

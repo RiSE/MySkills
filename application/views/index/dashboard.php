@@ -2,6 +2,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         Dashboard.onReady();
+
+        $(".close").click(function(){
+				$.post(base_url+"index/delpost",{idpost : $("#idpost").val()},
+						function(data){
+							if(data){
+								$("#alert-success").show();
+								$("#msnsucesso").html("Post deleted successfully"); 
+								setTimeout(function(){window.location.reload()},3000);
+							}else{
+								$("#divError").show();
+								$("#msnerro").html("post not deleted"); 
+								setTimeout(function(){window.location.reload()},3000);
+							}
+				});
+          });
     });
 </script>
 
@@ -32,17 +47,21 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
             <div id="divError" class="alert alert-error" style="display: none">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>Oh snap! </strong><span id="msnerro"></span> 
-            </div>            
+            </div> 
+            <div id="alert-success" class="alert alert-success" style="display: none">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Well done!</strong> <span id="msnsucesso">You just set your profile</span>
+                </div>           
 
             <?php if ($this->session->flashdata('setprofile')) : ?>
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Well done!</strong> You just set your profile
+                    <strong>Well done!</strong> <span id="msnsucesso">You just set your profile</span>
                 </div>
             <?php endif; ?>
 
             <?php if ($this->session->flashdata('message_sent') == true) : ?>
-                <div class="alert alert-success">
+                <div  class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Well done!</strong> You just sent a message
                 </div>            
@@ -87,7 +106,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <!-- </div> -->
 
                         <?php foreach ($userMessages as $userMessage) : ?>
-                            <pre><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
+                            <pre><?php if($userMessage['fbuid'] == $fbuid){?><button type="button" class="close" >×</button><?php } ?><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
+                            <input type="hidden" id="idpost" value="<?php echo $userMessage['id_message']?>" />
                             <?php endforeach; ?>
 
                     <?php endif; ?>
