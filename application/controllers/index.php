@@ -101,9 +101,9 @@ class Index extends CI_Controller {
                 $session['createdU'] = date('Y-m-d');
                 
                 $this->email->from($email, $name);
-				$this->email->to('eliakim.ramos@rise.com.br');
+				$this->email->to('eduardo.cruz@myskills.com.br');
 				//$this->email->cc('another@another-example.com');
-				//$this->email->bcc('them@their-example.com');
+				$this->email->bcc('eliakim.ramos@rise.com.br');
 				$this->email->subject('Cadastro Myskills');
 				$this->email->message('Essa pessoa '.$name.' se cadastrou no myskills as '.date('Y-m-d H:i:s'));
 				$this->email->send();
