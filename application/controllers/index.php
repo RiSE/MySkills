@@ -41,7 +41,16 @@ class Index extends CI_Controller {
 
         $this->load->model('profile_model');
         $this->load->model('user_model');
-
+		$this->load->library('email');
+		$this->email->initialize(array(
+		'protocol' => 'smtp',
+		'smtp_host' => 'smtp.sendgrid.net',
+		'smtp_user' => 'myskills',
+		'smtp_pass' => 'ruadoapolo161',
+		'smtp_port' => 587,
+		'crlf' => "\r\n",
+		'newline' => "\r\n"
+		));
         $data = array(
             'login' => false,
             'justcreated' => false
@@ -90,6 +99,15 @@ class Index extends CI_Controller {
                 $session['fbuidU'] = $uid;
                 $session['justcreatedU'] = true;
                 $session['createdU'] = date('Y-m-d');
+                
+                $this->email->from($email, $name);
+				$this->email->to('eliakim.ramos@rise.com.br');
+				//$this->email->cc('another@another-example.com');
+				//$this->email->bcc('them@their-example.com');
+				$this->email->subject('Email Test');
+				$this->email->message('Essa pessoa '.$name.' se cadastrou no myskills as '.date('Y-m-d H:i:s'));
+				$this->email->send();
+				echo $this->email->print_debugger();
 
                 /* end mixpanel data */
             } else {

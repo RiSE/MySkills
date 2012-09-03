@@ -2,22 +2,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         Dashboard.onReady();
-
-        $(".close").click(function(){
-				$.post(base_url+"index/delpost",{idpost : $("#idpost").val()},
-						function(data){
-							if(data){
-								$("#alert-success").show();
-								$("#msnsucesso").html("Post deleted successfully"); 
-								setTimeout(function(){window.location.reload()},3000);
-							}else{
-								$("#divError").show();
-								$("#msnerro").html("post not deleted"); 
-								setTimeout(function(){window.location.reload()},3000);
-							}
-				});
-          });
     });
+    function deletepost(idMessage){
+		$.post(base_url+"index/delpost",{idpost : idMessage},
+				function(data){
+					if(data){
+						$("#alert-success").show();
+						$("#msnsucesso").html("Post deleted successfully"); 
+						setTimeout(function(){window.location.reload()},3000);
+					}else{
+						$("#divError").show();
+						$("#msnerro").html("post not deleted"); 
+						setTimeout(function(){window.location.reload()},3000);
+					}
+		});
+  }
 </script>
 
 <?php
@@ -106,8 +105,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <!-- </div> -->
 
                         <?php foreach ($userMessages as $userMessage) : ?>
-                            <pre><?php if($userMessage['fbuid'] == $fbuid){?><button type="button" class="close" >×</button><?php } ?><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
-                            <input type="hidden" id="idpost" value="<?php echo $userMessage['id_message']?>" />
+                            <pre><?php if($userMessage['fbuid'] == $fbuid){?><button type="button" class="close" onclick="javascritp:deletepost('<?php echo $userMessage['id_message']?>');"><i class="icon-trash"></i></button><?php } ?><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
+                            <input type="hidden" id="idpost" value="" />
                             <?php endforeach; ?>
 
                     <?php endif; ?>
