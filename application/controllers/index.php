@@ -104,10 +104,17 @@ class Index extends CI_Controller {
 				$this->email->to('eliakim.ramos@rise.com.br');
 				//$this->email->cc('another@another-example.com');
 				//$this->email->bcc('them@their-example.com');
-				$this->email->subject('Email Test');
+				$this->email->subject('Cadastro Myskills');
 				$this->email->message('Essa pessoa '.$name.' se cadastrou no myskills as '.date('Y-m-d H:i:s'));
 				$this->email->send();
-				echo $this->email->print_debugger();
+                $this->email->from('eduardo.cruz@myskills.com.br', 'Eduardo Cruz');
+				$this->email->to($email);
+				//$this->email->cc('another@another-example.com');
+				//$this->email->bcc('them@their-example.com');
+				$this->email->subject('Email Test');
+				$this->email->message('Você acaba de se cadastrar no myskills acesse nossa pagina diariamente que temos sempre novidades para você /n atenciosamente /n Equipe Myskills');
+				$this->email->send();
+				//echo $this->email->print_debugger();
 
                 /* end mixpanel data */
             } else {
