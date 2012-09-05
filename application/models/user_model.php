@@ -150,7 +150,7 @@ class User_model extends CI_Model {
     public function listUsers() {
 
         $result = array();
-        $Profile = array('2');
+        $Profile = array('2','3');
         $this->db->select('id_user, fbuid, points, created, name, surname, video_url');
         $this->db->where('published', "1");
         //$this->db->where('id_profile', "is null");

@@ -41,6 +41,7 @@ class Index extends CI_Controller {
 
         $this->load->model('profile_model');
         $this->load->model('user_model');
+        $this->load->model('message_model');
 		$this->load->library('email');
 		$this->email->initialize(array(
 		'protocol' => 'smtp',
@@ -87,7 +88,10 @@ class Index extends CI_Controller {
 
                 $userid = $this->user_model->insertUser($datauser);
                 $session['userid'] = $userid;
-
+				
+                $mesageSis['message'] = "New User inscribed:".$name." <img id='userpic' src='https://graph.facebook.com/".$uid."/picture&type=small' /> welcome to myskills!";
+                $mesageSis['id_user'] = "46";
+                $this->message_model->insertMessage($mesageSis);
                 /* mixpanel data */
                 $data['name'] = $name;
                 $data['email'] = $email;
@@ -119,7 +123,7 @@ class Index extends CI_Controller {
                 /* end mixpanel data */
             } else {
                 $session['userid'] = $user[0]->id_user;
-
+                
                 if (isset($user[0]->id_profile)) {
 
                     $profile = $this->profile_model->loadProfile($user[0]->id_profile);
