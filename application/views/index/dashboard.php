@@ -105,9 +105,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <!-- </div> -->
 
                         <?php foreach ($userMessages as $userMessage) : ?>
-                            <pre><?php if($userMessage['fbuid'] == $fbuid){?><button type="button" class="close" onclick="javascritp:deletepost('<?php echo $userMessage['id_message']?>');"><i class="icon-trash"></i></button><?php } ?><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
-                            <input type="hidden" id="idpost" value="" />
-                            <?php endforeach; ?>
+                           <pre><?php if($userMessage['fbuid'] == $fbuid){?><button type="button" class="close" onclick="javascritp:deletepost('<?php echo $userMessage['id_message']?>');"><i class="icon-trash"></i></button><?php } ?><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
+                        <?php endforeach; ?>
 
                     <?php endif; ?>
                 </div>

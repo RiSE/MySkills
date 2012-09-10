@@ -49,6 +49,7 @@ class Index extends CI_Controller {
 		'smtp_user' => 'myskills',
 		'smtp_pass' => 'ruadoapolo161',
 		'smtp_port' => 587,
+		'mailtype' => 'html',
 		'crlf' => "\r\n",
 		'newline' => "\r\n"
 		));
@@ -89,8 +90,9 @@ class Index extends CI_Controller {
                 $userid = $this->user_model->insertUser($datauser);
                 $session['userid'] = $userid;
 				
-                $mesageSis['message'] = "New User inscribed:".$name." <img id='userpic' src='https://graph.facebook.com/".$uid."/picture&type=small' /> welcome to myskills!";
+                $mesageSis['message'] = "New User inscribed:".$name." welcome to myskills! <img id='userpic' src='https://graph.facebook.com/".$uid."/picture&type=small' />";
                 $mesageSis['id_user'] = "46";
+                $mesageSis['fbuid_added'] = $uid;
                 $this->message_model->insertMessage($mesageSis);
                 /* mixpanel data */
                 $data['name'] = $name;
@@ -108,15 +110,15 @@ class Index extends CI_Controller {
 				$this->email->to('eduardo.cruz@myskills.com.br');
 				//$this->email->cc('another@another-example.com');
 				$this->email->bcc('eliakim.ramos@rise.com.br');
-				$this->email->subject('Cadastro Myskills');
+				$this->email->subject('[myskills] new Developer '.$name.' '.$surname);
 				$this->email->message('Essa pessoa '.$name.' se cadastrou no myskills as '.date('Y-m-d H:i:s'));
 				$this->email->send();
-                $this->email->from('eduardo.cruz@myskills.com.br', 'Eduardo Cruz');
+                $this->email->from('eduardo.cruz@myskills.com.br', 'Myskills');
 				$this->email->to($email);
 				//$this->email->cc('another@another-example.com');
 				//$this->email->bcc('them@their-example.com');
-				$this->email->subject('Email Test');
-				$this->email->message('Você acaba de se cadastrar no myskills acesse nossa pagina diariamente que temos sempre novidades para você /n atenciosamente /n Equipe Myskills');
+				$this->email->subject('[myskills] Welcome to Myskills');
+				$this->email->message('Você acaba de se cadastrar no myskills acesse nossa página diariamente que temos sempre novidades para você <br/> atenciosamente <br/> Equipe Myskills');
 				$this->email->send();
 				//echo $this->email->print_debugger();
 
@@ -124,7 +126,7 @@ class Index extends CI_Controller {
             } else {
                 $session['userid'] = $user[0]->id_user;
                 
-                if (isset($user[0]->id_profile)) {
+                if (isset($user[0]->id_profile) && $user[0]->id_profile != 0) {
 
                     $profile = $this->profile_model->loadProfile($user[0]->id_profile);
                     $session['id_profile'] = $user[0]->id_profile;
@@ -516,7 +518,8 @@ class Index extends CI_Controller {
                         'fbuid' => $usr->fbuid,
                         'name' => $usr->name,
                         'message' => $message->message,
-                        'id_message' => $message->id_message
+                        'id_message' => $message->id_message,
+                        'id_user' => $message->id_user
                     ));
                 }
             }
