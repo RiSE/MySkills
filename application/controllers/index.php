@@ -91,7 +91,7 @@ class Index extends CI_Controller {
                 $session['userid'] = $userid;
 				
                 $mesageSis['message'] = "New User inscribed:".$name." welcome to myskills! <img id='userpic' src='https://graph.facebook.com/".$uid."/picture&type=small' />";
-                $mesageSis['id_user'] = "46";
+                $mesageSis['id_user'] = "120";
                 $mesageSis['fbuid_added'] = $uid;
                 $this->message_model->insertMessage($mesageSis);
                 /* mixpanel data */
@@ -111,7 +111,7 @@ class Index extends CI_Controller {
 				//$this->email->cc('another@another-example.com');
 				$this->email->bcc('eliakim.ramos@rise.com.br');
 				$this->email->subject('[myskills] new Developer '.$name.' '.$surname);
-				$this->email->message('Essa pessoa '.$name.' se cadastrou no myskills as '.date('Y-m-d H:i:s'));
+				$this->email->message('First Name:'.$name.'<br/> Last Name:'.$surname.'<br/> date register:'.date('d/m/Y H:i:s'));
 				$this->email->send();
                 $this->email->from('eduardo.cruz@myskills.com.br', 'Myskills');
 				$this->email->to($email);
