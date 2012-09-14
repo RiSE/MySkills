@@ -82,7 +82,7 @@ Do you want to unlock your badges? Go to our homepage, login, choose the option 
                                                     </a>
                                     </h3>
                                                 <?php else: ?>	
-                                                    <strong><?php echo $professional->name; ?></strong>
+                                                    <strong><?php echo $firstName[0]; ?></strong>
                                                 <?php endif; ?>
                                     <?php else: ?>
                                                     

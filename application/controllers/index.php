@@ -90,8 +90,8 @@ class Index extends CI_Controller {
                 $userid = $this->user_model->insertUser($datauser);
                 $session['userid'] = $userid;
 				
-                $mesageSis['message'] = "New User inscribed:".$name." welcome to myskills! <img id='userpic' src='https://graph.facebook.com/".$uid."/picture&type=small' />";
-                $mesageSis['id_user'] = "120";
+                $mesageSis['message'] = 'We have a new user. welcome, '.$name.' <img id="userpic" src="https://graph.facebook.com/'.$uid.'/picture&type=small" />';
+                $mesageSis['id_user'] = "170";
                 $mesageSis['fbuid_added'] = $uid;
                 $this->message_model->insertMessage($mesageSis);
                 /* mixpanel data */
@@ -519,7 +519,9 @@ class Index extends CI_Controller {
                         'name' => $usr->name,
                         'message' => $message->message,
                         'id_message' => $message->id_message,
-                        'id_user' => $message->id_user
+                        'id_user' => $message->id_user,
+                    	'id_profile' => $usr->id_profile,
+                    	'video_url' => $usr->video_url
                     ));
                 }
             }

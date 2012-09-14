@@ -103,9 +103,22 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         <!-- <div class="form-actions"> -->
                             
                         <!-- </div> -->
-
-                        <?php foreach ($userMessages as $userMessage) : ?>
-                           <pre><?php if($userMessage['fbuid'] == $fbuid){?><button type="button" class="close" onclick="javascritp:deletepost('<?php echo $userMessage['id_message']?>');"><i class="icon-trash"></i></button><?php } ?><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;" . $userMessage['name'] . " said:&nbsp;" . $userMessage['message']; ?></pre>
+						
+                        <?php foreach ($userMessages as $userMessage) : 
+		                        $textUserName = "";
+                        		if ($userMessage['id_profile'] == "1") :
+		                              if ($userMessage['video_url'] != null) :
+		                                   $textUserName .=' <a class="btn btn-small" href="'.base_url(). 'index/profile?'.$userMessage['fbuid'].'"><i class="icon-facetime-video"></i></a>&nbsp;';
+		                               else: 
+		                                 $textUserName .='<a class="btn btn-small" href="'.base_url() . 'index/profile?' . $userMessage['fbuid'].'"><i class="icon-user"></i></a>&nbsp;';
+		                               endif; 
+		                               $textUserName .='<a href="'.base_url().'index/profile?'.$userMessage['fbuid'].'">'. $userMessage['name'].'</a>'; 
+		                         else: 	
+		                         	$textUserName .= $userMessage['name'];
+		                         endif; 
+		                       
+                        ?>
+                           <pre><?php if($userMessage['fbuid'] == $fbuid){?><button type="button" class="close" onclick="javascritp:deletepost('<?php echo $userMessage['id_message']?>');"><i class="icon-trash"></i></button><?php } ?><img id="userpic" src="https://graph.facebook.com/<?php echo $userMessage['fbuid']; ?>/picture&type=small" /><?php echo"&nbsp;".$textUserName . " said:&nbsp;" . $userMessage['message']; ?></pre>
                         <?php endforeach; ?>
 
                     <?php endif; ?>
