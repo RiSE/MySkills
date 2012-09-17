@@ -34,6 +34,18 @@ class Course_model extends CI_Model {
 
         return $result;
     }
+    
+    public function loadCourses($idCourses){
+    	$result = array();
+    	$this->db->select('id_course,title,description');
+    	$this->db->where('id_course',$idCourses);
+    	$query = $this->db->get($this->table);
+    	if($query->num_rows() > 0){
+    		$result = $query->result_object();
+    	}
+    	
+    	return $result;
+    }
 
     public function listCoursesApplied($idUser) {
 

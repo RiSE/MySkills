@@ -356,6 +356,7 @@ class Index extends CI_Controller {
     public function claimBadges() {
         $this->load->model('user_model');
         $this->load->model('badge_model');
+        $this->load->model('message_model');
 
         $data = array(
             'title' => 'Claim Badges',
@@ -384,8 +385,11 @@ class Index extends CI_Controller {
                         'id_badge' => $badge[0]->id_badge,
                         'code' => $code
                     );
-
+					$mesageSis['message'] = 'The user  '.$professional[0]->name.' <img id="userpic" src="https://graph.facebook.com/'.$fbuid.'/picture&type=small" /> requested a '.$badge[0]->name.' badge';
+                	$mesageSis['id_user'] = "170";
+                	$mesageSis['fbuid_added'] = $fbuid;
                     $this->badge_model->insertBadgeProfessional($insert);
+                    $this->message_model->insertMessage($mesageSis);
                     $this->session->set_flashdata('claimbadge', true);
 
                     redirect(base_url() . 'index/profile');
@@ -832,19 +836,24 @@ class Index extends CI_Controller {
 
         $this->load->model('user_model');
         $this->load->model('course_model');
-        $this->load->library('email');
+        //$this->load->library('email');
+        $this->load->model('message_model');
 
         $fbuid = $this->session->userdata('uid');
         $idCourse = (int) $this->input->post('ids');
 
         $user = $this->user_model->loadUserOfFacebookId($fbuid);
-
+		$course = $this->course_model->loadCourses($idCourse);
         $dataCourseProfessional = array(
             'id_user' => $user[0]->id_user,
             'id_course' => $idCourse
         );
-
+        
+		$mesageSis['message'] = 'The user '.$user[0]->name.' <img id="userpic" src="https://graph.facebook.com/'.$fbuid.'/picture&type=small" /> applied for course for '.$course[0]->title;
+        $mesageSis['id_user'] = "170";
+        $mesageSis['fbuid_added'] = $fbuid;
         $save = $this->course_model->insertCourseProfessional($dataCourseProfessional);
+        $this->message_model->insertMessage($mesageSis);
         $this->session->set_flashdata('applyforacourse', true);
 
         redirect(base_url() . 'index/profile');
