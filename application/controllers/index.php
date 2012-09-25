@@ -659,7 +659,10 @@ class Index extends CI_Controller {
         	$User_jobs = $this->job_model->listJobsAppliedUserByJob($job->id_job);
         
 	        foreach($User_jobs as $userJobs){
-	        	$dados[$k][] = $this->user_model->loadUserOfUserId($userJobs->id_user);
+	        	$teste = $this->user_model->loadUserOfUserId($userJobs->id_user);
+	        	array_push($teste, $userJobs->status);
+	        	$dados[$k][] = $teste; 
+	        	 
 	        }
 	       $k++;
         }
@@ -979,6 +982,17 @@ class Index extends CI_Controller {
         $data['events'] = $this->event_model->listEvents();
 
         $this->layout->view('index/events', $data);
+    }
+    
+    public function mudastatus(){
+    	$this->load->model('job_model');
+    	
+    	$data['id_user'] = $this->input->post("idUser");
+    	$data['id_job'] = $this->input->post("idJob");
+    	$data['status'] = $this->input->post("novostatus");
+    	$this->job_model->updatesJobUser($data);
+    	
+    	die();
     }
 
 }

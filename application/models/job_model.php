@@ -48,7 +48,7 @@ class Job_model extends CI_Model {
 
         $result = array();
         
-        $this->db->select('id_user, id_job');
+        $this->db->select('id_user, id_job, status');
         $this->db->where('id_user', $idUser);
         
         if (isset($idJob) && !empty($idJob)) {
@@ -67,7 +67,7 @@ class Job_model extends CI_Model {
 
         $result = array();
         
-        $this->db->select('id_user, id_job');
+        $this->db->select('id_user, id_job, status');
                 
         if (isset($idJob) && !empty($idJob)) {
             $this->db->where('id_job', $idJob);
@@ -90,7 +90,15 @@ class Job_model extends CI_Model {
         $this->db->insert('jobs_user', $data);
         $this->db->trans_complete();
     }
+	
+public function updatesJobUser($data) {
 
+        $this->db->trans_start();
+        $this->db->where('id_user', $data['id_user']);
+        $this->db->where('id_job', $data['id_job']);
+        $this->db->update('jobs_user', $data);
+        $this->db->trans_complete();
+    }
 }
 
 ?>

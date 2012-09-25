@@ -5,8 +5,18 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     ?>
     <script type="text/javascript">
         mixpanel.track('Professional Profile');
+        
     </script>
 <?php endif; ?>
+<script type="text/javascript">
+function mudastatus(status,user,job){
+	$.post("<?php echo base_url(); ?>index/mudastatus",{novostatus:status,idUser:user,idJob:job},
+			function(data){
+				//alert(data);
+			}
+	);
+}
+</script>
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -171,26 +181,39 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 																        </colgroup>
 														
 																	<thead>
-																		<tr><th><?php echo $job->title;?></th></tr>
+																		<tr>
+																			<th><?php echo $job->title;?></th> 
+																			<th>Applied</th>
+																			<th>Evaluation</th>
+																			<th>Approved</th>
+																			<th>Rejected</th>
+																		</tr>
 																	</thead>
 																	<tbody>
 											                        <?php
 											                           if(!empty($professionals)):
+											                           
 											                            foreach ($professionals[$k] as $user) :
 											                             
 											                            ?>
-							                                
-																		        
 																		          <tr>
 																			            <td width=40%>
-																			             	 <?php echo $user[0]->name; 
-																		                     	   //echo $company[0]->company;
-																		                     	?>
-																		                  
+																			             	 <?php echo $user[0]->name; ?>
+																			            </td>
+																			            <td >
+																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Applied" onclick="mudastatus('Applied','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Applied"){?> checked = "checked" <?php }?>>
+																			            </td>
+																			            <td >
+																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Evaluation" onclick="mudastatus('Evaluation','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Evaluation"){?> checked = "checked" <?php }?>>
+																			            </td>
+																			            <td >
+																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Approved" onclick="mudastatus('Approved','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Approved"){?> checked = "checked" <?php }?>>
+																			            </td>
+																			            <td >
+																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Rejected" onclick="mudastatus('Rejected','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Rejected"){?> checked = "checked" <?php }?>>
 																			            </td>
 																			     </tr>
 																	<?php 
-																			
 																	    endforeach;
 																	  endif;
 																	?>
@@ -227,7 +250,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 	                <div class="sidebar">
 	                <?php if($user[0]->id_profile == 1):?>
 	                    <h4><span class="slash">//</span>iOS Training Badge</h4>
-	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/iOSBadge100.png">
+	                    <img width="50" align="left" src="<?php echo base_url(); ?>assets/images/badges/iOSBadge100.png">
 	
 	                    <p>
 	                        The iOS badge is provided for students that participated on an 
@@ -237,7 +260,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 	                    </p>
 	
 	                    <h4><span class="slash">//</span>The Unlock Badge</h4>
-	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/unlock100.png">
+	                    <img width="50" align="left" src="<?php echo base_url(); ?>assets/images/badges/unlock100.png">
 	
 	                    <p>
 	                        The Unlock badge is used as a visual representation for programmers and 
@@ -245,7 +268,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 	                    </p>
 					<?php else:?>
 							<h4><span class="slash">//</span>iOS Training Badge recruter</h4>
-	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/iOSBadge100.png">
+	                    <img width="50" align="left" src="<?php echo base_url(); ?>assets/images/badges/iOSBadge100.png">
 	
 	                    <p>
 	                        The iOS badge is provided for students that participated on an 
@@ -255,7 +278,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 	                    </p>
 	
 	                    <h4><span class="slash">//</span>The Unlock Badge</h4>
-	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/unlock100.png">
+	                    <img width="50" align="left" src="<?php echo base_url(); ?>assets/images/badges/unlock100.png">
 	
 	                    <p>
 	                        The Unlock badge is used as a visual representation for programmers and 
