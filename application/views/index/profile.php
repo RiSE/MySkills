@@ -17,11 +17,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 <div id="subpage">	
     <div class="container">
 
-        <form method="POST" name="frmClaim">
-
-            <!--            <div class="container">-->
-
-            <div class="row">
+           <div class="row">
                 <!-- -->
 
                 <?php if ($this->session->flashdata('signup') == true) : ?>
@@ -57,26 +53,28 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <br /><br />
 
                     <?php
-                    for ($i = 0; $i <= 7; $i++) {
-                        if ($i >= count($ThisBadge)) {
-                            ?>
-                            <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                            <?php
-                        } else {
-                            if ($ThisBadge[$i]->active == 1) {
-                                ?>
-                                <img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge) ?>" width="65"></img>
-                            <?php } else { ?>
-                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                                <?php
-                            }
-                        }
-                    }
+                    if($user[0]->id_profile == 1):
+	                    for ($i = 0; $i <= 7; $i++) {
+	                        if ($i >= count($ThisBadge)) {
+	                            ?>
+	                            <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+	                            <?php
+	                        } else {
+	                            if ($ThisBadge[$i]->active == 1) {
+	                                ?>
+	                                <img src="<?php echo base_url(); ?>assets/images/badges/<?php echo $this->badge_model->getImgBadgs($ThisBadge[$i]->id_badge) ?>" width="65"></img>
+	                            <?php } else { ?>
+	                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
+	                                <?php
+	                            }
+	                        }
+	                    }
+	                 endif;
                     ?>
 
                 </div>
 
-                <div class="span10" name="divContainer">
+                <div class="span7" name="divContainer">
 
                     <h3 id="name"><span class="slash">Professional:</span><?php echo $user[0]->name; ?></h3>
 
@@ -96,69 +94,120 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Courses</a></div>
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Profile Views</a></div>
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Expected Salary</a></div>-->
+				<?php if($user[0]->id_profile == 1):?>
+		                    <?php if ($user[0]->video_url != null) : ?>
+		                        <div class="span8">
+		                            <center>
+		                                <iframe width="250" height="188" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
+		                            </center>
+		                        </div>
+		
+		                        <div class="row">
+		                            <div class="span8">
+		                                &nbsp;
+		                            </div>
+		                        </div>
+		                        <div class="row">
+		                            <div class="span8">
+		                                &nbsp;
+		                            </div>
+		                        </div>
+		
+		                    <?php else: ?>
+		                        <div class="row">
+		                            <div class="span8">
+		                                &nbsp;
+		                            </div>
+		                        </div>
+		                        <div class="row">
+		                            <div class="span8">
+		                                &nbsp;
+		                            </div>
+		                        </div>
+		
+		                    <?php endif; ?>
+		
+						 
+		                    <div class="span2">
+		                        <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
+		                    </div>
+		
+		                    <div class="span2">
+		                        <a href="<?php echo base_url(); ?>index/claimbadges" class="btn btn-warning btn-large">Claim your Badges</a>
+		                    </div>
+		
+		                    <div class="span2">
+		                        &nbsp;<a href="<?php echo base_url(); ?>index/courses" class="btn btn-success btn-large" >Apply for a Course</a>
+		                    </div>
+				
+		                    <div class="row">
+		                        <div class="span8">
+		                            &nbsp;
+		                        </div>
+		                    </div>
+		
+		                    <div class="row">
+		                        <div class="span8">
+		                            &nbsp;
+		                        </div>
+		                    </div>
+					<?php endif;?>
 
-                    <?php if ($user[0]->video_url != null) : ?>
-                        <div class="span8">
-                            <center>
-                                <iframe width="250" height="188" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
-                            </center>
-                        </div>
-
-                        <div class="row">
-                            <div class="span8">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="span8">
-                                &nbsp;
-                            </div>
-                        </div>
-
-                    <?php else: ?>
-                        <div class="row">
-                            <div class="span8">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="span8">
-                                &nbsp;
-                            </div>
-                        </div>
-
-                    <?php endif; ?>
-
-
-                    <div class="span3">
-                        <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
-                    </div>
-
-                    <div class="span3">
-                        <a href="<?php echo base_url(); ?>index/claimbadges" class="btn btn-warning btn-large">Claim your Badges</a>
-                    </div>
-
-                    <div class="span3">
-                        &nbsp;<a href="<?php echo base_url(); ?>index/courses" class="btn btn-success btn-large" >Apply for a Course</a>
-                    </div>
-
-                    <div class="row">
-                        <div class="span8">
-                            &nbsp;
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="span8">
-                            &nbsp;
-                        </div>
-                    </div>
-
-
-                    <div class="span8  sidebar">
-                        <h2>News</h2>
-                        <p></p>
-                    </div>
+                    <div class="span8">
+                        <?php if($user[0]->id_profile == 2){?>
+							           <div class="tabbable tabs-left">
+							              <div class="tab-content">
+							                 <?php 
+							                   	$k = 0;
+							                   	foreach ($jobs as $job):?>
+							                       		<div class="row">
+							                                    <div class="span5">
+							                                        
+							                                        <table class="table  table-striped table-condensed">
+													
+																        <colgroup>
+																          <col class="span2">
+																           <!-- <col class="span4"> -->
+																        </colgroup>
+														
+																	<thead>
+																		<tr><th><?php echo $job->title;?></th></tr>
+																	</thead>
+																	<tbody>
+											                        <?php
+											                           if(!empty($professionals)):
+											                            foreach ($professionals[$k] as $user) :
+											                             
+											                            ?>
+							                                
+																		        
+																		          <tr>
+																			            <td width=40%>
+																			             	 <?php echo $user[0]->name; 
+																		                     	   //echo $company[0]->company;
+																		                     	?>
+																		                  
+																			            </td>
+																			     </tr>
+																	<?php 
+																			
+																	    endforeach;
+																	  endif;
+																	?>
+																	</tbody>
+																	</table>
+																	
+							  										 </div>
+							                                </div>
+											                    	
+											<?php 
+												$k++;	
+											endforeach;
+											?>
+                    					</div>
+                    				</div>
+                    			<?php } ?>
+                    	</div>
 
                     <div class="row">
                         <div class="span8">
@@ -173,8 +222,51 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     </div>
 
                 </div>
-
+					
+					<div class="span3">
+	                <div class="sidebar">
+	                <?php if($user[0]->id_profile == 1):?>
+	                    <h4><span class="slash">//</span>iOS Training Badge</h4>
+	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/iOSBadge100.png">
+	
+	                    <p>
+	                        The iOS badge is provided for students that participated on an 
+	                        Apple technology trainning. This course provided content and 
+	                        practice in iOS application development including: iPad, iPhone and iPod touch.
+	                        Unlock Badge.
+	                    </p>
+	
+	                    <h4><span class="slash">//</span>The Unlock Badge</h4>
+	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/unlock100.png">
+	
+	                    <p>
+	                        The Unlock badge is used as a visual representation for programmers and 
+	                        recruiters that the programmer can unlock other badges in the future to improve his profile page.
+	                    </p>
+					<?php else:?>
+							<h4><span class="slash">//</span>iOS Training Badge recruter</h4>
+	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/iOSBadge100.png">
+	
+	                    <p>
+	                        The iOS badge is provided for students that participated on an 
+	                        Apple technology trainning. This course provided content and 
+	                        practice in iOS application development including: iPad, iPhone and iPod touch.
+	                        Unlock Badge.
+	                    </p>
+	
+	                    <h4><span class="slash">//</span>The Unlock Badge</h4>
+	                    <img width="50" align="left" src="http://localhost/MySkills/assets/images/badges/unlock100.png">
+	
+	                    <p>
+	                        The Unlock badge is used as a visual representation for programmers and 
+	                        recruiters that the programmer can unlock other badges in the future to improve his profile page.
+	                    </p>
+	                 <?php endif;?>
+	                </div>
+              </div>
+    
             </div>
+            
 
             <!--            </div>-->
 
@@ -283,7 +375,5 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     </div>
                 </div>
             </div>-->
-
-        </form>
     </div>
 </div>

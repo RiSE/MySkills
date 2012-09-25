@@ -43,26 +43,7 @@ class Job_model extends CI_Model {
         return $result;
     }
 
-    public function listJobsApplied($idProfessional , $idJob = null) {
-
-        $result = array();
-        
-        $this->db->select('id_professional, id_job');
-        $this->db->where('id_professional', $idProfessional);
-        
-        if (isset($idJob) && !empty($idJob)) {
-            $this->db->where('id_job', $idJob);
-        }
-
-        $query = $this->db->get('jobs_professional');
-
-        if ($query->num_rows() > 0) {
-            $result = $query->result_object();
-        }
-
-        return $result;
-    }
-    
+   
     public function listJobsAppliedUser($idUser , $idJob = null) {
 
         $result = array();
@@ -82,13 +63,26 @@ class Job_model extends CI_Model {
 
         return $result;
     }
+    public function listJobsAppliedUserByJob($idJob = null) {
 
-    public function insertJobProfessional($data = array()) {
+        $result = array();
+        
+        $this->db->select('id_user, id_job');
+                
+        if (isset($idJob) && !empty($idJob)) {
+            $this->db->where('id_job', $idJob);
+        }
 
-        $this->db->trans_start();
-        $this->db->insert('jobs_professional', $data);
-        $this->db->trans_complete();
+        $query = $this->db->get('jobs_user');
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
     }
+
+    
     
     public function insertJobUser($data = array()) {
 

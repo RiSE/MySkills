@@ -42,6 +42,7 @@ class Index extends CI_Controller {
         $this->load->model('profile_model');
         $this->load->model('user_model');
         $this->load->model('message_model');
+        $this->load->model('log_model');
 		$this->load->library('email');
 		$this->email->initialize(array(
 		'protocol' => 'smtp',
@@ -145,7 +146,24 @@ class Index extends CI_Controller {
                     $session['id_profile'] = null;
                 }
             }
-
+            
+			$listLog = $this->log_model->loadLog($uid,date('Y-m-d'));
+			
+			if(empty($listLog)){
+            	$datalog['id_fbuid'] = $uid;
+            	$datalog['date'] = date('Y-m-d');
+            	$datalog['descryption'] = "o usuario logou";
+            	$datalog['points'] = 1;
+            	$this->log_model->insertLog($datalog);
+            	$professional = $this->user_model->loadUserOfFacebookId($uid);
+            	
+            	$professional2['fbuid'] = $uid;
+            	$professional2['points'] = $professional[0]->points;
+            	$professional2['points'] = $professional2['points'] + $datalog['points'];
+            	
+            	$this->user_model->updatesUser($professional2);
+            		
+			}
             $this->session->set_userdata($session);
 
             $data['login'] = true;
@@ -295,14 +313,30 @@ class Index extends CI_Controller {
     public function recruiterProfile() {
 
         $this->load->model('user_model');
-
+        $this->load->model('job_model');
+		
+        $fbuid = $this->session->userdata('uid');
         $data = array(
             'title' => 'Recruiter Profile',
             'mixpanel' => 'Recruiter Profile',
         );
-
-        $data['professionals'] = $this->user_model->listProfessionals();
-
+		$professional = $this->user_model->loadUserOfFacebookId($fbuid);
+		$userRecruiter['id_user']= $professional[0]->id_user;
+        $jobs = $this->job_model->listJobs($userRecruiter);
+        $k = 0;
+        foreach($jobs as $job){ 
+        	$User_jobs = $this->job_model->listJobsAppliedUserByJob($job->id_job);
+        
+	        foreach($User_jobs as $userJobs){
+	        	$dados[$k][] = $this->user_model->loadUserOfUserId($userJobs->id_user);
+	        }
+	       $k++;
+        }
+        
+        $data['professionals'] = $dados;
+        $data['jobs'] = $jobs;
+        $data["userRecruter"] = $professional;
+		
         $this->layout->view('index/recruiterProfile', $data);
     }
 
@@ -385,7 +419,7 @@ class Index extends CI_Controller {
                         'id_badge' => $badge[0]->id_badge,
                         'code' => $code
                     );
-					$mesageSis['message'] = 'The user  '.$professional[0]->name.' <img id="userpic" src="https://graph.facebook.com/'.$fbuid.'/picture&type=small" /> requested a '.$badge[0]->name.' badge';
+					$mesageSis['message'] = '<img id="userpic" src="https://graph.facebook.com/'.$fbuid.'/picture&type=small" />  '.$professional[0]->name.' requested a '.$badge[0]->name.' badge';
                 	$mesageSis['id_user'] = "170";
                 	$mesageSis['fbuid_added'] = $fbuid;
                     $this->badge_model->insertBadgeProfessional($insert);
@@ -599,18 +633,9 @@ class Index extends CI_Controller {
 
     public function profile() {
 
-        /* $this->load->model('professional_model');
-
-          $data = array(
-          'title' => 'Recruiter Profile'
-          );
-
-          $data['professionals'] = $this->professional_model->listProfessionals();
-
-          $this->layout->view('recruiter/profile', $data); */
-
         $this->load->model('professional_model');
         $this->load->model('user_model');
+        $this->load->model('job_model');
         $this->load->model('badge_model');
 
         $data = array(
@@ -625,7 +650,23 @@ class Index extends CI_Controller {
         } else {
             $fbuid = $valuesarray[0];
         }
-        //var_dump($fbuid);die;
+        $professional = $this->user_model->loadUserOfFacebookId($fbuid);
+		$userRecruiter['id_user']= $professional[0]->id_user;
+        $jobs = $this->job_model->listJobs($userRecruiter);
+        $k = 0;
+        $dados = array();
+        foreach($jobs as $job){ 
+        	$User_jobs = $this->job_model->listJobsAppliedUserByJob($job->id_job);
+        
+	        foreach($User_jobs as $userJobs){
+	        	$dados[$k][] = $this->user_model->loadUserOfUserId($userJobs->id_user);
+	        }
+	       $k++;
+        }
+        
+        $data['professionals'] = $dados;
+        $data['jobs'] = $jobs;
+        $data["userRecruter"] = $professional;
         $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
         $video = $user[0]->video_url;
         $video = str_replace('watch?v=', 'embed/', $video);        
@@ -849,7 +890,7 @@ class Index extends CI_Controller {
             'id_course' => $idCourse
         );
         
-		$mesageSis['message'] = 'The user '.$user[0]->name.' <img id="userpic" src="https://graph.facebook.com/'.$fbuid.'/picture&type=small" /> applied for course for '.$course[0]->title;
+		$mesageSis['message'] = '<img id="userpic" src="https://graph.facebook.com/'.$fbuid.'/picture&type=small" /> '.$user[0]->name.'  applied for '.$course[0]->title;
         $mesageSis['id_user'] = "170";
         $mesageSis['fbuid_added'] = $fbuid;
         $save = $this->course_model->insertCourseProfessional($dataCourseProfessional);

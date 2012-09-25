@@ -113,7 +113,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, name, surname, created, email, id_profile');
+        $this->db->select('id_user, name, surname, created, email, id_profile,points');
         
         if ($fbuid > 0) {
             $this->db->where('fbuid', $fbuid);
@@ -132,7 +132,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, fbuid, created, email, name, surname, id_profile,video_url');
+        $this->db->select('id_user, fbuid, created, email, name, surname, id_profile,video_url,points');
         
         if ($userid > 0) {
             $this->db->where('id_user', $userid);

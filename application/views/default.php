@@ -37,6 +37,7 @@ if ($this->session->userdata('justcreatedU') == true) {
 <?php } ?>
     </script><!-- end Mixpanel -->        
     <head>
+        <script src="//cdn.optimizely.com/js/111465504.js"></script>
         <meta charset="utf-8">
         <title><?php echo $title; ?></title>
 
@@ -297,7 +298,7 @@ if ($this->session->userdata('justcreatedU') == true) {
                                 <li class="dropdown" id="fat-menu">
                                     <?php $link = null; ?>
                                     <?php if ($this->session->userdata('recruiter') == true) : ?>
-                                        <?php $link = 'index/recruiterProfile'; ?>
+                                        <?php $link = 'index/profile'; ?>
                                     <?php elseif ($this->session->userdata('developer') == true) : ?>
                                         <?php $link = 'index/profile'; ?>
                                     <?php else: ?>
