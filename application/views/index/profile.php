@@ -8,15 +8,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         
     </script>
 <?php endif; ?>
-<script type="text/javascript">
-function mudastatus(status,user,job){
-	$.post("<?php echo base_url(); ?>index/mudastatus",{novostatus:status,idUser:user,idJob:job},
-			function(data){
-				//alert(data);
-			}
-	);
-}
-</script>
+
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -164,73 +156,7 @@ function mudastatus(status,user,job){
 					<?php endif;?>
 
                     <div class="span8">
-                        <?php if($user[0]->id_profile == 2){?>
-							           <div class="tabbable tabs-left">
-							              <div class="tab-content">
-							                 <?php 
-							                   	$k = 0;
-							                   	foreach ($jobs as $job):?>
-							                       		<div class="row">
-							                                    <div class="span5">
-							                                        
-							                                        <table class="table  table-striped table-condensed">
-													
-																        <colgroup>
-																          <col class="span2">
-																           <!-- <col class="span4"> -->
-																        </colgroup>
-														
-																	<thead>
-																		<tr>
-																			<th><?php echo $job->title;?></th> 
-																			<th>Applied</th>
-																			<th>Evaluation</th>
-																			<th>Approved</th>
-																			<th>Rejected</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-											                        <?php
-											                           if(!empty($professionals)):
-											                           
-											                            foreach ($professionals[$k] as $user) :
-											                             
-											                            ?>
-																		          <tr>
-																			            <td width=40%>
-																			             	 <?php echo $user[0]->name; ?>
-																			            </td>
-																			            <td >
-																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Applied" onclick="mudastatus('Applied','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Applied"){?> checked = "checked" <?php }?>>
-																			            </td>
-																			            <td >
-																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Evaluation" onclick="mudastatus('Evaluation','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Evaluation"){?> checked = "checked" <?php }?>>
-																			            </td>
-																			            <td >
-																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Approved" onclick="mudastatus('Approved','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Approved"){?> checked = "checked" <?php }?>>
-																			            </td>
-																			            <td >
-																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Rejected" onclick="mudastatus('Rejected','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Rejected"){?> checked = "checked" <?php }?>>
-																			            </td>
-																			     </tr>
-																	<?php 
-																	    endforeach;
-																	  endif;
-																	?>
-																	</tbody>
-																	</table>
-																	
-							  										 </div>
-							                                </div>
-											                    	
-											<?php 
-												$k++;	
-											endforeach;
-											?>
-                    					</div>
-                    				</div>
-                    			<?php } ?>
-                    	</div>
+                    </div>
 
                     <div class="row">
                         <div class="span8">

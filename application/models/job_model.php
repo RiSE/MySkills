@@ -26,8 +26,9 @@ class Job_model extends CI_Model {
         
         if (isset($data['id_user']) && !empty($data['id_user'])) {
             $this->db->where('id_user', $data['id_user']);
+            
         }        
-        
+        $this->db->where('published', '1');
         if (isset($data['exist']) && $data['exist'] == false) {
             $this->db->limit(0, 0);
         }
@@ -71,8 +72,9 @@ class Job_model extends CI_Model {
                 
         if (isset($idJob) && !empty($idJob)) {
             $this->db->where('id_job', $idJob);
-        }
 
+        }
+		
         $query = $this->db->get('jobs_user');
 
         if ($query->num_rows() > 0) {
@@ -94,9 +96,23 @@ class Job_model extends CI_Model {
 public function updatesJobUser($data) {
 
         $this->db->trans_start();
-        $this->db->where('id_user', $data['id_user']);
-        $this->db->where('id_job', $data['id_job']);
+        if(!empty($data['id_user'])){
+        	$this->db->where('id_user', $data['id_user']);
+        }
+        if(!empty($data['id_job'])){
+        	$this->db->where('id_job', $data['id_job']);
+        }
         $this->db->update('jobs_user', $data);
+        $this->db->trans_complete();
+    }
+public function updatesJob($data) {
+
+        $this->db->trans_start();
+        
+        if(!empty($data['id_job'])){
+        	$this->db->where('id_job', $data['id_job']);
+        }
+        $this->db->update('job', $data);
         $this->db->trans_complete();
     }
 }

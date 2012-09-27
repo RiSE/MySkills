@@ -113,7 +113,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, name, surname, created, email, id_profile,points');
+        $this->db->select('id_user, name, surname, created, email, id_profile,points,vizify_portfolio');
         
         if ($fbuid > 0) {
             $this->db->where('fbuid', $fbuid);
@@ -132,7 +132,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user, fbuid, created, email, name, surname, id_profile,video_url,points');
+        $this->db->select('id_user, fbuid, created, email, name, surname, id_profile,video_url,points,vizify_portfolio');
         
         if ($userid > 0) {
             $this->db->where('id_user', $userid);
@@ -151,7 +151,7 @@ class User_model extends CI_Model {
 
         $result = array();
         $Profile = array('2','3');
-        $this->db->select('id_user, fbuid, points, created, name, surname, video_url');
+        $this->db->select('id_user, fbuid, points, created, name, surname, video_url,vizify_portfolio');
         $this->db->where('published', "1");
         //$this->db->where('id_profile', "is null");
         $this->db->where_not_in('id_profile', $Profile);
@@ -171,7 +171,7 @@ class User_model extends CI_Model {
 
         $result = array();
 
-        $this->db->select('id_user as id_professional, fbuid, points, created, name, surname');
+        $this->db->select('id_user as id_professional, fbuid, points, created, name, surname, vizify_portfolio');
         $this->db->where('id_profile', 1);
         $this->db->order_by('points', 'DESC');
 

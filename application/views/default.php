@@ -242,26 +242,45 @@ if ($this->session->userdata('justcreatedU') == true) {
                                         Home
                                     </a>						
                             </li>
-                            <?php if ($this->session->userdata('uid') > 0) : ?>
-                                <li>						
-                                    <a href="<?php echo base_url(); ?>index/jobs">
-                                        Apply for a job
-                                    </a>
-                                </li>
+                            <?php if ($this->session->userdata('uid') > 0) : 
+                            		if ($this->session->userdata('developer') == true) :	
+                            ?>
+		                                <li>						
+		                                    <a href="<?php echo base_url(); ?>index/jobs">
+		                                        Apply for a job
+		                                    </a>
+		                                </li>
+		                            <?php endif;?>
                             <?php endif; ?>
-                            <?php if ($this->session->userdata('uid') > 0) : ?>
-                                <li>						
-                                    <a href="<?php echo base_url(); ?>index/claimBadges">
-                                        Claim Badge
-                                    </a>						
-                                </li>
+                            <?php if ($this->session->userdata('uid') > 0) : 
+                            			if ($this->session->userdata('developer') == true) :
+                            ?>
+			                                <li>						
+			                                    <a href="<?php echo base_url(); ?>index/claimBadges">
+			                                        Claim Badge
+			                                    </a>						
+			                                </li>
+                            			<?php endif; ?>
                             <?php endif; ?>
-                            <?php if ($this->session->userdata('uid') > 0) : ?>
-                                <li>						
-                                    <a href="<?php echo base_url(); ?>index/courses">
-                                        Apply for a Course
-                                    </a>						
-                                </li>
+                            <?php if ($this->session->userdata('uid') > 0) : 
+                            			if ($this->session->userdata('developer') == true) :
+                            ?>
+			                                <li>						
+			                                    <a href="<?php echo base_url(); ?>index/courses">
+			                                        Apply for a Course
+			                                    </a>						
+			                                </li>
+                            		<?php endif; ?>
+                            <?php endif; ?>
+                            <?php if ($this->session->userdata('uid') > 0) : 
+                            			if ($this->session->userdata('recruiter') == true) :
+                            ?>
+			                                <li>						
+			                                    <a href="<?php echo base_url(); ?>index/myJobs">
+			                                        My Jobs
+			                                    </a>						
+			                                </li>
+                            		<?php endif; ?>
                             <?php endif; ?>
                             <li>
                                 <a href="<?php echo base_url(); ?>index/features">
@@ -278,11 +297,11 @@ if ($this->session->userdata('justcreatedU') == true) {
                                     Companies
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="<?php echo base_url(); ?>index/events">
                                     Events
                                 </a>
-                            </li>
+                            </li> -->
                             <li>						
                                 <a href="<?php echo base_url(); ?>index/contact">
                                     Contact Us

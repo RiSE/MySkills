@@ -650,26 +650,7 @@ class Index extends CI_Controller {
         } else {
             $fbuid = $valuesarray[0];
         }
-        $professional = $this->user_model->loadUserOfFacebookId($fbuid);
-		$userRecruiter['id_user']= $professional[0]->id_user;
-        $jobs = $this->job_model->listJobs($userRecruiter);
-        $k = 0;
-        $dados = array();
-        foreach($jobs as $job){ 
-        	$User_jobs = $this->job_model->listJobsAppliedUserByJob($job->id_job);
         
-	        foreach($User_jobs as $userJobs){
-	        	$teste = $this->user_model->loadUserOfUserId($userJobs->id_user);
-	        	array_push($teste, $userJobs->status);
-	        	$dados[$k][] = $teste; 
-	        	 
-	        }
-	       $k++;
-        }
-        
-        $data['professionals'] = $dados;
-        $data['jobs'] = $jobs;
-        $data["userRecruter"] = $professional;
         $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
         $video = $user[0]->video_url;
         $video = str_replace('watch?v=', 'embed/', $video);        
@@ -956,7 +937,7 @@ class Index extends CI_Controller {
         $this->layout->view('index/companies', $data);
     }
 
-    public function events() {
+  /*  public function events() {
 
         //$this->load->model('eventgroup_model');
         $this->load->model('event_model');
@@ -978,14 +959,15 @@ class Index extends CI_Controller {
           }
           }
           } */
-
+	/*
         $data['events'] = $this->event_model->listEvents();
 
         $this->layout->view('index/events', $data);
     }
-    
+    */
     public function mudastatus(){
     	$this->load->model('job_model');
+    	
     	
     	$data['id_user'] = $this->input->post("idUser");
     	$data['id_job'] = $this->input->post("idJob");
@@ -993,6 +975,53 @@ class Index extends CI_Controller {
     	$this->job_model->updatesJobUser($data);
     	
     	die();
+    }
+    public function deactivateJob(){
+    	$this->load->model('job_model');
+    	
+    	
+    	
+    	$data['id_job'] = $this->input->post("jobId");
+    	$data['published'] = 0;
+    	$this->job_model->updatesJob($data);
+    	
+    	die();
+    }
+    
+    public function myJobs(){
+    	$this->load->model('job_model');
+    	$this->load->model('user_model');
+    	
+    	$data = array(
+            'title' => 'My Jobs',
+            'mixpanel' => 'My Jobs'
+        );
+    	
+    	$fbuid = $this->session->userdata('uid');
+    	$professional = $this->user_model->loadUserOfFacebookId($fbuid);
+    	if($professional[0]->id_profile == 1):
+    		redirect(base_url() . 'index/dashboard');
+    	endif;
+		$userRecruiter['id_user']= $professional[0]->id_user;
+        $jobs = $this->job_model->listJobs($userRecruiter);
+        $k = 0;
+        $dados = array();
+        foreach($jobs as $job){ 
+        	$User_jobs = $this->job_model->listJobsAppliedUserByJob($job->id_job);
+        
+	        foreach($User_jobs as $userJobs){
+	        	$teste = $this->user_model->loadUserOfUserId($userJobs->id_user);
+	        	array_push($teste, $userJobs->status);
+	        	$dados[$k][] = $teste; 
+	        	 
+	        }
+	       $k++;
+        }
+        
+        $data['professionals'] = $dados;
+        $data['jobs'] = $jobs;
+        $data["userRecruter"] = $professional;
+        $this->layout->view('index/myJobs', $data);
     }
 
 }
