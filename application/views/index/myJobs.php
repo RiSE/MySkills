@@ -66,7 +66,7 @@ function mudastatus(status,user,job){
 																	<thead>
 																		<tr>
 																			<th>Name</th> 
-																			<th>Video YouTube</th>
+																			<th>Video</th>
 																			<th>Vizify</th>
 																			<th>Applied</th>
 																			<th>Evaluation</th>

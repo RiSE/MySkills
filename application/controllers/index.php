@@ -26,7 +26,7 @@ class Index extends CI_Controller {
         if ($profile == 1) {
             redirect(base_url() . 'index/profile');
         } else if ($recruiter == 1) {
-            redirect(base_url() . 'index/recruiterProfile');
+            redirect(base_url() . 'index/profile');
         }
 
         $data = array(
@@ -195,7 +195,7 @@ class Index extends CI_Controller {
             if ($this->session->userdata('pro') == true) {
                 redirect(base_url() . 'index/profile');
             } else if ($this->session->userdata('rec') == true) {
-                redirect(base_url() . 'index/recruiterProfile');
+                redirect(base_url() . 'index/profile');
             }
         }
 
@@ -203,7 +203,7 @@ class Index extends CI_Controller {
         $professionalexist = $this->professional_model->loadProfessional($fbuid);
 
         if (!empty($recruiterexist)) {
-            redirect(base_url() . 'index/recruiterProfile');
+            redirect(base_url() . 'index/profile');
         } else if (!empty($professionalexist)) {
             redirect(base_url() . 'index/profile');
         }
@@ -259,7 +259,7 @@ class Index extends CI_Controller {
 
             $this->session->set_flashdata('signup', true);
 
-            redirect(base_url() . 'index/recruiterProfile');
+            redirect(base_url() . 'index/profile');
         } else {
             $this->layout->view('index/logged', $data);
         }
@@ -310,7 +310,7 @@ class Index extends CI_Controller {
         }
     }
 
-    public function recruiterProfile() {
+    /*public function recruiterProfile() {
 
         $this->load->model('user_model');
         $this->load->model('job_model');
@@ -339,7 +339,7 @@ class Index extends CI_Controller {
 		
         $this->layout->view('index/recruiterProfile', $data);
     }
-
+	*/
     public function professionalProfile() {
 
         $this->load->model('professional_model');
