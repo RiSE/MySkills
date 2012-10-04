@@ -97,30 +97,37 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Profile Views</a></div>
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Expected Salary</a></div>-->
 				<?php if($user[0]->id_profile == 1):?>
-		                    <?php if ($user[0]->video_url != null) : ?>
+		                    <?php if ($user[0]->video_url != null || $user[0]->vizify_portfolio != null) : ?>
 		                        <div class="span8">
-		                            <center>
-		                                <iframe width="250" height="188" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
-		                            </center>
+		                           <?php if ($user[0]->video_url != null): ?> 
+			                            <center>
+			                                <iframe width="350" height="200" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
+			                            </center>
+		                           <?php endif; ?>
 		                        </div>
 		
 		                        <div class="row">
 		                            <div class="span8">
-		                                &nbsp;
+		                               &nbsp; 
 		                            </div>
 		                        </div>
 		                        <div class="row">
 		                            <div class="span8">
-		                                &nbsp;
+		                               <i class="icon-folder-close"></i>Vizify: <a href="<?php echo $user[0]->vizify_portfolio; ?>" target="_blank"><?php echo $user[0]->vizify_portfolio; ?></a>
 		                            </div>
 		                        </div>
-		
+								<div class="row">
+		                            <div class="span8">
+		                               &nbsp; 
+		                            </div>
+		                        </div>
 		                    <?php else: ?>
 		                        <div class="row">
 		                            <div class="span8">
 		                                &nbsp;
 		                            </div>
 		                        </div>
+		                        
 		                        <div class="row">
 		                            <div class="span8">
 		                                &nbsp;
@@ -129,7 +136,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 		
 		                    <?php endif; ?>
 		
-						 
+						<?php if($user[0]->fbuid == $fbuid):?>				 
 		                    <div class="span2">
 		                        <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
 		                    </div>
@@ -141,7 +148,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 		                    <div class="span2">
 		                        &nbsp;<a href="<?php echo base_url(); ?>index/courses" class="btn btn-success btn-large" >Apply for a Course</a>
 		                    </div>
-				
+					  <?php endif;?>
 		                    <div class="row">
 		                        <div class="span8">
 		                            &nbsp;

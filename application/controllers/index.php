@@ -987,6 +987,38 @@ class Index extends CI_Controller {
     	
     	die();
     }
+    public function sendMail(){
+    	$this->load->model('user_model');
+    	$this->load->library('email');
+		$this->email->initialize(array(
+		'protocol' => 'smtp',
+		'smtp_host' => 'smtp.sendgrid.net',
+		'smtp_user' => 'myskills',
+		'smtp_pass' => 'ruadoapolo161',
+		'smtp_port' => 587,
+		'mailtype' => 'html',
+		'crlf' => "\r\n",
+		'newline' => "\r\n"
+		));
+		$iduser = $this->input->post("UserId");
+		$user = $this->user_model->loadUserOfUserId($iduser);
+		
+		$dadostemplateArquivo = file_get_contents('template_email.txt');
+    	$this->email->from('eduardo.cruz@myskills.com.br', 'Myskills');
+		$this->email->to($user[0]->email);
+		//$this->email->cc('another@another-example.com');
+		//$this->email->bcc('eliakim.ramos@rise.com.br');
+		$this->email->subject('[myskills] Update your data');
+		$this->email->message('Dear '.$user[0]->name.', <br/> '.$dadostemplateArquivo);
+    if ( ! $this->email->send())
+		{
+		   echo "error sending the email! please try again later";
+		}else{
+			echo "";
+		}
+    	
+    	die();
+    }
     
     public function myJobs(){
     	$this->load->model('job_model');

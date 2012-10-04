@@ -12,6 +12,22 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 function deactivateJob(idjob){
 	$.post("<?php echo base_url(); ?>index/deactivateJob",{jobId : idjob});
 }
+function sendmail(idUser){
+	$.post("<?php echo base_url(); ?>index/sendMail",{UserId : idUser},
+			function(data){
+				if(data != ""){
+					$("#error").show();
+					$("#success").hide();
+					$("#msnError").html(data);
+				}else{
+					$("#error").hide();
+					$("#success").show();
+					$("#msnSuccess").html("Success email sent!");
+				}
+					
+			}
+		);
+}
 function mudastatus(status,user,job){
 	$.post("<?php echo base_url(); ?>index/mudastatus",{novostatus:status,idUser:user,idJob:job},
 			function(data){
@@ -32,19 +48,19 @@ function mudastatus(status,user,job){
  <div class="container">
 	 <div class="row">
 			  <div class="span9">
-			  		<?php if ($this->session->flashdata('error_message') != '') : ?>
-		                <div class="alert alert-error">
+			  		
+		                <div class="alert alert-error" style="display:none" id="error">
 		                    <button type="button" class="close" data-dismiss="alert">×</button>
-		                    <strong>Oh snap!</strong> <?php echo $this->session->flashdata('error_message'); ?>
+		                    <strong>Oh snap!</strong> <div id="msnError"></div>
 		                </div>
-            		<?php endif; ?>
+            		
 
-		            <?php if ($this->session->flashdata('success_message') != '') : ?>
-		                <div class="alert alert-success">
+		            
+		                <div class="alert alert-success" style="display:none" id="success">
 		                    <button type="button" class="close" data-dismiss="alert">×</button>
-		                    <strong>Well done!</strong> <?php echo $this->session->flashdata('success_message'); ?>
+		                    <strong>Well done!</strong> <div id="msnSuccess"></div>
 		                </div>
-		            <?php endif; ?>
+		          
 		            
 		            		<?php if($userRecruter[0]->id_profile == 2){?>
 							           <div class="tabbable tabs-left">
@@ -53,7 +69,7 @@ function mudastatus(status,user,job){
 							                   	$k = 0;
 							                   	foreach ($jobs as $job):?>
 							                       		<div class="row">
-							                                    <div class="span5">
+							                                    <div class="span8">
 							                                        
 							                                        <div class="span7"><button type="button" class="close" onclick="javascritp:deactivateJob('<?php echo $job->id_job;?>');"><i class="icon-trash"></i></button> <?php echo $job->title;?></div>
 							                                        <table class="table  table-striped table-condensed">
@@ -72,6 +88,7 @@ function mudastatus(status,user,job){
 																			<th>Evaluation</th>
 																			<th>Approved</th>
 																			<th>Rejected</th>
+																			<th>Send E-mail to</th>
 																		</tr>
 																	</thead>
 																	<tbody>
@@ -82,20 +99,20 @@ function mudastatus(status,user,job){
 											                             
 											                            ?>
 																		          <tr>
-																			            <td width=40%>
+																			            <td width=20%>
 																			             	<a href="<?php echo base_url()."index/profile?".$user[0]->fbuid;?>">
 																			             	 <?php echo $user[0]->name; ?>
 																			             	 </a>
 																			            </td>
-																			            <td width=40%>
+																			            <td >
 																			             	<?php if ($user[0]->video_url != null) :?>
 										                                                        <i class="icon-ok"></i>
 										                                                    <?php else: ?>
 										                                                        
 										                                                    <?php endif; ?>
 																			            </td>
-																			            <td width=40%>
-																			             	<?php if ($user[0]->video_url != null) :?>
+																			            <td>
+																			             	<?php if ($user[0]->vizify_portfolio != null) :?>
 										                                                        <i class="icon-ok"></i>
 										                                                    <?php else: ?>
 										                                                        
@@ -113,6 +130,13 @@ function mudastatus(status,user,job){
 																			            <td >
 																			             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Rejected" onclick="mudastatus('Rejected','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Rejected"){?> checked = "checked" <?php }?>>
 																			            </td>
+																			            <td>
+																			            		<?php if ($user[0]->vizify_portfolio == null || $user[0]->video_url == null) :?>
+																					            	<button class="btn" type="button" onclick="sendmail('<?php echo $user[0]->id_user;?>');">
+																										data updates
+																									</button>
+																								<?php endif;?>
+																					     </td>
 																			     </tr>
 																	<?php 
 																	    endforeach;
