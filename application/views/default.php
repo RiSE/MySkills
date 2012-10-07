@@ -81,7 +81,13 @@ if ($this->session->userdata('justcreatedU') == true) {
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlxecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
+        <meta property="og:title" content="Meet the best developers"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://www.myskills.com.br"/>
+        <meta property="og:image" content="http://www.myskills.com.br/assets/images/MySkills-64.png"/>
+        <meta property="og:site_name" content="MySkills.com.br"/>
+        <meta property="og:description" content="Hire the best professionals."/>
+        '
     </head>
     <body>
         <div id="fb-root"></div>
