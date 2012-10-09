@@ -43,6 +43,31 @@ class Job_model extends CI_Model {
 
         return $result;
     }
+    public function listJobsInMyJobs($data = array()) {
+        
+        $result = array();
+
+        $this->db->select('id_job, title, created');
+        
+        if (isset($data['id_user']) && !empty($data['id_user'])) {
+            $this->db->where('id_user', $data['id_user']);
+            
+        }        
+        
+        if (isset($data['exist']) && $data['exist'] == false) {
+            $this->db->limit(0, 0);
+        }
+        
+        $this->db->order_by('created', 'DESC');
+
+        $query = $this->db->get($this->table);
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+    }
 
    
     public function listJobsAppliedUser($idUser , $idJob = null) {
@@ -90,6 +115,12 @@ class Job_model extends CI_Model {
 
         $this->db->trans_start();
         $this->db->insert('jobs_user', $data);
+        $this->db->trans_complete();
+    }
+    public function insertJob($data = array()) {
+
+        $this->db->trans_start();
+        $this->db->insert('job', $data);
         $this->db->trans_complete();
     }
 	

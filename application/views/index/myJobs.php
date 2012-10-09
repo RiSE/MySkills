@@ -10,7 +10,20 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 <?php endif; ?>
 <script type="text/javascript">
 function deactivateJob(idjob){
-	$.post("<?php echo base_url(); ?>index/deactivateJob",{jobId : idjob});
+	$.post("<?php echo base_url(); ?>index/deactivateJob",{jobId : idjob},
+			function(data){
+		if(data != ""){
+			$("#error").show();
+			$("#success").hide();
+			$("#msnError").html(data);
+		}else{
+			$("#error").hide();
+			$("#success").show();
+			$("#msnSuccess").html("Success job vacancy disabled!");
+		}
+			
+	}
+);
 }
 function sendmail(idUser){
 	$.post("<?php echo base_url(); ?>index/sendMail",{UserId : idUser},
@@ -44,11 +57,15 @@ function mudastatus(status,user,job){
     </div>
 </div>
 
-<div id="subpage">	
+<div id="subpage">
+
+  	    <div class="form-actions">
+		    <button type="button" class="btn btn-primary" onclick="javascript:window.location='<?php echo base_url();?>/index/registerNewJob';">Register New Job</button>
+	    </div>
  <div class="container">
+	 
 	 <div class="row">
 			  <div class="span9">
-			  		
 		                <div class="alert alert-error" style="display:none" id="error">
 		                    <button type="button" class="close" data-dismiss="alert">×</button>
 		                    <strong>Oh snap!</strong> <div id="msnError"></div>
@@ -69,10 +86,15 @@ function mudastatus(status,user,job){
 							                   	$k = 0;
 							                   	foreach ($jobs as $job):?>
 							                       		<div class="row">
-							                                    <div class="span8">
+							                                    <div class="span8 sidebar">
 							                                        
-							                                        <div class="span7"><button type="button" class="close" onclick="javascritp:deactivateJob('<?php echo $job->id_job;?>');"><i class="icon-trash"></i></button> <?php echo $job->title;?></div>
-							                                        <table class="table  table-striped table-condensed">
+							                                        <div class="span7"><button type="button" class="close" onclick="javascritp:deactivateJob('<?php echo $job->id_job;?>');"><i class="icon-off"></i></button> <?php echo $job->title;?></div>
+							                                        
+											                        <?php
+											                           
+											                        if(!empty($professionals[$k])):
+											                           ?>
+											                           <table class="table  table-striped table-condensed">
 													
 																        <colgroup>
 																          <col class="span2">
@@ -92,9 +114,7 @@ function mudastatus(status,user,job){
 																		</tr>
 																	</thead>
 																	<tbody>
-											                        <?php
-											                           if(!empty($professionals)):
-											                           
+																	<?php 
 											                            foreach ($professionals[$k] as $user) :
 											                             
 											                            ?>
@@ -146,6 +166,11 @@ function mudastatus(status,user,job){
 																	</table>
 																	
 							  										 </div>
+							                                </div>
+							                                <div class="row">
+							                                    <div class="span8">
+							                                    	&nbsp;
+							                                    </div>
 							                                </div>
 											                    	
 											<?php 

@@ -978,12 +978,14 @@ class Index extends CI_Controller {
     }
     public function deactivateJob(){
     	$this->load->model('job_model');
+    	try {
+    		$data['id_job'] = $this->input->post("jobId");
+	    	$data['published'] = 0;
+	    	$this->job_model->updatesJob($data);
+    	} catch (Exception $e) {
+    		echo "Error in try  disable job";
+    	}
     	
-    	
-    	
-    	$data['id_job'] = $this->input->post("jobId");
-    	$data['published'] = 0;
-    	$this->job_model->updatesJob($data);
     	
     	die();
     }
@@ -1035,7 +1037,7 @@ class Index extends CI_Controller {
     		redirect(base_url() . 'index/dashboard');
     	endif;
 		$userRecruiter['id_user']= $professional[0]->id_user;
-        $jobs = $this->job_model->listJobs($userRecruiter);
+        $jobs = $this->job_model->listJobsInMyJobs($userRecruiter);
         $k = 0;
         $dados = array();
         foreach($jobs as $job){ 
@@ -1054,6 +1056,38 @@ class Index extends CI_Controller {
         $data['jobs'] = $jobs;
         $data["userRecruter"] = $professional;
         $this->layout->view('index/myJobs', $data);
+    }
+    
+    public function registerNewJob(){
+    	$this->load->model('job_model');
+    	$this->load->model('user_model');
+    	$data = array(
+            'title' => 'Register New Job',
+            'mixpanel' => 'NewJob'
+        );
+        
+        try {
+		        if ($this->form_validation->run('registerNewJob') !== false) {
+		         		        	
+		         		$dados['title'] = $this->input->post("title");
+		         		$dados['quantity'] = $this->input->post("quantity");
+		         		$dados['description'] = $this->input->post("description");
+		         		$dados['id_user'] = $this->session->userdata("userid");
+		         		
+		         		$this->job_model->insertJob($dados); 
+		         		$this->session->set_flashdata('success_message', 'vague work successfully registered!');
+		        
+		        } else {
+		                if (validation_errors() != '') {
+		                    throw new Exception(validation_errors());
+		                     //$this->session->set_flashdata('error_message', "Fill out the required fields \"*\"");
+		                }
+		        }
+        } catch (Exception $e) {
+            $this->session->set_flashdata('error_message', $e->getMessage());
+            redirect(base_url() . 'index/registerNewJob');
+        }
+        $this->layout->view('index/registerNewJob', $data);
     }
 
 }

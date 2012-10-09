@@ -67,6 +67,18 @@ $config = array(
             'rules' => 'max_length[255]'
         )
     ),
+    'registerNewJob' => array(
+        array(
+            'field' => 'title',
+            'label' => 'Title',
+            'rules' => 'required|max_length[500]'
+        ),        
+        array(
+            'field' => 'quantity',
+            'label' => 'Quantity',
+            'rules' => 'numeric|required'
+        )
+    ),
     'recruiter' => array(
         array(
             'field' => 'company',
