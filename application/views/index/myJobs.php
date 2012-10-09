@@ -25,6 +25,22 @@ function deactivateJob(idjob){
 	}
 );
 }
+function deleteJob(idjob){
+	$.post("<?php echo base_url(); ?>index/deleteJob",{jobId : idjob},
+			function(data){
+		if(data != ""){
+			$("#error").show();
+			$("#success").hide();
+			$("#msnError").html(data);
+		}else{
+			$("#error").hide();
+			$("#success").show();
+			$("#msnSuccess").html("Job vacancy deleted successfully!");
+		}
+		setTimeout(function(){window.location="<?php echo base_url(); ?>index/myJobs"},3000);	
+	}
+);
+}
 function sendmail(idUser){
 	$.post("<?php echo base_url(); ?>index/sendMail",{UserId : idUser},
 			function(data){
@@ -79,16 +95,34 @@ function mudastatus(status,user,job){
 		                </div>
 		          
 		            
-		            		<?php if($userRecruter[0]->id_profile == 2){?>
+		            		<?php if($userRecruter[0]->id_profile == 2){
+									if(!empty($jobs)):	            		
+		            			?>
 							           <div class="tabbable tabs-left">
 							              <div class="tab-content">
 							                 <?php 
 							                   	$k = 0;
-							                   	foreach ($jobs as $job):?>
+							                   	foreach ($jobs as $job): ?>
 							                       		<div class="row">
 							                                    <div class="span8 sidebar">
 							                                        
-							                                        <div class="span7"><button type="button" class="close" onclick="javascritp:deactivateJob('<?php echo $job->id_job;?>');"><i class="icon-off"></i></button> <?php echo $job->title;?></div>
+							                                        <div class="span7"><!--  --> 
+									                                        <div class="btn-group ">
+																					  <button class="btn btn-mini btn-success">Action</button>
+																					  <button class="btn btn-mini  btn-success dropdown-toggle" data-toggle="dropdown">
+																					    <span class="caret"></span>
+																					  </button>
+																					  <ul class="dropdown-menu">
+																					    <li><a href="#" onclick="javascritp:deactivateJob('<?php echo $job->id_job;?>');"><i class="icon-off"></i>Disable</a></li>
+																					    <?php if(empty($professionals[$k])):?>
+																					    	<li><a href="#" onclick="javascritp:deleteJob('<?php echo $job->id_job;?>');"><i class="icon-trash"></i>Delete</a></li>
+																					    <?php endif;?>
+																					    <li><a href="<?php echo base_url();?>/index/editJob?<?php echo base64_encode($job->id_job."*".$job->title." ");?>"><i class="icon-edit"></i>Edit</a></li>
+																					  </ul>
+																			</div>
+																			<br>
+																		<?php echo $job->title;?>
+																	</div>
 							                                        
 											                        <?php
 											                           
@@ -179,7 +213,17 @@ function mudastatus(status,user,job){
 											?>
                     					</div>
                     				</div>
-                    			<?php } ?>
+                    			<?php
+                    			else:
+                    				?>
+                    				 <div class="row">
+	                                    <div class="span8">
+	                                    	&nbsp;
+	                                    </div>
+	                                </div>
+							     <?php  
+		            			endif;
+		            		} ?>
 		            		
 			      </div><!-- span9 -->
 			      <div class="span3">

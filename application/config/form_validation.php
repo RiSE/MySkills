@@ -72,12 +72,16 @@ $config = array(
             'field' => 'title',
             'label' => 'Title',
             'rules' => 'required|max_length[500]'
-        ),        
+        )        
+        
+    ),
+    'editJob' => array(
         array(
-            'field' => 'quantity',
-            'label' => 'Quantity',
-            'rules' => 'numeric|required'
-        )
+            'field' => 'title',
+            'label' => 'Title',
+            'rules' => 'required|max_length[500]'
+        )        
+        
     ),
     'recruiter' => array(
         array(

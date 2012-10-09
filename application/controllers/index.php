@@ -989,6 +989,18 @@ class Index extends CI_Controller {
     	
     	die();
     }
+    public function deleteJob(){
+    	$this->load->model('job_model');
+    	try {
+    		$id_job = $this->input->post("jobId");
+	    	$this->job_model->deleteJob($id_job);
+    	} catch (Exception $e) {
+    		echo "Error when trying to delete a job";
+    	}
+    	
+    	
+    	die();
+    }
     public function sendMail(){
     	$this->load->model('user_model');
     	$this->load->library('email');
@@ -1088,6 +1100,48 @@ class Index extends CI_Controller {
             redirect(base_url() . 'index/registerNewJob');
         }
         $this->layout->view('index/registerNewJob', $data);
+    }
+    public function editJob(){
+    	$this->load->model('job_model');
+    	$this->load->model('user_model');
+    	$data = array(
+            'title' => 'Edit Job',
+            'mixpanel' => 'Edit Job'
+        );
+        $keyget = array_keys($_GET);
+        
+        $hash = explode("*", base64_decode($keyget[0]));
+        $dadosJob['id_job'] = $hash[0];
+        $dadosJob['id_user'] = $this->session->userdata("userid");
+        
+        $resultJob = $this->job_model->listJobsInMyJobs($dadosJob);
+        $data['jobResult'] = $resultJob[0];
+        
+        if(empty($resultJob)):
+        	redirect(base_url() . 'index/registerNewJob');
+        endif;
+        
+        try {
+		        if ($this->form_validation->run('editJob') !== false) {
+		         		        	
+		         		$dados['title'] = $this->input->post("title");
+		         		$dados['description'] = $this->input->post("description");
+		         		$dados['id_job'] = $dadosJob['id_job'];
+		         		
+		         		
+		         		$this->job_model->updatesJob($dados); 
+		         		$this->session->set_flashdata('success_message', 'Job vacancy edited successfully!');
+		        
+		        } else {
+		                if (validation_errors() != '') {
+		                    throw new Exception(validation_errors());
+		                }
+		        }
+        } catch (Exception $e) {
+            $this->session->set_flashdata('error_message', $e->getMessage());
+            redirect(base_url() . 'index/editJob');
+        }
+        $this->layout->view('index/editJob', $data);
     }
 
 }
