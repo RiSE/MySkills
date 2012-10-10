@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -1085,14 +1084,14 @@ class Index extends CI_Controller {
 		         		$dados['quantity'] = $this->input->post("quantity");
 		         		$dados['description'] = $this->input->post("description");
 		         		$dados['id_user'] = $this->session->userdata("userid");
+		         		$dados['published'] = 1;
 		         		
 		         		$this->job_model->insertJob($dados); 
 		         		$this->session->set_flashdata('success_message', 'vague work successfully registered!');
-		        
+		        		redirect(base_url() .'index/myJobs');
 		        } else {
 		                if (validation_errors() != '') {
 		                    throw new Exception(validation_errors());
-		                     //$this->session->set_flashdata('error_message', "Fill out the required fields \"*\"");
 		                }
 		        }
         } catch (Exception $e) {
@@ -1127,11 +1126,10 @@ class Index extends CI_Controller {
 		         		$dados['title'] = $this->input->post("title");
 		         		$dados['description'] = $this->input->post("description");
 		         		$dados['id_job'] = $dadosJob['id_job'];
-		         		
-		         		
+		         				         		
 		         		$this->job_model->updatesJob($dados); 
 		         		$this->session->set_flashdata('success_message', 'Job vacancy edited successfully!');
-		        
+		        		redirect(base_url() .'index/myJobs');
 		        } else {
 		                if (validation_errors() != '') {
 		                    throw new Exception(validation_errors());

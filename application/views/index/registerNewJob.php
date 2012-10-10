@@ -39,17 +39,17 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 		            	$this->session->flashdata('success_message','');
 		            endif; ?>
 			    <form method="POST" class="form-horizontal" name="frmEditProfile">
-			   	    <legend>Legend</legend>
+			   	   
 					 <div class="control-group">
-					  	<label class="control-label">Title:</label>
+					  	<label class="control-label">Title*:</label>
 					  	<div class="controls">
-					  		<input type="text" placeholder="Title of job vacancy" class="span4" name="title" value="<?php echo""; /*$user->title;*/ ?>"/>
+					  		<input type="text"  class="span4" name="title" value="<?php echo""; /*$user->title;*/ ?>"/>
 					  	</div><!-- controls -->
 					  </div><!-- control-group -->
 					  <div class="control-group">
 					  		<label class="control-label">description:</label>
 					  		<div class="controls">
-					  			<textarea rows="3" name="description" style="width: 368px; height: 156px;"></textarea>
+					  			<textarea rows="3"  name="description" style="width: 368px; height: 156px;"></textarea>
 					  		</div><!-- controls -->
 					  </div><!-- control-group -->
 					  <div class="control-group">

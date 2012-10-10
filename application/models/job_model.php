@@ -47,7 +47,7 @@ class Job_model extends CI_Model {
         
         $result = array();
 
-        $this->db->select('id_job, title,description, created');
+        $this->db->select('id_job, title,description, created, published');
         
         if (isset($data['id_user']) && !empty($data['id_user'])) {
             $this->db->where('id_user', $data['id_user']);
