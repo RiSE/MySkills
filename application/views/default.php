@@ -38,6 +38,13 @@ if ($this->session->userdata('justcreatedU') == true) {
     </script><!-- end Mixpanel -->        
     <head>
         <script src="//cdn.optimizely.com/js/111465504.js"></script>
+        <meta property="og:title" content="Meet the best developers"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://www.myskills.com.br"/>
+        <meta property="og:image" content="http://www.myskills.com.br/assets/images/MySkills-64.png"/>
+        <meta property="og:site_name" content="MySkills.com.br"/>
+        <meta property="og:description" content="Hire the best professionals."/>
+        
         <meta charset="utf-8">
         <title><?php echo $title; ?></title>
 
@@ -51,6 +58,7 @@ if ($this->session->userdata('justcreatedU') == true) {
 
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
         <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet">
+        <link href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" rel="stylesheet">
 
         <link href="<?php echo base_url(); ?>assets/css/reboot-landing.css" rel="stylesheet">
         <link href="<?php echo base_url(); ?>assets/css/reboot-landing-responsive.css" rel="stylesheet">
@@ -71,10 +79,12 @@ if ($this->session->userdata('justcreatedU') == true) {
         <!--<link href="<?php echo base_url(); ?>assets/js/lightbox/themes/default/jquery.lightbox.css" rel="stylesheet">-->
 
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.ui.datepicker-pt-BR.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/facebook.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_tab.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_alert.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_dropdown.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -223,9 +233,7 @@ if ($this->session->userdata('justcreatedU') == true) {
                 
         </script>
         <div class="navbar navbar-fixed-top">
-
             <div class="navbar-inner">
-
                 <div class="container">
 
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -233,11 +241,8 @@ if ($this->session->userdata('justcreatedU') == true) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-
                     <div class="nav-collapse">
-
                         <ul class="nav pull-right">
-
                             <li class="active">
                                 <?php if ($this->session->userdata('uid') > 0) : ?>
                                     <a href="<?php echo base_url(); ?>index/dashboard">

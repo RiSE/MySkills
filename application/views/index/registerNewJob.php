@@ -6,9 +6,14 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     ?>
     <script type="text/javascript">
         mixpanel.track('Edit Profile');
+       
     </script>
 <?php endif; ?>
-
+<script>
+$(function() {
+    $("#datepicker").datepicker();
+});
+</script>
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -44,6 +49,12 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 					  	<label class="control-label">Title*:</label>
 					  	<div class="controls">
 					  		<input type="text"  class="span4" name="title" value="<?php echo""; /*$user->title;*/ ?>"/>
+					  	</div><!-- controls -->
+					  </div><!-- control-group -->
+					 <div class="control-group">
+					  	<label class="control-label">Period:</label>
+					  	<div class="controls">
+					  		<input type="text"  class="span4" id="datepicker" name="period" value="<?php echo""; /*$user->title;*/ ?>"/>
 					  	</div><!-- controls -->
 					  </div><!-- control-group -->
 					  <div class="control-group">

@@ -77,9 +77,9 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                 </div>
 
                 <div class="span7" name="divContainer">
-
+				<?php if($user[0]->fbuid != $fbuid): ?>
                     <h3 id="name"><span class="slash">Professional:</span><?php echo $user[0]->name; ?></h3>
-
+				<?php endif;?>
                     <div class="row">
                         <div class="span8">
                             &nbsp;
@@ -98,12 +98,37 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                     <div class="span2"><a href="#" class="btn btn-large btn disabled">Expected Salary</a></div>-->
 				<?php if($user[0]->id_profile == 1):?>
 		                    <?php if ($user[0]->video_url != null || $user[0]->vizify_portfolio != null) : ?>
-		                        <div class="span8">
+		                        <div class="span4">
 		                           <?php if ($user[0]->video_url != null): ?> 
 			                            <center>
 			                                <iframe width="350" height="200" src="<?php echo $user[0]->video_url; ?>" frameborder="0" allowfullscreen></iframe>
 			                            </center>
 		                           <?php endif; ?>
+		                        </div>
+		                        <div class="span2">
+		                           <?php if($user[0]->fbuid == $fbuid):?>				 
+					                      <div class="row">
+						                    	<div class="span2">
+						                        	<a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
+						                    	</div>
+					                      </div>
+					                      <div class="row">
+					                      		&nbsp;
+					                      </div>
+					                      <div class="row">
+							                    <div class="span2">
+							                        <a href="<?php echo base_url(); ?>index/claimbadges" class="btn btn-warning btn-large">Claim your Badges</a>
+							                    </div>
+							               </div>
+							                <div class="row">
+					                      		&nbsp;
+					                        </div>
+						                   <div class="row">
+							                    <div class="span2">
+							                        &nbsp;<a href="<?php echo base_url(); ?>index/courses" class="btn btn-success btn-large" >Apply for a Course</a>
+							                    </div>
+							                </div>
+					  				<?php endif;?>
 		                        </div>
 		
 		                        <div class="row">
@@ -135,23 +160,36 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 		                        </div>
 		
 		                    <?php endif; ?>
-		
-						<?php if($user[0]->fbuid == $fbuid):?>				 
-		                    <div class="span2">
-		                        <a href="<?php echo base_url(); ?>index/jobs" class="btn btn-success btn-large">Apply for a Job</a>
-		                    </div>
-		
-		                    <div class="span2">
-		                        <a href="<?php echo base_url(); ?>index/claimbadges" class="btn btn-warning btn-large">Claim your Badges</a>
-		                    </div>
-		
-		                    <div class="span2">
-		                        &nbsp;<a href="<?php echo base_url(); ?>index/courses" class="btn btn-success btn-large" >Apply for a Course</a>
-		                    </div>
-					  <?php endif;?>
 		                    <div class="row">
 		                        <div class="span8">
-		                            &nbsp;
+		                           <table class="table table-hover">
+						              <thead>
+						                <tr>
+						                  <th>Job</th>
+						                  <th>Period</th>
+						                  <th>Status</th>
+						                  <th>FeedBack</th>
+						                  <th>Message</th>
+						                </tr>
+						              </thead>
+						              <tbody>
+				             <?php if(!empty($jobsapplied)):
+										foreach ($jobsapplied as $dadosjobsapplied):						             			
+				             
+				             ?>
+						                <tr>
+						                  <td width="20%"><?php echo $dadosjobsapplied->title;?></td>
+						                  <td width="20%"><?php echo date('d/m/Y', strtotime($dadosjobsapplied->period));?></td>
+						                  <td width="20%"><?php echo $dadosjobsapplied->status;?></td>
+						                  <td width="20%">@mdo</td>
+						                  <td width="20%">@mdo</td>
+						                </tr>
+						    <?php 		endforeach;
+						    
+						    		endif;
+						    ?>
+						              </tbody>
+						           </table>
 		                        </div>
 		                    </div>
 		
@@ -170,7 +208,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                             &nbsp;
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="span8">
                             &nbsp;

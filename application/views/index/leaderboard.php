@@ -26,23 +26,18 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         </div>
     </div>
 </div>
-
 <div id="subpage">	
     <div class="container">
-
         <div class="row">
-
             <?php if ($this->session->flashdata('hasapplied') == true) : ?>
                 <div class="alert alert-error">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>Oh snap!</strong> You already applied for this job.
                 </div>
             <?php endif; ?>
-            
             <div class="span3">
                 &nbsp;
-            </div>
-            
+            </div>        
             <div class="span12">
 
                 <ul class="testimonials-list">

@@ -649,7 +649,10 @@ class Index extends CI_Controller {
         } else {
             $fbuid = $valuesarray[0];
         }
-        
+        $userid = $this->session->userdata('userid');
+        $jobsapplied = $this->job_model->listJobsAppliedUserWithFeddback($userid);
+        $data['jobsapplied'] = $jobsapplied;
+        //var_dump($jobsapplied);
         $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
         $video = $user[0]->video_url;
         $video = str_replace('watch?v=', 'embed/', $video);        
@@ -1081,7 +1084,7 @@ class Index extends CI_Controller {
 		        if ($this->form_validation->run('registerNewJob') !== false) {
 		         		        	
 		         		$dados['title'] = $this->input->post("title");
-		         		$dados['quantity'] = $this->input->post("quantity");
+		         		$dados['period'] = $this->input->post("period");
 		         		$dados['description'] = $this->input->post("description");
 		         		$dados['id_user'] = $this->session->userdata("userid");
 		         		$dados['published'] = 1;
@@ -1124,6 +1127,7 @@ class Index extends CI_Controller {
 		        if ($this->form_validation->run('editJob') !== false) {
 		         		        	
 		         		$dados['title'] = $this->input->post("title");
+		         		$dados['period'] = $this->input->post("period");
 		         		$dados['description'] = $this->input->post("description");
 		         		$dados['id_job'] = $dadosJob['id_job'];
 		         				         		

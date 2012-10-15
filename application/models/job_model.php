@@ -47,7 +47,7 @@ class Job_model extends CI_Model {
         
         $result = array();
 
-        $this->db->select('id_job, title,description, created, published');
+        $this->db->select('id_job, title,description, created, published, period');
         
         if (isset($data['id_user']) && !empty($data['id_user'])) {
             $this->db->where('id_user', $data['id_user']);
@@ -72,7 +72,24 @@ class Job_model extends CI_Model {
 
         return $result;
     }
+	public function listJobsAppliedUserWithFeddback($idUser){
+		$result = array();
+		
+		$this->db->select("job.title,jobs_user.status,job.period");
+		//$this->db->select("*");
+		$this->db->from("job");
+		$this->db->join("jobs_user","jobs_user.id_job = job.id_job");
+		$this->db->where("jobs_user.id_user",$idUser);
+		
+		$query = $this->db->get();
+		
+		if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
 
+        return $result;
+		
+	}
    
     public function listJobsAppliedUser($idUser , $idJob = null) {
 
