@@ -86,16 +86,6 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
                         </div>
                     </div>
 
-                    <!--<div class="span2"><a href="#" class="btn btn-large btn disabled">Skill Points</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Job Offers</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Job Applications</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Course Savings</a></div>-->
-
-
-                    <!--<div class="span2"><a href="#" class="btn btn-large btn disabled">Badges</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Courses</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Profile Views</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Expected Salary</a></div>-->
 				<?php if($user[0]->id_profile == 1):?>
 		                    <?php if ($user[0]->video_url != null || $user[0]->vizify_portfolio != null) : ?>
 		                        <div class="span4">
@@ -166,7 +156,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						              <thead>
 						                <tr>
 						                  <th>Job</th>
-						                  <th>Period</th>
+						                  <th>Due Date</th>
 						                  <th>Status</th>
 						                  <th>FeedBack</th>
 						                  <th>Message</th>
@@ -182,7 +172,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						                  <td width="20%"><?php echo date('d/m/Y', strtotime($dadosjobsapplied->period));?></td>
 						                  <td width="20%"><?php echo $dadosjobsapplied->status;?></td>
 						                  <td width="20%">@mdo</td>
-						                  <td width="20%">@mdo</td>
+						                  <td width="20%"><button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button></td>
 						                </tr>
 						    <?php 		endforeach;
 						    
@@ -216,7 +206,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 
                 </div>
 					
-					<div class="span3">
+				<div class="span3">
 	                <div class="sidebar">
 	                <?php if($user[0]->id_profile == 1):?>
 	                    <h4><span class="slash">//</span>iOS Training Badge</h4>
@@ -259,114 +249,19 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
               </div>
     
             </div>
-            
-
-            <!--            </div>-->
-
-            <!--<div class="row">
-        
-                <div class="span2">
-                    <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal" style="border:thick groove green;" />
-                    <br /><br />
-        
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="65"></img>
-        
-                </div>
-        
-                <div class="span10">
-                    <h3 id="hname"><span class="slash">Professional:</span></h3>
-                    <hr>
-        
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Skill Points</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Job Offers</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Job Applications</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Course Savings</a></div>
-        
-                    <br /><br /><br />
-        
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Badges</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Courses</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Profile Views</a></div>
-                    <div class="span2"><a href="#" class="btn btn-large btn disabled">Expected Salary</a></div>
-                </div>
-        
-                <br /><br /><br />
-        
-                <br /><br /><br />
-        
-                <div class="span10">
-                    <a class="btn btn-primary btn-large">Learn more</a>
-                    <a class="btn btn-primary btn-large">Learn more</a>
-                    <a class="btn btn-primary btn-large">Learn more</a>
-                    <a class="btn btn-primary btn-large">Learn more</a>
-                    <a class="btn btn-primary btn-large">Learn more</a>
-                </div>
-        
-        
-            </div>-->
-
-            <!--<div class="row-fluid">
-        
-                <div class="span12">
-        
-                    <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=normal" style="border:thick groove green;" />
-        
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-                    <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="100"></img>
-        
-                    <div class="row-fluid">
-                        <div class="span9">
-                            <hr>
-                            <h3 id="hname"><span class="slash">Professional:</span></h3>
-                            <hr>
-                            <span class="slash">Badges:</span>
-                            <select name="selectBadges">
-                                <option value="">--SELECT--</option>
-            <?php foreach ($badges as $badge) : ?>
-                                                                                                                                                                                                                                                    <option value="<?php echo $badge->id_badge; ?>"><?php echo $badge->name; ?></option>
-            <?php endforeach; ?>
-                            </select>
-            <?php echo form_error('selectBadges'); ?>
-                            <input type="text" id="code" name="code" placeholder="Type Your Code Certificate" />
-            <?php echo form_error('code'); ?>
-        
-                            <input type="submit" value="Claim Right now!" name="claim" />
-            <?php echo $badge_error; ?>
-                        </div>
-                        <div class="span3">
-                            <div class="sidebar">
-                                <h4><span class="slash">//</span>iOS Training Badge</h4>
-                                <img src="<?php echo base_url(); ?>assets/images/badges/iOSBadge100.png" width="50" align="left" />
-        
-                                <p>
-                                    The iOS badge is provided for students that participated on an 
-                                    Apple technology trainning. This course provided content and 
-                                    practice in iOS application development including: iPad, iPhone and iPod touch.
-                                    Unlock Badge.
-                                </p>
-        
-                                <h4><span class="slash">//</span>The Unlock Badge</h4>
-                                <img src="<?php echo base_url(); ?>assets/images/badges/unlock100.png" width="50" align="left"/>
-        
-                                <p>
-                                    The Unlock badge is used as a visual representation for programmers and 
-                                    recruiters that the programmer can unlock other badges in the future to improve his profile page.
-                                </p>
-        
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
+            <!-- Modal -->
+			<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="myModalLabel">Modal header</h3>
+			  </div>
+			  <div class="modal-body">
+			    <p>One fine body…</p>
+			  </div>
+			  <div class="modal-footer">
+			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			    <button class="btn btn-primary">Save changes</button>
+			  </div>
+			</div>
     </div>
 </div>

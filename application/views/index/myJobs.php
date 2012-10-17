@@ -1,5 +1,6 @@
 <?php
 $fbuid = $this->session->userdata('uid');
+$idRecruter = $this->session->userdata('userid');
 $arrBlockedIds = array('100000634528702', '578648267', '1781396621');
 if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     ?>
@@ -56,10 +57,23 @@ function sendmail(idUser){
 			}
 		);
 }
+function mandarParametro(idJob,idUserRec,idUserDev){
+	$("#iduserdev").val(idUserDev);
+	$("#iduserRec").val(idUserRec);
+	$("#idjob").val(idJob);
+}
 function mudastatus(status,user,job){
 	$.post("<?php echo base_url(); ?>index/mudastatus",{novostatus:status,idUser:user,idJob:job},
 			function(data){
 				//alert(data);
+			}
+	);
+}
+function sendMessage(){
+	$.post("<?php echo base_url(); ?>index/sendMessage",{message:$("#message").val(),idUserDev:$("#iduserdev").val(),idUserRec:$("#iduserRec").val(),idJob:$("#idjob").val()},
+			function(data){
+				alert(data);
+				$('#myModal').modal('hide');
 			}
 	);
 }
@@ -154,7 +168,7 @@ function mudastatus(status,user,job){
 																					<th>Evaluation</th>
 																					<th>Approved</th>
 																					<th>Rejected</th>
-																					<th>Send e-mail reminder</th>
+																					<th>Send message reminder</th>
 																				</tr>
 																			</thead>
 																			<tbody>
@@ -196,9 +210,12 @@ function mudastatus(status,user,job){
 																					            </td>
 																					            <td>
 																					            		<?php if ($user[0]->vizify_portfolio == null || $user[0]->video_url == null) :?>
-																							            	<button class="btn" type="button" onclick="sendmail('<?php echo $user[0]->id_user;?>');">
-																												SEND
+																							            	<button class="btn" type="button" onclick="javascript:mandarParametro('<?php echo $job->id_job;?>','<?php echo $idRecruter;?>','<?php echo $user[0]->id_user;?>');" data-toggle="modal" data-target="#myModal">
+																												<i class="icon-envelope"></i>
 																											</button>
+																							            	<!-- <button class="btn" type="button" onclick="sendmail('<?php echo $user[0]->id_user;?>');">
+																												SEND
+																											</button> -->
 																										<?php endif;?>
 																							     </td>
 																			     		</tr>
@@ -235,6 +252,24 @@ function mudastatus(status,user,job){
 						            			endif;
 						            		} ?>
 		            		
+			     		<!-- Modal -->
+						<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-header">
+						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						    <h3 id="myModalLabel">Send message reminder</h3>
+						  </div>
+						  <div class="modal-body">
+						    <textarea rows="3" id="message" name="message" style="width: 368px; height: 156px;"></textarea>
+						    <input type="hidden" id="iduserdev" />
+						    <input type="hidden" id="iduserRec" />
+						    <input type="hidden" id="idjob" />
+						  </div>
+						  <div class="modal-footer">
+						    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						    <button class="btn btn-primary" onclick="javascript:sendMessage();">Save changes</button>
+						  </div>
+						</div>
+			     
 			      </div><!-- span9 -->
 			      <div class="span3">
 			      	   <div class="sidebar">

@@ -84,6 +84,7 @@ if ($this->session->userdata('justcreatedU') == true) {
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_tab.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_alert.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_dropdown.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap_modal.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 
 

@@ -1035,6 +1035,28 @@ class Index extends CI_Controller {
     	
     	die();
     }
+    public function sendMessage(){
+    	$this->load->model('user_model');
+    	$this->load->model('job_model');
+    	
+		$dadosMessage['message'] = $this->input->post("message");
+		$dadosMessage['id_user_dev'] = $this->input->post("idUserDev");
+		$dadosMessage['id_user_rec'] = $this->input->post("idUserRec");
+		$dadosMessage['id_job'] = $this->input->post("idJob");
+		
+		try {
+			$this->job_model->insertJobMessage($dadosMessage);
+			echo"Message sent successfully";
+		} catch (Exception $e) {
+			echo $e;
+		}
+		
+		
+		
+    
+    	
+    	die();
+    }
     
     public function myJobs(){
     	$this->load->model('job_model');
@@ -1076,7 +1098,7 @@ class Index extends CI_Controller {
     	$this->load->model('job_model');
     	$this->load->model('user_model');
     	$data = array(
-            'title' => 'Register New Job',
+            'title' => 'Add New Job',
             'mixpanel' => 'NewJob'
         );
         

@@ -138,6 +138,12 @@ class Job_model extends CI_Model {
         $this->db->insert('jobs_user', $data);
         $this->db->trans_complete();
     }
+    public function insertJobMessage($data = array()) {
+
+        $this->db->trans_start();
+        $this->db->insert('job_message', $data);
+        $this->db->trans_complete();
+    }
     public function insertJob($data = array()) {
 
         $this->db->trans_start();

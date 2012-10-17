@@ -52,13 +52,13 @@ $(function() {
 					  	</div><!-- controls -->
 					  </div><!-- control-group -->
 					 <div class="control-group">
-					  	<label class="control-label">Period:</label>
+					  	<label class="control-label">Due Date:</label>
 					  	<div class="controls">
 					  		<input type="text"  class="span4" id="datepicker" name="period" value="<?php echo""; /*$user->title;*/ ?>"/>
 					  	</div><!-- controls -->
 					  </div><!-- control-group -->
 					  <div class="control-group">
-					  		<label class="control-label">description:</label>
+					  		<label class="control-label">Description:</label>
 					  		<div class="controls">
 					  			<textarea rows="3"  name="description" style="width: 368px; height: 156px;"></textarea>
 					  		</div><!-- controls -->
