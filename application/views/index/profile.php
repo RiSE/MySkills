@@ -8,7 +8,16 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
         
     </script>
 <?php endif; ?>
+<script type="text/javascript">
+function vermensagem(idjob,userdevId){
+	$.post('<?php echo base_url(); ?>index/seeMessage',{id_job:idjob,id_userdev:userdevId},
+			function(data){
+				$("#seeMessage").html(data);
 
+			}
+	);
+}
+</script>
 <div id="subheader">
     <div class="inner">
         <div class="container">
@@ -158,23 +167,24 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 						                  <th>Job</th>
 						                  <th>Due Date</th>
 						                  <th>Status</th>
-						                  <th>FeedBack</th>
-						                  <th>Message</th>
+						                  <th>FeedBack Message</th>
 						                </tr>
 						              </thead>
 						              <tbody>
 				             <?php if(!empty($jobsapplied)):
-										foreach ($jobsapplied as $dadosjobsapplied):						             			
-				             
+									$rjm = 0;	
+				             		foreach ($jobsapplied as $dadosjobsapplied):						             			
+				             				echo($resultJobMessage[$rjm]);
 				             ?>
 						                <tr>
 						                  <td width="20%"><?php echo $dadosjobsapplied->title;?></td>
 						                  <td width="20%"><?php echo date('d/m/Y', strtotime($dadosjobsapplied->period));?></td>
 						                  <td width="20%"><?php echo $dadosjobsapplied->status;?></td>
-						                  <td width="20%">@mdo</td>
-						                  <td width="20%"><button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button></td>
+						                  <td width="20%"><span class="badge badge-important" <?php if($resultJobMessage[$rjm] > 0):?> data-toggle="modal" data-target="#myModal" onclick="javascript:vermensagem('<?php echo $dadosjobsapplied->id_job?>','<?php echo $dadosjobsapplied->id_user?>');" <?php endif;?>><?php echo $resultJobMessage[$rjm];?></span></td>
 						                </tr>
-						    <?php 		endforeach;
+						    <?php 		
+						    			$rjm++;
+						    		endforeach;
 						    
 						    		endif;
 						    ?>
@@ -256,7 +266,8 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 			    <h3 id="myModalLabel">Modal header</h3>
 			  </div>
 			  <div class="modal-body">
-			    <p>One fine body…</p>
+			    <div id="seeMessage"></div>
+			   
 			  </div>
 			  <div class="modal-footer">
 			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

@@ -40,6 +40,7 @@ class Index extends CI_Controller {
 
         $this->load->model('profile_model');
         $this->load->model('user_model');
+        $this->load->model('job_model');
         $this->load->model('message_model');
         $this->load->model('log_model');
 		$this->load->library('email');
@@ -652,7 +653,11 @@ class Index extends CI_Controller {
         $userid = $this->session->userdata('userid');
         $jobsapplied = $this->job_model->listJobsAppliedUserWithFeddback($userid);
         $data['jobsapplied'] = $jobsapplied;
-        //var_dump($jobsapplied);
+        $resultJobMessage = array();
+        foreach($jobsapplied as $dadosJobsapplied){
+        	        	$resultJobMessage[] = $this->job_model->listMessageJobByJob($dadosJobsapplied->id_job,$dadosJobsapplied->id_user);
+        }
+        $data['resultJobMessage']=$resultJobMessage;
         $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
         $video = $user[0]->video_url;
         $video = str_replace('watch?v=', 'embed/', $video);        
@@ -999,8 +1004,28 @@ class Index extends CI_Controller {
     	} catch (Exception $e) {
     		echo "Error when trying to delete a job";
     	}
-    	
-    	
+ 
+    	die();
+    }
+    public function seeMessage(){
+    	$this->load->model('job_model');
+    	try {
+    		$result = array();
+    		$id_job = $this->input->post("id_job");
+    		$id_userDev = $this->input->post("id_userdev");
+	    	$result= $this->job_model->seeMessageJobByJob($id_job,$id_userDev);
+	    	foreach($result as $dadosResult){
+	    		$class = "";
+	    		if($dadosResult->read == 1){
+	    			$class = "class='sidebar'";	
+	    		}
+	    		echo"<p ".$class."> ".$dadosResult->message."</p>";
+	    	}
+	    	
+    	} catch (Exception $e) {
+    		echo "Error when loading data";
+    	}
+ 
     	die();
     }
     public function sendMail(){
@@ -1057,6 +1082,7 @@ class Index extends CI_Controller {
     	
     	die();
     }
+    
     
     public function myJobs(){
     	$this->load->model('job_model');

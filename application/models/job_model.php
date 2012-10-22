@@ -75,10 +75,11 @@ class Job_model extends CI_Model {
 	public function listJobsAppliedUserWithFeddback($idUser){
 		$result = array();
 		
-		$this->db->select("job.title,jobs_user.status,job.period");
+		$this->db->select("job.title,jobs_user.status,job.period,job.id_job,jobs_user.id_user");
 		//$this->db->select("*");
 		$this->db->from("job");
 		$this->db->join("jobs_user","jobs_user.id_job = job.id_job");
+		//$this->db->join("job_message","job.id_job = job_message.id_job");
 		$this->db->where("jobs_user.id_user",$idUser);
 		
 		$query = $this->db->get();
@@ -178,6 +179,55 @@ public function updatesJob($data) {
         $this->db->update('job', $data);
         $this->db->trans_complete();
     }
+    
+public function listMessageJobByUserDeveloper($idUserDev){
+		$result = array();
+        
+        $this->db->select('*');
+                
+        $this->db->where('id_user_dev', $idUserDev);
+        $this->db->where('read', '0');
+        $query = $this->db->get('job_message');
+
+        if ($query->num_rows() > 0) {
+            $result = $this->db->count_all_results();
+        }
+
+        return $result;
+}
+
+public function listMessageJobByJob($job,$iduser){
+		$result = 0;
+        
+        $this->db->select('*');
+                
+        $this->db->where('id_job', $job);
+        $this->db->where('id_user_dev', $iduser);
+        $this->db->where('read', '0');
+        $query = $this->db->get('job_message');
+
+        if ($query->num_rows() > 0) {
+            $result = $this->db->count_all_results();
+        }
+
+        return $result;
+}
+public function seeMessageJobByJob($job,$iduser){
+		$result = 0;
+        
+        $this->db->select('*');
+                
+        $this->db->where('id_job', $job);
+        $this->db->where('id_user_dev', $iduser);
+        $query = $this->db->get('job_message');
+
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+}
+
 }
 
 ?>
