@@ -329,8 +329,8 @@ if ($this->session->userdata('justcreatedU') == true) {
                                 <li>
                                     <a  href="<?php echo base_url().'index/profile';?>">
                                         <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
-                                        <?php if($qtdMsn > 0):?>
-                                    		<span class="badge badge-important"><?php echo $qtdMsn;?></span>
+                                        <?php if($qtdMsn[0]->qtd > 0):?>
+                                    		<span class="badge badge-important"><?php echo $qtdMsn[0]->qtd;?></span>
                                     <?php endif;?>
                                     </a>
                                     

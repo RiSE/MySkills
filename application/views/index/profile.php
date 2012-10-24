@@ -9,11 +9,23 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     </script>
 <?php endif; ?>
 <script type="text/javascript">
-function vermensagem(idjob,userdevId){
-	$.post('<?php echo base_url(); ?>index/seeMessage',{id_job:idjob,id_userdev:userdevId},
+function vermensagem(idjob,userdevId,idrecebeu){
+	$.post('<?php echo base_url(); ?>index/seeMessage',{id_job:idjob,id_userRecebeu:userdevId},
 			function(data){
 				$("#seeMessage").html(data);
+				$("#iduserdev").val(userdevId);
+				$("#iduserRec").val(idrecebeu);
+				$("#idjob").val(idjob);
 
+			}
+	);
+}
+function sendMessage(){
+	$.post("<?php echo base_url(); ?>index/sendMessage",{message:$("#message").val(),idUserRecebeu:$("#iduserRec").val(),idUserEnviou:$("#iduserdev").val(),idJob:$("#idjob").val()},
+			function(data){
+				alert(data);
+				$('#myModal').modal('hide');
+				$("#message").val("");
 			}
 	);
 }
@@ -174,13 +186,18 @@ function vermensagem(idjob,userdevId){
 				             <?php if(!empty($jobsapplied)):
 									$rjm = 0;	
 				             		foreach ($jobsapplied as $dadosjobsapplied):						             			
-				             				echo($resultJobMessage[$rjm]);
+				             				
 				             ?>
 						                <tr>
 						                  <td width="20%"><?php echo $dadosjobsapplied->title;?></td>
 						                  <td width="20%"><?php echo date('d/m/Y', strtotime($dadosjobsapplied->period));?></td>
 						                  <td width="20%"><?php echo $dadosjobsapplied->status;?></td>
-						                  <td width="20%"><span class="badge badge-important" <?php if($resultJobMessage[$rjm] > 0):?> data-toggle="modal" data-target="#myModal" onclick="javascript:vermensagem('<?php echo $dadosjobsapplied->id_job?>','<?php echo $dadosjobsapplied->id_user?>');" <?php endif;?>><?php echo $resultJobMessage[$rjm];?></span></td>
+						                  <td width="20%">
+						                  		<?php if($resultJobMessage[$rjm][0]->qtd > 0):?>
+						                  			<span class="badge badge-important" <?php if($resultJobMessage[$rjm][0]->qtd > 0):?> data-toggle="modal" data-target="#myModal" onclick="javascript:vermensagem('<?php echo $dadosjobsapplied->id_job?>','<?php echo $dadosjobsapplied->id_user?>','<?php echo $dadosjobsapplied->idrecruter?>');" <?php endif;?>><?php echo $resultJobMessage[$rjm][0]->qtd;?></span>
+						                  		<?php endif;?>
+						                  </td>
+						                  			
 						                </tr>
 						    <?php 		
 						    			$rjm++;
@@ -263,7 +280,10 @@ function vermensagem(idjob,userdevId){
 			<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="myModalLabel">Modal header</h3>
+			    <h3 id="myModalLabel">Message</h3>
+			    <input type="hidden" id="iduserdev" />
+			    <input type="hidden" id="iduserRec" />
+			    <input type="hidden" id="idjob" />
 			  </div>
 			  <div class="modal-body">
 			    <div id="seeMessage"></div>
@@ -271,7 +291,7 @@ function vermensagem(idjob,userdevId){
 			  </div>
 			  <div class="modal-footer">
 			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			    <button class="btn btn-primary">Save changes</button>
+			    <button class="btn btn-primary" onclick="javascript:sendMessage();">Save changes</button>
 			  </div>
 			</div>
     </div>

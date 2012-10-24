@@ -75,7 +75,7 @@ class Job_model extends CI_Model {
 	public function listJobsAppliedUserWithFeddback($idUser){
 		$result = array();
 		
-		$this->db->select("job.title,jobs_user.status,job.period,job.id_job,jobs_user.id_user");
+		$this->db->select("job.title,jobs_user.status,job.period,job.id_job,jobs_user.id_user,job.id_user as idRecruter");
 		//$this->db->select("*");
 		$this->db->from("job");
 		$this->db->join("jobs_user","jobs_user.id_job = job.id_job");
@@ -111,6 +111,7 @@ class Job_model extends CI_Model {
 
         return $result;
     }
+
     public function listJobsAppliedUserByJob($idJob = null) {
 
         $result = array();
@@ -139,37 +140,41 @@ class Job_model extends CI_Model {
         $this->db->insert('jobs_user', $data);
         $this->db->trans_complete();
     }
+    
     public function insertJobMessage($data = array()) {
 
         $this->db->trans_start();
         $this->db->insert('job_message', $data);
         $this->db->trans_complete();
     }
+    
     public function insertJob($data = array()) {
 
         $this->db->trans_start();
         $this->db->insert('job', $data);
         $this->db->trans_complete();
     }
+    
     public function deleteJob($idJob) {
 
         $this->db->where('id_job', $idJob);
 		$this->db->delete('job');
     }
 	
-public function updatesJobUser($data) {
-
-        $this->db->trans_start();
-        if(!empty($data['id_user'])){
-        	$this->db->where('id_user', $data['id_user']);
-        }
-        if(!empty($data['id_job'])){
-        	$this->db->where('id_job', $data['id_job']);
-        }
-        $this->db->update('jobs_user', $data);
-        $this->db->trans_complete();
-    }
-public function updatesJob($data) {
+	public function updatesJobUser($data) {
+	
+	        $this->db->trans_start();
+	        if(!empty($data['id_user'])){
+	        	$this->db->where('id_user', $data['id_user']);
+	        }
+	        if(!empty($data['id_job'])){
+	        	$this->db->where('id_job', $data['id_job']);
+	        }
+	        $this->db->update('jobs_user', $data);
+	        $this->db->trans_complete();
+	}
+	
+	public function updatesJob($data) {
 
         $this->db->trans_start();
         
@@ -179,46 +184,42 @@ public function updatesJob($data) {
         $this->db->update('job', $data);
         $this->db->trans_complete();
     }
+	
+    public function updatesJobMessage($data) {
+
+        $this->db->trans_start();
+        
+        if(!empty($data['id_job_message'])){
+        	$this->db->where('id_job_message', $data['id_job_message']);
+        }
+        $this->db->update('job_message', $data);
+        $this->db->trans_complete();
+    }
     
-public function listMessageJobByUserDeveloper($idUserDev){
-		$result = array();
-        
-        $this->db->select('*');
-                
-        $this->db->where('id_user_dev', $idUserDev);
-        $this->db->where('read', '0');
-        $query = $this->db->get('job_message');
+	public function listMessageJobByUserDeveloper($idUserDev){
+			$result = 0;
+	        
+	        $this->db->select('count(*) as qtd');
+	                
+	        $this->db->where('id_user_recebeu', $idUserDev);
+	        $this->db->where('read','0');
+	        $query = $this->db->get('job_message');
+	
+	        if ($query->num_rows() > 0) {
+	            $result = $query->result_object();
+	        }
+	
+	        return $result;
+	}
 
-        if ($query->num_rows() > 0) {
-            $result = $this->db->count_all_results();
-        }
-
-        return $result;
-}
-
-public function listMessageJobByJob($job,$iduser){
+	public function listMessageJobByJob($job,$iduser){
 		$result = 0;
         
-        $this->db->select('*');
+        $this->db->select('count(*) as qtd');
                 
         $this->db->where('id_job', $job);
-        $this->db->where('id_user_dev', $iduser);
+        $this->db->where('id_user_recebeu', $iduser);
         $this->db->where('read', '0');
-        $query = $this->db->get('job_message');
-
-        if ($query->num_rows() > 0) {
-            $result = $this->db->count_all_results();
-        }
-
-        return $result;
-}
-public function seeMessageJobByJob($job,$iduser){
-		$result = 0;
-        
-        $this->db->select('*');
-                
-        $this->db->where('id_job', $job);
-        $this->db->where('id_user_dev', $iduser);
         $query = $this->db->get('job_message');
 
         if ($query->num_rows() > 0) {
@@ -226,7 +227,24 @@ public function seeMessageJobByJob($job,$iduser){
         }
 
         return $result;
-}
+	}
+
+	public function seeMessageJobByJob($job,$iduser){
+			$result = 0;
+	        
+	        $this->db->select('*');
+	                
+	        $this->db->where('id_job', $job);
+	        $this->db->where('id_user_recebeu', $iduser);
+	        $this->db->order_by("created", "asc");
+	        $query = $this->db->get('job_message');
+	
+	        if ($query->num_rows() > 0) {
+	            $result = $query->result_object();
+	        }
+	
+	        return $result;
+	}
 
 }
 

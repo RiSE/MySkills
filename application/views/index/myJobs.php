@@ -70,10 +70,11 @@ function mudastatus(status,user,job){
 	);
 }
 function sendMessage(){
-	$.post("<?php echo base_url(); ?>index/sendMessage",{message:$("#message").val(),idUserDev:$("#iduserdev").val(),idUserRec:$("#iduserRec").val(),idJob:$("#idjob").val()},
+	$.post("<?php echo base_url(); ?>index/sendMessage",{message:$("#message").val(),idUserRecebeu:$("#iduserdev").val(),idUserEnviou:$("#iduserRec").val(),idJob:$("#idjob").val()},
 			function(data){
 				alert(data);
 				$('#myModal').modal('hide');
+				$("#message").val("");
 			}
 	);
 }

@@ -1012,14 +1012,23 @@ class Index extends CI_Controller {
     	try {
     		$result = array();
     		$id_job = $this->input->post("id_job");
-    		$id_userDev = $this->input->post("id_userdev");
+    		$id_userDev = $this->input->post("id_userRecebeu");
 	    	$result= $this->job_model->seeMessageJobByJob($id_job,$id_userDev);
 	    	foreach($result as $dadosResult){
 	    		$class = "";
-	    		if($dadosResult->read == 1){
-	    			$class = "class='sidebar'";	
+	    		$liberatext = false;
+	    		if($dadosResult->read == 0){
+	    			$class = 'class="sidebar"';	
+	    			$liberatext = true;
 	    		}
+	    		$dadosupdate['read'] = 1;
+	    		$dadosupdate['update'] = date("Y-m-d");
+	    		$dadosupdate['id_job_message'] = $dadosResult->id_job_message;
+	    		$this->job_model->updatesJobMessage($dadosupdate);	    		
 	    		echo"<p ".$class."> ".$dadosResult->message."</p>";
+	    	}
+	    	if($liberatext){
+	    		echo'<textarea rows="3" id="message" name="message" style="width: 368px; height: 156px;"></textarea>';
 	    	}
 	    	
     	} catch (Exception $e) {
@@ -1065,8 +1074,8 @@ class Index extends CI_Controller {
     	$this->load->model('job_model');
     	
 		$dadosMessage['message'] = $this->input->post("message");
-		$dadosMessage['id_user_dev'] = $this->input->post("idUserDev");
-		$dadosMessage['id_user_rec'] = $this->input->post("idUserRec");
+		$dadosMessage['id_user_recebeu'] = $this->input->post("idUserRecebeu");
+		$dadosMessage['id_user_enviou'] = $this->input->post("idUserEnviou");
 		$dadosMessage['id_job'] = $this->input->post("idJob");
 		
 		try {
