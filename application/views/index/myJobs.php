@@ -9,6 +9,17 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
     </script>
 <?php endif; ?>
 <script type="text/javascript">
+function vermensagem(idjob,userdevId,idrecebeu){
+	$.post('<?php echo base_url(); ?>index/seeMessage',{id_job:idjob,id_userRecebeu:userdevId,id_userMandou:idrecebeu},
+			function(data){
+				$("#seeMessage").html(data);
+				$("#iduserdev").val(userdevId);
+				$("#iduserRec").val(idrecebeu);
+				$("#idjob").val(idjob);
+
+			}
+	);
+}
 function deactivateJob(idjob){
 	$.post("<?php echo base_url(); ?>index/deactivateJob",{jobId : idjob},
 			function(data){
@@ -58,8 +69,8 @@ function sendmail(idUser){
 		);
 }
 function mandarParametro(idJob,idUserRec,idUserDev){
-	$("#iduserdev").val(idUserDev);
-	$("#iduserRec").val(idUserRec);
+	$("#iduserdev").val(idUserRec);
+	$("#iduserRec").val(idUserDev);
 	$("#idjob").val(idJob);
 }
 function mudastatus(status,user,job){
@@ -70,11 +81,21 @@ function mudastatus(status,user,job){
 	);
 }
 function sendMessage(){
-	$.post("<?php echo base_url(); ?>index/sendMessage",{message:$("#message").val(),idUserRecebeu:$("#iduserdev").val(),idUserEnviou:$("#iduserRec").val(),idJob:$("#idjob").val()},
+	var mensagem = "";
+	
+	if($("#message").val() != ""){
+		mensagem = $("#message").val();
+	}
+	if($("#message2").val() != ""){
+		mensagem = $("#message2").val();
+	}
+	$.post("<?php echo base_url(); ?>index/sendMessage",{message:mensagem,idUserRecebeu:$("#iduserRec").val(),idUserEnviou:$("#iduserdev").val(),idJob:$("#idjob").val()},
 			function(data){
 				alert(data);
 				$('#myModal').modal('hide');
+				$('#myModal2').modal('hide');
 				$("#message").val("");
+				$("#message2").val("");
 			}
 	);
 }
@@ -169,12 +190,13 @@ function sendMessage(){
 																					<th>Evaluation</th>
 																					<th>Approved</th>
 																					<th>Rejected</th>
-																					<th>Send message reminder</th>
+																					<th>Send message</th>
 																				</tr>
 																			</thead>
 																			<tbody>
 																				<?php 
-														                            foreach ($professionals[$k] as $user) :
+																					$rjm = 0;
+																				foreach ($professionals[$k] as $user) :
 														                             
 														                            ?>
 																		          		<tr>
@@ -210,17 +232,16 @@ function sendMessage(){
 																					             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Rejected" onclick="mudastatus('Rejected','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Rejected"){?> checked = "checked" <?php }?>>
 																					            </td>
 																					            <td>
-																					            		<?php if ($user[0]->vizify_portfolio == null || $user[0]->video_url == null) :?>
-																							            	<button class="btn" type="button" onclick="javascript:mandarParametro('<?php echo $job->id_job;?>','<?php echo $idRecruter;?>','<?php echo $user[0]->id_user;?>');" data-toggle="modal" data-target="#myModal">
-																												<i class="icon-envelope"></i>
-																											</button>
-																							            	<!-- <button class="btn" type="button" onclick="sendmail('<?php echo $user[0]->id_user;?>');">
-																												SEND
-																											</button> -->
-																										<?php endif;?>
+																			            	      	<button class="btn" type="button" onclick="javascript:mandarParametro('<?php echo $job->id_job;?>','<?php echo $idRecruter;?>','<?php echo $user[0]->id_user;?>');" data-toggle="modal" data-target="#myModal">
+																										<i class="icon-envelope"></i>
+																									</button>
+																					            	<?php if($resultJobMessage[$rjm][0]->qtd > 0):?>
+																			                  			<span class="badge badge-important" <?php if($resultJobMessage[$rjm][0]->qtd > 0):?> data-toggle="modal" data-target="#myModal2" onclick="javascript:vermensagem('<?php echo $job->id_job;?>','<?php echo $idRecruter?>','<?php echo $user[0]->id_user;?>');" <?php endif;?>><?php echo $resultJobMessage[$rjm][0]->qtd;?></span>
+																			                  		<?php endif;?>
 																							     </td>
 																			     		</tr>
 																					<?php 
+																						$rjm++;
 																					    endforeach;
 																					  endif;
 																					?>
@@ -260,7 +281,7 @@ function sendMessage(){
 						    <h3 id="myModalLabel">Send message reminder</h3>
 						  </div>
 						  <div class="modal-body">
-						    <textarea rows="3" id="message" name="message" style="width: 368px; height: 156px;"></textarea>
+						    <textarea rows="3" id="message2" name="message" style="width: 368px; height: 156px;"></textarea>
 						    <input type="hidden" id="iduserdev" />
 						    <input type="hidden" id="iduserRec" />
 						    <input type="hidden" id="idjob" />
@@ -270,6 +291,24 @@ function sendMessage(){
 						    <button class="btn btn-primary" onclick="javascript:sendMessage();">Save changes</button>
 						  </div>
 						</div>
+						  <!-- Modal -->
+							<div class="modal hide fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-header">
+							    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							    <h3 id="myModalLabel">Message</h3>
+							    <input type="hidden" id="iduserdev" />
+							    <input type="hidden" id="iduserRec" />
+							    <input type="hidden" id="idjob" />
+							  </div>
+							  <div class="modal-body">
+							    <div id="seeMessage"></div>
+							   
+							  </div>
+							  <div class="modal-footer">
+							    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+							    <button class="btn btn-primary" onclick="javascript:sendMessage();">Save changes</button>
+							  </div>
+							</div>
 			     
 			      </div><!-- span9 -->
 			      <div class="span3">

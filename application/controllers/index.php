@@ -650,21 +650,28 @@ class Index extends CI_Controller {
         } else {
             $fbuid = $valuesarray[0];
         }
+        
         $userid = $this->session->userdata('userid');
-        $jobsapplied = $this->job_model->listJobsAppliedUserWithFeddback($userid);
-        $data['jobsapplied'] = $jobsapplied;
-        $resultJobMessage = array();
-        foreach($jobsapplied as $dadosJobsapplied){
-        	        	$resultJobMessage[] = $this->job_model->listMessageJobByJob($dadosJobsapplied->id_job,$dadosJobsapplied->id_user);
-        }
-        $data['resultJobMessage']=$resultJobMessage;
         $user = $this->user_model->loadUser(array('fbuid' => $fbuid));
-        $video = $user[0]->video_url;
-        $video = str_replace('watch?v=', 'embed/', $video);        
-        $user[0]->video_url = $video;
-
-        $data['badges'] = $this->badge_model->listBadges();
-        $data['ThisBadge'] = $this->badge_model->listBadgesProfessionalByUser($user[0]->id_user);
+        if($this->session->userdata('id_profile')== 1):
+	        $jobsapplied = $this->job_model->listJobsAppliedUserWithFeddback($userid);
+	        $data['jobsapplied'] = $jobsapplied;
+	        $resultJobMessage = array();
+	        foreach($jobsapplied as $dadosJobsapplied){
+	        	        	$resultJobMessage[] = $this->job_model->listMessageJobByJob($dadosJobsapplied->id_job,$dadosJobsapplied->id_user);
+	        }
+	        $data['resultJobMessage']=$resultJobMessage;
+	       
+	        $video = $user[0]->video_url;
+	        $video = str_replace('watch?v=', 'embed/', $video);        
+	        $user[0]->video_url = $video;
+	
+	        $data['badges'] = $this->badge_model->listBadges();
+	        $data['ThisBadge'] = $this->badge_model->listBadgesProfessionalByUser($user[0]->id_user);
+	    else:
+			
+	    endif;
+	    $data['ThisBadge'] = $this->badge_model->listBadgesProfessionalByUser($user[0]->id_user);
         $data['user'] = $user;
 
         $this->layout->view('index/profile', $data);
@@ -1009,12 +1016,15 @@ class Index extends CI_Controller {
     }
     public function seeMessage(){
     	$this->load->model('job_model');
+    	$this->load->model('user_model');
     	try {
     		$result = array();
     		$id_job = $this->input->post("id_job");
     		$id_userDev = $this->input->post("id_userRecebeu");
-	    	$result= $this->job_model->seeMessageJobByJob($id_job,$id_userDev);
+    		$id_userMandou = $this->input->post("id_userMandou");
+	    	$result= $this->job_model->seeMessageJobByJob($id_job,$id_userDev,$id_userMandou);
 	    	foreach($result as $dadosResult){
+	    		$mandou = $this->user_model->loadUserOfUserId($dadosResult->id_user_enviou);
 	    		$class = "";
 	    		$liberatext = false;
 	    		if($dadosResult->read == 0){
@@ -1025,7 +1035,7 @@ class Index extends CI_Controller {
 	    		$dadosupdate['update'] = date("Y-m-d");
 	    		$dadosupdate['id_job_message'] = $dadosResult->id_job_message;
 	    		$this->job_model->updatesJobMessage($dadosupdate);	    		
-	    		echo"<p ".$class."> ".$dadosResult->message."</p>";
+	    		echo"<p ".$class."> ".$mandou[0]->name." say: ".$dadosResult->message."</p>";
 	    	}
 	    	if($liberatext){
 	    		echo'<textarea rows="3" id="message" name="message" style="width: 368px; height: 156px;"></textarea>';
@@ -1111,17 +1121,21 @@ class Index extends CI_Controller {
         $jobs = $this->job_model->listJobsInMyJobs($userRecruiter);
         $k = 0;
         $dados = array();
+        $resultJobMessage = array();
         foreach($jobs as $job){ 
         	$User_jobs = $this->job_model->listJobsAppliedUserByJob($job->id_job);
         
 	        foreach($User_jobs as $userJobs){
 	        	$teste = $this->user_model->loadUserOfUserId($userJobs->id_user);
+	        	$resultJobMessage[] = $this->job_model->listMessageJobByJobwithRecruter($job->id_job,$userJobs->id_user,$userRecruiter['id_user']);
 	        	array_push($teste, $userJobs->status);
 	        	$dados[$k][] = $teste; 
 	        	 
 	        }
 	       $k++;
         }
+        	
+        $data['resultJobMessage']=$resultJobMessage;
         
         $data['professionals'] = $dados;
         $data['jobs'] = $jobs;

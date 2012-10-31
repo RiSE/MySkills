@@ -91,6 +91,26 @@ class Job_model extends CI_Model {
         return $result;
 		
 	}
+	public function listJobsAppliedUserWithFeddbackRecruter($idUser){
+		$result = array();
+		
+		$this->db->select("job.title,user.name,jobs_user.status,job.id_job,jobs_user.id_user,job.id_user as idRecruter");
+		//$this->db->select("*");
+		$this->db->from("user");
+		$this->db->join("jobs_user","jobs_user.id_user = user.id_user");
+		$this->db->join("job","jobs_user.id_job = job.id_job");
+		//$this->db->join("job_message","job.id_job = job_message.id_job");
+		$this->db->where("job.id_user",$idUser);
+		
+		$query = $this->db->get();
+		
+		if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+		
+	}
    
     public function listJobsAppliedUser($idUser , $idJob = null) {
 
@@ -228,14 +248,32 @@ class Job_model extends CI_Model {
 
         return $result;
 	}
+	public function listMessageJobByJobwithRecruter($job,$iduser,$idrecuter){
+		$result = 0;
+        
+        $this->db->select('count(*) as qtd');
+                
+        $this->db->where('id_job', $job);
+        $this->db->where('id_user_recebeu', $idrecuter);
+        $this->db->where('id_user_enviou', $iduser);
+        $this->db->where('read', '0');
+        $query = $this->db->get('job_message');
 
-	public function seeMessageJobByJob($job,$iduser){
+        if ($query->num_rows() > 0) {
+            $result = $query->result_object();
+        }
+
+        return $result;
+	}
+
+	public function seeMessageJobByJob($job,$iduser,$Mandou){
 			$result = 0;
-	        
+	        $Ids = array($iduser, $Mandou);
 	        $this->db->select('*');
 	                
 	        $this->db->where('id_job', $job);
-	        $this->db->where('id_user_recebeu', $iduser);
+	        $this->db->where_in('id_user_recebeu', $Ids);
+	        $this->db->where_in('id_user_enviou', $Ids);
 	        $this->db->order_by("created", "asc");
 	        $query = $this->db->get('job_message');
 	

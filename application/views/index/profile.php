@@ -10,7 +10,7 @@ if (!in_array($fbuid, $arrBlockedIds) && $_SERVER['HTTP_HOST'] != 'localhost') :
 <?php endif; ?>
 <script type="text/javascript">
 function vermensagem(idjob,userdevId,idrecebeu){
-	$.post('<?php echo base_url(); ?>index/seeMessage',{id_job:idjob,id_userRecebeu:userdevId},
+	$.post('<?php echo base_url(); ?>index/seeMessage',{id_job:idjob,id_userRecebeu:userdevId,id_userMandou:idrecebeu},
 			function(data){
 				$("#seeMessage").html(data);
 				$("#iduserdev").val(userdevId);
@@ -212,12 +212,17 @@ function sendMessage(){
 		
 		                    <div class="row">
 		                        <div class="span8">
+		                            
 		                            &nbsp;
 		                        </div>
 		                    </div>
-					<?php endif;?>
-
+					<?php else:
+						  if ($user[0]->fbuid == $fbuid):
+					
+		               		endif;
+		               endif;?>
                     <div class="span8">
+                    
                     </div>
 
                     <div class="row">
