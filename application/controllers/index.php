@@ -1019,27 +1019,33 @@ class Index extends CI_Controller {
     	$this->load->model('user_model');
     	try {
     		$result = array();
+    		$iduserSessao = $this->session->userdata('userid');
     		$id_job = $this->input->post("id_job");
     		$id_userDev = $this->input->post("id_userRecebeu");
     		$id_userMandou = $this->input->post("id_userMandou");
 	    	$result= $this->job_model->seeMessageJobByJob($id_job,$id_userDev,$id_userMandou);
-	    	foreach($result as $dadosResult){
-	    		$mandou = $this->user_model->loadUserOfUserId($dadosResult->id_user_enviou);
-	    		$class = "";
-	    		$liberatext = false;
-	    		if($dadosResult->read == 0){
-	    			$class = 'class="sidebar"';	
-	    			$liberatext = true;
-	    		}
-	    		$dadosupdate['read'] = 1;
-	    		$dadosupdate['update'] = date("Y-m-d");
-	    		$dadosupdate['id_job_message'] = $dadosResult->id_job_message;
-	    		$this->job_model->updatesJobMessage($dadosupdate);	    		
-	    		echo"<p ".$class."> ".$mandou[0]->name." say: ".$dadosResult->message."</p>";
+	    	if(!empty($result)){
+		    	foreach($result as $dadosResult){
+		    		$mandou = $this->user_model->loadUserOfUserId($dadosResult->id_user_enviou);
+		    		$class = "";
+		    		
+		    		if($dadosResult->id_user_recebeu == $iduserSessao){
+			    		if($dadosResult->read == 0){
+			    			$class = 'class="sidebar"';	
+			    			
+			    		}
+		    		}
+		    		$dadosupdate['read'] = 1;
+		    		$dadosupdate['update'] = date("Y-m-d");
+		    		$dadosupdate['id_job_message'] = $dadosResult->id_job_message;
+		    		if($dadosResult->id_user_recebeu == $iduserSessao){
+		    			$this->job_model->updatesJobMessage($dadosupdate);
+		    		}	    		
+		    		echo"<p ".$class."> ".$mandou[0]->name." say: ".$dadosResult->message."</p>";
+		    	}
 	    	}
-	    	if($liberatext){
 	    		echo'<textarea rows="3" id="message" name="message" style="width: 368px; height: 156px;"></textarea>';
-	    	}
+	    	
 	    	
     	} catch (Exception $e) {
     		echo "Error when loading data";

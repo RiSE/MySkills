@@ -193,9 +193,14 @@ function sendMessage(){
 						                  <td width="20%"><?php echo date('d/m/Y', strtotime($dadosjobsapplied->period));?></td>
 						                  <td width="20%"><?php echo $dadosjobsapplied->status;?></td>
 						                  <td width="20%">
-						                  		<?php if($resultJobMessage[$rjm][0]->qtd > 0):?>
-						                  			<span class="badge badge-important" <?php if($resultJobMessage[$rjm][0]->qtd > 0):?> data-toggle="modal" data-target="#myModal" onclick="javascript:vermensagem('<?php echo $dadosjobsapplied->id_job?>','<?php echo $dadosjobsapplied->id_user?>','<?php echo $dadosjobsapplied->idrecruter?>');" <?php endif;?>><?php echo $resultJobMessage[$rjm][0]->qtd;?></span>
-						                  		<?php endif;?>
+						                  		<button class="btn" type="button" onclick="javascript:vermensagem('<?php echo $dadosjobsapplied->id_job?>','<?php echo $dadosjobsapplied->id_user?>','<?php echo $dadosjobsapplied->idrecruter?>');" data-toggle="modal" data-target="#myModal">
+													<i class="icon-envelope">
+														<?php if($resultJobMessage[$rjm][0]->qtd > 0):?>
+						                  						<span class="badge badge-important" ><?php echo $resultJobMessage[$rjm][0]->qtd;?></span>
+						                  				<?php endif;?>
+													</i>
+												</button>
+				             					
 						                  </td>
 						                  			
 						                </tr>
@@ -296,7 +301,7 @@ function sendMessage(){
 			  </div>
 			  <div class="modal-footer">
 			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			    <button class="btn btn-primary" onclick="javascript:sendMessage();">Save changes</button>
+			    <button class="btn btn-primary" onclick="javascript:sendMessage();">Send</button>
 			  </div>
 			</div>
     </div>

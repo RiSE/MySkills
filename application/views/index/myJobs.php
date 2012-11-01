@@ -232,12 +232,14 @@ function sendMessage(){
 																					             	 <input type="radio" name="<?php echo $user[0]->name.$k;?>"  value="Rejected" onclick="mudastatus('Rejected','<?php echo $user[0]->id_user?>','<?php echo $job->id_job;?>');" <?php if($user[1] == "Rejected"){?> checked = "checked" <?php }?>>
 																					            </td>
 																					            <td>
-																			            	      	<button class="btn" type="button" onclick="javascript:mandarParametro('<?php echo $job->id_job;?>','<?php echo $idRecruter;?>','<?php echo $user[0]->id_user;?>');" data-toggle="modal" data-target="#myModal">
-																										<i class="icon-envelope"></i>
+																			            	      	<button class="btn" type="button" onclick="javascript:vermensagem('<?php echo $job->id_job;?>','<?php echo $idRecruter?>','<?php echo $user[0]->id_user;?>');" data-toggle="modal" data-target="#myModal2">
+																										<i class="icon-envelope">
+																											<?php if($resultJobMessage[$rjm][0]->qtd > 0):?>
+																			                  						<span class="badge badge-important" ><?php echo $resultJobMessage[$rjm][0]->qtd;?></span>
+																			                  			<?php endif;?>
+																										</i>
 																									</button>
-																					            	<?php if($resultJobMessage[$rjm][0]->qtd > 0):?>
-																			                  			<span class="badge badge-important" <?php if($resultJobMessage[$rjm][0]->qtd > 0):?> data-toggle="modal" data-target="#myModal2" onclick="javascript:vermensagem('<?php echo $job->id_job;?>','<?php echo $idRecruter?>','<?php echo $user[0]->id_user;?>');" <?php endif;?>><?php echo $resultJobMessage[$rjm][0]->qtd;?></span>
-																			                  		<?php endif;?>
+																					            	
 																							     </td>
 																			     		</tr>
 																					<?php 
@@ -274,23 +276,7 @@ function sendMessage(){
 						            			endif;
 						            		} ?>
 		            		
-			     		<!-- Modal -->
-						<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-header">
-						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						    <h3 id="myModalLabel">Send message reminder</h3>
-						  </div>
-						  <div class="modal-body">
-						    <textarea rows="3" id="message2" name="message" style="width: 368px; height: 156px;"></textarea>
-						    <input type="hidden" id="iduserdev" />
-						    <input type="hidden" id="iduserRec" />
-						    <input type="hidden" id="idjob" />
-						  </div>
-						  <div class="modal-footer">
-						    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-						    <button class="btn btn-primary" onclick="javascript:sendMessage();">Save changes</button>
-						  </div>
-						</div>
+			     		
 						  <!-- Modal -->
 							<div class="modal hide fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							  <div class="modal-header">
@@ -306,7 +292,7 @@ function sendMessage(){
 							  </div>
 							  <div class="modal-footer">
 							    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-							    <button class="btn btn-primary" onclick="javascript:sendMessage();">Save changes</button>
+							    <button class="btn btn-primary" onclick="javascript:sendMessage();">Send</button>
 							  </div>
 							</div>
 			     
