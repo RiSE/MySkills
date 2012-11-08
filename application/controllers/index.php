@@ -1088,7 +1088,19 @@ class Index extends CI_Controller {
     public function sendMessage(){
     	$this->load->model('user_model');
     	$this->load->model('job_model');
-    	
+    	$this->load->library('email');
+		$this->email->initialize(array(
+		'protocol' => 'smtp',
+		'smtp_host' => 'smtp.sendgrid.net',
+		'smtp_user' => 'myskills',
+		'smtp_pass' => 'ruadoapolo161',
+		'smtp_port' => 587,
+		'mailtype' => 'html',
+		'crlf' => "\r\n",
+		'newline' => "\r\n"
+		));
+		
+		
 		$dadosMessage['message'] = $this->input->post("message");
 		$dadosMessage['id_user_recebeu'] = $this->input->post("idUserRecebeu");
 		$dadosMessage['id_user_enviou'] = $this->input->post("idUserEnviou");
@@ -1096,6 +1108,20 @@ class Index extends CI_Controller {
 		
 		try {
 			$this->job_model->insertJobMessage($dadosMessage);
+			$user = $this->user_model->loadUserOfUserId($dadosMessage['id_user_recebeu']);
+			
+			$dadostemplateArquivo = file_get_contents('template_email.txt');
+	    	$this->email->from('eduardo.cruz@myskills.com.br', 'Myskills');
+			$this->email->to($user[0]->email);
+			
+			$this->email->subject('[myskills] You received a new message');
+			$this->email->message('Dear '.$user[0]->name.', <br/> '.$dadostemplateArquivo);
+		    if ( ! $this->email->send())
+				{
+				   echo "";
+				}else{
+					echo "";
+				}
 			echo"Message sent successfully";
 		} catch (Exception $e) {
 			echo $e;
@@ -1161,7 +1187,7 @@ class Index extends CI_Controller {
 		        if ($this->form_validation->run('registerNewJob') !== false) {
 		         		        	
 		         		$dados['title'] = $this->input->post("title");
-		         		$dados['period'] = $this->input->post("period");
+		         		$dados['period'] = date('Y-m-d', strtotime($this->input->post("period")));
 		         		$dados['description'] = $this->input->post("description");
 		         		$dados['id_user'] = $this->session->userdata("userid");
 		         		$dados['published'] = 1;
@@ -1204,7 +1230,7 @@ class Index extends CI_Controller {
 		        if ($this->form_validation->run('editJob') !== false) {
 		         		        	
 		         		$dados['title'] = $this->input->post("title");
-		         		$dados['period'] = $this->input->post("period");
+		         		$dados['period'] = date('Y-m-d', strtotime($this->input->post("period")));
 		         		$dados['description'] = $this->input->post("description");
 		         		$dados['id_job'] = $dadosJob['id_job'];
 		         				         		

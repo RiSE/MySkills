@@ -324,10 +324,16 @@ if ($this->session->userdata('justcreatedU') == true) {
                                     Contact Us
                                 </a>						
                             </li>
-                            <?php if ($this->session->userdata('uid') > 0) : ?>
-
+                            <?php if ($this->session->userdata('uid') > 0) : 
+                            		$link2 = null;
+                            ?>
+									 <?php if ($this->session->userdata('recruiter') == true) : ?>
+                                        <?php $link2 = 'index/myJobs'; ?>
+                                    <?php elseif ($this->session->userdata('developer') == true) : ?>
+                                        <?php $link2 = 'index/profile'; ?>
+                                    <?php endif; ?>                               
                                 <li>
-                                    <a  href="<?php echo base_url().'index/profile';?>">
+                                    <a  href="<?php echo base_url().$link2;?>">
                                         <img id="userpic" src="https://graph.facebook.com/<?php echo $this->session->userdata('uid'); ?>/picture&type=square" width="25" height="25" />
                                         <?php if($qtdMsn[0]->qtd > 0):?>
                                     		<span class="badge badge-important"><?php echo $qtdMsn[0]->qtd;?></span>

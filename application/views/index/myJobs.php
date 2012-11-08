@@ -89,7 +89,7 @@ function sendMessage(){
 	if($("#message2").val() != ""){
 		mensagem = $("#message2").val();
 	}
-	$.post("<?php echo base_url(); ?>index/sendMessage",{message:mensagem,idUserRecebeu:$("#iduserRec").val(),idUserEnviou:$("#iduserdev").val(),idJob:$("#idjob").val()},
+	$.post("<?php echo base_url(); ?>index/sendMessage",{message:$("#message").val(),idUserRecebeu:$("#iduserRec").val(),idUserEnviou:$("#iduserdev").val(),idJob:$("#idjob").val()},
 			function(data){
 				alert(data);
 				$('#myModal').modal('hide');
